@@ -92,7 +92,7 @@
         height: 100%;
 		overflow:hidden;
 		position:absolute; top:0; bottom:0;
-		background: url("assets/images/Alice_sketch_3.jpg");
+		background: url("/assets/images/Alice_sketch_3.jpg");
         background-size: contain;
         background-repeat: no-repeat;
 		transform-style:preserve-3d;

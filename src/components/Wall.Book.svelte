@@ -33,7 +33,7 @@
         id="book_{book.ISBN}" 
         style="height:{h/8}px"
     >
-        <img src ="/assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}">
+        <img src ="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}">
         <AddButton />
     </div>
 {/if}
