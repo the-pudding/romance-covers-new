@@ -23,7 +23,8 @@
 	let illustrationData = data.filter(d => d.cover_url.includes("http")).filter(d => d.Style == "Illustrated").sort((a, b) => d3.ascending(a["Year Season"], b["Year Season"]));
 	let raceData = data.filter(d => d.cover_url.includes("http")).filter(d => d["Has POC"] == "true").sort((a, b) => d3.ascending(a["Year Season"], b["Year Season"]));
 	let barData = raunchinessData;
-	let barColor = "#4C7DFE";
+	let barColorHighlight = "#4C7DFE";
+	let barColor = "#7da1fa"
 	
 	onMount(() => {
 		body = d3.select("body")
@@ -43,13 +44,16 @@
 	function swapBarData(activeSection) {
 		if (activeSection == "raunchiness") {
 			barData = raunchinessData;
-			barColor = "#4C7DFE";
+			barColor = "#a3bcfb";
+			barColorHighlight = "#4C7DFE";
 		} else if (activeSection == "illustration") {
 			barData = illustrationData;
-			barColor = "#F7C42D";
+			barColor = "#f9dd8b";
+			barColorHighlight = "#F7C42D";
 		} else if (activeSection == "race") {
 			barData = raceData;
-			barColor = "#01AFCC";
+			barColor = "#8de0ef";
+			barColorHighlight = "#01AFCC";
 		}
 	}
 	$: activeSection, swapBarData($activeSection)
@@ -67,7 +71,7 @@
 	<Chapter id={"race"} data={raceData} copyBlock={copy.lookBack} copyScroll={copy.raunchinessScroll} />
 </div>
 {#if $activeSection !== "intro"}
-	<BarChart data={barData} color={barColor}/>
+	<BarChart data={barData} color={barColor} highlightColor={barColorHighlight}/>
 {/if}
 {#if $readingListVisible == true}
 	<ReadingList data={data}/>

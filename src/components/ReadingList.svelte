@@ -38,7 +38,7 @@
 </script>
 
 {#if $readingListVisible}
-<section id="reading-list" on:click={handleClickOut} on:keydown={handleClickOut}>
+<section id="reading-list">
     <div class="paper"
         in:fly={{ y: 2000, duration: 1000 }}
         out:fly={{ y: 2000, duration: 1000 }}>

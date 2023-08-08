@@ -1,14 +1,22 @@
 <script>
     import * as d3 from "d3";
     import { onMount } from "svelte";
-    import { highlightYear } from "$stores/misc.js";
     import { fade, fly } from 'svelte/transition';
-    import { activeSection } from "$stores/misc.js";
+    import { activeSection, stepData } from "$stores/misc.js";
 
     export let data;
     export let color;
+    export let highlightColor;
     let w;
     let barChartW;
+
+    function checkData(data, year) {
+        if (data[1] !== undefined && data[1].highlightYears.includes(year)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     $: groupedData = d3.groups(data, d => d.year);
 </script>
@@ -21,13 +29,13 @@
     <div class="chart-wrapper" bind:clientWidth={barChartW}>
         {#if groupedData !== undefined}
             {#each groupedData as year, i}
-                {@const isHighlightYear = $highlightYear == year[0] ? "highlightYear" : ""}
-                <div class="year-bar {isHighlightYear}" 
+                <div class={checkData($stepData, year[0]) ? "year-bar active" : "year-bar"} 
+                id="bar-{year[0]}"
                 style="height: {year[1].length*1.5}px;
                 width: {barChartW/groupedData.length}px;
-                background: {color}"
+                background: {checkData($stepData, year[0]) ? highlightColor : color}"
                 >
-                    <p class="count count-{isHighlightYear}"
+                    <p class="count"
                     in:fly={{ y: 20, duration: 500 }} out:fade>
                         {year[1].length}
                     </p>
@@ -62,11 +70,8 @@
     .year-bar {
         width: 5rem;
         margin: 0 0.05rem;
-        transition: 0.25s ease-in;
+        transition: 0.25s linear;
         position: relative;
-    }
-    .highlightYear {
-        background: blue;
     }
     .count {
         margin: 0;
@@ -75,10 +80,11 @@
         width: 100%;
         text-align: center;
         top: -1.5rem;
-        transition: 0.25s ease-in;
-        opacity: 1;
+        transition: 0.25s linear;
+        opacity: 0.125;
+        font-family: var(--sans);
     }
-    .count-highlightYear {
+    .year-bar.active .count {
         opacity: 1;
     }
     .label {
@@ -90,7 +96,7 @@
         font-size: 36px;
         padding: 0;
         line-height: 1;
-        transition: 0.25s ease-in;
+        transition: 0.25s linear;
     }
     .label.left {
         margin: 0 1rem 0 0;

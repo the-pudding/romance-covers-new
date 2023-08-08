@@ -1,6 +1,6 @@
 <script>
     import AddButton from "$components/AddButton.svelte";
-    import { readingList, highlightYear } from "$stores/misc.js";
+    import { stepData } from "$stores/misc.js";
     import * as d3 from "d3";
 
     export let book;
@@ -8,18 +8,31 @@
 
     let w;
     let h; 
+    let bookActive;
+
+    function checkData(data, id) {
+        if (data[1] !== undefined) {
+            return data[1].highlightBooks.includes(id);
+        }
+    }
 </script>
 
 <svelte:window bind:innerHeight={h} bind:innerWidth={w} />
 
 {#if index == 0}
-    <div class="book" id="book_{book.ISBN}" style="height:{h/8}px">
+    <div class={checkData($stepData, book.ISBN) ? "book active" : "book"}
+        id="book_{book.ISBN}"
+        style="height:{h/8}px"
+    >
         <img src ="/assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}">
+        <div class="marker">{book.year}</div>
         <AddButton />
-        <!-- <div class="marker">{book.year}</div> -->
     </div>
 {:else}
-    <div class="book" id="book_{book.ISBN}" style="height:{h/8}px">
+    <div class={checkData($stepData, book.ISBN) ? "book active" : "book"} 
+        id="book_{book.ISBN}" 
+        style="height:{h/8}px"
+    >
         <img src ="/assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}">
         <AddButton />
     </div>
@@ -43,15 +56,38 @@
     } */
     .book img {
         box-shadow: -0.25rem 0 1rem  var(--color-gray-100);
+        opacity: 1;
+    }
+    .book.active img {
+        opacity: 1;
+    }
+    :global(#raunchiness .book.active img) {
+        outline: 5px solid var(--romance-blue);
+    }
+    :global(#illustrations .book.active img) {
+        outline: 5px solid var(--romance-yellow);
+    }
+    :global(#race .book.active img) {
+        outline: 5px solid var(--romance-teal);
     }
     .book .marker {
         position: absolute;
-        background: pink;
         font-family: var(--serif);
         padding: 0.25rem 0.5rem;
         text-align: center;
         width: 3.5rem;
         left: 0.25rem;
-        bottom: -1rem;
+        bottom: -2.25rem;
+        font-family: var(--sans);
+        z-index: 999;
+    }
+    :global(#raunchiness .book .marker) {
+        background: var(--romance-blue-light);
+    }
+    :global(#illustration .book .marker) {
+        background: var(--romance-yellow-light);
+    }
+    :global(#race .book .marker) {
+        background: var(--romance-teal-light);
     }
 </style>

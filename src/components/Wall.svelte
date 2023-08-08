@@ -1,19 +1,19 @@
 <script>
     import * as d3 from "d3";
     import { onMount } from "svelte";
-    import { readingList, highlightYear } from "$stores/misc.js";
+    import { stepData } from "$stores/misc.js";
     import Book from "$components/Wall.Book.svelte";
 
     export let data;
     export let value;
-    export let stepData;
     export let section;
+    export let copy;
 
     const shelves = [0, 1, 2, 3, 4];
     let bookWidth = 64;
     let margins = 32;
     let bookRows = 5;
-    let xShift;
+    let xShift = 0;
     let h;
     let w;
     let bookAdded = false;
@@ -37,11 +37,12 @@
         totalShelfWidth = chunks.reduce((a, b) => a + b, 0);
     }
 
-
     onMount(() => {
 		stop1_raunchiness = d3.select("#book_9780345543790").node().getBoundingClientRect().x;
         stop2_raunchiness = d3.select("#book_9780062448026").node().getBoundingClientRect().x;
         stop3_raunchiness = d3.select("#book_9781335458520").node().getBoundingClientRect().x;
+
+        console.log(stop1_raunchiness, stop2_raunchiness, stop3_raunchiness)
 
         if (chunkWidths.length == 26) {
             calcTotalWidth(chunkWidths)
@@ -49,20 +50,18 @@
         // wallWidth = d3.select(`#wall-${section}`).node().getBoundingClientRect().width;
 	})
 
-    function horizShift(value) {
-         if (value == 0 || value == undefined) {
-            xShift = 0;
-         } else if (value == 1) {
-            xShift = stop1_raunchiness - margins;
-         } else if (value == 2) {
-            xShift =  stop2_raunchiness - margins;
-         } else if (value == 3) {
-            xShift =  stop3_raunchiness - margins;
-         }
+    function shiftX(value) {
+        if (copy[value] !== undefined) {
+            if (value == 0) {
+                xShift = 0; 
+            } else if (copy[value] !== 0 && d3.select(`#book_${copy[value].scrollToId}`).node() !== null) {
+                let sel = d3.select(`#book_${copy[value].scrollToId}`).node().getBoundingClientRect().x;
+                xShift = xShift + sel - margins
+            }
+        }
     }
 
-    $: value, horizShift(value);
-    $: console.log(stepData);
+    $: value, shiftX(value);
 </script>
 
 <svelte:window bind:innerHeight={h} bind:innerWidth={w} />

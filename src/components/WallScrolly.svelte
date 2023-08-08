@@ -2,20 +2,23 @@
 	import Scrolly from "$components/helpers/Scrolly.svelte";
     import Wall from "$components/Wall.svelte";
     import { getContext } from "svelte";
+	import { stepData } from "$stores/misc.js";
 	let value;
-	let stepData;
     export let data;
     export let copy;
 	export let section;
 
-	function getData(value) { stepData = copy[value] }
+	function setStepData(value) {
+        let localStepData = [section, (copy[value])];
+		$stepData = localStepData;
+    }
 
-	$: getData(value)
+	$: value, setStepData(value);
 </script>
 
 <section id="scrolly">
 	<div class="sticky">
-        <Wall data={data} value={value} stepData={stepData} section={section}/>
+        <Wall data={data} value={value} section={section} copy={copy}/>
     </div>
 	<Scrolly bind:value>
         {#if copy}
@@ -32,7 +35,7 @@
 <style>
 	.sticky {
 		position: sticky;
-		top: 3rem;
+		top: 5rem;
 		transition: all 1s;
 		height: 100vh;
         z-index: 1;

@@ -63,6 +63,7 @@
         border: 2px solid white;
         box-shadow: 0.25rem 0 1rem  var(--color-gray-300);
         transition: 0.25s transform linear, 0.5s background-color linear;
+        z-index: 1000;
     }
     .add:hover {
         transform: scale(1.5);
