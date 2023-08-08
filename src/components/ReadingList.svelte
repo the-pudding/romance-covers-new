@@ -49,7 +49,7 @@
                     <div animate:flip={{duration:1000, delay:0}}> 
                         {#if book.id !== undefined && $readingList.find(d => d.id == book.id) !== undefined}  
                             <li id="{findBookMatch(book.id, "img")}" >    
-                                <img src ="/assets/images/img_{findBookMatch(book.id, "img")}.jpg" alt="a thumbnail book cover of {findBookMatch(book.id, "title")}">
+                                <img src ="assets/images/img_{findBookMatch(book.id, "img")}.jpg" alt="a thumbnail book cover of {findBookMatch(book.id, "title")}">
                                 <div class="details">
                                     <p class="title">{findBookMatch(book.id, "title")}</p>
                                     <p class="author">By Author Name</p>
