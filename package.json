@@ -8,7 +8,8 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"lint": "prettier --check --plugin-search-dir=. .",
-		"format": "prettier --write --plugin-search-dir=. ."
+		"format": "prettier --write --plugin-search-dir=. .",
+		"imgDownload": "node tasks/imgDownload.js"
 	},
 	"devDependencies": {
 		"@rollup/plugin-dsv": "^3.0.2",
