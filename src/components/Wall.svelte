@@ -27,22 +27,21 @@
     let totalShelfWidth;
 
     function calcWidth(len) {
-        let bookCols = Math.round((len)/bookRows);
+        let remainder = len % 5;
+        let bookCols = remainder == 1 ? Math.round((len)/bookRows) + 1 : Math.round((len)/bookRows);
         let chunkWidth = bookCols == 0 ? bookWidth + margins : bookCols * (bookWidth + margins);
         chunkWidths.push(chunkWidth);
         return chunkWidth;
     }
 
-    function calcTotalWidth(chunks) {
-        totalShelfWidth = chunks.reduce((a, b) => a + b, 0);
-    }
+    // function calcTotalWidth(chunks) {
+    //     totalShelfWidth = chunks.reduce((a, b) => a + b, 0);
+    // }
 
     onMount(() => {
 		stop1_raunchiness = d3.select("#book_9780345543790").node().getBoundingClientRect().x;
         stop2_raunchiness = d3.select("#book_9780062448026").node().getBoundingClientRect().x;
         stop3_raunchiness = d3.select("#book_9781335458520").node().getBoundingClientRect().x;
-
-        console.log(stop1_raunchiness, stop2_raunchiness, stop3_raunchiness)
 
         if (chunkWidths.length == 26) {
             calcTotalWidth(chunkWidths)
@@ -68,26 +67,26 @@
 
 <section id="wall-{section}" class="wall" style="transform:translateX(-{xShift}px)">
     {#each yearGroups as year, i}
-        <div class="yearChunk" id="chunk-{year[0]}"
-        style="width:{calcWidth(year[1].length)}px;margin-right:{calcWidth(year[1].length)}px">
-            <div class="books">
-                {#each year[1] as book, i}
-                    <Book book={book} index={i} />
+        <div class="year-wrapper">
+            <div class="yearChunk" id="chunk-{year[0]}"
+            style="width:{calcWidth(year[1].length)}px">
+                <div class="books">
+                    {#each year[1] as book, i}
+                        <Book book={book} index={i} />
+                    {/each}
+                </div>
+            </div>
+            <div class="shelves">
+                {#each shelves as shelf, i} 
+                    <div class="shelf" style="width:{calcWidth(year[1].length)}px">
+                        <div class="shelf-front"></div>
+                        <div class="shelf-top"></div>
+                        <div class="shelf-shadow"></div>
+                    </div>
                 {/each}
             </div>
         </div>
     {/each}
-    {#if totalShelfWidth}
-        <div class="shelves">
-            {#each shelves as shelf, i} 
-                <div class="shelf" style="width:{totalShelfWidth}px">
-                    <div class="shelf-front"></div>
-                    <div class="shelf-top"></div>
-                    <div class="shelf-shadow"></div>
-                </div>
-            {/each}
-        </div>
-    {/if}
 </section>
 
 <style>
@@ -100,6 +99,9 @@
         z-index: 1;
         position: relative;
         transition: 1s ease-in-out;
+    }
+    .yearChunk {
+        margin: 0 2rem 0 0;
     }
     .shelves {
         width: 100%;

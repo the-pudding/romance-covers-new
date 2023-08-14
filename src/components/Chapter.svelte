@@ -15,6 +15,7 @@
 <section id={id}
     use:inView
     on:enter={() => setSection(id)}>
+    <h2>{id}</h2>
     <ChapterText copy={copyBlock}/>
     <WallScrolly data={data} copy={copyScroll} section={id} />
 </section>
@@ -31,5 +32,17 @@
     }
     #race {
         background-image: linear-gradient(var(--romance-bg-yellow) 0%, var(--romance-bg-teal) 10%);;
+    }
+    h2 {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        max-width: 40rem;
+        margin: 0 auto;
+        text-align: center;
+        text-transform: capitalize;
+        font-family: "Canela";
+        font-size: var(--64px);
+        padding: 3rem 0 0 0;
     }
 </style>

@@ -7,14 +7,19 @@
     export let data;
     export let color;
     export let highlightColor;
+    export let pos;
     let w;
     let barChartW;
 
     function checkData(data, year) {
-        if (data[1] !== undefined && data[1].highlightYears.includes(year)) {
-            return true;
+        if (pos !== "overlay") {
+            return true
         } else {
-            return false;
+            if (data[1] !== undefined && data[1].highlightYears.includes(year)) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
@@ -23,9 +28,9 @@
 
 <svelte:window bind:innerWidth={w} />
 
-{#if $activeSection !== "intro"}
-<section id="barChart" in:fly={{ y: 200, duration: 2000 }}>
-    <p class="label left" style="color: {data[0]}">2011</p>
+    {#if pos == "overlay"}
+        <p class="label left" style="color: {data[0]}">2011</p>
+    {/if}
     <div class="chart-wrapper" bind:clientWidth={barChartW}>
         {#if groupedData !== undefined}
             {#each groupedData as year, i}
@@ -35,30 +40,21 @@
                 width: {barChartW/groupedData.length}px;
                 background: {checkData($stepData, year[0]) ? highlightColor : color}"
                 >
-                    <p class="count"
-                    in:fly={{ y: 20, duration: 500 }} out:fade>
-                        {year[1].length}
-                    </p>
+                    {#if pos == "overlay"}
+                        <p class="count"
+                        in:fly={{ y: 20, duration: 500 }} out:fade>
+                            {year[1].length}
+                        </p>
+                    {/if}
                 </div>
             {/each}
         {/if}
     </div>
-    <p class="label right" style="color: {data[0]}">2023</p>
-</section>
-{/if}
+    {#if pos == "overlay"}
+        <p class="label right" style="color: {data[0]}">2023</p>
+    {/if}
 
 <style>
-    #barChart {
-        position: fixed;
-        width: 100%;
-        height: 10rem;
-        left: 0;
-        bottom: 0;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        z-index: 999;
-    }
     .chart-wrapper {
         display: flex;
         flex-direction: row; 

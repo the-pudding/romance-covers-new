@@ -1,12 +1,13 @@
 <script>
 	import Scrolly from "$components/helpers/Scrolly.svelte";
     import IntroBook from "$components/IntroBook.svelte";
+    import SmallMultiples from "$components/SmallMultiples.svelte";
     import { getContext } from "svelte";
     import inView from "$actions/inView.js";
     import { activeSection } from "$stores/misc.js";
 
     const copy = getContext("copy");
-    let steps = [0, 1];
+    let steps = [0];
 	let value;
     let id = "intro";
 
@@ -26,9 +27,14 @@
         {/each}
 	</Scrolly>
 	<div class="spacer" />
+    <SmallMultiples />
 </section>
 
 <style>
+    .intro {
+        height: 200vh;
+        width: 100%;
+    }
 	.sticky {
 		position: sticky;
 		top: 0rem;
@@ -39,7 +45,8 @@
         display: flex;
         flex-direction: row;
         justify-content: center;
-        align-items: center;
+        align-items: start;
+        padding-top: 10rem;
 	}
 
 	.spacer {

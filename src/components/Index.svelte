@@ -6,8 +6,10 @@
 	import BarChart from "$components/BarChart.svelte";
 	import IntroScrolly from "$components/IntroScrolly.svelte";
 	import ReadingList from "$components/ReadingList.svelte";
-	import { activeSection, readingListVisible, readingList } from "$stores/misc.js";
-	// import Footer from "$components/Footer.svelte";
+	import Outro from "$components/Outro.svelte";
+	import { activeSection, readingListVisible } from "$stores/misc.js";
+	import Footer from "$components/Footer.svelte";
+	import { fade, fly } from 'svelte/transition';
 
 	const copy = getContext("copy");
 	// const data = getContext("data");
@@ -66,16 +68,20 @@
 <IntroScrolly />
 <ChapterMarker />
 <div class="sections">
-	<Chapter id={"raunchiness"} data={raunchinessData} copyBlock={copy.lookBack} copyScroll={copy.raunchinessScroll} />
-	<Chapter id={"illustration"} data={illustrationData} copyBlock={copy.lookBack} copyScroll={copy.raunchinessScroll} />
-	<Chapter id={"race"} data={raceData} copyBlock={copy.lookBack} copyScroll={copy.raunchinessScroll} />
+	<Chapter id={"raunchiness"} data={raunchinessData} copyBlock={copy.lookBack} copyScroll={copy.raunchinessScroll} pos={"overlay"} />
+	<Chapter id={"illustration"} data={illustrationData} copyBlock={copy.lookBack} copyScroll={copy.raunchinessScroll} pos={"overlay"} />
+	<Chapter id={"race"} data={raceData} copyBlock={copy.lookBack} copyScroll={copy.raunchinessScroll} pos={"overlay"} />
 </div>
-{#if $activeSection !== "intro"}
-	<BarChart data={barData} color={barColor} highlightColor={barColorHighlight}/>
+{#if $activeSection !== "intro" && $activeSection !== "outro" && $activeSection !== null}
+	<section id="barChart" in:fly={{ y: 200, duration: 2000 }}>
+		<BarChart data={barData} color={barColor} highlightColor={barColorHighlight} pos={"overlay"}/>
+	</section>
 {/if}
 {#if $readingListVisible == true}
-	<ReadingList data={data}/>
+	<ReadingList data={data} pos={"overlay"}/>
 {/if}
+<Outro />
+<Footer />
 
 <style>
 	.scrollContainer {
@@ -83,8 +89,18 @@
 		position: fixed;
 		height: 100vh;
 	}
-
 	.sections {
 		margin-top: 5rem;
 	}
+	#barChart {
+        position: fixed;
+        width: 100%;
+        height: 10rem;
+        left: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        z-index: 999;
+    }
 </style>

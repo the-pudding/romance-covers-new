@@ -1,7 +1,7 @@
 <script>
     import { activeSection, readingListVisible } from "$stores/misc.js";
     import Icon from "$components/helpers/Icon.svelte";
-    const sections = ["intro", "raunchiness", "illustration", "race"];
+    const sections = ["intro", "raunchiness", "illustration", "race", "outro"];
     import * as d3 from "d3";
 
     function handleListToggle(initState) {
@@ -88,6 +88,9 @@
     #sectionBox-race.active {
         border: 3px solid var(--romance-teal);
     }
+    #sectionBox-outro.active {
+        border: 3px solid var(--romance-purple);
+    }
     .sectionBox:hover {
         opacity: 1; 
     }
@@ -102,6 +105,9 @@
     }
     #sectionBox-race {
         border: 3px solid var(--romance-teal-light);
+    }
+    #sectionBox-outro {
+        border: 3px solid var(--romance-purple-light);
     }
     .label {
         position: absolute;

@@ -1,19 +1,45 @@
 <script>
     import { getContext, onMount } from "svelte";
     const copy = getContext("copy");
+	import { tweened } from 'svelte/motion';
+	import { cubicOut } from 'svelte/easing';
 
     let w;
+	let h;
+	let y;
+	let scrollPercent;
+	let bookTranslate;
+	let mainRotate;
+	let frontTranslate;
+	let frontRotate;
 	export let value;
-    $: open = value == 0 || value == undefined ? false : true;
 
+	const progress = tweened(0, {
+		duration: 400,
+		easing: cubicOut
+	});
+
+	function computePercentage(y) {
+		if (y >= h) {
+			bookTranslate = 50;
+			mainRotate = 0;
+			frontRotate = 180;
+		} else {
+			bookTranslate = y/h*50;
+			mainRotate = y/h*10;
+			frontRotate = y/h*180;
+		}
+	}
+    $: open = y < 10 ? false : true;
+	$: y, computePercentage(y)
 </script>
 
-<svelte:window bind:innerWidth={w}/>
+<svelte:window bind:innerWidth={w} bind:innerHeight={h} bind:scrollY={y}/>
 
 <section id="intro-book">
-    <div id="book" class:open-book={open} >
-        <div class="main">
-            <div class="book-front">
+    <div id="book" style="transform:translate3d({bookTranslate}%,0,0)" >
+        <div class="main" style="transform:rotate3d(1,1,0,{mainRotate}deg)">
+            <div class="book-front" style="transform:translate3d(0,0,25px) rotate3d(0,1,0,-{frontRotate}deg)">
                 <div class="book-cover">
                 </div>
                 <div class="book-cover-back">
@@ -56,12 +82,13 @@
         margin: 0 0 0 0;
     }
 	#book {
-		width: 30%;
+		width: 40%;
 		height: auto;
 		margin: 0 auto;
 		position: relative;
 		transition-duration: .5s;
 		perspective: 2000px;
+		transform:translate3d(0,0,0);
 	}
 	.main {
 		width: 100%;

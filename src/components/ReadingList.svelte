@@ -1,12 +1,13 @@
 <script>
-    import { readingList, readingListVisible } from "$stores/misc.js";
+    import { readingList, readingListVisible, activeSection } from "$stores/misc.js";
     import { fly, fade } from 'svelte/transition';
     import { flip } from 'svelte/animate';
     import Icon from "$components/helpers/Icon.svelte";
     import * as d3 from "d3";
     export let data;
+    export let pos;
 
-    let displayList = $readingList
+    let displayList = $readingList;
 
     function findBookMatch(id, type) {
         let match = data.find(d => d.ISBN == id);
@@ -37,7 +38,7 @@
     }
 </script>
 
-{#if $readingListVisible}
+{#if $readingListVisible && pos == "overlay"}
 <section id="reading-list">
     <div class="paper"
         in:fly={{ y: 2000, duration: 1000 }}
@@ -69,6 +70,37 @@
     </div>
     <div class="bg" in:fade={{ delay: 500 }} out:fade={{ delay: 0 }}></div>
 </section>
+{:else if pos == "inline"}
+<section id="reading-list-inline">
+    <div class="paper"
+        in:fly={{ y: 2000, duration: 1000 }}
+        out:fly={{ y: 2000, duration: 1000 }}>
+        <h3>Your Reading List</h3>
+        {#if $readingList.length > 0}
+            <ul>
+                {#each $readingList as book, i (book.id)}
+                    <div animate:flip={{duration:1000, delay:0}}> 
+                        {#if book.id !== undefined && $readingList.find(d => d.id == book.id) !== undefined}  
+                            <li id="{findBookMatch(book.id, "img")}" >    
+                                <img src ="assets/images/img_{findBookMatch(book.id, "img")}.jpg" alt="a thumbnail book cover of {findBookMatch(book.id, "title")}">
+                                <div class="details">
+                                    <p class="title">{findBookMatch(book.id, "title")}</p>
+                                    <p class="author">By Author Name</p>
+                                </div>
+                                <button class="remove"
+                                    on:click={handleBtnClick}>
+                                    <Icon name="x" />
+                                </button>
+                            </li> 
+                        {/if}
+                    </div>
+                {/each}
+            </ul>
+        {:else}
+            <p>Click on the + signs next to each book to add them to your list</p>
+        {/if}
+    </div>
+</section>
 {/if}
 
 <style>
@@ -81,6 +113,9 @@
         /* background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(2px); */
         z-index: 999;
+    }
+    #reading-list-inline {
+        position: relative;
     }
     .bg {
         width: 100%;
@@ -106,6 +141,14 @@
         padding: 2rem;
         z-index: 1000;
         overflow-y: scroll;
+    }
+    #reading-list-inline .paper {
+        position: relative;
+        margin: 0 auto;
+        transform: translate(0,0);
+        left: 0;
+        height: auto;
+        z-index: 997;
     }
     h3 {
         font-family: 'Canela';
