@@ -61,7 +61,7 @@
             <div class="book-back">
             </div>
             <div class="book-bone">
-                <h2>What Does A Happily Ever After Look Like?</h2>
+                <!-- <h2>What Does A Happily Ever After Look Like?</h2> -->
             </div>
             <div class="book-top"></div>
             <div class="book-right"></div>
@@ -83,6 +83,7 @@
     }
 	#book {
 		width: 40%;
+		max-width: 30rem;
 		height: auto;
 		margin: 0 auto;
 		position: relative;
@@ -119,7 +120,7 @@
         height: 100%;
 		overflow:hidden;
 		position:absolute; top:0; bottom:0;
-		background: url("/assets/images/Alice_sketch_3.jpg");
+		background: url("/assets/images/Alice_cover.jpg");
         background-size: contain;
         background-repeat: no-repeat;
 		transform-style:preserve-3d;
