@@ -1,6 +1,7 @@
 <script>
     import WallScrolly from "$components/WallScrolly.svelte";
     import ChapterText from "$components/ChapterText.svelte";
+    import Bookmark from "$components/Bookmark.svelte";
     import inView from "$actions/inView.js";
     import { activeSection } from "$stores/misc.js";
 
@@ -17,6 +18,7 @@
     on:enter={() => setSection(id)}>
     <h2>{id}</h2>
     <ChapterText copy={copyBlock}/>
+    <Bookmark />
     <WallScrolly data={data} copy={copyScroll} section={id} />
 </section>
 

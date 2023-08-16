@@ -1,5 +1,6 @@
 <script>
-    import { activeSection, readingListVisible } from "$stores/misc.js";
+    import { activeSection, readingList, readingListVisible } from "$stores/misc.js";
+    import { fly, fade } from 'svelte/transition';
     import Icon from "$components/helpers/Icon.svelte";
     const sections = ["intro", "raunchiness", "illustration", "race", "outro"];
     import * as d3 from "d3";
@@ -7,10 +8,10 @@
     function handleListToggle(initState) {
         readingListVisible.set(!$readingListVisible);
         d3.select(this).style("animation", "none")
+        d3.select(this).classed("highlight", false)
     }
     function handleChapterClick(e) {
         let id = (d3.select(this).node().id).split("-")[1];
-        console.log(id)
 
         e.preventDefault()
 		const anchor = document.getElementById(id)
@@ -34,17 +35,22 @@
             <p class="label">{section}</p>
         </div>
     {/each}
-    {#if $activeSection !== "intro"}
-        <button 
-            on:click={handleListToggle}
-            class="listBtn">
-                {#if $readingListVisible == true}
-                    <Icon name="x" />
-                {:else}
-                    <Icon name="book-open" />
-                {/if}
-        </button>
-    {/if}
+    <button 
+        on:click={handleListToggle}
+        class="listBtn">
+            {#if $readingList.length > 0}
+                <p class="count"
+                in:fly={{ y: 20, duration: 200}}
+                out:fade={{ duration: 200}}>
+                    {$readingList.length}
+                </p>
+            {/if}
+            {#if $readingListVisible == true}
+                <Icon name="x" />
+            {:else}
+                <Icon name="book-open" />
+            {/if}
+    </button>
 </nav>
 
 <style>
@@ -60,7 +66,6 @@
         z-index: 1000;
         height: 3rem;
     }
-
     .sectionBox {
         width: 20px;
         height: 20px;
@@ -145,15 +150,46 @@
         border-radius: 50%;
         height: 2rem;
         width: 2rem;
-        animation: pulse-animation 2s infinite;
+        /* animation: pulse-animation 2s infinite; */
+        transition: 0.25s linear;
+        transform: scale(1);
     }
-
+    .count {
+        position: absolute;
+        top: -1.3rem;
+        right: -0.3rem;
+        background: var(--romance-pink);
+        min-width: 1.25rem;
+        min-height: 1.25rem;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.125rem 0.25rem;
+        font-weight: bold;
+        font-size: 10px;
+        border: 2px solid white;
+        box-shadow: 0.25rem 0 1rem  var(--color-gray-300);
+    }
+    :global(.listBtn.highlight) {
+        background: rgba(255, 255, 255, 0.75) !important;
+        /* animation: pulse-animation 2s infinite !important; */
+        animation: pulse-animation 2s infinite 1s !important;
+    }
     @keyframes pulse-animation {
         0% {
             box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.75);
         }
         100% {
             box-shadow: 0 0 0 16px rgba(255, 255, 255, 0);
+        }
+    }
+    @keyframes scale-up {
+        0% {
+            transform: scale(1);
+        }
+        20% {
+            transform: scale(1.5);
         }
     }
 </style>

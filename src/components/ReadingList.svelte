@@ -3,6 +3,7 @@
     import { fly, fade } from 'svelte/transition';
     import { flip } from 'svelte/animate';
     import Icon from "$components/helpers/Icon.svelte";
+    import Bookmark from "$components/Bookmark.svelte";
     import * as d3 from "d3";
     export let data;
     export let pos;
@@ -32,43 +33,59 @@
 
     }
     function handleClickOut(e) {
-        if (e.target.parentNode == this) {
+        if (e.target.parentNode.id == "reading-list") {
             $readingListVisible = false;
         }
     }
+    function clearList(e) {
+        $readingList = [];
+        let allBookButtons = d3.selectAll(`.book button`);
+        allBookButtons.classed("book_inList", false);
+
+        setTimeout(() => {
+            $readingListVisible = false;
+        }, 500);
+    }
 </script>
 
-{#if $readingListVisible && pos == "overlay"}
+{#if pos == "overlay"}
 <section id="reading-list">
-    <div class="paper"
-        in:fly={{ y: 2000, duration: 1000 }}
-        out:fly={{ y: 2000, duration: 1000 }}>
-        <h3>Your Reading List</h3>
-        {#if $readingList.length > 0}
-            <ul>
-                {#each $readingList as book, i (book.id)}
-                    <div animate:flip={{duration:1000, delay:0}}> 
-                        {#if book.id !== undefined && $readingList.find(d => d.id == book.id) !== undefined}  
-                            <li id="{findBookMatch(book.id, "img")}" >    
-                                <img src ="assets/images/img_{findBookMatch(book.id, "img")}.jpg" alt="a thumbnail book cover of {findBookMatch(book.id, "title")}">
-                                <div class="details">
-                                    <p class="title">{findBookMatch(book.id, "title")}</p>
-                                    <p class="author">By Author Name</p>
-                                </div>
-                                <button class="remove"
-                                    on:click={handleBtnClick}>
-                                    <Icon name="x" />
-                                </button>
-                            </li> 
-                        {/if}
-                    </div>
-                {/each}
-            </ul>
-        {:else}
-            <p>Click on the + signs next to each book to add them to your list</p>
-        {/if}
-    </div>
-    <div class="bg" in:fade={{ delay: 500 }} out:fade={{ delay: 0 }}></div>
+    {#if $readingListVisible && pos == "overlay"}
+        <div class="paper"
+            in:fly={{ y: 200, duration: 1000}}
+            out:fly={{ y: 200, duration: 1000}}>
+            <h3>Your Reading List</h3>
+            {#if $readingList.length > 0}
+                <button class="clear-list"
+                on:click={clearList}>Clear list</button>
+                <ul>
+                    {#each $readingList as book, i (book.id)}
+                        <div animate:flip={{duration:1000, delay:0}}> 
+                            {#if book.id !== undefined && $readingList.find(d => d.id == book.id) !== undefined}  
+                                <li id="{findBookMatch(book.id, "img")}" >    
+                                    <img src ="assets/images/img_{findBookMatch(book.id, "img")}.jpg" alt="a thumbnail book cover of {findBookMatch(book.id, "title")}">
+                                    <div class="details">
+                                        <p class="title">{findBookMatch(book.id, "title")}</p>
+                                        <p class="author">By Author Name</p>
+                                    </div>
+                                    <button class="remove"
+                                        on:click={handleBtnClick}>
+                                        <Icon name="x" />
+                                    </button>
+                                </li> 
+                            {/if}
+                        </div>
+                    {/each}
+                </ul>
+            {:else}
+                <Bookmark />
+            {/if}
+        </div>
+    {/if}
+    {#if $readingListVisible && pos == "overlay"}
+        <div class="bg" in:fade={{ delay: 300 }} out:fade={{ delay: 300 }}
+        on:click={handleClickOut}></div>
+    {/if}
 </section>
 {:else if pos == "inline"}
 <section id="reading-list-inline">
@@ -113,6 +130,7 @@
         /* background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(2px); */
         z-index: 999;
+        pointer-events: none;
     }
     #reading-list-inline {
         position: relative;
@@ -126,6 +144,7 @@
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(2px);
         z-index: 999;
+        pointer-events: auto;
     }
     .paper {
         background: white;
@@ -141,6 +160,10 @@
         padding: 2rem;
         z-index: 1000;
         overflow-y: scroll;
+        pointer-events: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     #reading-list-inline .paper {
         position: relative;
@@ -155,8 +178,14 @@
         text-align: center;
         font-size: var(--36px);
     }
+    .clear-list {
+        margin: 0 auto;
+        background: transparent;
+        color: var(--color-gray-500);
+    }
     ul {
         margin-top: 5rem;
+        width: 100%;
     }
     li {
         display: flex;

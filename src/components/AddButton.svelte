@@ -9,6 +9,7 @@
     function handleBtnClick(e) {
         let btn = d3.select(this);
         let textFeedback = d3.select(this.parentNode).select(".message");
+        let readingListIcon = d3.select(".listBtn");
 
         let bookID = e.target.parentNode.parentNode.id;
             if (bookID == "") {
@@ -33,9 +34,11 @@
             textFeedback.text("Book added!")
             showMessage = true;
         }  
+        readingListIcon.classed("highlight", true)
 
         setTimeout(() => {
             showMessage = false;
+            // readingListIcon.classed("highlight", false)
         }, 3000);
     }
 </script>

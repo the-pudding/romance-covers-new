@@ -77,9 +77,7 @@
 		<BarChart data={barData} color={barColor} highlightColor={barColorHighlight} pos={"overlay"}/>
 	</section>
 {/if}
-{#if $readingListVisible == true}
-	<ReadingList data={data} pos={"overlay"}/>
-{/if}
+<ReadingList data={data} pos={"overlay"}/>
 <Outro />
 <Footer />
 
