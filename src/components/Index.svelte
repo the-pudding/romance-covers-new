@@ -6,6 +6,7 @@
 	import BarChart from "$components/BarChart.svelte";
 	import IntroScrolly from "$components/IntroScrolly.svelte";
 	import ReadingList from "$components/ReadingList.svelte";
+	import Lookback from "$components/Lookback.svelte";
 	import Outro from "$components/Outro.svelte";
 	import { activeSection, readingListVisible } from "$stores/misc.js";
 	import Footer from "$components/Footer.svelte";
@@ -67,6 +68,7 @@
 <!-- <Header /> -->
 <IntroScrolly />
 <ChapterMarker />
+<Lookback />
 <div class="sections">
 	<Chapter id={"raunchiness"} data={raunchinessData} copyBlock={copy.lookBack} copyScroll={copy.raunchinessScroll} pos={"overlay"} />
 	<Chapter id={"illustration"} data={illustrationData} copyBlock={copy.lookBack} copyScroll={copy.raunchinessScroll} pos={"overlay"} />
