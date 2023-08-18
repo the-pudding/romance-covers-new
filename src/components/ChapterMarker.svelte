@@ -15,7 +15,6 @@
 
         e.preventDefault()
 		const anchor = document.getElementById(id)
-        console.log(anchor)
 		window.scrollTo({
 			top: anchor.offsetTop,
 			behavior: 'instant'

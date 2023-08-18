@@ -41,6 +41,8 @@
         <div class="main" style="transform:rotate3d(1,1,0,{mainRotate}deg)">
             <div class="book-front" style="transform:translate3d(0,0,25px) rotate3d(0,1,0,-{frontRotate}deg)">
                 <div class="book-cover">
+					<h1>What does a happily ever after look like?</h1>
+					<p class="byline">Alice Liang</p>
                 </div>
                 <div class="book-cover-back">
 					<div class="book-cover-back-indent">
@@ -120,11 +122,39 @@
         height: 100%;
 		overflow:hidden;
 		position:absolute; top:0; bottom:0;
-		background: url("/assets/images/Alice_cover.jpg");
+		background: url("/assets/images/Alice_cover_notype.jpg");
         background-size: contain;
         background-repeat: no-repeat;
 		transform-style:preserve-3d;
 		backface-visibility:hidden;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.book-cover h1 {
+		font-family: filson-pro, sans-serif;
+		font-weight: 900;
+		font-style: normal;
+		text-transform: uppercase;
+		color: #ffe93b;
+		font-size: 72px;
+		line-height: 2;
+		margin: -0.5rem 0 0 0;
+		padding: 0;
+		text-align: center;
+		width: 100%;
+	}
+	.book-cover .byline {
+		font-family: "thirsty-script", sans-serif;
+		font-weight: 900;
+		font-style: normal;
+		text-align: center;
+		width: 100%;
+		font-size: 42px;
+		color: #ffe93b;
+		margin: 0;
+		padding: 0 0 1.5rem 0;
 	}
 	.book-cover-back{
 		width: 100%;

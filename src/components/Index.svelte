@@ -47,16 +47,16 @@
 	function swapBarData(activeSection) {
 		if (activeSection == "raunchiness") {
 			barData = raunchinessData;
-			barColor = "#a3bcfb";
-			barColorHighlight = "#4C7DFE";
+			barColor = "#7aaaf9";
+			barColorHighlight = "#2f76ec";
 		} else if (activeSection == "illustration") {
 			barData = illustrationData;
-			barColor = "#f9dd8b";
-			barColorHighlight = "#F7C42D";
+			barColor = "#fdeb74";
+			barColorHighlight = "#fcdf1f";
 		} else if (activeSection == "race") {
 			barData = raceData;
-			barColor = "#8de0ef";
-			barColorHighlight = "#01AFCC";
+			barColor = "#50dada";
+			barColorHighlight = "#25b3b4";
 		}
 	}
 	$: activeSection, swapBarData($activeSection)

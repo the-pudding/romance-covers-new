@@ -1,6 +1,5 @@
 <script>
     export let shelfW;
-    console.log(shelfW);
 </script>
 
 <div class="shelf" style="width:{shelfW}px">

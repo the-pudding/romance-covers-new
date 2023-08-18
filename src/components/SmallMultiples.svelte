@@ -14,7 +14,7 @@
 <div id="small-multiples">
     <div class="top-wrapper">
         <h5>Raunchiness</h5>
-        <BarChart data={raunchinessData} color={"#a3bcfb"} highlightColor={"#4C7DFE"} pos={"inline"} />
+        <BarChart data={raunchinessData} color={"#7aaaf9"} highlightColor={"#2f76ec"} pos={"inline"} />
         <div class="year-labels">
             <p>2011</p>
             <p>2023</p>
@@ -22,7 +22,7 @@
     </div>
     <div class="top-wrapper">
         <h5>Illustration</h5>
-        <BarChart data={illustrationData} color={"#f9dd8b"} highlightColor={"#F7C42D"} pos={"inline"} />
+        <BarChart data={illustrationData} color={"#fdeb74"} highlightColor={"#fcdf1f"} pos={"inline"} />
         <div class="year-labels">
             <p>2011</p>
             <p>2023</p>
@@ -30,7 +30,7 @@
     </div>
     <div class="top-wrapper">
         <h5>Race & Ethnicity</h5>
-        <BarChart data={raceData} color={"#8de0ef"} highlightColor={"#01AFCC"} pos={"inline"} />
+        <BarChart data={raceData} color={"#50dada"} highlightColor={"#25b3b4"} pos={"inline"} />
         <div class="year-labels">
             <p>2011</p>
             <p>2023</p>
