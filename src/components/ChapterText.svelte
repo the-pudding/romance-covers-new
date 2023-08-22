@@ -5,14 +5,6 @@
 
 <Prose copy={copy} />
 
-<div class="prose">
-    {#if copy}
-        {#each copy as text, i}
-            <p>{@html text.value}</p>
-        {/each}
-    {/if}
-</div>
-
 <style>
     .prose {
         display: flex;

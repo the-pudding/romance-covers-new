@@ -7,6 +7,7 @@
     import Book from "$components/Wall.Book.svelte";
     import Shelf from "$components/Wall.Shelf.svelte";
     import Prose from "$components/Prose.svelte";
+    import SmallMultiples from "$components/SmallMultiples.svelte";
 
     const copy = getContext("copy");
     const book = [data[0]];
@@ -52,6 +53,7 @@
             {/each}
         </div>
     </div>
+    <SmallMultiples />
 </section>
 
 <style>

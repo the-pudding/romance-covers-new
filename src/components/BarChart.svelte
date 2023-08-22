@@ -8,6 +8,7 @@
     export let color;
     export let highlightColor;
     export let pos;
+    export let yearTotals;
     let w;
     let barChartW;
 
@@ -23,6 +24,13 @@
         }
     }
 
+    function calcPercentage(year, groupLen) {
+        let yearMatch = yearTotals.find(d => d[0] == year);
+        let yearTotLen = yearMatch[1].length;
+        let percent = groupLen/yearTotLen*100;
+        return percent
+    }
+
     $: groupedData = d3.groups(data, d => d.year);
 </script>
 
@@ -36,14 +44,14 @@
             {#each groupedData as year, i}
                 <div class={checkData($stepData, year[0]) ? "year-bar active" : "year-bar"} 
                 id="bar-{year[0]}"
-                style="height: {year[1].length*1.5}px;
+                style="height: {calcPercentage(year[0], year[1].length)*1.5}px;
                 width: {barChartW/groupedData.length}px;
                 background: {checkData($stepData, year[0]) ? highlightColor : color}"
                 >
                     {#if pos == "overlay"}
                         <p class="count"
                         in:fly={{ y: 20, duration: 500 }} out:fade>
-                            {year[1].length}
+                            {Math.round(calcPercentage(year[0], year[1].length))}%
                         </p>
                     {/if}
                 </div>

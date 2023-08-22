@@ -56,15 +56,17 @@
     } */
     .book img {
         box-shadow: -0.25rem 0 1rem  var(--color-gray-100);
-        opacity: 1;
+        /* opacity: 0.5; */
+        /* filter: contrast(20%) brightness(150%) saturate(25%); */
     }
     .book.active img {
         opacity: 1;
+        filter: contrast(100%) brightness(100%) saturate(100%);
     }
     :global(#raunchiness .book.active img) {
         outline: 5px solid var(--romance-blue);
     }
-    :global(#illustrations .book.active img) {
+    :global(#illustration .book.active img) {
         outline: 5px solid var(--romance-yellow);
     }
     :global(#race .book.active img) {

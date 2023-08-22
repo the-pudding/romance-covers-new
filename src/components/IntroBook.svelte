@@ -58,7 +58,6 @@
                         <p>{@html text.value}</p>
                     {/each}
                 </div>
-                <div class="page-number">- 1 -</div>
             </div>
             <div class="book-back">
             </div>
@@ -146,8 +145,8 @@
 		width: 100%;
 	}
 	.book-cover .byline {
-		font-family: "thirsty-script", sans-serif;
-		font-weight: 900;
+		font-family: "Canela";
+		/* font-weight: 900; */
 		font-style: normal;
 		text-align: center;
 		width: 100%;
