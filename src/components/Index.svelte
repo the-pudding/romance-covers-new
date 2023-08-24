@@ -25,6 +25,7 @@
 	let raunchinessData = data.filter(d => d.cover_url.includes("http")).filter(d => d["Man partially unclothed"] == "true" || d["Woman partially unclothed"] == "true").sort((a, b) => d3.ascending(a["Year Season"], b["Year Season"]));
 	let illustrationData = data.filter(d => d.cover_url.includes("http")).filter(d => d.Style == "Illustrated").sort((a, b) => d3.ascending(a["Year Season"], b["Year Season"]));
 	let raceData = data.filter(d => d.cover_url.includes("http")).filter(d => d["Has POC"] == "true").sort((a, b) => d3.ascending(a["Year Season"], b["Year Season"]));
+	let yearTotals = d3.groups(data, d => d.year);
 	let barData = raunchinessData;
 	let barColorHighlight = "#4C7DFE";
 	let barColor = "#7da1fa"
@@ -75,8 +76,8 @@
 	<Chapter id={"race"} data={raceData} copyBlock={copy.raceText} copyScroll={copy.raceScroll} pos={"overlay"} />
 </div>
 {#if $activeSection !== "intro" && $activeSection !== "outro" && $activeSection !== null}
-	<section id="barChart" in:fly={{ y: 200, duration: 2000 }}>
-		<BarChart data={barData} color={barColor} highlightColor={barColorHighlight} pos={"overlay"}/>
+	<section id="barChart" in:fly={{ y: 200, duration: 2000 }} out:fly={{ y: 200, duration: 2000 }}>
+		<BarChart data={barData} color={barColor} highlightColor={barColorHighlight} pos={"overlay"} yearTotals={yearTotals}/>
 	</section>
 {/if}
 <ReadingList data={data} pos={"overlay"}/>

@@ -1,19 +1,19 @@
 <script>
     import { getContext, onMount } from "svelte";
-    import data from "$data/listings.csv";
+    import lookbackData from "$data/lookback.csv";
     import * as d3 from "d3";
 
     import Wall from "$components/Wall.svelte";
     import Book from "$components/Wall.Book.svelte";
     import Shelf from "$components/Wall.Shelf.svelte";
     import Prose from "$components/Prose.svelte";
+    import SmallMultiples from "$components/SmallMultiples.svelte";
 
     const copy = getContext("copy");
-    const book = [data[0]];
     let bookRows = 5;
     let bookWidth = 64;
     let margins = 32;
-    const shelves = [0];
+    const shelves = [0,1,2,3,4];
     let chunkWidths = [];
 
     // This function calculates the width of the shelf based on the book rows
@@ -40,7 +40,10 @@
             overall spreadsheet. We could create another spreadsheet structured in the same way, just with
             "lookBack" books. If you need multiple books, you can wrap the Book.svelte component in an
             {#each} statement (see Wall.svelte) or the Shelf component below.-->
-            <Book book={book[0]}/>
+            <!-- Index is set to 0 to add publication year on the shelf (might remove?) -->
+            {#each lookbackData as book, i} 
+                <Book book={book} index={0} bookAddable={false}/>
+            {/each}
         </div>
         <div class="shelves">
             {#each shelves as shelf, i} 
@@ -48,25 +51,35 @@
                 multiple shelf rows, but currently there's only one item in the array (const shelves = [0];).
                 To add more, it would look like (const shelves = [0, 1];). This value is hardcoded now, but
                 it could change based on screen size.-->
-                <Shelf shelfW={calcWidth(book.length)} />
+                <Shelf shelfW={calcWidth(lookbackData.length)} shelfHasShadow={false} />
             {/each}
         </div>
     </div>
+    
+    <Prose copy={copy.postLookBack} />
+    <SmallMultiples />
 </section>
 
 <style>
     .shelves {
-        width: 100%;
         height: auto;
         position: absolute;
         z-index: 1;
+        display: flex;
+        margin: 10px;
     }
     .books {
         height: auto;
         position: absolute;
         z-index: 1000;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         flex-wrap: wrap;
+    }
+    .highlightBook{
+        display: flex;
+        width: 30rem;
+        margin: auto;
+        height: 12rem;
     }
 </style>

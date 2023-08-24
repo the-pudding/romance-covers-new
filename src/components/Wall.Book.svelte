@@ -5,6 +5,7 @@
 
     export let book;
     export let index;
+    export let bookAddable = true;
 
     let w;
     let h; 
@@ -26,7 +27,9 @@
     >
         <img src ="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}">
         <div class="marker">{book.year}</div>
-        <AddButton />
+        {#if bookAddable == true}
+            <AddButton />
+        {/if}
     </div>
 {:else}
     <div class={checkData($stepData, book.ISBN) ? "book active" : "book"} 
@@ -34,7 +37,9 @@
         style="height:{h/8}px"
     >
         <img src ="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}">
-        <AddButton />
+        {#if bookAddable == true}
+            <AddButton />
+        {/if}
     </div>
 {/if}
 
@@ -56,15 +61,17 @@
     } */
     .book img {
         box-shadow: -0.25rem 0 1rem  var(--color-gray-100);
-        opacity: 1;
+        /* opacity: 0.5; */
+        /* filter: contrast(20%) brightness(150%) saturate(25%); */
     }
     .book.active img {
         opacity: 1;
+        filter: contrast(100%) brightness(100%) saturate(100%);
     }
     :global(#raunchiness .book.active img) {
         outline: 5px solid var(--romance-blue);
     }
-    :global(#illustrations .book.active img) {
+    :global(#illustration .book.active img) {
         outline: 5px solid var(--romance-yellow);
     }
     :global(#race .book.active img) {

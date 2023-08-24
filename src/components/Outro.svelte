@@ -25,7 +25,7 @@
 <style>
     #outro {
         background-image: linear-gradient(var(--romance-bg-teal) 0%, var(--romance-bg-purple) 10%);
-        padding: 0 0 5rem 0;
+        padding: 10rem 0 5rem 0;
     }
     .prose {
         display: flex;

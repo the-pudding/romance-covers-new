@@ -5,15 +5,6 @@
 
 <Prose copy={copy} />
 
-<!-- Chapter text is showing up twice with this code -->
-<!-- <div class="prose">
-    {#if copy}
-        {#each copy as text, i}
-            <p>{@html text.value}</p>
-        {/each}
-    {/if}
-</div> -->
-
 <style>
     .prose {
         display: flex;

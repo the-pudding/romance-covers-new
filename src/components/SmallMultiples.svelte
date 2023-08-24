@@ -9,12 +9,13 @@
 	let raunchinessData = data.filter(d => d.cover_url.includes("http")).filter(d => d["Man partially unclothed"] == "true" || d["Woman partially unclothed"] == "true").sort((a, b) => d3.ascending(a["Year Season"], b["Year Season"]));
 	let illustrationData = data.filter(d => d.cover_url.includes("http")).filter(d => d.Style == "Illustrated").sort((a, b) => d3.ascending(a["Year Season"], b["Year Season"]));
 	let raceData = data.filter(d => d.cover_url.includes("http")).filter(d => d["Has POC"] == "true").sort((a, b) => d3.ascending(a["Year Season"], b["Year Season"]));
+    let yearTotals = d3.groups(data, d => d.year);
 </script>
 
 <div id="small-multiples">
     <div class="top-wrapper">
         <h5>Raunchiness</h5>
-        <BarChart data={raunchinessData} color={"#7aaaf9"} highlightColor={"#2f76ec"} pos={"inline"} />
+        <BarChart data={raunchinessData} color={"#7aaaf9"} highlightColor={"#2f76ec"} pos={"inline"} yearTotals={yearTotals}/>
         <div class="year-labels">
             <p>2011</p>
             <p>2023</p>
@@ -22,7 +23,7 @@
     </div>
     <div class="top-wrapper">
         <h5>Illustration</h5>
-        <BarChart data={illustrationData} color={"#fdeb74"} highlightColor={"#fcdf1f"} pos={"inline"} />
+        <BarChart data={illustrationData} color={"#fdeb74"} highlightColor={"#fcdf1f"} pos={"inline"} yearTotals={yearTotals}/>
         <div class="year-labels">
             <p>2011</p>
             <p>2023</p>
@@ -30,7 +31,7 @@
     </div>
     <div class="top-wrapper">
         <h5>Race & Ethnicity</h5>
-        <BarChart data={raceData} color={"#50dada"} highlightColor={"#25b3b4"} pos={"inline"} />
+        <BarChart data={raceData} color={"#50dada"} highlightColor={"#25b3b4"} pos={"inline"} yearTotals={yearTotals}/>
         <div class="year-labels">
             <p>2011</p>
             <p>2023</p>

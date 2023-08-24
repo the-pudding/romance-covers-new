@@ -1,7 +1,6 @@
 <script>
 	import Scrolly from "$components/helpers/Scrolly.svelte";
     import IntroBook from "$components/IntroBook.svelte";
-    import SmallMultiples from "$components/SmallMultiples.svelte";
     import { getContext } from "svelte";
     import inView from "$actions/inView.js";
     import { activeSection } from "$stores/misc.js";
@@ -27,7 +26,6 @@
         {/each}
 	</Scrolly>
 	<div class="spacer" />
-    <SmallMultiples />
 </section>
 
 <style>

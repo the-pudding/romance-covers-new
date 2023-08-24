@@ -1,11 +1,14 @@
 <script>
     export let shelfW;
+    export let shelfHasShadow = true;
 </script>
 
 <div class="shelf" style="width:{shelfW}px">
     <div class="shelf-front"></div>
     <div class="shelf-top"></div>
-    <div class="shelf-shadow"></div>
+    {#if shelfHasShadow == true}
+        <div class="shelf-shadow"></div>
+    {/if}
 </div>
 
 <style>
