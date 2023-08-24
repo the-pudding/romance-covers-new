@@ -9,7 +9,8 @@
 		"preview": "vite preview",
 		"lint": "prettier --check --plugin-search-dir=. .",
 		"format": "prettier --write --plugin-search-dir=. .",
-		"imgDownload": "node tasks/imgDownload.js"
+		"imgDownload": "node tasks/imgDownload.js",
+		"imgLookbackDownload": "node tasks/imgLookbackDownload.js"
 	},
 	"devDependencies": {
 		"@rollup/plugin-dsv": "^3.0.2",
@@ -37,5 +38,8 @@
 	"engines": {
 		"node": ">= 18.12.0"
 	},
-	"browserslist": "> 0.5%, last 4 versions, not ie <= 11, not ie_mob <= 11"
+	"browserslist": "> 0.5%, last 4 versions, not ie <= 11, not ie_mob <= 11",
+	"dependencies": {
+		"image-downloader": "^4.3.0"
+	}
 }
