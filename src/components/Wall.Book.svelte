@@ -24,8 +24,19 @@
     <div class={checkData($stepData, book.ISBN) ? "book active" : "book"}
         id="book_{book.ISBN}"
         style="height:{h/8}px"
-    >
-        <img src ="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}">
+    >   
+        <div class='img-wrapper' style="height:{h/12}px; background-image: linear-gradient(to right, 
+            rgba(60, 13, 20, 0.25) 1px, 
+            rgba(255, 255, 255, 0.5) 3px, 
+            rgba(255, 255, 255, 0.25) 7px, 
+            rgba(255, 255, 255, 0.25) 10px, 
+            transparent 12px,
+            transparent 16px, 
+            rgba(255, 255, 255, 0.25) 17px,
+            transparent 22px),
+            url(assets/images/img_{book.ISBN}.jpg)">
+            <!-- <img src ="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}"> -->
+        </div>
         <div class="marker">{book.year}</div>
         {#if bookAddable == true}
             <AddButton />
@@ -36,7 +47,18 @@
         id="book_{book.ISBN}" 
         style="height:{h/8}px"
     >
-        <img src ="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}">
+        <div class='img-wrapper' style="height:{h/12}px; background-image: linear-gradient(to right, 
+            rgba(60, 13, 20, 0.25) 1px, 
+            rgba(255, 255, 255, 0.5) 3px, 
+            rgba(255, 255, 255, 0.25) 7px, 
+            rgba(255, 255, 255, 0.25) 10px, 
+            transparent 12px,
+            transparent 16px, 
+            rgba(255, 255, 255, 0.25) 17px,
+            transparent 22px),
+            url(assets/images/img_{book.ISBN}.jpg)">
+            <!-- <img src ="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}"> -->
+        </div>
         {#if bookAddable == true}
             <AddButton />
         {/if}
@@ -52,13 +74,15 @@
         align-items: end;
         position: relative;
     }
-        /* .book:hover img {
-        -webkit-transform:rotate3d(0,1,0,-30deg);
-		-moz-transform:rotate3d(0,1,0,-30deg);
-		-ms-transform:rotate3d(0,1,0,-30deg);
-		-o-transform:rotate3d(0,1,0,-30deg);
-		transform:rotate3d(0,1,0,-30deg);
-    } */
+    .img-wrapper {
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 4rem;
+        height: calc(100vh / 5);
+        box-shadow: -5px 5px 4px -3px  rgba(0, 0, 0, 0.25), inset -1px 1px 2px rgba(255, 255, 255, 0.5);
+        transform: perspective(8rem) rotateX(2deg);
+        transform-style: preserve-3d;
+    }
     .book img {
         box-shadow: -0.25rem 0 1rem  var(--color-gray-100);
         /* opacity: 0.5; */
@@ -87,6 +111,9 @@
         bottom: -2.25rem;
         font-family: var(--sans);
         z-index: 999;
+    }
+    :global(#lookback .book .marker) {
+        background: var(--romance-pink-light);
     }
     :global(#raunchiness .book .marker) {
         background: var(--romance-blue-light);

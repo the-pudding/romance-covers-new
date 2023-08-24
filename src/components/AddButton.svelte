@@ -3,8 +3,10 @@
     import { fly } from 'svelte/transition';
     import { readingList, highlightYear } from "$stores/misc.js";
     import * as d3 from "d3";
+    import addbook from "$svg/addbook.svg";
 
     let showMessage = false;
+    let showX = false;
 
     function handleBtnClick(e) {
         let btn = d3.select(this);
@@ -36,6 +38,8 @@
         }  
         readingListIcon.classed("highlight", true)
 
+        showX = !showX;
+
         setTimeout(() => {
             showMessage = false;
             // readingListIcon.classed("highlight", false)
@@ -46,7 +50,11 @@
 <button 
     on:click={handleBtnClick}
     class="add book_noList">
-    <Icon name="plus" />
+    {#if showX}
+        <Icon name="plus" size="0.75em"/>
+    {:else}
+        <Icon name="book-open" size="0.75em"/>
+    {/if}
 </button>
 <p class="message" class:visible={showMessage}>Book added!</p>
 

@@ -121,7 +121,17 @@
         height: 100%;
 		overflow:hidden;
 		position:absolute; top:0; bottom:0;
-		background: url("/assets/images/Alice_cover_notype.jpg");
+		background-image: linear-gradient(to right, 
+            rgba(60, 13, 20, 0.25) 3px, 
+            rgba(255, 255, 255, 0.5) 5px, 
+            rgba(255, 255, 255, 0.25) 7px, 
+            rgba(255, 255, 255, 0.25) 10px, 
+            transparent 12px,
+            transparent 16px, 
+            rgba(255, 255, 255, 0.25) 17px,
+            transparent 22px),
+            url("/assets/images/Alice_cover_notype.jpg");
+		/* background: url("/assets/images/Alice_cover_notype.jpg"); */
         background-size: contain;
         background-repeat: no-repeat;
 		transform-style:preserve-3d;
@@ -130,6 +140,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
+		box-shadow: -5px 2px 5px -3px  rgba(0, 0, 0, 0.25), inset -1px 1px 2px rgba(255, 255, 255, 0.5);
 	}
 	.book-cover h1 {
 		font-family: filson-pro, sans-serif;
@@ -255,13 +266,13 @@
 
 /* = Order
 -------------------------------------------------------------- */
-	.book-cover:after,.book-back:after{ /*  */
+	/* .book-cover:after,.book-back:after{ 
 		content:"";
 		width:3px;
 		position:absolute; top:0; left:10px; bottom:0;
 		background:rgba(0,0,0,0.06);
 		box-shadow:1px 0 3px rgba(255, 255, 255, 0.1);
-	}
+	} */
 	.book-page,.book-top,.book-right,.book-bottom{
 		background:var(--color-white);
 	}

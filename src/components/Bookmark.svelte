@@ -5,7 +5,7 @@
 <div class="instructions">
     <p>Use the</p>
     <div class="svg-wrapper">
-        <Icon name="plus" />
+        <Icon name="book open" size="0.75em" />
     </div>
     <p>buttons next to each book to add it to your reading list.</p>
 </div>  
@@ -35,7 +35,7 @@
         margin: 0 0.25rem;
     }
     :global(.svg-wrapper svg) {
-        margin-top: 0.25rem;
+        margin-top: 0.4rem;
     }
     :global(.svg-wrapper svg path) {
         stroke: var(--color-white);
