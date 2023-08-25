@@ -5,14 +5,18 @@
     import inView from "$actions/inView.js";
     import { activeSection } from "$stores/misc.js";
     import Icon from "$components/helpers/Icon.svelte";
+    import { fly, fade } from 'svelte/transition';
 
     const copy = getContext("copy");
     let steps = [0];
 	let value;
     let id = "intro";
+    let y
 
     function setSection(id) { activeSection.set(id); }
 </script>
+
+<svelte:window bind:scrollY={y}/>
 
 <section id="intro"
     use:inView
@@ -28,9 +32,12 @@
         {/each}
 	</Scrolly>
 	<div class="spacer" />
-    <div class="icon-wrapper">
-        <Icon name="arrow-down-circle" size="3rem"/>
-    </div>
+    {#if y < 10}
+        <div class="icon-wrapper"
+            out:fade={{ duration: 500}}>
+            <Icon name="arrow-down-circle" size="3rem"/>
+        </div>
+    {/if}
 </section>
 
 <style>
@@ -54,11 +61,11 @@
     .sticky p {
         font-style: italic;
         font-size: var(--12px);
-        color: var(--romance-pink-light)
+        color: var(--color-gray-1000)
     }
     .sticky a {
         font-style: italic;
-        color: var(--romance-pink-light)
+        color: var(--color-gray-1000)
     }
     .sticky a:hover {
         color: var(--romance-pink)
@@ -83,7 +90,7 @@
         background: var(--color-white);
 	}
     .icon-wrapper {
-        position: absolute;
+        position: fixed;
         bottom: 0;
         left: 50%;
         transform: translate(-50%, -50%);

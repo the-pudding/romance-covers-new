@@ -157,7 +157,7 @@
         position: absolute;
         top: -1.3rem;
         right: -0.3rem;
-        background: var(--romance-pink);
+        background: var(--romance-pink-light);
         min-width: 1.25rem;
         min-height: 1.25rem;
         border-radius: 50%;

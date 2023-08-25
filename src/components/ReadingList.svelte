@@ -114,7 +114,7 @@
                 {/each}
             </ul>
         {:else}
-            <p>Click on the + signs next to each book to add them to your list</p>
+            <Bookmark />
         {/if}
     </div>
 </section>
@@ -218,7 +218,7 @@
         width: 3rem;
         height: 3rem;
         border-radius: 50%;
-        background: var(--romance-pink);
+        background: var(--romance-bg-pink);
         pointer-events: auto;
     }
     :global(li button svg) {

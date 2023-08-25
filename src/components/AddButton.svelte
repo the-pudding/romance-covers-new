@@ -86,7 +86,7 @@
         transform: translate(-50%, -165%) scale(0.65);
     }
     :global(.add.book_inList) {
-        background-color: var(--romance-pink);
+        background-color: var(--romance-pink-light);
         transition: 0.5s background-color linear;
     }
     :global(.add svg) {

@@ -147,7 +147,7 @@
 		font-weight: 900;
 		font-style: normal;
 		text-transform: uppercase;
-		color: #ffe93b;
+		color: #f7d92d;
 		font-size: 72px;
 		line-height: 2;
 		margin: -0.5rem 0 0 0;
@@ -162,7 +162,7 @@
 		text-align: center;
 		width: 100%;
 		font-size: 42px;
-		color: #ffe93b;
+		color: #f7d92d;
 		margin: 0;
 		padding: 0 0 1.5rem 0;
 	}
