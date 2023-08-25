@@ -154,6 +154,7 @@
 		padding: 0;
 		text-align: center;
 		width: 100%;
+		/* text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.125); */
 	}
 	.book-cover .byline {
 		font-family: "Canela";
