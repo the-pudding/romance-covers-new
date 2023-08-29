@@ -86,7 +86,8 @@
         top: -1.5rem;
         transition: 0.25s linear;
         opacity: 0.125;
-        font-family: var(--sans);
+        font-family: var(--sans-display);
+        font-size: var(--14px);
     }
     .year-bar.active .count {
         opacity: 1;
@@ -96,7 +97,7 @@
         padding: 0;
         display: flex;
         align-self: flex-end;
-        font-family: "Canela";
+        font-family: var(--serif-display);
         font-size: 36px;
         padding: 0;
         line-height: 1;

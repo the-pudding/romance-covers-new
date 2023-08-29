@@ -9,6 +9,8 @@
 	--sans: "National 2 Web", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
 	--serif: "Tiempos Text Web", Iowan Old Style, Times New Roman, Times, serif;
 	--mono: Menlo, Consolas, Monaco, monospace;
+	--sans-display: filson-pro, "National 2 Web", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+	--serif-display: "Canela", "Tiempos Text Web", Iowan Old Style, Times New Roman, Times, serif;
 
 	/* z-index */
 	--z-bottom: -100;

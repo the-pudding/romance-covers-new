@@ -20,7 +20,7 @@
 	});
 
 	function computePercentage(y) {
-		if (y >= h) {
+		if (y >= h/2) {
 			bookTranslate = 50;
 			mainRotate = 0;
 			frontRotate = 180;
@@ -91,6 +91,7 @@
 		transition-duration: .5s;
 		perspective: 2000px;
 		transform:translate3d(0,0,0);
+		
 	}
 	.main {
 		width: 100%;
@@ -122,8 +123,8 @@
 		overflow:hidden;
 		position:absolute; top:0; bottom:0;
 		background-image: linear-gradient(to right, 
-            rgba(60, 13, 20, 0.25) 3px, 
-            rgba(255, 255, 255, 0.5) 5px, 
+			rgba(60, 13, 20, 0.25) 1px, 
+            rgba(255, 255, 255, 0.5) 3px, 
             rgba(255, 255, 255, 0.25) 7px, 
             rgba(255, 255, 255, 0.25) 10px, 
             transparent 12px,
@@ -140,10 +141,10 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
-		box-shadow: -5px 2px 5px -3px  rgba(0, 0, 0, 0.25), inset -1px 1px 2px rgba(255, 255, 255, 0.5);
+		box-shadow: -15px 15px 20px -3px  rgba(0, 0, 0, 0.125), inset -1px 1px 2px rgba(255, 255, 255, 0.5);
 	}
 	.book-cover h1 {
-		font-family: filson-pro, sans-serif;
+		font-family: var(--sans-display);
 		font-weight: 900;
 		font-style: normal;
 		text-transform: uppercase;
@@ -157,7 +158,7 @@
 		/* text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.125); */
 	}
 	.book-cover .byline {
-		font-family: "Canela";
+		font-family: var(--serif-display);
 		/* font-weight: 900; */
 		font-style: normal;
 		text-align: center;
@@ -175,6 +176,7 @@
 		transform-style:preserve-3d;
 		backface-visibility:hidden;
 		transform:rotate3d(0,1,0,-180deg);
+		box-shadow: -15px 15px 20px -3px  rgba(0, 0, 0, 0.125);
 	}
 	.book-cover-back-indent {
 		width: calc(100% - 1rem);
@@ -243,6 +245,7 @@
         bottom:0;
 		transform:rotate3d(0,1,0,-180deg) translate3d(0,0,25px);
 		z-index:8;
+		box-shadow: -15px 15px 20px -3px  rgba(0, 0, 0, 0.125)
 	}
 
 /* = Book Bone
@@ -264,16 +267,7 @@
 		transform:rotate(90deg) translateY(-50px);
 	}
 	.book-bone span{ font-size:14px; padding-right:20px;}
-
-/* = Order
--------------------------------------------------------------- */
-	/* .book-cover:after,.book-back:after{ 
-		content:"";
-		width:3px;
-		position:absolute; top:0; left:10px; bottom:0;
-		background:rgba(0,0,0,0.06);
-		box-shadow:1px 0 3px rgba(255, 255, 255, 0.1);
-	} */
+	
 	.book-page,.book-top,.book-right,.book-bottom{
 		background:var(--color-white);
 	}
@@ -295,38 +289,5 @@
 	}
 	.book-right,.book-top,.book-bottom{
 		backface-visibility:hidden;
-	}
-
-/* = Flip
--------------------------------------------------------------- */
-	/* Cover */
-	#book:hover .main{
-		-webkit-transform:rotate3d(0,1,0,-30deg);
-		-moz-transform:rotate3d(0,1,0,-30deg);
-		-ms-transform:rotate3d(0,1,0,-30deg);
-		-o-transform:rotate3d(0,1,0,-30deg);
-		transform:rotate3d(0,1,0,-30deg);
-	}
-	/* Open */
-	.open-book{
-		-webkit-transform:translate3d(50%,0,0);
-		-moz-transform:translate3d(50%,0,0);
-		-ms-transform:translate3d(50%,0,0);
-		-o-transform:translate3d(50%,0,0);
-		transform:translate3d(50%,0,0);
-	}
-	.open-book  .book-front{
-		-webkit-transform:translate3d(0,0,25px) rotate3d(0,1,0,-180deg);
-		-moz-transform:translate3d(0,0,25px) rotate3d(0,1,0,-180deg);
-		-ms-transform:translate3d(0,0,25px) rotate3d(0,1,0,-180deg);
-		-o-transform:translate3d(0,0,25px) rotate3d(0,1,0,-180deg);
-		transform:translate3d(0,0,25px) rotate3d(0,1,0,-180deg);
-	}
-	.open-book:hover .main{
-		-webkit-transform:rotate3d(1,1,0,15deg);
-		-moz-transform:rotate3d(1,1,0,15deg);
-		-ms-transform:rotate3d(1,1,0,15deg);
-		-o-transform:rotate3d(1,1,0,15deg);
-		transform:rotate3d(1,1,0,15deg);
 	}
 </style>

@@ -15,8 +15,8 @@
     let margins = 32;
     const shelves = [0];
     let chunkWidths = [];
-
-    console.log(lookbackData)
+    let lookbackDoc;
+    let lookbackClinch;
 
     // This function calculates the width of the shelf based on the book rows
     function calcWidth(len) {
@@ -25,6 +25,31 @@
         let chunkWidth = bookCols == 0 ? bookWidth + margins : bookCols * (bookWidth + margins);
         chunkWidths.push(chunkWidth);
         return chunkWidth;
+    }
+
+    onMount(() => {
+		lookbackDoc = d3.selectAll(".lookback-doc");
+        lookbackClinch = d3.selectAll(".lookback-clinch");
+	})
+
+    $: console.log(lookbackDoc);
+    $: if (lookbackDoc !== undefined && lookbackClinch !== undefined) {
+        lookbackDoc
+            .on("mouseover", function() {
+                d3.selectAll("#lookback .img-wrapper").classed("highlight", false);
+                d3.selectAll("#book_0 .img-wrapper, #book_1 .img-wrapper, #book_2 .img-wrapper").classed("highlight", true);
+            })
+            .on("mouseout", function() {
+                d3.selectAll("#lookback .img-wrapper").classed("highlight", false);
+            })
+        lookbackClinch
+            .on("mouseover", function() {
+                d3.selectAll("#lookback .img-wrapper").classed("highlight", false);
+                d3.selectAll("#book_3 .img-wrapper, #book_4 .img-wrapper").classed("highlight", true);
+            })
+            .on("mouseout", function() {
+                d3.selectAll("#lookback .img-wrapper").classed("highlight", false);
+            })
     }
 </script>
 
@@ -68,8 +93,9 @@
     .book-wrapper {
         display: flex;
         flex-direction: row;
-        max-width: 60rem;
+        max-width: 50rem;
         margin: 0 auto;
+        padding: 2rem 0 4rem 0;
     }
     .shelves {
         height: auto;
@@ -95,5 +121,22 @@
     }
     :global(#lookback .book) {
         margin: 0.5rem 0 0 0.25rem;
+        transition: 0.125s all linear;
+    }
+    :global(#lookback .img-wrapper.highlight) {
+        transform: scale(1.75) translate(0, -25%);
+        transition: 0.125s all linear;
+    }
+    :global(#lookback .lookback-doc, #lookback .lookback-clinch) {
+        transition: 0.125s all linear;
+        background-color: white;
+        border-radius: 0.25rem;
+        padding: 0.25rem 0.5rem;
+        box-shadow: -2px 2px 5px  rgba(0,0,0,0.125);
+        opacity: 1; 
+        font-family: var(--sans-display);
+    }
+    :global(#lookback .lookback-doc:hover, #lookback .lookback-clinch:hover) {
+        background-color: var(--romance-pink-light);
     }
 </style>

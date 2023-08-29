@@ -19,7 +19,7 @@
         width: 100%;
         margin: 2rem auto 0 auto;
         max-width: 40rem;
-        font-family: var(--sans);
+        font-family: var(--sans-display);
     }
 
     .svg-wrapper {

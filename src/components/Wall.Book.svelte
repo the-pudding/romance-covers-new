@@ -49,13 +49,13 @@
     >
         <div class='img-wrapper' style="height:{h/12}px; background-image: linear-gradient(to right, 
             rgba(60, 13, 20, 0.25) 1px, 
-            rgba(255, 255, 255, 0.5) 3px, 
+            rgba(255, 255, 255, 0.5) 2px, 
+            rgba(255, 255, 255, 0.25) 5px, 
             rgba(255, 255, 255, 0.25) 7px, 
-            rgba(255, 255, 255, 0.25) 10px, 
-            transparent 12px,
-            transparent 16px, 
-            rgba(255, 255, 255, 0.25) 17px,
-            transparent 22px),
+            transparent 10px,
+            transparent 12px, 
+            rgba(255, 255, 255, 0.25) 14px,
+            transparent 18px),
             url(assets/images/img_{book.ISBN}.jpg)">
             <!-- <img src ="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}"> -->
         </div>
@@ -79,14 +79,9 @@
         background-repeat: no-repeat;
         width: 4rem;
         height: calc(100vh / 5);
-        box-shadow: -5px 5px 4px -3px  rgba(0, 0, 0, 0.25), inset -1px 1px 2px rgba(255, 255, 255, 0.5);
+        box-shadow: -3px 3px 2px -2px  rgba(0, 0, 0, 0.125), inset -1px 1px 2px rgba(255, 255, 255, 0.5);
         transform: perspective(8rem) rotateX(2deg);
         transform-style: preserve-3d;
-    }
-    .book img {
-        box-shadow: -0.25rem 0 1rem  var(--color-gray-100);
-        /* opacity: 0.5; */
-        /* filter: contrast(20%) brightness(150%) saturate(25%); */
     }
     .book.active img {
         opacity: 1;
@@ -103,13 +98,13 @@
     }
     .book .marker {
         position: absolute;
-        font-family: var(--serif);
         padding: 0.25rem 0.5rem;
         text-align: center;
         width: 3.5rem;
         left: 0.25rem;
         bottom: -2.25rem;
-        font-family: var(--sans);
+        font-family: var(--sans-display);
+        font-size: var(--14px);
         z-index: 999;
     }
     :global(#lookback .book .marker) {

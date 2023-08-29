@@ -6,6 +6,7 @@
 <div class="shelf" style="width:{shelfW}px">
     <div class="shelf-front"></div>
     <div class="shelf-top"></div>
+    <div class="shelf-right"></div>
     {#if shelfHasShadow == true}
         <div class="shelf-shadow"></div>
     {/if}
@@ -25,6 +26,7 @@
         position: absolute;
         bottom: -1.5rem;
         z-index: 999;
+        box-shadow: 0 19px 38px rgba(0,0,0,0.1), 0 15px 12px rgba(0,0,0,0.05);
     }
     .shelf-top {
         background: var(--color-white);
@@ -35,20 +37,28 @@
         left: 0.25rem;
         bottom: -0.5rem;
         transform: skew(-30deg);
-        stroke: 1px solid #FBF7F7;
         z-index: 999;
+        clip-path: polygon(0 0, calc(100% - 1rem) 0, 100% 100%, calc(100% - 1rem) 100%, 0 100%, 0 0); 
     }
-    .shelf-shadow {
-        background: #D9D9D9;
-        /* background: green; */
-        transform: skew(-60deg);
-        width: 100%;
-        bottom: -6.5rem;
-        height: 5rem;
+    /* .shelf-front:after {
+        content: '';
         position: absolute;
-        left: -8.75rem;
+        width: 1rem;
+        height: 2rem;
+        background: green;
+        bottom: 0rem;
+        right: -1rem;
+    } */
+    /* .shelf-shadow {
+        background: var(--romance-blue-light);
+        transform: skew(-50deg);
+        width: 100%;
+        bottom: -2.5rem;
+        height: 2.5rem;
+        position: absolute;
+        right: 1rem;
         opacity: 0.75;
-        filter: blur(3rem); 
+        filter: blur(1rem); 
         z-index: 1;
-    }
+    } */
 </style>

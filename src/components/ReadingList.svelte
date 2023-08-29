@@ -174,7 +174,7 @@
         z-index: 997;
     }
     h3 {
-        font-family: 'Canela';
+        font-family: var(--serif-display);
         text-align: center;
         font-size: var(--36px);
     }
@@ -199,13 +199,13 @@
         width: calc(100% - 10rem);
     }
     .title {
-        font-family: 'Canela';
+        font-family: var(--serif-display);
         font-size: var(--24px);
         padding: 0;
-        margin: 0;
+        margin: 0 0 0.5rem 0;
     }
     .author {
-        font-family: var(--sans);
+        font-family: var(--sans-display);
         padding: 0;
         margin: 0;
     }
@@ -220,6 +220,10 @@
         border-radius: 50%;
         background: var(--romance-bg-pink);
         pointer-events: auto;
+        transition: 0.125s all linear;
+    }
+    li button:hover {
+        background: var(--romance-pink-light); 
     }
     :global(li button svg) {
         pointer-events: none;

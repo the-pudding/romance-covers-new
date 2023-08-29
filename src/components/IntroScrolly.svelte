@@ -11,12 +11,26 @@
     let steps = [0];
 	let value;
     let id = "intro";
-    let y
+    let y;
+    let h;
+    let scrollDir;
+	let lastY;
 
     function setSection(id) { activeSection.set(id); }
+
+    function checkScrollY(y) {
+        if (y && y != 0) {
+            scrollDir = scrollY > lastY ? "down" : "up"
+            lastY = scrollY;
+        } else {
+            scrollDir = "down";
+        }
+    }
+
+    $: y, checkScrollY(y);
 </script>
 
-<svelte:window bind:scrollY={y}/>
+<svelte:window bind:innerHeight={h} bind:scrollY={y}/>
 
 <section id="intro"
     use:inView
@@ -32,7 +46,7 @@
         {/each}
 	</Scrolly>
 	<div class="spacer" />
-    {#if y < 10}
+    {#if y < h && scrollDir != "up"}
         <div class="icon-wrapper"
             out:fade={{ duration: 500}}>
             <Icon name="arrow-down-circle" size="3rem"/>
@@ -59,13 +73,12 @@
         padding-top: 10rem;
 	}
     .sticky p {
-        font-style: italic;
         font-size: var(--12px);
-        color: var(--color-gray-1000)
+        color: var(--color-gray-800);
+        font-family: var(--sans-display);
     }
     .sticky a {
-        font-style: italic;
-        color: var(--color-gray-1000)
+        color: var(--color-gray-800)
     }
     .sticky a:hover {
         color: var(--romance-pink)
@@ -74,7 +87,7 @@
 		height: 75vh;
 	}
 	.step {
-		height: 50vh;
+		height: 75vh;
 		text-align: center;
         z-index: 999;
         max-width: 30rem;

@@ -70,9 +70,9 @@
         height: 1.5rem;
         width: 1.5rem;
         pointer-events: auto;
-        background-color: var(--color-gray-900);
+        background-color: var(--color-gray-800);
         border: 2px solid white;
-        box-shadow: 0.25rem 0 1rem  var(--color-gray-300);
+        box-shadow: 0.25rem 0 0.5rem  rgba(0,0,0,0.125);
         transition: 0.25s transform linear, 0.5s background-color linear;
         z-index: 1000;
     }
@@ -112,12 +112,12 @@
     .message {
         position: absolute;
         font-size: var(--12px);
-        font-weight: 700;
+        font-weight: 900;
         opacity: 0;
         bottom: 0;
         right: 0;
         text-align: center;
-        font-family: var(--sans);
+        font-family: var(--sans-display);
         transform: translate(50%, 50%);
         transition: 0.125s all linear;
         background-color: white;

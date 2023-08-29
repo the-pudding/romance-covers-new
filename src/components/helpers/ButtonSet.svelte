@@ -83,7 +83,7 @@
 		margin: 0;
 		padding: 0.5em;
 		border-radius: 0;
-		border: 2px solid var(--color-gray-900);
+		border: 2px solid var(--color-gray-800);
 		outline: none;
 		cursor: pointer;
 		font-family: inherit;
@@ -114,7 +114,7 @@
 
 	input[type="radio"]:checked + label,
 	input[type="radio"]:checked:hover + label {
-		background: var(--color-gray-900);
+		background: var(--color-gray-800);
 		color: var(--color-white);
 	}
 

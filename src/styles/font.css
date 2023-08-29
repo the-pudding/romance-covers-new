@@ -35,3 +35,32 @@
 	font-stretch: normal;
 	font-display: swap;
 }
+
+/* Canela */
+@font-face {
+	font-family: "Canela";
+	src: url("https://pudding.cool/assets/fonts/canela/Canela-Bold-Web.woff") format("woff2");
+	font-weight: 600;
+	font-style: normal;
+	font-stretch: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Canela";
+	src: url("https://pudding.cool/assets/fonts/canela/Canela-Light-Web.woff") format("woff2");
+	font-weight: 300;
+	font-style: normal;
+	font-stretch: normal;
+	font-display: swap;
+}
+
+/* Filson */
+@font-face {
+	font-family: "Filson Pro";
+	src: url("https://use.typekit.net/xit7xbk.css") format("woff2");
+	font-weight: 500;
+	font-style: normal;
+	font-stretch: normal;
+	font-display: swap;
+}

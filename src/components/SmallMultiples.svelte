@@ -30,7 +30,7 @@
         </div>
     </div>
     <div class="top-wrapper">
-        <h5>Race & Ethnicity</h5>
+        <h5>Racial Diversity</h5>
         <BarChart data={raceData} color={"#50dada"} highlightColor={"#20B6B6"} pos={"inline"} yearTotals={yearTotals}/>
         <div class="year-labels">
             <p>2011</p>
@@ -42,7 +42,7 @@
 <style>
     #small-multiples {
         max-width: 50rem;
-        margin: 0 auto;
+        margin: 4rem auto;
         display: flex;
         flex-direction: row;
     }
@@ -56,14 +56,15 @@
     h5 {
         font-family: "Canela";
         text-align: center;
-        margin: 0;
+        margin: 0 0 -1rem 0;
     }
     .year-labels {
         width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        font-family: var(--sans);
+        font-family: var(--sans-display);
+        font-size: var(--14px);
     }
     .year-labels p {
         padding: 0;

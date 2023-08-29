@@ -31,7 +31,7 @@
                 class="sectionBox {active}"
                 id="sectionBox-{section}">
             </button>
-            <p class="label">{section}</p>
+            <p class="label {active}">{section}</p>
         </div>
     {/each}
     <button 
@@ -115,17 +115,21 @@
     }
     .label {
         position: absolute;
-        top: 0;
+        top: -0.5rem;
         left: 50%;
         transform: translate(-50%, 100%);
         transition: 0.125s all linear;
         background-color: white;
         border-radius: 0.25rem;
         padding: 0.25rem;
-        box-shadow: 1rem 0 1rem  var(--color-gray-100);
+        box-shadow: -2px 2px 5px  rgba(0,0,0,0.125);
         opacity: 0; 
         text-transform: capitalize;
-        font-family: var(--sans);
+        font-family: var(--sans-display);
+        font-size: var(--14px);
+    }
+    .label.active {
+        opacity: 1; 
     }
     .sectionBox.active .label {
         transform: scale(0.65);
@@ -135,7 +139,8 @@
     }
     .btn-wrapper:hover .label {
         opacity: 1; 
-        transform: translate(-50%, 75%);
+        transform: translate(-50%, 100%);
+        z-index: 1000;
     }
     .btn-wrapper:hover .sectionBox {
         transform: scale(1);
@@ -165,8 +170,9 @@
         justify-content: center;
         align-items: center;
         padding: 0.125rem 0.25rem;
-        font-weight: bold;
+        font-weight: 900;
         font-size: 10px;
+        font-family:  var(--sans-display);
         border: 2px solid white;
         box-shadow: 0.25rem 0 1rem  var(--color-gray-300);
     }

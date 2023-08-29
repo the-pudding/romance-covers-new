@@ -1,7 +1,7 @@
 
 body {
 	background-color: var(--romance-bg-pink);
-	color: var(--color-fg, black);
+	color: var(--color-gray-800);
 	line-height: 1.4;
 	font-family: var(--font-body, serif);
 	font-feature-settings: 'kern' 1, 'onum' 0, 'liga' 0, 'tnum' 1;
