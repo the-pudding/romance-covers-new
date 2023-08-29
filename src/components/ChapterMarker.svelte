@@ -21,7 +21,10 @@
 		})
     }
     
-    $: console.log($readingList)
+    function resetTitles(id) {
+        let title = id == "race" ? "diversity" : id;
+        return title
+    }
 </script>
 
 <nav>
@@ -33,7 +36,7 @@
                 class="sectionBox {active}"
                 id="sectionBox-{section}">
             </button>
-            <p class="label {active}">{section}</p>
+            <p class="label {active}">{resetTitles(section)}</p>
         </div>
     {/each}
     <button 
@@ -117,9 +120,9 @@
     }
     .label {
         position: absolute;
-        top: -0.5rem;
+        top: 2rem;
         left: 50%;
-        transform: translate(-50%, 100%);
+        transform: translate(-50%, -50%);
         transition: 0.125s all linear;
         background-color: white;
         border-radius: 0.25rem;
@@ -129,6 +132,7 @@
         text-transform: capitalize;
         font-family: var(--sans-display);
         font-size: var(--14px);
+        text-align: center;
     }
     .label.active {
         opacity: 1; 
@@ -141,7 +145,7 @@
     }
     .btn-wrapper:hover .label {
         opacity: 1; 
-        transform: translate(-50%, 100%);
+        transform: translate(-50%, -75%);
         z-index: 1000;
     }
     .btn-wrapper:hover .sectionBox {
