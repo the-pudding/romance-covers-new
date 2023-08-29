@@ -94,6 +94,8 @@
         out:fly={{ y: 2000, duration: 1000 }}>
         <h3>Your Reading List</h3>
         {#if $readingList.length > 0}
+            <button class="clear-list"
+                on:click={clearList}>Clear list</button>
             <ul>
                 {#each $readingList as book, i (book.id)}
                     <div animate:flip={{duration:1000, delay:0}}> 
@@ -134,6 +136,7 @@
     }
     #reading-list-inline {
         position: relative;
+        margin: 4rem auto;
     }
     .bg {
         width: 100%;
@@ -172,6 +175,7 @@
         left: 0;
         height: auto;
         z-index: 997;
+        box-shadow: -15px 15px 20px -3px  rgba(0, 0, 0, 0.05);
     }
     h3 {
         font-family: var(--serif-display);
@@ -182,6 +186,11 @@
         margin: 0 auto;
         background: transparent;
         color: var(--color-gray-500);
+        font-family: var(--sans-display);
+        font-size: var(--14px);
+    }
+    .clear-list:hover {
+        color: var(--color-gray-800);
     }
     ul {
         margin-top: 5rem;
@@ -224,6 +233,9 @@
     }
     li button:hover {
         background: var(--romance-pink-light); 
+    }
+    ul div:last-of-type li {
+        border-bottom: none;
     }
     :global(li button svg) {
         pointer-events: none;

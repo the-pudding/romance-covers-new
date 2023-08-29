@@ -1,7 +1,7 @@
 <script>
     import { getContext } from "svelte";
     import inView from "$actions/inView.js";
-    import { activeSection } from "$stores/misc.js";
+    import { readingList, activeSection } from "$stores/misc.js";
     import ReadingList from "$components/ReadingList.svelte";
     import data from "$data/listings.csv";
     const copy = getContext("copy");
@@ -19,12 +19,14 @@
             {/each}
         {/if}
     </div>
-    <ReadingList data={data} pos={"inline"}/>
+    {#if $readingList.length > 0}
+        <ReadingList data={data} pos={"inline"}/>
+    {/if}
 </section>
 
 <style>
     #outro {
-        background-image: linear-gradient(var(--romance-bg-teal) 0%, var(--romance-bg-purple) 10%);
+        background-image: linear-gradient(var(--romance-bg-teal) 0%, var(--romance-bg-purple) 50%);
         padding: 10rem 0 5rem 0;
     }
     .prose {

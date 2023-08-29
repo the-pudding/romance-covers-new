@@ -26,13 +26,15 @@
             btn.classed("book_inList", false);
             btn.classed("book_noList", true); 
             const indexOfObject = $readingList.findIndex(object => { return object.id == bookID })
+            console.log(indexOfObject)
             $readingList.splice(indexOfObject, 1)
+            readingList.set($readingList);
             textFeedback.text("Book removed!")
             showMessage = true;
         } else {
             btn.classed("book_inList", true)
             btn.classed("book_noList", false); 
-            $readingList = [...$readingList, { id: bookID }];
+            readingList.set([...$readingList, { id: bookID }]);
             textFeedback.text("Book added!")
             showMessage = true;
         }  
@@ -45,6 +47,7 @@
             // readingListIcon.classed("highlight", false)
         }, 3000);
     }
+    // $:console.log($readingList)
 </script>
 
 <button 

@@ -20,6 +20,8 @@
 			behavior: 'instant'
 		})
     }
+    
+    $: console.log($readingList)
 </script>
 
 <nav>
