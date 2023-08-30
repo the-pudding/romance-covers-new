@@ -3,6 +3,7 @@
     import { onMount } from "svelte";
     import { fade, fly } from 'svelte/transition';
     import { activeSection, stepData } from "$stores/misc.js";
+    import Icon from "$components/helpers/Icon.svelte";
 
     export let data;
     export let color;
@@ -24,10 +25,11 @@
         }
     }
 
-    function calcPercentage(year, groupLen) {
+    function calcPercentage(year, groupLen, i) {
         let yearMatch = yearTotals.find(d => d[0] == year);
         let yearTotLen = yearMatch[1].length;
-        let percent = groupLen/yearTotLen*100;
+        let percent = Math.round(groupLen/yearTotLen*100);
+        // let text = i == 0 ? `${percent}%` : percent;
         return percent
     }
 
@@ -51,7 +53,7 @@
                     {#if pos == "overlay"}
                         <p class="count"
                         in:fly={{ y: 20, duration: 500 }} out:fade>
-                            {Math.round(calcPercentage(year[0], year[1].length))}%
+                            {calcPercentage(year[0], year[1].length, i)}%
                         </p>
                     {/if}
                 </div>
@@ -68,7 +70,7 @@
         flex-direction: row; 
         align-items: end;
         height: 100%;
-        width: 60%;
+        width: 100%;
         position: relative;
     }
     .year-bar {
@@ -83,11 +85,14 @@
         position: absolute;
         width: 100%;
         text-align: center;
-        top: -1.5rem;
+        top: -1rem;
         transition: 0.25s linear;
         opacity: 0.125;
+        letter-spacing: -0.05rem;
         font-family: var(--sans-display);
-        font-size: var(--14px);
+        font-size: var(--12px);
+        white-space: nowrap;
+        z-index: 1000;
     }
     .year-bar.active .count {
         opacity: 1;
@@ -97,16 +102,65 @@
         padding: 0;
         display: flex;
         align-self: flex-end;
-        font-family: var(--serif-display);
-        font-size: 36px;
+        align-items: center;
+        font-family: var(--sans-display);
+        font-size: var(--12px);
         padding: 0;
         line-height: 1;
         transition: 0.25s linear;
+        z-index: 1000;
+        letter-spacing: -0.05rem;
     }
     .label.left {
         margin: 0 1rem 0 0;
+        position: absolute;
+        bottom: 0;
+        left: 0;
     }
     .label.right {
         margin: 0 0 0 1rem;
+        position: absolute;
+        bottom: 0;
+        right: 0;
     }
+    :global(#barChart .label .icon) {
+        margin: 0;
+        opacity: 1;
+        display: inline;
+    }
+    @media only screen and (min-width: 600px) {
+        .count {
+            font-size: var(--12px);
+            top: -1rem;
+        }
+        .chart-wrapper {
+            width: 60%;
+        }
+        .label {
+            font-size: var(--36px);
+            font-family: var(--serif-display);
+            letter-spacing: 0;
+        }
+        .label.left {
+            margin: 0 1rem 0 0;
+            position: relative;
+            top: 0;
+            left: 0;
+        }
+        .label.right {
+            margin: 0 0 0 1rem;
+            position: relative;
+            top: 0;
+            right: 0;
+        }
+        :global(#barChart .label .icon) {
+            display: none;
+        }
+	}
+    @media only screen and (min-width: 800px) {
+        .count {
+            font-size: var(--14px);
+            top: -1.5rem;
+        }
+	}
 </style>

@@ -40,6 +40,7 @@
 		height: 100vh;
         z-index: 1;
         overflow-x: hidden;
+		pointer-events: none;
 	}
 
 	.spacer {
@@ -52,7 +53,7 @@
         z-index: 999;
         max-width: 30rem;
         margin: 0 auto;
-		pointer-events: none;
+		pointer-events: auto;
 	}
 
 	.step p {

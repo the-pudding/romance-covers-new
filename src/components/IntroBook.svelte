@@ -21,11 +21,11 @@
 
 	function computePercentage(y) {
 		if (y >= h/2) {
-			bookTranslate = 50;
+			bookTranslate = w <= 600 ? 100 : 50;
 			mainRotate = 0;
 			frontRotate = 180;
 		} else {
-			bookTranslate = y/h*50;
+			bookTranslate = w <= 600 ? y/h*100 : y/h*50;
 			mainRotate = y/h*10;
 			frontRotate = y/h*180;
 		}
@@ -83,15 +83,13 @@
         margin: 0 0 0 0;
     }
 	#book {
-		width: 40%;
-		max-width: 30rem;
+		width: 15rem;
 		height: auto;
 		margin: 0 auto;
 		position: relative;
 		transition-duration: .5s;
 		perspective: 2000px;
-		transform:translate3d(0,0,0);
-		
+		transform:translate3d(0,0,0);	
 	}
 	.main {
 		width: 100%;
@@ -149,12 +147,12 @@
 		font-style: normal;
 		text-transform: uppercase;
 		color: #f7d92d;
-		font-size: 72px;
+		font-size: var(--36px);
 		line-height: 2;
-		margin: -0.5rem 0 0 0;
+		margin: -0.25rem auto 0 auto;
 		padding: 0;
 		text-align: center;
-		width: 100%;
+		width: 95%;
 		/* text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.125); */
 	}
 	.book-cover .byline {
@@ -162,10 +160,10 @@
 		/* font-weight: 900; */
 		font-style: normal;
 		text-align: center;
-		width: 100%;
-		font-size: 42px;
+		width: 95%;
+		font-size: var(--24px);
 		color: #f7d92d;
-		margin: 0;
+		margin: 1.5rem auto 0 auto;
 		padding: 0 0 1.5rem 0;
 	}
 	.book-cover-back{
@@ -289,5 +287,59 @@
 	}
 	.book-right,.book-top,.book-bottom{
 		backface-visibility:hidden;
+	}
+
+	/* MEDIA QUERIES */
+	@media only screen and (min-width: 400px) {
+		#book {
+			width: 18rem;
+		}
+		.book-cover h1 {
+			font-size: var(--44px);
+			margin: -0.25rem auto 0 auto;
+		}
+		.book-cover .byline {
+			font-size: var(--28px);
+			margin: 1.5rem auto 0 auto;
+		}
+	}
+	@media only screen and (min-width: 600px) {
+		#book {
+			width: 20rem;
+		}
+		.book-cover h1 {
+			font-size: var(--44px);
+			margin: -0.25rem auto 0 auto;
+		}
+		.book-cover .byline {
+			font-size: var(--32px);
+			margin: 4.25rem auto 0 auto;
+		}
+	}
+	@media only screen and (min-width: 800px) {
+		#book {
+			width: 25rem;
+		}
+		.book-cover h1 {
+			font-size: var(--56px);
+			margin: 0.5rem auto 0 auto;
+		}
+		.book-cover .byline {
+			font-size: var(--36px);
+			margin: 4.25rem auto 0 auto;
+		}
+	}
+	@media only screen and (min-width: 1000px) {
+		#book {
+			width: 30rem;
+		}
+		.book-cover h1 {
+			font-size: var(--72px);
+			margin: -0.5rem auto 0 auto;
+		}
+		.book-cover .byline {
+			font-size: var(--44px);
+			margin: 1rem auto 0 auto;
+		}
 	}
 </style>

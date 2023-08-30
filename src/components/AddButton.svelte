@@ -78,6 +78,7 @@
         box-shadow: 0.25rem 0 0.5rem  rgba(0,0,0,0.125);
         transition: 0.25s transform linear, 0.5s background-color linear;
         z-index: 1000;
+        pointer-events: auto;
     }
     .add:hover {
         transform: scale(1.5);

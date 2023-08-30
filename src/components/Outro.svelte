@@ -4,6 +4,7 @@
     import { readingList, activeSection } from "$stores/misc.js";
     import ReadingList from "$components/ReadingList.svelte";
     import data from "$data/listings.csv";
+    import Prose from "$components/Prose.svelte";
     const copy = getContext("copy");
 
     function setSection(id) { activeSection.set(id); }
@@ -12,13 +13,7 @@
 <section id="outro"
     use:inView
     on:enter={() => setSection("outro")}>
-    <div class="prose">
-        {#if copy}
-            {#each copy.lookBack as text, i}
-                <p>{@html text.value}</p>
-            {/each}
-        {/if}
-    </div>
+    <Prose copy={copy.lookBack} />
     {#if $readingList.length > 0}
         <ReadingList data={data} pos={"inline"}/>
     {/if}

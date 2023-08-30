@@ -98,7 +98,7 @@
         width: 100%;
         height: 10rem;
         left: 0;
-        bottom: 0;
+        bottom: 0rem;
         display: flex;
         flex-direction: row;
         justify-content: center;

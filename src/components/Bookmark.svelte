@@ -3,11 +3,9 @@
 </script>
 
 <div class="instructions">
-    <p>Use the</p>
-    <div class="svg-wrapper">
+    <p>Use the <span class="svg-wrapper">
         <Icon name="book open" size="0.75em" />
-    </div>
-    <p>buttons next to each book to add it to your reading list.</p>
+    </span> buttons next to each book to add it to your reading list.</p>
 </div>  
 
 <style>
@@ -23,19 +21,17 @@
     }
 
     .svg-wrapper {
+        display: inline-block;
         background-color: var(--color-gray-900);
         border: 2px solid white;
         box-shadow: 0.25rem 0 1rem  var(--color-gray-300);
         border-radius: 50%;
-        align-items: center;
-        justify-content: center;
         height: 1.5rem;
         width: 1.5rem;
-        display: flex;
-        margin: 0 0.25rem;
+        margin: 0;
     }
     :global(.svg-wrapper svg) {
-        margin-top: 0.4rem;
+        margin: 0.25rem 0 0 0.25rem;
     }
     :global(.svg-wrapper svg path) {
         stroke: var(--color-white);

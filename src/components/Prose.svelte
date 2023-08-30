@@ -18,5 +18,6 @@
         max-width: 40rem;
         margin: 0 auto;
         line-height: 2;
+        padding: 0 1rem;
     }
 </style>

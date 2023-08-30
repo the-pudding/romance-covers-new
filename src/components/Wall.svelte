@@ -97,14 +97,18 @@
         position: relative;
         transition: 1s ease-in-out;
     }
+    .year-wrapper {
+        pointer-events: none;
+    }
     .yearChunk {
         margin: 0 2rem 0 0;
     }
     .shelves {
         width: 100%;
-        height: 50vh;
+        height: 70vh;
         position: absolute;
         z-index: 1;
+        pointer-events: none;
     }
     .books {
         height: 70vh;

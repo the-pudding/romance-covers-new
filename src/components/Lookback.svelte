@@ -96,6 +96,7 @@
         max-width: 50rem;
         margin: 0 auto;
         padding: 2rem 0 4rem 0;
+        flex-wrap: wrap;
     }
     .shelves {
         height: auto;
@@ -112,10 +113,10 @@
         flex-direction: row;
         flex-wrap: wrap;
     }
-    .highlightBook{
+    .highlightBook {
         display: flex;
         justify-content: center;
-        width: 30rem;
+        width: 33%;
         margin: auto;
         height: 12rem;
     }
@@ -124,7 +125,7 @@
         transition: 0.125s all linear;
     }
     :global(#lookback .img-wrapper.highlight) {
-        transform: scale(1.75) translate(0, -25%);
+        transform: scale(1.5) translate(0, -15%);
         transition: 0.125s all linear;
     }
     :global(#lookback .lookback-doc, #lookback .lookback-clinch) {
@@ -135,8 +136,22 @@
         box-shadow: -2px 2px 5px  rgba(0,0,0,0.125);
         opacity: 1; 
         font-family: var(--sans-display);
+        box-decoration-break: clone;
     }
     :global(#lookback .lookback-doc:hover, #lookback .lookback-clinch:hover) {
         background-color: var(--romance-pink-light);
     }
+
+    @media only screen and (min-width: 600px) {
+        .book-wrapper {
+            flex-wrap: nowrap;
+        }
+        .highlightBook {
+            width: 30rem;
+        }
+        :global(#lookback .img-wrapper.highlight) {
+            transform: scale(1.75) translate(0, -25%);
+            transition: 0.125s all linear;
+        }
+	}
 </style>

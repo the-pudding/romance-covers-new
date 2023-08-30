@@ -48,8 +48,8 @@
         margin: 0 auto 4rem auto;
         text-align: center;
         text-transform: capitalize;
-        font-family: "Canela";
-        font-size: var(--64px);
+        font-family: var(--serif-display);
+        font-size: var(--44px);
         padding: 3rem 0 0 0;
         z-index: 100;
         position: relative;
@@ -58,7 +58,7 @@
         position: absolute;
         font-family: var(--sans-display);
         font-weight: 900;
-        font-size: 300px;
+        font-size: 200px;
         text-align: center;
         left: 50%;
         transform: translate(-50%, -10%);
@@ -88,4 +88,12 @@
         -webkit-background-clip: text;
         opacity: 0.35;
     }
+    @media only screen and (min-width: 600px) {
+        h2 {
+            font-size: var(--64px);
+        }
+        h2:after {
+            font-size: 300px;
+        }
+	}
 </style>
