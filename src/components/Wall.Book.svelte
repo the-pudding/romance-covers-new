@@ -26,7 +26,7 @@
         id="book_{book.ISBN}"
         style="height: {Math.floor(wallH/5)}px; width: {Math.floor(wallH/5*0.66)}px"
     >   
-        <div class='img-wrapper' style="height: {Math.floor(wallH/5-48)}px; width: {Math.floor((wallH/5-48)*0.66)}px;
+        <div class='img-wrapper' style="height: {Math.floor(wallH/5-48)}px; width: {Math.floor((wallH/5-48)*0.625)}px;
             background-image: linear-gradient(to right, 
             rgba(60, 13, 20, 0.25) 1px, 
             rgba(255, 255, 255, 0.5) 3px, 
@@ -49,7 +49,7 @@
         id="book_{book.ISBN}" 
         style="height: {Math.floor(wallH/5)}px; width: {Math.floor(wallH/5*0.66)}px"
     >
-        <div class='img-wrapper' style="height: {Math.floor(wallH/5-48)}px; width: {Math.floor((wallH/5-48)*0.66)}px;
+        <div class='img-wrapper' style="height: {Math.floor(wallH/5-48)}px; width: {Math.floor((wallH/5-48)*0.625)}px;
             background-image: linear-gradient(to right, 
             rgba(60, 13, 20, 0.25) 1px, 
             rgba(255, 255, 255, 0.5) 2px, 

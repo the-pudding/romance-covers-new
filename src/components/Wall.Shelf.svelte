@@ -3,6 +3,8 @@
     export let shelfHasShadow = true;
     export let wallH;
 
+    console.log(shelfW)
+
     let w;
     let h; 
 </script>

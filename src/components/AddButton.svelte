@@ -104,7 +104,7 @@
         transition: 0.25s rotate linear-out, 1s background-color 0.25s; */
     }
     :global(.add.book_inList svg) {
-        transform: rotate(45deg);
+        transform: rotate(0deg);
         pointer-events: none;
         transition: 0.25s rotate linear;
     }
@@ -123,7 +123,7 @@
         bottom: 0;
         text-align: center;
         font-family: var(--sans-display);
-        transform: translate(-5%, 100%);
+        transform: translate(0, 100%);
         transition: 0.125s all linear;
         background-color: white;
         border-radius: 0.25rem;
@@ -134,7 +134,7 @@
     }
     .message.visible {
 		opacity: 1;
-        transform: translate(-5%, 0);
+        transform: translate(0, 0);
         z-index: 1000;
 	}
 </style>

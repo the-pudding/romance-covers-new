@@ -34,7 +34,7 @@
 
     }
     function handleClickOut(e) {
-        if (e.target.parentNode.id == "reading-list") {
+        if (e.target.parentNode.id == "reading-list-overlay") {
             $readingListVisible = false;
         }
     }
@@ -49,8 +49,7 @@
     }
 </script>
 
-{#if pos == "overlay"}
-<section id="reading-list">
+<section id="reading-list-{pos}">
     {#if $readingListVisible && pos == "overlay"}
         <div class="paper"
             in:fly={{ y: 200, duration: 1000}}
@@ -68,8 +67,20 @@
                                     <div class="details">
                                         <p class="title">{findBookMatch(book.id, "title")}</p>
                                         <p class="author">By {findBookMatch(book.id, "author")}</p>
-                                        <span class="list-link library"><a href="https://www.worldcat.org/search?q=bn%3A{book.id}" target="_blank">⟶ Check out from your library</a></span>
-                                        <span class="list-link bookshop"><a href="https://bookshop.org/book/{book.id}" target="_blank">⟶ Buy from Bookshop</a></span>
+                                        <div class="link-outs">
+                                            <p class="list-link library">
+                                                <span><Icon name="book" /></span>
+                                                <a href="https://www.worldcat.org/search?q=bn%3A{book.id}">
+                                                    Check out from your library
+                                                </a>
+                                            </p>
+                                            <p class="list-link bookshop">
+                                                <span><Icon name="shopping-bag" /></span>
+                                                <a href="https://bookshop.org/book/{book.id}">
+                                                    Buy from Bookshop
+                                                </a>
+                                            </p>
+                                        </div>
                                     </div>
                                     <button class="remove"
                                         on:click={handleBtnClick}>
@@ -90,45 +101,9 @@
         on:click={handleClickOut}></div>
     {/if}
 </section>
-{:else if pos == "inline"}
-<section id="reading-list-inline">
-    <div class="paper"
-        in:fly={{ y: 2000, duration: 1000 }}
-        out:fly={{ y: 2000, duration: 1000 }}>
-        <h3>Your Reading List</h3>
-        {#if $readingList.length > 0}
-            <button class="clear-list"
-                on:click={clearList}>Clear list</button>
-            <ul>
-                {#each $readingList as book, i (book.id)}
-                    <div animate:flip={{duration:1000, delay:0}}> 
-                        {#if book.id !== undefined && $readingList.find(d => d.id == book.id) !== undefined}  
-                            <li id="{findBookMatch(book.id, "img")}" >    
-                                <img src ="assets/images/img_{findBookMatch(book.id, "img")}.jpg" alt="a thumbnail book cover of {findBookMatch(book.id, "title")}">
-                                <div class="details">
-                                    <p class="title">{findBookMatch(book.id, "title")}</p>
-                                    <p class="author">By {findBookMatch(book.id, "author")}</p>
-                                    <span class="list-link library"><a href="https://www.worldcat.org/search?q=bn%3A{book.id}" target="_blank">⟶ Check out from your library</a></span>
-                                    <span class="list-link bookshop"><a href="https://bookshop.org/book/{book.id}" target="_blank">⟶ Buy from Bookshop</a></span>
-                                </div>
-                                <button class="remove"
-                                    on:click={handleBtnClick}>
-                                    <Icon name="x" />
-                                </button>
-                            </li> 
-                        {/if}
-                    </div>
-                {/each}
-            </ul>
-        {:else}
-            <Bookmark />
-        {/if}
-    </div>
-</section>
-{/if}
 
 <style>
-    #reading-list {
+    #reading-list-overlay {
         width: calc(100% - 2rem);
         height: 100vh;
         position: fixed;
@@ -191,7 +166,7 @@
     .clear-list {
         margin: 0 auto;
         background: transparent;
-        color: var(--color-gray-500);
+        color: var(--color-gray-600);
         font-family: var(--sans-display);
         font-size: var(--14px);
     }
@@ -225,6 +200,19 @@
         padding: 0;
         margin: 0;
     }
+    .link-outs {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    :global(.link-outs svg path) {
+        stroke: var(--color-gray-500);
+    }
+    .link-outs span {
+        position: relative;
+        top: 0.125rem;
+        margin: 0 0.25rem 0 0;
+    }
     li img {
         width: 3.5rem;
         object-fit: contain;
@@ -234,9 +222,14 @@
         width: 2.5rem;
         height: 2.5rem;
         border-radius: 50%;
-        color: var(--romance-pink);
+        color: var(--color-gray-800);
         pointer-events: auto;
-        background-color: transparent;
+        background-color: var(--romance-bg-blue);
+        transition: 0.25s all linear;
+    }
+    li button:hover {
+        transform: scale(1.125);
+        background-color: var(--romance-blue-light);;
     }
     :global(li button svg) {
         pointer-events: none;
@@ -246,28 +239,26 @@
         stroke: white;
     }
     .list-link {
-        text-transform: uppercase;
-        font-variant: small-caps;
-        text-transform: lowercase;
-        font-size: var(--16px);
-        font-family: var(--sans);
+        font-size: var(--12px);
+        font-family: var(--sans-display);
     }
-    .list-link a {
-        color: var(--color-gray-500);
-    }
-    .library a {
+    .list-link a, .library a {
         margin-right: 1rem;
-        color: var(--color-gray-500);
+        color: var(--color-gray-600);
+        letter-spacing: -0.025rem;
+    }
+    .list-link a:hover, .library a:hover {
+        color: var(--color-gray-800);
     }
     @media only screen and (min-width: 600px) {
         li {
             align-items: center;
         }
         .title {
-            font-size: var(--24px);
+            font-size: var(--28px);
         }
         .author {
-            font-size: var(--16px);
+            font-size: var(--14px);
         }
         li button {
             width: 3rem;

@@ -69,7 +69,7 @@
                     "lookBack" books. If you need multiple books, you can wrap the Book.svelte component in an
                     {#each} statement (see Wall.svelte) or the Shelf component below.-->
                     <!-- Index is set to 0 to add publication year on the shelf (might remove?) -->
-                    <Book book={book} index={0} bookAddable={false}/>
+                    <Book book={book} index={0} bookAddable={false} wallH={760}/>
                 </div>
                 <div class="shelves">
                     {#each shelves as shelf, i} 
@@ -77,7 +77,7 @@
                         multiple shelf rows, but currently there's only one item in the array (const shelves = [0];).
                         To add more, it would look like (const shelves = [0, 1];). This value is hardcoded now, but
                         it could change based on screen size.-->
-                        <Shelf shelfW={calcWidth(lookbackData.length)} shelfHasShadow={false} />
+                        <Shelf shelfW={calcWidth(lookbackData.length)} shelfHasShadow={false} wallH={760} />
                     {/each}
                 </div>
             </div>

@@ -21,6 +21,7 @@
 
     let yearGroups = d3.groups(data, d => d.year);
     let chunkWidths = [];
+    let chunkWidths2 = [];
     let totalShelfWidth;
 
     function calcWidth(len) {
@@ -32,14 +33,15 @@
         return chunkWidth;
     }
 
-    function calcTotalWidth(chunks) {
-        totalShelfWidth = chunks.reduce((a, b) => a + b, 0);
-    }
+    // function calcTotalWidth(chunks) {
+    //     totalShelfWidth = chunks.reduce((a, b) => a + b, 0);
+    // }
 
     onMount(() => {
-        if (chunkWidths.length == 26) {
-            calcTotalWidth(chunkWidths)
-        }
+        // if (chunkWidths.length == 26) {
+        //     calcTotalWidth(chunkWidths)
+        // }
+        // getYearLengths(yearGroups);
         // wallWidth = d3.select(`#wall-${section}`).node().getBoundingClientRect().width;
 	})
 
@@ -54,8 +56,26 @@
         }
     }
 
+    function getYearLengths(data) {
+        console.log(data)
+        chunkWidths2 = [];
+        console.log(chunkWidths2)
+        if (wallH !== undefined) {
+            let bookWidth = Math.floor(wallH/5*0.66);
+            data.forEach((d, i) => {
+                let year = d[0];
+                let chunkLength = d[1].length;
+                let remainder = chunkLength % 5;
+                let bookCols = remainder == 1 ? Math.round((chunkLength)/bookRows) + 1 : Math.round((chunkLength)/bookRows);
+                let chunkWidth = bookCols == 0 ? bookWidth + 8 : (bookCols * (bookWidth) + 8);
+                chunkWidths2.push({year: year, chunkWidth: chunkWidth});
+            });
+        }
+        console.log(chunkWidths2[0])
+    }
+
     $: value, shiftX(value);
-    // $: wallH, calcWidth(len)
+    $: wallH, getYearLengths(yearGroups)
 </script>
 
 <svelte:window bind:innerHeight={h} bind:innerWidth={w} />
@@ -63,9 +83,10 @@
 <section id="wall-{section}" class="wall" style="transform:translateX(-{xShift}px)">
     {#each yearGroups as year, i}
         <div class="year-wrapper" bind:clientHeight={wallH}>
-            {#if wallH !== undefined}
+            {#if wallH !== undefined && chunkWidths2.length == 13}
+                {@const match = chunkWidths2.find((d) => d.year == year[0])}
                 <div class="yearChunk" id="chunk-{year[0]}"
-                style="width:{calcWidth(year[1].length)}px">
+                style="width:{match.chunkWidth}px">
                     <div class="books">
                         {#each year[1] as book, i}
                             <Book book={book} index={i} wallH={wallH} />
@@ -74,7 +95,7 @@
                 </div>
                 <div class="shelves">
                     {#each shelves as shelf, i} 
-                        <Shelf shelfW={calcWidth(year[1].length)} wallH={wallH} />
+                        <Shelf shelfW={match.chunkWidth} wallH={wallH} />
                     {/each}
                 </div>
             {/if}
