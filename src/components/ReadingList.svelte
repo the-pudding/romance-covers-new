@@ -68,8 +68,8 @@
                                     <div class="details">
                                         <p class="title">{findBookMatch(book.id, "title")}</p>
                                         <p class="author">By {findBookMatch(book.id, "author")}</p>
-                                        <span class="list-link library"><a href="https://www.worldcat.org/search?q=bn%3A{book.id}" target="_blank">Check out from your library</a></span>
-                                        <span class="list-link bookshop"><a href="https://bookshop.org/book/{book.id}" target="_blank">Buy from Bookshop</a></span>
+                                        <span class="list-link library"><a href="https://www.worldcat.org/search?q=bn%3A{book.id}" target="_blank">⟶ Check out from your library</a></span>
+                                        <span class="list-link bookshop"><a href="https://bookshop.org/book/{book.id}" target="_blank">⟶ Buy from Bookshop</a></span>
                                     </div>
                                     <button class="remove"
                                         on:click={handleBtnClick}>
@@ -108,8 +108,8 @@
                                 <div class="details">
                                     <p class="title">{findBookMatch(book.id, "title")}</p>
                                     <p class="author">By {findBookMatch(book.id, "author")}</p>
-                                    <span class="list-link library"><a href="https://www.worldcat.org/search?q=bn%3A{book.id}" target="_blank">Check out from your library</a></span>
-                                    <span class="list-link bookshop"><a href="https://bookshop.org/book/{book.id}" target="_blank">Buy from Bookshop</a></span>
+                                    <span class="list-link library"><a href="https://www.worldcat.org/search?q=bn%3A{book.id}" target="_blank">⟶ Check out from your library</a></span>
+                                    <span class="list-link bookshop"><a href="https://bookshop.org/book/{book.id}" target="_blank">⟶ Buy from Bookshop</a></span>
                                 </div>
                                 <button class="remove"
                                     on:click={handleBtnClick}>
@@ -216,7 +216,7 @@
         font-family: var(--serif-display);
         font-size: var(--24px);
         padding: 0;
-        margin: 0 0 0.5rem 0;
+        margin: 0;
     }
     .author {
         font-family: var(--sans);
