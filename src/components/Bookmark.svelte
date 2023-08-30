@@ -18,6 +18,11 @@
         margin: 2rem auto 0 auto;
         max-width: 40rem;
         font-family: var(--sans-display);
+        text-align: center;
+        padding: 0 1rem;
+        letter-spacing: -0.025rem;
+        color: var(--color-gray-600);
+        font-size: var(--14px);
     }
 
     .svg-wrapper {
@@ -31,7 +36,7 @@
         margin: 0;
     }
     :global(.svg-wrapper svg) {
-        margin: 0.25rem 0 0 0.25rem;
+        margin: 0.3rem 0 0 0;
     }
     :global(.svg-wrapper svg path) {
         stroke: var(--color-white);

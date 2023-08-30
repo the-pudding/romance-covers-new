@@ -115,7 +115,6 @@
         transition: 1s ease-in-out;
     }
     .year-wrapper {
-        width: 100%;
         height: 70vh;
         pointer-events: none;
     }
