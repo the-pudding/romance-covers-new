@@ -15,6 +15,7 @@
 
         if (type == "title") { return match.title }
         else if (type == "img") { return match.ISBN }
+        else if (type == "author") { return match.author }
     }
 
     function handleBtnClick(e) {
@@ -66,7 +67,9 @@
                                     <img src ="assets/images/img_{findBookMatch(book.id, "img")}.jpg" alt="a thumbnail book cover of {findBookMatch(book.id, "title")}">
                                     <div class="details">
                                         <p class="title">{findBookMatch(book.id, "title")}</p>
-                                        <p class="author">By Author Name</p>
+                                        <p class="author">By {findBookMatch(book.id, "author")}</p>
+                                        <span class="list-link library"><a href="https://www.worldcat.org/search?q=bn%3A{book.id}" target="_blank">⟶ Check out from your library</a></span>
+                                        <span class="list-link bookshop"><a href="https://bookshop.org/book/{book.id}" target="_blank">⟶ Buy from Bookshop</a></span>
                                     </div>
                                     <button class="remove"
                                         on:click={handleBtnClick}>
@@ -104,7 +107,9 @@
                                 <img src ="assets/images/img_{findBookMatch(book.id, "img")}.jpg" alt="a thumbnail book cover of {findBookMatch(book.id, "title")}">
                                 <div class="details">
                                     <p class="title">{findBookMatch(book.id, "title")}</p>
-                                    <p class="author">By Author Name</p>
+                                    <p class="author">By {findBookMatch(book.id, "author")}</p>
+                                    <span class="list-link library"><a href="https://www.worldcat.org/search?q=bn%3A{book.id}" target="_blank">⟶ Check out from your library</a></span>
+                                    <span class="list-link bookshop"><a href="https://bookshop.org/book/{book.id}" target="_blank">⟶ Buy from Bookshop</a></span>
                                 </div>
                                 <button class="remove"
                                     on:click={handleBtnClick}>
@@ -212,7 +217,7 @@
         font-family: var(--serif-display);
         font-size: var(--18px);
         padding: 0;
-        margin: 0 0 0.5rem 0;
+        margin: 0;
     }
     .author {
         font-family: var(--sans-display);
@@ -221,7 +226,7 @@
         margin: 0;
     }
     li img {
-        width: 3rem;
+        width: 3.5rem;
         object-fit: contain;
         margin-right: 0rem;
     }
@@ -229,15 +234,9 @@
         width: 2.5rem;
         height: 2.5rem;
         border-radius: 50%;
-        background: var(--romance-bg-pink);
+        color: var(--romance-pink);
         pointer-events: auto;
-        transition: 0.125s all linear;
-    }
-    li button:hover {
-        background: var(--romance-pink-light); 
-    }
-    ul div:last-of-type li {
-        border-bottom: none;
+        background-color: transparent;
     }
     :global(li button svg) {
         pointer-events: none;
@@ -246,7 +245,20 @@
     :global(li button svg line) {
         stroke: white;
     }
-
+    .list-link {
+        text-transform: uppercase;
+        font-variant: small-caps;
+        text-transform: lowercase;
+        font-size: var(--16px);
+        font-family: var(--sans);
+    }
+    .list-link a {
+        color: var(--color-gray-500);
+    }
+    .library a {
+        margin-right: 1rem;
+        color: var(--color-gray-500);
+    }
     @media only screen and (min-width: 600px) {
         li {
             align-items: center;
