@@ -1,9 +1,15 @@
 <script>
     export let shelfW;
     export let shelfHasShadow = true;
+    export let wallH;
+
+    let w;
+    let h; 
 </script>
 
-<div class="shelf" style="width:{shelfW}px">
+<svelte:window bind:innerHeight={h} bind:innerWidth={w} />
+
+<div class="shelf" style="width:{shelfW}px; height:{Math.floor(wallH/5)}px">
     <div class="shelf-front"></div>
     <div class="shelf-top"></div>
     <div class="shelf-right"></div>
@@ -14,12 +20,11 @@
 
 <style>
     .shelf {
-        height: 5.75rem;
         display: flex;
         align-items: end;
         position: relative;
         pointer-events: none;
-        margin: 0 0 3rem 0;
+        margin: 0;
     }
     .shelf-front {
         background: #FBF7F7;

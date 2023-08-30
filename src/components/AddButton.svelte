@@ -65,7 +65,7 @@
     .add {
         position: absolute;
         bottom: -0.75rem;
-        right: -0.75rem;
+        right: 0rem;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -115,23 +115,26 @@
     }
     .message {
         position: absolute;
+        left: 50%;
         font-size: var(--12px);
         font-weight: 900;
+        width: 4.5rem;
         opacity: 0;
         bottom: 0;
-        right: 0;
         text-align: center;
         font-family: var(--sans-display);
-        transform: translate(50%, 50%);
+        transform: translate(-5%, 100%);
         transition: 0.125s all linear;
         background-color: white;
         border-radius: 0.25rem;
         padding: 0.25rem;
         box-shadow: 1rem 0 1rem  var(--color-gray-100);
         pointer-events: none;
+        z-index: 1000;
     }
     .message.visible {
 		opacity: 1;
-		transform: translate(50%, 0%);
+        transform: translate(-5%, 0);
+        z-index: 1000;
 	}
 </style>

@@ -11,39 +11,32 @@
     export let copy;
 
     const shelves = [0, 1, 2, 3, 4];
-    let bookWidth = 64;
     let margins = 32;
     let bookRows = 5;
     let xShift = 0;
     let h;
     let w;
-    let bookAdded = false;
-    let stop1_raunchiness;
-    let stop2_raunchiness;
-    let stop3_raunchiness;
-    let stop4_raunchiness;
+    let wallH;
+    let shelfSectinoW;
 
     let yearGroups = d3.groups(data, d => d.year);
     let chunkWidths = [];
     let totalShelfWidth;
 
     function calcWidth(len) {
+        let bookWidth = Math.floor(wallH/5*0.66);
         let remainder = len % 5;
         let bookCols = remainder == 1 ? Math.round((len)/bookRows) + 1 : Math.round((len)/bookRows);
-        let chunkWidth = bookCols == 0 ? bookWidth + margins : bookCols * (bookWidth + margins);
+        let chunkWidth = bookCols == 0 ? bookWidth + 8 : (bookCols * (bookWidth) + 8);
         chunkWidths.push(chunkWidth);
         return chunkWidth;
     }
 
-    // function calcTotalWidth(chunks) {
-    //     totalShelfWidth = chunks.reduce((a, b) => a + b, 0);
-    // }
+    function calcTotalWidth(chunks) {
+        totalShelfWidth = chunks.reduce((a, b) => a + b, 0);
+    }
 
     onMount(() => {
-		stop1_raunchiness = d3.select("#book_9780345543790").node().getBoundingClientRect().x;
-        stop2_raunchiness = d3.select("#book_9780062448026").node().getBoundingClientRect().x;
-        stop3_raunchiness = d3.select("#book_9781335458520").node().getBoundingClientRect().x;
-
         if (chunkWidths.length == 26) {
             calcTotalWidth(chunkWidths)
         }
@@ -62,26 +55,29 @@
     }
 
     $: value, shiftX(value);
+    // $: wallH, calcWidth(len)
 </script>
 
 <svelte:window bind:innerHeight={h} bind:innerWidth={w} />
 
 <section id="wall-{section}" class="wall" style="transform:translateX(-{xShift}px)">
     {#each yearGroups as year, i}
-        <div class="year-wrapper">
-            <div class="yearChunk" id="chunk-{year[0]}"
-            style="width:{calcWidth(year[1].length)}px">
-                <div class="books">
-                    {#each year[1] as book, i}
-                        <Book book={book} index={i} />
+        <div class="year-wrapper" bind:clientHeight={wallH}>
+            {#if wallH !== undefined}
+                <div class="yearChunk" id="chunk-{year[0]}"
+                style="width:{calcWidth(year[1].length)}px">
+                    <div class="books">
+                        {#each year[1] as book, i}
+                            <Book book={book} index={i} wallH={wallH} />
+                        {/each}
+                    </div>
+                </div>
+                <div class="shelves">
+                    {#each shelves as shelf, i} 
+                        <Shelf shelfW={calcWidth(year[1].length)} wallH={wallH} />
                     {/each}
                 </div>
-            </div>
-            <div class="shelves">
-                {#each shelves as shelf, i} 
-                    <Shelf shelfW={calcWidth(year[1].length)} />
-                {/each}
-            </div>
+            {/if}
         </div>
     {/each}
 </section>
@@ -98,6 +94,8 @@
         transition: 1s ease-in-out;
     }
     .year-wrapper {
+        width: 100%;
+        height: 70vh;
         pointer-events: none;
     }
     .yearChunk {

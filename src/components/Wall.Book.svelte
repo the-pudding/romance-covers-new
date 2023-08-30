@@ -6,6 +6,7 @@
     export let book;
     export let index;
     export let bookAddable = true;
+    export let wallH;
 
     let w;
     let h; 
@@ -23,8 +24,10 @@
 {#if index == 0}
     <div class={checkData($stepData, book.ISBN) ? "book active" : "book"}
         id="book_{book.ISBN}"
+        style="height: {Math.floor(wallH/5)}px; width: {Math.floor(wallH/5*0.66)}px"
     >   
-        <div class='img-wrapper' style="background-image: linear-gradient(to right, 
+        <div class='img-wrapper' style="height: {Math.floor(wallH/5-48)}px; width: {Math.floor((wallH/5-48)*0.66)}px;
+            background-image: linear-gradient(to right, 
             rgba(60, 13, 20, 0.25) 1px, 
             rgba(255, 255, 255, 0.5) 3px, 
             rgba(255, 255, 255, 0.25) 7px, 
@@ -44,8 +47,10 @@
 {:else}
     <div class={checkData($stepData, book.ISBN) ? "book active" : "book"} 
         id="book_{book.ISBN}" 
+        style="height: {Math.floor(wallH/5)}px; width: {Math.floor(wallH/5*0.66)}px"
     >
-        <div class='img-wrapper' style="background-image: linear-gradient(to right, 
+        <div class='img-wrapper' style="height: {Math.floor(wallH/5-48)}px; width: {Math.floor((wallH/5-48)*0.66)}px;
+            background-image: linear-gradient(to right, 
             rgba(60, 13, 20, 0.25) 1px, 
             rgba(255, 255, 255, 0.5) 2px, 
             rgba(255, 255, 255, 0.25) 5px, 
@@ -65,19 +70,16 @@
 
 <style>
     .book {
-        width: 3.75rem;
-        margin: 0 1rem 3rem 1rem;
-        height: 5.75rem;
+        margin: 0;
         display: flex;
         align-items: end;
         position: relative;
         pointer-events: none;
+        justify-content: center;
     }
     .img-wrapper {
         background-size: cover;
         background-repeat: no-repeat;
-        width: 3.75rem;
-        height: 5.75rem;
         box-shadow: -3px 3px 2px -2px  rgba(0, 0, 0, 0.125), inset -1px 1px 2px rgba(255, 255, 255, 0.5);
         transform: perspective(8rem) rotateX(2deg);
         transform-style: preserve-3d;
@@ -100,11 +102,12 @@
         padding: 0.25rem 0.5rem;
         text-align: center;
         width: 3.5rem;
-        left: 0.25rem;
-        bottom: -2.25rem;
+        left: 50%;
+        bottom: -2.5rem;
         font-family: var(--sans-display);
         font-size: var(--14px);
         z-index: 999;
+        transform: translate(-50%, 0);
     }
     :global(#lookback .book .marker) {
         background: var(--romance-pink-light);

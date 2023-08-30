@@ -32,7 +32,6 @@
         lookbackClinch = d3.selectAll(".lookback-clinch");
 	})
 
-    $: console.log(lookbackDoc);
     $: if (lookbackDoc !== undefined && lookbackClinch !== undefined) {
         lookbackDoc
             .on("mouseover", function() {
