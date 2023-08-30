@@ -23,9 +23,8 @@
 {#if index == 0}
     <div class={checkData($stepData, book.ISBN) ? "book active" : "book"}
         id="book_{book.ISBN}"
-        style="height:{h/8}px"
     >   
-        <div class='img-wrapper' style="height:{h/12}px; background-image: linear-gradient(to right, 
+        <div class='img-wrapper' style="background-image: linear-gradient(to right, 
             rgba(60, 13, 20, 0.25) 1px, 
             rgba(255, 255, 255, 0.5) 3px, 
             rgba(255, 255, 255, 0.25) 7px, 
@@ -45,9 +44,8 @@
 {:else}
     <div class={checkData($stepData, book.ISBN) ? "book active" : "book"} 
         id="book_{book.ISBN}" 
-        style="height:{h/8}px"
     >
-        <div class='img-wrapper' style="height:{h/12}px; background-image: linear-gradient(to right, 
+        <div class='img-wrapper' style="background-image: linear-gradient(to right, 
             rgba(60, 13, 20, 0.25) 1px, 
             rgba(255, 255, 255, 0.5) 2px, 
             rgba(255, 255, 255, 0.25) 5px, 
@@ -67,18 +65,19 @@
 
 <style>
     .book {
-        width: 4rem;
-        margin: 0 1rem;
-        height: calc(100vh / 5);
+        width: 3.75rem;
+        margin: 0 1rem 3rem 1rem;
+        height: 5.75rem;
         display: flex;
         align-items: end;
         position: relative;
+        pointer-events: none;
     }
     .img-wrapper {
         background-size: cover;
         background-repeat: no-repeat;
-        width: 4rem;
-        height: calc(100vh / 5);
+        width: 3.75rem;
+        height: 5.75rem;
         box-shadow: -3px 3px 2px -2px  rgba(0, 0, 0, 0.125), inset -1px 1px 2px rgba(255, 255, 255, 0.5);
         transform: perspective(8rem) rotateX(2deg);
         transform-style: preserve-3d;

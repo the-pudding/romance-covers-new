@@ -14,10 +14,12 @@
 
 <style>
     .shelf {
-        height: calc(100vh / 8);
+        height: 5.75rem;
         display: flex;
         align-items: end;
         position: relative;
+        pointer-events: none;
+        margin: 0 0 3rem 0;
     }
     .shelf-front {
         background: #FBF7F7;

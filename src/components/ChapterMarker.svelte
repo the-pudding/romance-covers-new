@@ -28,17 +28,19 @@
 </script>
 
 <nav>
-    {#each sections as section, i}
-        {@const active = $activeSection == section ? "active" : ""}
-        <div class="btn-wrapper">
-            <button 
-                on:click={handleChapterClick}
-                class="sectionBox {active}"
-                id="sectionBox-{section}">
-            </button>
-            <p class="label {active}">{resetTitles(section)}</p>
-        </div>
-    {/each}
+    <div class="sect-btns">
+        {#each sections as section, i}
+            {@const active = $activeSection == section ? "active" : ""}
+            <div class="btn-wrapper">
+                <button 
+                    on:click={handleChapterClick}
+                    class="sectionBox {active}"
+                    id="sectionBox-{section}">
+                </button>
+                <p class="label {active}">{resetTitles(section)}</p>
+            </div>
+        {/each}
+    </div>
     <button 
         on:click={handleListToggle}
         class="listBtn">
@@ -70,11 +72,17 @@
         z-index: 1000;
         height: 3rem;
     }
+    .sect-btns {
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        min-width: 10rem;
+        justify-content: space-between;
+    }
     .sectionBox {
         width: 20px;
         height: 20px;
         background: white;
-        margin: 0 1rem;
         opacity: 1;
         transform: scale(0.65);
         transition: 0.25s linear;
@@ -142,6 +150,7 @@
     }
     .btn-wrapper {
         position: relative;
+        margin: -0.5rem 0 0 0;
     }
     .btn-wrapper:hover .label {
         opacity: 1; 
@@ -203,4 +212,9 @@
             transform: scale(1.5);
         }
     }
+    @media only screen and (min-width: 400px) {
+        .sect-btns {
+            min-width: 15rem;
+        }
+	}
 </style>

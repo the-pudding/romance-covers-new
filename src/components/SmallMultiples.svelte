@@ -54,9 +54,13 @@
         width: 100%;
     }
     h5 {
-        font-family: "Canela";
+        font-family: var(--serif-display);
         text-align: center;
-        margin: 0 0 -1rem 0;
+        margin: 0 0 -2rem 0;
+        height: 4rem;
+        display: flex;
+        align-items: end;
+        justify-content: center;
     }
     .year-labels {
         width: 100%;
@@ -64,10 +68,18 @@
         flex-direction: row;
         justify-content: space-between;
         font-family: var(--sans-display);
-        font-size: var(--14px);
+        font-size: var(--12px);
     }
     .year-labels p {
         padding: 0;
         margin: 0;
     }
+    @media only screen and (min-width: 600px) {
+        .year-labels p {
+            font-size: var(--14px);
+        }
+        h5 {
+            height: 4rem;
+        }
+	}
 </style>

@@ -129,7 +129,7 @@
 
 <style>
     #reading-list {
-        width: 100%;
+        width: calc(100% - 2rem);
         height: 100vh;
         position: fixed;
         left: 0;
@@ -138,6 +138,7 @@
         backdrop-filter: blur(2px); */
         z-index: 999;
         pointer-events: none;
+        margin: 0 1rem;
     }
     #reading-list-inline {
         position: relative;
@@ -207,30 +208,31 @@
         border-bottom: 1px solid var(--color-gray-100);
         padding: 1rem;
         justify-content: space-between;
-        align-items: center;
+        align-items: start;
     }
     .details {
         width: calc(100% - 10rem);
     }
     .title {
         font-family: var(--serif-display);
-        font-size: var(--24px);
+        font-size: var(--18px);
         padding: 0;
         margin: 0;
     }
     .author {
-        font-family: var(--sans);
-        padding: 0 0 .25rem;
+        font-family: var(--sans-display);
+        font-size: var(--14px);
+        padding: 0;
         margin: 0;
     }
     li img {
         width: 3.5rem;
         object-fit: contain;
-        margin-right: 2rem;
+        margin-right: 0rem;
     }
     li button {
-        width: 3rem;
-        height: 3rem;
+        width: 2.5rem;
+        height: 2.5rem;
         border-radius: 50%;
         color: var(--romance-pink);
         pointer-events: auto;
@@ -257,5 +259,19 @@
         margin-right: 1rem;
         color: var(--color-gray-500);
     }
-
+    @media only screen and (min-width: 600px) {
+        li {
+            align-items: center;
+        }
+        .title {
+            font-size: var(--24px);
+        }
+        .author {
+            font-size: var(--16px);
+        }
+        li button {
+            width: 3rem;
+            height: 3rem;
+        }
+	}
 </style>
