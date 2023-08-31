@@ -50,6 +50,16 @@
                 d3.selectAll("#lookback .img-wrapper").classed("highlight", false);
             })
     }
+    function handleEnter(){
+        let el = d3.select(this);
+        let img = el.select(".book .img-wrapper");
+        img.classed("highlight", true)
+    }
+    function handleExit(){
+        let el = d3.select(this);
+        let img = el.select(".book .img-wrapper");
+        img.classed("highlight", false)
+    }
 </script>
 
 <section id="lookback">
@@ -63,7 +73,9 @@
     <div class="book-wrapper">
         {#each lookbackData as book, i}
             <div class="highlightBook">
-                <div class="books">
+                <div class="books"
+                    on:mouseenter={handleEnter}
+                    on:mouseout={handleExit}>
                     <!-- Books expects a single book. In this case, I'm just using the first row of data from the
                     overall spreadsheet. We could create another spreadsheet structured in the same way, just with
                     "lookBack" books. If you need multiple books, you can wrap the Book.svelte component in an

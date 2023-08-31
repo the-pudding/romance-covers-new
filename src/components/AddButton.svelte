@@ -13,12 +13,12 @@
         let textFeedback = d3.select(this.parentNode).select(".message");
         let readingListIcon = d3.select(".listBtn");
 
-        let bookID = e.target.parentNode.parentNode.id;
+        let bookID = e.target.parentNode.id;
             if (bookID == "") {
-                bookID = e.target.parentNode.parentNode.parentNode.id;
+                bookID = e.target.parentNode.parentNode.id;
             }
             if (bookID.includes("chunk")) {
-                bookID = e.target.parentNode.parentNode.id; 
+                bookID = e.target.parentNode.id; 
             }
         bookID = bookID.split("_")[1];
 
@@ -26,7 +26,6 @@
             btn.classed("book_inList", false);
             btn.classed("book_noList", true); 
             const indexOfObject = $readingList.findIndex(object => { return object.id == bookID })
-            console.log(indexOfObject)
             $readingList.splice(indexOfObject, 1)
             readingList.set($readingList);
             textFeedback.text("Book removed!")
@@ -40,24 +39,19 @@
         }  
         readingListIcon.classed("highlight", true)
 
-        showX = !showX;
-
         setTimeout(() => {
             showMessage = false;
-            // readingListIcon.classed("highlight", false)
         }, 3000);
     }
-    // $:console.log($readingList)
+
+    function setBtnClass() {
+
+    }
 </script>
 
 <button 
     on:click={handleBtnClick}
     class="add book_noList">
-    {#if showX}
-        <Icon name="plus" size="0.75em"/>
-    {:else}
-        <Icon name="book-open" size="0.75em"/>
-    {/if}
 </button>
 <p class="message" class:visible={showMessage}>Book added!</p>
 
@@ -77,45 +71,42 @@
         border: 2px solid white;
         box-shadow: 0.25rem 0 0.5rem  rgba(0,0,0,0.125);
         transition: 0.25s transform linear, 0.5s background-color linear;
-        z-index: 1000;
+        z-index: 1;
         pointer-events: auto;
+        transform: translateZ(0px);
     }
     .add:hover {
-        transform: scale(1.5);
+        transform: translateZ(0px) scale(1.5);
+        transform-style: preserve-3d;
+        z-index: 5;
     }
     .add:hover .message {
-        transform: translate(-50%, -100%) scale(0.6);
+        transform: translate(-50%, -100%, 0) scale(0.6);
+        transform-style: preserve-3d;
+        z-index: 5;
     }
     .add:hover .message.visible {
-        transform: translate(-50%, -165%) scale(0.65);
+        transform: translate(-50%, -165%, 0) scale(0.65);
+        transform-style: preserve-3d;
+        z-index: 5;
     }
     :global(.add.book_inList) {
+        background-image: url($svg/x.svg);
+        background-size: 0.75rem 0.75rem;
+        background-repeat: no-repeat;
+        background-position: center;
         background-color: var(--romance-pink-light);
         transition: 0.5s background-color linear;
     }
-    :global(.add svg) {
-        margin-top: 0.25rem;
-        pointer-events: none;
-    }
-    :global(.add.book_noList svg) {
-        transform: rotate(0deg);
-        pointer-events: none;
-        /* background-color: var(--color-gray-900);
-        transition: 0.25s rotate linear-out, 1s background-color 0.25s; */
-    }
-    :global(.add.book_inList svg) {
-        transform: rotate(0deg);
-        pointer-events: none;
-        transition: 0.25s rotate linear;
-    }
-    :global(.add svg path) {
-        stroke: white;
-        pointer-events: none;
-        pointer-events: none;
+    :global(.add.book_noList) {
+        background-image: url($svg/book-open.svg);
+        background-size: 0.75rem 0.75rem;
+        background-repeat: no-repeat;
+        background-position: center;
     }
     .message {
         position: absolute;
-        left: 50%;
+        right: 0;
         font-size: var(--12px);
         font-weight: 900;
         width: 4.5rem;
@@ -123,7 +114,8 @@
         bottom: 0;
         text-align: center;
         font-family: var(--sans-display);
-        transform: translate(0, 100%);
+        transform:translate3d(1.5rem,100%,0);
+        transform-style: preserve-3d;
         transition: 0.125s all linear;
         background-color: white;
         border-radius: 0.25rem;
@@ -134,7 +126,8 @@
     }
     .message.visible {
 		opacity: 1;
-        transform: translate(0, 0);
+        transform:translate3d(1.5rem,0,0);
+        transform-style: preserve-3d;
         z-index: 1000;
 	}
 </style>

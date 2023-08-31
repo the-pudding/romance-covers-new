@@ -46,20 +46,20 @@
 	})
 
     function shiftX(value) {
+        console.log(copy[value])
         if (copy[value] !== undefined) {
             if (value == 0) {
                 xShift = 0; 
             } else if (copy[value] !== 0 && d3.select(`#book_${copy[value].scrollToId}`).node() !== null) {
                 let sel = d3.select(`#book_${copy[value].scrollToId}`).node().getBoundingClientRect().x;
+                console.log(xShift, (sel-margins))
                 xShift = xShift + sel - margins
             }
         }
     }
 
     function getYearLengths(data) {
-        console.log(data)
         chunkWidths2 = [];
-        console.log(chunkWidths2)
         if (wallH !== undefined) {
             let bookWidth = Math.floor(wallH/5*0.66);
             data.forEach((d, i) => {
@@ -71,7 +71,6 @@
                 chunkWidths2.push({year: year, chunkWidth: chunkWidth});
             });
         }
-        console.log(chunkWidths2[0])
     }
 
     $: value, shiftX(value);
@@ -131,9 +130,11 @@
     .books {
         height: 70vh;
         position: absolute;
-        z-index: 1000;
+        z-index: 999;
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
+        transform:translate3d(0,0,0);
+        -webkit-transform:translate3d(0,0,0);
     }
 </style>

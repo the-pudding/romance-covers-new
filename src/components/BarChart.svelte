@@ -69,6 +69,7 @@
         display: flex;
         flex-direction: row; 
         align-items: end;
+        -webkit-align-items: flex-end;
         height: 100%;
         width: 100%;
         position: relative;

@@ -24,7 +24,7 @@
         {#if copy}
             {#each copy as text, i}
                 <div class="step">
-                    <p>{text.text}</p>
+                    <p>{@html text.text}</p>
                 </div>
             {/each}
         {/if}
@@ -53,7 +53,7 @@
         z-index: 999;
         max-width: 30rem;
         margin: 0 auto;
-		pointer-events: auto;
+		pointer-events: none;
 	}
 
 	.step p {
@@ -61,6 +61,26 @@
         text-align: left;
         padding: 2rem;
         background: var(--color-white);
-		pointer-events: none;
+		pointer-events: auto;
 	}
-</style>
+	:global(.step p a) {
+		color: var(--color-gray-800);
+		background-repeat: no-repeat;
+        transition: background-position .08s ease-out;
+        background-position: 0 1.125rem;
+		border-bottom: none;
+		pointer-events: auto;
+	}
+	:global(#raunchiness .step p a) {
+		background-image: linear-gradient(180deg,transparent 0,var(--romance-blue-light) 0);
+	}
+	:global(#illustration .step p a) {
+		background-image: linear-gradient(180deg,transparent 0,var(--romance-yellow-light) 0);
+	}
+	:global(#race .step p a) {
+		background-image: linear-gradient(180deg,transparent 0,var(--romance-teal-light) 0);
+	}
+	:global(.step p a:hover) {
+		background-position: 0 0rem;
+	}
+ </style>

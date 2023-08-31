@@ -73,6 +73,9 @@
         margin: 0;
         display: flex;
         align-items: end;
+        -webkit-justify-content: center;
+        align-items: flex-end;
+        -webkit-align-items: flex-end;
         position: relative;
         pointer-events: none;
         justify-content: center;
@@ -81,22 +84,51 @@
         background-size: cover;
         background-repeat: no-repeat;
         box-shadow: -3px 3px 2px -2px  rgba(0, 0, 0, 0.125), inset -1px 1px 2px rgba(255, 255, 255, 0.5);
-        transform: perspective(8rem) rotateX(2deg);
+        transform: translate(0,0,0) perspective(8rem) rotateX(2deg);
         transform-style: preserve-3d;
     }
-    .book.active img {
+    :global(#raunchiness .book.active .img-wrapper)  {
         opacity: 1;
         filter: contrast(100%) brightness(100%) saturate(100%);
+        outline: 3px solid var(--romance-pink-light);
+        box-shadow: 0 0 30px 5px rgba(0,0,0,0.25);
+        transform: scale(1.125);
+        transition: all 0.25s ease-in;
     }
-    :global(#raunchiness .book.active img) {
-        outline: 5px solid var(--romance-blue);
+    :global(#illustration .book.active .img-wrapper)  {
+        opacity: 1;
+        filter: contrast(100%) brightness(100%) saturate(100%);
+        outline: 3px solid var(--romance-pink-light);
+        box-shadow: 0 0 30px 5px rgba(0,0,0,0.25);
+        transform: scale(1.125);
+        transition: all 0.25s ease-in;
     }
-    :global(#illustration .book.active img) {
+    :global(#race .book.active .img-wrapper)  {
+        opacity: 1;
+        filter: contrast(100%) brightness(100%) saturate(100%);
+        outline: 3px solid var(--romance-pink-light);
+        box-shadow: 0 0 30px 5px rgba(0,0,0,0.25);
+        transform: scale(1.125);
+        transition: all 0.25s ease-in;
+    }
+    .book .img-wrapper {
+        opacity: 1;
+        filter: contrast(100%) brightness(100%) saturate(100%);
+        transition: all 0.25s ease-in;
+        transform: scale(1);
+    }
+    /* :global(.book.active .img-wrapper) {
+        outline: 3px solid var(--romance-yellow);
+        box-shadow: 0 0 30px 5px var(--romance-yellow);
+    }
+    :global(#illustration .book.active .img-wrapper) {
         outline: 5px solid var(--romance-yellow);
+        box-shadow: 0 0 30px 12px var(--romance-yellow);
     }
-    :global(#race .book.active img) {
-        outline: 5px solid var(--romance-teal);
-    }
+    :global(#race .book.active .img-wrapper) {
+        outline: 3px solid var(--romance-yellow);
+        box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.25);
+    } */
     .book .marker {
         position: absolute;
         padding: 0.25rem 0.5rem;
@@ -106,7 +138,7 @@
         bottom: -2.5rem;
         font-family: var(--sans-display);
         font-size: var(--14px);
-        z-index: 999;
+        z-index: 1;
         transform: translate(-50%, 0);
     }
     :global(#lookback .book .marker) {
@@ -116,7 +148,7 @@
         background: var(--romance-blue-light);
     }
     :global(#illustration .book .marker) {
-        background: var(--romance-yellow-light);
+        background: var(--romance-purple-light);
     }
     :global(#race .book .marker) {
         background: var(--romance-teal-light);

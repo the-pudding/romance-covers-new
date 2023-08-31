@@ -72,8 +72,8 @@
 <Lookback />
 <div class="sections">
 	<Chapter id={"raunchiness"} data={raunchinessData} copyBlock={copy.raunchinessText} copyScroll={copy.raunchinessScroll} pos={"overlay"} />
-	<!-- <Chapter id={"illustration"} data={illustrationData} copyBlock={copy.illustrationText} copyScroll={copy.illustrationScroll} pos={"overlay"} />
-	<Chapter id={"race"} data={raceData} copyBlock={copy.raceText} copyScroll={copy.raceScroll} pos={"overlay"} /> -->
+	<Chapter id={"illustration"} data={illustrationData} copyBlock={copy.illustrationText} copyScroll={copy.illustrationScroll} pos={"overlay"} />
+	<Chapter id={"race"} data={raceData} copyBlock={copy.raceText} copyScroll={copy.raceScroll} pos={"overlay"} />
 </div>
 {#if $activeSection !== "intro" && $activeSection !== "outro" && $activeSection !== null}
 	<section id="barChart" in:fly={{ y: 200, duration: 2000 }} out:fly={{ y: 200, duration: 2000 }}>

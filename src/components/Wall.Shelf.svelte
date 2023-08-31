@@ -3,8 +3,6 @@
     export let shelfHasShadow = true;
     export let wallH;
 
-    console.log(shelfW)
-
     let w;
     let h; 
 </script>
@@ -27,6 +25,8 @@
         position: relative;
         pointer-events: none;
         margin: 0;
+        transform:translate3d(0,0,0);
+        -webkit-transform:translate3d(0,0,0);
     }
     .shelf-front {
         background: #FBF7F7;

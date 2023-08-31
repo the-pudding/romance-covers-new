@@ -40,6 +40,32 @@
     #race {
         background-image: linear-gradient(var(--romance-bg-yellow) 0%, var(--romance-bg-teal) 10%);
     }
+    :global(section a) {
+		color: var(--color-gray-800);
+		background-repeat: no-repeat;
+        transition: background-position .08s ease-out;
+        background-position: 0 1.125rem;
+		border-bottom: none;
+		pointer-events: auto;
+	}
+    :global(#raunchiness a) {
+		background-image: linear-gradient(180deg,transparent 0,var(--romance-blue-light) 0);
+	}
+	:global(#illustration a) {
+		background-image: linear-gradient(180deg,transparent 0,var(--romance-yellow-light) 0);
+	}
+	:global(#race a) {
+		background-image: linear-gradient(180deg,transparent 0,var(--romance-teal-light) 0);
+	}
+    :global(#intro a) {
+		background-image: linear-gradient(180deg,transparent 0,var(--romance-pink-light) 0);
+	}
+    :global(#outro a) {
+		background-image: linear-gradient(180deg,transparent 0,var(--romance-purple-light) 0);
+	}
+    :global(section a:hover) {
+		background-position: 0 0;
+	}
     h2 {
         display: flex;
         justify-content: center;

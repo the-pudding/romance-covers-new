@@ -4,6 +4,7 @@
     import { flip } from 'svelte/animate';
     import Icon from "$components/helpers/Icon.svelte";
     import Bookmark from "$components/Bookmark.svelte";
+    import AddButton from "$components/AddButton.svelte";
     import * as d3 from "d3";
     export let data;
     export let pos;
@@ -29,6 +30,7 @@
         $readingList = $readingList
         
         let allBookButtons = d3.selectAll(`#book_${bookID} button`);
+        console.log(allBookButtons)
         allBookButtons.classed("book_inList", false);
         allBookButtons.classed("book_noList", true); 
 

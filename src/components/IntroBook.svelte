@@ -12,6 +12,7 @@
 	let mainRotate;
 	let frontTranslate;
 	let frontRotate;
+	let bookMax;
 	export let value;
 
 	const progress = tweened(0, {
@@ -20,7 +21,7 @@
 	});
 
 	function computePercentage(y) {
-		if (y >= h/2) {
+		if (y >= 2) {
 			bookTranslate = w <= 600 ? 100 : 50;
 			mainRotate = 0;
 			frontRotate = 180;
@@ -30,45 +31,47 @@
 			frontRotate = y/h*180;
 		}
 	}
+
     $: open = y < 10 ? false : true;
-	$: y, computePercentage(y)
+	$: y, computePercentage(y);
 </script>
 
 <svelte:window bind:innerWidth={w} bind:innerHeight={h} bind:scrollY={y}/>
 
 <section id="intro-book">
-    <div id="book" style="transform:translate3d({bookTranslate}%,0,0)" >
-        <div class="main" style="transform:rotate3d(1,1,0,{mainRotate}deg)">
-            <div class="book-front" style="transform:translate3d(0,0,25px) rotate3d(0,1,0,-{frontRotate}deg)">
-                <div class="book-cover">
+	<div id="book" style="transform:translate3d({bookTranslate}%,0,0)" >
+		<div class="main" style="transform:rotate3d(1,1,0,{mainRotate}deg)">
+			<div class="book-front" style="transform:translate3d(0,0,25px) rotate3d(0,1,0,-{frontRotate}deg)">
+				<div class="book-cover">
 					<h1>What does a happily ever after look like?</h1>
 					<p class="byline">Alice Liang</p>
-                </div>
-                <div class="book-cover-back">
+				</div>
+				<div class="book-cover-back">
 					<div class="book-cover-back-indent">
 						{#each copy.intro as text, i}
-                        	<p>{@html text.value}</p>
-                    	{/each}
+							<p>{@html text.value}</p>
+						{/each}
 					</div>
 				</div>
-            </div>
-            <div class="book-page">
-                <div id="page-1" class="page">
-                    {#each copy.postIntro as text, i}
-                        <p>{@html text.value}</p>
-                    {/each}
-                </div>
-            </div>
-            <div class="book-back">
-            </div>
-            <div class="book-bone">
-                <!-- <h2>What Does A Happily Ever After Look Like?</h2> -->
-            </div>
-            <div class="book-top"></div>
-            <div class="book-right"></div>
-            <div class="book-bottom"></div>
-        </div>
-    </div>
+			</div>
+			<div class="book-page">
+				<div id="page-1" class="page">
+					{#each copy.postIntro as text, i}
+						<p>{@html text.value}</p>
+					{/each}
+				</div>
+			</div>
+			<div class="book-back">
+			</div>
+			<div class="book-bone">
+				<!-- <h2>What Does A Happily Ever After Look Like?</h2> -->
+			</div>
+			<div class="book-top"></div>
+			<div class="book-right"></div>
+			<div class="book-bottom"></div>
+		</div>
+	</div>
+	<p class="credit">Cover design by <a href="http://www.sandrachiu.com/">Sandra Chiu</a></p>
 </section>
 
 <style>
@@ -78,13 +81,25 @@
         width: 100%;
         height: auto;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: center;
         margin: 0 0 0 0;
     }
+	.credit {
+        font-size: var(--12px);
+        color: var(--color-gray-800);
+        font-family: var(--sans-display);
+		text-align: center;
+    }
+    .credit a {
+        color: var(--color-gray-800)
+    }
+    .credit a:hover {
+        color: var(--romance-pink)
+    }
 	#book {
 		width: 15rem;
-		height: auto;
+		height: 22.125rem;
 		margin: 0 auto;
 		position: relative;
 		transition-duration: .5s;
@@ -293,6 +308,7 @@
 	@media only screen and (min-width: 400px) {
 		#book {
 			width: 18rem;
+			height: 26.55rem;
 		}
 		.book-cover h1 {
 			font-size: var(--44px);
@@ -306,6 +322,7 @@
 	@media only screen and (min-width: 600px) {
 		#book {
 			width: 20rem;
+			height: 29.6rem;
 		}
 		.book-cover h1 {
 			font-size: var(--44px);
@@ -319,6 +336,7 @@
 	@media only screen and (min-width: 800px) {
 		#book {
 			width: 25rem;
+			height: 36.9rem;
 		}
 		.book-cover h1 {
 			font-size: var(--56px);
@@ -332,6 +350,7 @@
 	@media only screen and (min-width: 1000px) {
 		#book {
 			width: 30rem;
+			height: 44.25rem;
 		}
 		.book-cover h1 {
 			font-size: var(--72px);

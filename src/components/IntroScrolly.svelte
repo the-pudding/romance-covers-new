@@ -37,7 +37,6 @@
     on:enter={() => setSection(id)}>
 	<div class="sticky">
         <IntroBook value={value}/>
-        <p>Cover design by <a href="http://www.sandrachiu.com/">Sandra Chiu</a></p>
     </div>
 	<Scrolly bind:value>
         {#each steps as step, i}
@@ -72,17 +71,6 @@
         align-items: center;
         padding-top: 10rem;
 	}
-    .sticky p {
-        font-size: var(--12px);
-        color: var(--color-gray-800);
-        font-family: var(--sans-display);
-    }
-    .sticky a {
-        color: var(--color-gray-800)
-    }
-    .sticky a:hover {
-        color: var(--romance-pink)
-    }
 	.spacer {
 		height: 75vh;
 	}
