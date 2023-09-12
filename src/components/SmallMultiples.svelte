@@ -15,7 +15,7 @@
 <div id="small-multiples">
     <div class="top-wrapper raunchiness">
         <h5>Raunchiness</h5>
-        <BarChart data={raunchinessData} color={"#8eacf9"} highlightColor={"#4C7DFE"} pos={"inline"} yearTotals={yearTotals}/>
+        <BarChart data={raunchinessData} color={"#4C7DFE"} highlightColor={"#4C7DFE"} pos={"inline"} yearTotals={yearTotals}/>
         <div class="year-labels">
             <p>2011</p>
             <p>2023</p>
@@ -23,7 +23,7 @@
     </div>
     <div class="top-wrapper illustration">
         <h5>Illustration</h5>
-        <BarChart data={illustrationData} color={"#fde59a"} highlightColor={"#F7C42D"} pos={"inline"} yearTotals={yearTotals}/>
+        <BarChart data={illustrationData} color={"#F7C42D"} highlightColor={"#F7C42D"} pos={"inline"} yearTotals={yearTotals}/>
         <div class="year-labels">
             <p>2011</p>
             <p>2023</p>
@@ -31,7 +31,7 @@
     </div>
     <div class="top-wrapper race">
         <h5>Racial Diversity</h5>
-        <BarChart data={raceData} color={"#7ce7e7"} highlightColor={"#20B6B6"} pos={"inline"} yearTotals={yearTotals}/>
+        <BarChart data={raceData} color={"#20b6b6"} highlightColor={"#20B6B6"} pos={"inline"} yearTotals={yearTotals}/>
         <div class="year-labels">
             <p>2011</p>
             <p>2023</p>
@@ -49,14 +49,19 @@
     .top-wrapper {
         width: 33%;
         padding: 0 1rem;
+        transition: 0.25s linear;
     }
     :global(#small-multiples .chart-wrapper) {
         width: 100%;
     }
     h5 {
-        font-family: var(--serif-display);
+        font-family: var(--sans-display);
+        font-weight: 900;
         text-align: center;
-        margin: 0 0 -2rem 0;
+        text-transform: uppercase;
+        font-size: var(--18px);
+        margin: 0 auto -2rem auto;
+        line-height: 1;
         height: 4rem;
         display: flex;
         align-items: end;

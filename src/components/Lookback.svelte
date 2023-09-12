@@ -73,24 +73,24 @@
     $: if (smallChartRaunchiness !== undefined && smallChartIllustration !== undefined && smallChartRace != undefined) {
         smallChartRaunchiness
             .on("mouseover", function() {
-                d3.select(".top-wrapper.raunchiness").selectAll(".year-bar").classed("active", true);
+                d3.selectAll(".top-wrapper.illustration, .top-wrapper.race").style("opacity", 0.25);
             })
             .on("mouseout", function() {
-                d3.select(".top-wrapper.raunchiness").selectAll(".year-bar").classed("active", false);
+                d3.selectAll(".top-wrapper").style("opacity", 1);
             })
         smallChartIllustration
             .on("mouseover", function() {
-                d3.select(".top-wrapper.illustration").selectAll(".year-bar").classed("active", true);
+                d3.selectAll(".top-wrapper.raunchiness, .top-wrapper.race").style("opacity", 0.25);
             })
             .on("mouseout", function() {
-                d3.select(".top-wrapper.illustration").selectAll(".year-bar").classed("active", false);
+                d3.selectAll(".top-wrapper").style("opacity", 1);
             })
         smallChartRace
             .on("mouseover", function() {
-                d3.select(".top-wrapper.race").selectAll(".year-bar").classed("active", true);
+                d3.selectAll(".top-wrapper.illustration, .top-wrapper.raunchiness").style("opacity", 0.25);
             })
             .on("mouseout", function() {
-                d3.select(".top-wrapper.race").selectAll(".year-bar").classed("active", false);
+                d3.selectAll(".top-wrapper").style("opacity", 1);
             })
     }
 
@@ -193,8 +193,29 @@
         font-family: var(--sans-display);
         box-decoration-break: clone;
     }
+    :global(#lookback .lookback-doc, #lookback .lookback-clinch, #lookback .lookback-travel) {
+        border: 3px solid var(--romance-pink)
+    }
     :global(#lookback .lookback-doc:hover, #lookback .lookback-clinch:hover, #lookback .lookback-travel:hover, #lookback .small-chart-raunchiness:hover, #lookback .small-chart-illustration:hover, #lookback .small-chart-race:hover) {
         background-color: var(--romance-pink-light);
+    }
+    :global(#lookback .small-chart-raunchiness) {
+        border: 3px solid var(--romance-blue)
+    }
+    :global(#lookback .small-chart-illustration) {
+        border: 3px solid var(--romance-yellow)
+    }
+    :global(#lookback .small-chart-race) {
+        border: 3px solid var(--romance-teal)
+    }
+    :global(#lookback .small-chart-raunchiness:hover) {
+        background-color: var(--romance-blue-light);
+    }
+    :global(#lookback .small-chart-illustration:hover) {
+        background-color: var(--romance-yellow-light);
+    }
+    :global(#lookback .small-chart-race:hover) {
+        background-color: var(--romance-teal-light);
     }
 
     @media only screen and (min-width: 600px) {

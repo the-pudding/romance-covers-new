@@ -46,7 +46,7 @@
     <div class="chart-wrapper" bind:clientWidth={barChartW}>
         {#if groupedData !== undefined}
             {#each groupedData as year, i}
-                <div class={checkData($stepData, year[0]) ? "year-bar active" : "year-bar"} 
+                <div class="year-bar" 
                 id="bar-{year[0]}"
                 style="height: {calcPercentage(year[0], year[1].length)*1.5}px;
                 width: {barChartW/groupedData.length}px;
@@ -55,6 +55,11 @@
                     {#if pos == "overlay"}
                         <p class="count"
                         in:fly={{ y: 20, duration: 500 }} out:fade>
+                            {calcPercentage(year[0], year[1].length, i)}%
+                        </p>
+                    {/if}
+                    {#if pos == "inline" && i == 12}
+                        <p class="count" style="opacity: 1">
                             {calcPercentage(year[0], year[1].length, i)}%
                         </p>
                     {/if}
