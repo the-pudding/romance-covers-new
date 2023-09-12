@@ -13,10 +13,14 @@
 <section id="outro"
     use:inView
     on:enter={() => setSection("outro")}>
-    <Prose copy={copy.lookBack} />
+    <Prose copy={copy.outro} />
     {#if $readingList.length > 0}
         <ReadingList data={data} pos={"inline"}/>
     {/if}
+    <div id="methods">
+        <h5>Methods & Notes</h5>
+        <Prose copy={copy.dataNote} />
+    </div>
 </section>
 
 <style>
@@ -31,5 +35,22 @@
         max-width: 40rem;
         margin: 0 auto;
         line-height: 2;
+    }
+
+    #methods h5 {
+        max-width: 40rem;
+        margin: 5rem auto 0 auto;
+        padding: 0 1rem;
+        font-family: var(--sans-display);
+        text-transform: uppercase;
+        font-size: var(--18px);
+        font-weight: 900;
+        letter-spacing: -5%;
+    }
+    :global(#methods .prose p) {
+        font-family: var(--sans-display);
+        font-size: var(--14px);
+        margin: 0.5rem 0;
+        line-height: 1.65;
     }
 </style>

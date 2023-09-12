@@ -4,23 +4,65 @@
     import Bookmark from "$components/Bookmark.svelte";
     import inView from "$actions/inView.js";
     import { activeSection } from "$stores/misc.js";
+    import * as d3 from "d3";
+
+    let scrollY;
+	let scrollDir;
+	let lastY;
 
     export let id;
     export let data;
     export let copyBlock;
     export let copyScroll;
 
-    function setSection(id) { activeSection.set(id); }
+    function setSectionEnter(id) { activeSection.set(id); }
+    function setSectionExit(id) { 
+        // let activeSectionDiv = d3.select(`#${id}`);
+        // let parentNode = activeSectionDiv.node().parentNode; 
+        let nextSection;
+        if (scrollDir == "down") {
+            if (id == "raunchiness") {
+                nextSection = "illustration"
+            } else if (id == "illustration") {
+                nextSection = "race"
+            } else if (id == "race") {
+                nextSection = "outro"
+            }
+            activeSection.set(nextSection)
+        } else if (scrollDir == "up") {
+            if (id == "raunchiness") {
+                nextSection = "intro"
+            } else if (id == "illustration") {
+                nextSection = "raunchiness"
+            } else if (id == "race") {
+                nextSection = "illustration"
+            }
+            activeSection.set(nextSection)
+        }
+    }
+
+    function checkScrollY(scrollY) {
+        if (scrollY) {
+            scrollDir = scrollY > lastY ? "down" : "up"
+            lastY = scrollY;
+        }
+    }
 
     function resetTitles(id) {
         let title = id == "race" ? "racial diversity" : id;
         return title
     }
+
+    $: scrollY, checkScrollY(scrollY);
+    // $: console.log(scrollDir);
 </script>
+
+<svelte:window bind:scrollY/>
 
 <section id={id}
     use:inView
-    on:enter={() => setSection(id)}>
+    on:enter={() => setSectionEnter(id)}
+    on:exit={() => setSectionExit(id)}>
     <h2>{resetTitles(id)}</h2>
     <ChapterText copy={copyBlock}/>
     <Bookmark />

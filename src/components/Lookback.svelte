@@ -22,6 +22,7 @@
     let smallChartRaunchiness;
     let smallChartIllustration;
     let smallChartRace;
+    export let bookMin;
 
 
     // This function calculates the width of the shelf based on the book rows
@@ -109,6 +110,11 @@
 <section id="lookback">
     <!-- This component handles the body copy. It expects and iteratible array of paragraphs 
         that is pulled from the Google Doc. Right now, it is pulling from the ".lookBack" section.-->
+    {#if bookMin < 700}
+        <div class="prose">
+            <p>{@html copy.intro[1].value}</p>
+        </div>
+    {/if}
     <Prose copy={copy.lookBack} />
 
     <!-- This setcion pulls out book(s) to highlight without a full wall by using the Wall.Book.svelte
@@ -140,11 +146,22 @@
         {/each}
     </div>
     
-    <Prose copy={copy.postLookBack} />
+    <div class="prose">
+        <p>{@html copy.postLookBack[0].value}</p>
+    </div>
     <SmallMultiples />
 </section>
 
 <style>
+    .prose {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        max-width: 40rem;
+        margin: 0 auto;
+        line-height: 2;
+        padding: 0 1rem;
+    }
     .book-wrapper {
         display: flex;
         flex-direction: row;

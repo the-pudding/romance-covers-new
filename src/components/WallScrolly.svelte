@@ -55,6 +55,9 @@
         margin: 0 auto;
 		pointer-events: none;
 	}
+	.step:last-of-type {
+		opacity: 0;
+	}
 
 	.step p {
 		padding: 1rem;

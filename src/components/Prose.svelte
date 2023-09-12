@@ -3,10 +3,12 @@
 </script>
 
 <div class="prose">
-    {#if copy}
+    {#if copy && copy.length > 1}
         {#each copy as text, i}
             <p>{@html text.value}</p>
         {/each}
+    {:else if copy <= 1}
+        <p>{@html copy.value}</p>
     {/if}
 </div>
 

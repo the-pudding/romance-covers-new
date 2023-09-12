@@ -15,6 +15,7 @@
     let h;
     let scrollDir;
 	let lastY;
+    export let bookMin;
 
     function setSection(id) { activeSection.set(id); }
 
@@ -28,6 +29,7 @@
     }
 
     $: y, checkScrollY(y);
+    
 </script>
 
 <svelte:window bind:innerHeight={h} bind:scrollY={y}/>
@@ -36,7 +38,7 @@
     use:inView
     on:enter={() => setSection(id)}>
 	<div class="sticky">
-        <IntroBook value={value}/>
+        <IntroBook value={value} bookMin={bookMin}/>
     </div>
 	<Scrolly bind:value>
         {#each steps as step, i}
@@ -69,7 +71,7 @@
         flex-direction: column;
         justify-content: start;
         align-items: center;
-        padding-top: 10rem;
+        padding-top: 5rem;
 	}
 	.spacer {
 		height: 75vh;

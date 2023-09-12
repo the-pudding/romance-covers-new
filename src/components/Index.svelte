@@ -17,6 +17,7 @@
 	let scrollY = 0;
 	let containerElement;
 	let w;
+	let h;
 	let body;
 
 	import data from "$data/listings.csv";
@@ -62,14 +63,15 @@
 	}
 	$: activeSection, swapBarData($activeSection)
 	$: readingListVisible, setScroll($readingListVisible)
+	$: bookMin = Math.min(w,h);
 </script>
 
-<svelte:window bind:scrollY={scrollY} />
+<svelte:window bind:outerWidth={w} bind:outerHeight={h} bind:scrollY={scrollY} />
 
 <!-- <Header /> -->
-<IntroScrolly />
+<IntroScrolly bookMin={bookMin}/>
 <ChapterMarker />
-<Lookback />
+<Lookback bookMin={bookMin}/>
 <div class="sections">
 	<Chapter id={"raunchiness"} data={raunchinessData} copyBlock={copy.raunchinessText} copyScroll={copy.raunchinessScroll} pos={"overlay"} />
 	<Chapter id={"illustration"} data={illustrationData} copyBlock={copy.illustrationText} copyScroll={copy.illustrationScroll} pos={"overlay"} />

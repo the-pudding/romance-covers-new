@@ -46,13 +46,12 @@
 	})
 
     function shiftX(value) {
-        console.log(copy[value])
         if (copy[value] !== undefined) {
             if (value == 0) {
                 xShift = 0; 
             } else if (copy[value] !== 0 && d3.select(`#book_${copy[value].scrollToId}`).node() !== null) {
                 let sel = d3.select(`#book_${copy[value].scrollToId}`).node().getBoundingClientRect().x;
-                console.log(xShift, (sel-margins))
+                // console.log(xShift, (sel-margins))
                 xShift = xShift + sel - margins
             }
         }

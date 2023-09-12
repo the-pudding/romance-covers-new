@@ -46,7 +46,7 @@
     <div class="chart-wrapper" bind:clientWidth={barChartW}>
         {#if groupedData !== undefined}
             {#each groupedData as year, i}
-                <div class="year-bar" 
+                <div class={checkData($stepData, year[0]) ? "year-bar active" : "year-bar"} 
                 id="bar-{year[0]}"
                 style="height: {calcPercentage(year[0], year[1].length)*1.5}px;
                 width: {barChartW/groupedData.length}px;

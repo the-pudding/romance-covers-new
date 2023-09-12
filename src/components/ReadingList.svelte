@@ -43,6 +43,7 @@
     function clearList(e) {
         $readingList = [];
         let allBookButtons = d3.selectAll(`.book button`);
+        allBookButtons.classed("book_noList", true);
         allBookButtons.classed("book_inList", false);
 
         setTimeout(() => {
