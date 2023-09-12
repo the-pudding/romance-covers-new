@@ -8,6 +8,7 @@
     import Shelf from "$components/Wall.Shelf.svelte";
     import Prose from "$components/Prose.svelte";
     import SmallMultiples from "$components/SmallMultiples.svelte";
+	import { Dice4 } from "lucide-svelte";
 
     const copy = getContext("copy");
     let bookRows = 5;
@@ -17,6 +18,11 @@
     let chunkWidths = [];
     let lookbackDoc;
     let lookbackClinch;
+    let lookbackTravel;
+    let smallChartRaunchiness;
+    let smallChartIllustration;
+    let smallChartRace;
+
 
     // This function calculates the width of the shelf based on the book rows
     function calcWidth(len) {
@@ -30,13 +36,25 @@
     onMount(() => {
 		lookbackDoc = d3.selectAll(".lookback-doc");
         lookbackClinch = d3.selectAll(".lookback-clinch");
-	})
+        lookbackTravel = d3.selectAll(".lookback-travel");
+        smallChartRaunchiness = d3.selectAll(".small-chart-raunchiness");
+        smallChartIllustration = d3.selectAll(".small-chart-illustration");
+        smallChartRace = d3.selectAll(".small-chart-race");
+    })
 
-    $: if (lookbackDoc !== undefined && lookbackClinch !== undefined) {
+    $: if (lookbackDoc !== undefined && lookbackTravel !== undefined && lookbackClinch !== undefined) {
         lookbackDoc
             .on("mouseover", function() {
                 d3.selectAll("#lookback .img-wrapper").classed("highlight", false);
                 d3.selectAll("#book_0 .img-wrapper, #book_1 .img-wrapper, #book_2 .img-wrapper").classed("highlight", true);
+            })
+            .on("mouseout", function() {
+                d3.selectAll("#lookback .img-wrapper").classed("highlight", false);
+            })
+        lookbackTravel
+            .on("mouseover", function() {
+                d3.selectAll("#lookback .img-wrapper").classed("highlight", false);
+                d3.selectAll("#book_2 .img-wrapper").classed("highlight", true);
             })
             .on("mouseout", function() {
                 d3.selectAll("#lookback .img-wrapper").classed("highlight", false);
@@ -49,7 +67,33 @@
             .on("mouseout", function() {
                 d3.selectAll("#lookback .img-wrapper").classed("highlight", false);
             })
+
     }
+
+    $: if (smallChartRaunchiness !== undefined && smallChartIllustration !== undefined && smallChartRace != undefined) {
+        smallChartRaunchiness
+            .on("mouseover", function() {
+                d3.select(".top-wrapper.raunchiness").selectAll(".year-bar").classed("active", true);
+            })
+            .on("mouseout", function() {
+                d3.select(".top-wrapper.raunchiness").selectAll(".year-bar").classed("active", false);
+            })
+        smallChartIllustration
+            .on("mouseover", function() {
+                d3.select(".top-wrapper.illustration").selectAll(".year-bar").classed("active", true);
+            })
+            .on("mouseout", function() {
+                d3.select(".top-wrapper.illustration").selectAll(".year-bar").classed("active", false);
+            })
+        smallChartRace
+            .on("mouseover", function() {
+                d3.select(".top-wrapper.race").selectAll(".year-bar").classed("active", true);
+            })
+            .on("mouseout", function() {
+                d3.select(".top-wrapper.race").selectAll(".year-bar").classed("active", false);
+            })
+    }
+
     function handleEnter(){
         let el = d3.select(this);
         let img = el.select(".book .img-wrapper");
@@ -139,7 +183,7 @@
         transform: scale(1.5) translate(0, -15%);
         transition: 0.125s all linear;
     }
-    :global(#lookback .lookback-doc, #lookback .lookback-clinch) {
+    :global(#lookback .lookback-doc, #lookback .lookback-clinch, #lookback .lookback-travel, #lookback .small-chart-raunchiness, #lookback .small-chart-illustration, #lookback .small-chart-race) {
         transition: 0.125s all linear;
         background-color: white;
         border-radius: 0.25rem;
@@ -149,7 +193,7 @@
         font-family: var(--sans-display);
         box-decoration-break: clone;
     }
-    :global(#lookback .lookback-doc:hover, #lookback .lookback-clinch:hover) {
+    :global(#lookback .lookback-doc:hover, #lookback .lookback-clinch:hover, #lookback .lookback-travel:hover, #lookback .small-chart-raunchiness:hover, #lookback .small-chart-illustration:hover, #lookback .small-chart-race:hover) {
         background-color: var(--romance-pink-light);
     }
 

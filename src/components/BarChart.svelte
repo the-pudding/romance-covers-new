@@ -14,7 +14,9 @@
     let barChartW;
 
     function checkData(data, year) {
-        if (pos !== "overlay") {
+        if (pos == "inline") {
+            return false
+        } else if (pos !== "overlay") {
             return true
         } else {
             if (data[1] !== undefined && data[1].highlightYears.includes(year)) {
