@@ -58,7 +58,7 @@
                             {calcPercentage(year[0], year[1].length, i)}%
                         </p>
                     {/if}
-                    {#if pos == "inline" && i == 12}
+                    {#if pos == "inline" && i == 12 || pos == "inline" && i == 0}
                         <p class="count" style="opacity: 1">
                             {calcPercentage(year[0], year[1].length, i)}%
                         </p>
