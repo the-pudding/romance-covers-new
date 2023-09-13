@@ -1,7 +1,7 @@
 <script>
     import * as d3 from "d3";
     import { onMount } from "svelte";
-    import { stepData } from "$stores/misc.js";
+    import { stepData, sliderVisible, sliderStore } from "$stores/misc.js";
     import Book from "$components/Wall.Book.svelte";
     import Shelf from "$components/Wall.Shelf.svelte";
 
@@ -71,9 +71,17 @@
             });
         }
     }
+    
+    function shiftSlider() {
+        if ($sliderVisible) {
+            let maxSlide = xShift;
+            xShift = $sliderStore*maxSlide/100;
+        }
+    }
 
     $: value, shiftX(value);
-    $: wallH, getYearLengths(yearGroups)
+    $: wallH, getYearLengths(yearGroups);
+    $: $sliderStore, shiftSlider();
 </script>
 
 <svelte:window bind:innerHeight={h} bind:innerWidth={w} />

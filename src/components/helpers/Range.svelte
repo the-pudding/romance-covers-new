@@ -1,10 +1,12 @@
 <script>
+	import { sliderStore } from "$stores/misc.js";
+	import Icon from "$components/helpers/Icon.svelte";
 	import { range, format } from "d3";
 	export let min = 0;
 	export let max = 100;
 	export let step = 1;
 	export let showTicks = false;
-	export let value = min;
+	export let value = max;
 	export let label = "";
 
 	const getDecimalCount = (value) => {
@@ -14,6 +16,8 @@
 
 	$: decimals = getDecimalCount(step);
 	$: ticks = showTicks ? range(min, max + step, step) : [];
+	$: value, sliderStore.set(value);
+	$: console.log($sliderStore);
 </script>
 
 <div class="range">
@@ -30,9 +34,10 @@
 		--thumb-width: 24px;
 		--tick-font-size: 12px;
 		position: relative;
-		margin-bottom: calc(var(--thumb-width) * 2);
+		display: flex;
+		flex-direction: row;
+		width: calc(100% - 12rem);
 	}
-
 	input[type="range"] {
 		display: block;
 		width: 100%;
@@ -46,19 +51,19 @@
 	}
 
 	input[type="range"]:focus {
-		box-shadow: 0 0 4px 0 var(--color-focus, #999);
+		box-shadow: 0 0 4px 0 var(--color-gray-300);
 	}
 
 	input[type="range"]:focus::-webkit-slider-thumb,
 	input[type="range"]:focus::-moz-range-thumb,
 	input[type="range"]:focus::-ms-thumb {
-		box-shadow: 0 0 4px 0 var(--color-focus, #999);
+		box-shadow: 0 0 4px 0 var(--color-gray-300);
 	}
 
 	input[type="range"]::-webkit-slider-runnable-track {
 		width: 100%;
 		height: calc(var(--thumb-width) / 4);
-		background: var(--color-gray-300);
+		background: rgba(255,255,255,0.75);
 		border-radius: 4px;
 	}
 
@@ -66,19 +71,19 @@
 		height: var(--thumb-width);
 		width: var(--thumb-width);
 		border-radius: 50%;
-		background: var(--color-gray-900);
+		background: var(--color-gray-800);
 		appearance: none;
 		margin-top: calc(var(--thumb-width) / -3);
 	}
 
 	input[type="range"]:focus::-webkit-slider-runnable-track {
-		background: var(--color-gray-300);
+		background: rgba(255,255,255,0.75);
 	}
 
 	input[type="range"]::-moz-range-track {
 		width: 100%;
 		height: calc(var(--thumb-width) / 4);
-		background: var(--color-gray-300);
+		background: rgba(255,255,255,0.75);
 		border-radius: 4px;
 	}
 

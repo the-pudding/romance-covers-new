@@ -6,6 +6,10 @@
     import { activeSection } from "$stores/misc.js";
     import * as d3 from "d3";
 
+	let sliderEl; // component binding
+    let value;
+    // sliderEl.next(); // navigation call
+
     let scrollY;
 	let scrollDir;
 	let lastY;

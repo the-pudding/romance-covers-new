@@ -30,7 +30,7 @@
         $readingList = $readingList
         
         let allBookButtons = d3.selectAll(`#book_${bookID} button`);
-        console.log(allBookButtons)
+        // console.log(allBookButtons)
         allBookButtons.classed("book_inList", false);
         allBookButtons.classed("book_noList", true); 
 

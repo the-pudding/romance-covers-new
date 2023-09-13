@@ -2,8 +2,11 @@
 	import Scrolly from "$components/helpers/Scrolly.svelte";
     import Wall from "$components/Wall.svelte";
     import { getContext } from "svelte";
-	import { stepData } from "$stores/misc.js";
+	import { stepData, sliderVisible } from "$stores/misc.js";
+	import Bookmark from "$components/Bookmark.svelte";
+	import Range from "$components/helpers/Range.svelte";
 	let value;
+	let sliderVal;
     export let data;
     export let copy;
 	export let section;
@@ -11,7 +14,16 @@
 	function setStepData(value) {
         let localStepData = [section, (copy[value])];
 		$stepData = localStepData;
+		lastStepUnlock(value)
     }
+
+	function lastStepUnlock(value) {
+		if (value == copy.length-1) {
+			sliderVisible.set(true)
+		} else {
+			sliderVisible.set(false)
+		}
+	}
 
 	$: value, setStepData(value);
 </script>
@@ -42,7 +54,6 @@
         overflow-x: hidden;
 		pointer-events: none;
 	}
-
 	.spacer {
 		height: 75vh;
 	}

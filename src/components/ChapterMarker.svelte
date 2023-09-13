@@ -1,9 +1,11 @@
 <script>
-    import { activeSection, readingList, readingListVisible } from "$stores/misc.js";
+    import { activeSection, readingList, readingListVisible, sliderVisible } from "$stores/misc.js";
     import { fly, fade } from 'svelte/transition';
     import Icon from "$components/helpers/Icon.svelte";
     const sections = ["intro", "raunchiness", "illustration", "race", "outro"];
     import * as d3 from "d3";
+    import Range from "$components/helpers/Range.svelte";
+	let sliderVal;
 
     function handleListToggle(initState) {
         readingListVisible.set(!$readingListVisible);
@@ -28,35 +30,44 @@
 </script>
 
 <nav>
-    <div class="sect-btns">
-        {#each sections as section, i}
-            {@const active = $activeSection == section ? "active" : ""}
-            <div class="btn-wrapper">
-                <button 
-                    on:click={handleChapterClick}
-                    class="sectionBox {active}"
-                    id="sectionBox-{section}">
-                </button>
-                <p class="label {active}">{resetTitles(section)}</p>
-            </div>
-        {/each}
+    <div class="top-nav">
+        <div class="sect-btns">
+            {#each sections as section, i}
+                {@const active = $activeSection == section ? "active" : ""}
+                <div class="btn-wrapper">
+                    <button 
+                        on:click={handleChapterClick}
+                        class="sectionBox {active}"
+                        id="sectionBox-{section}">
+                    </button>
+                    <p class="label {active}">{resetTitles(section)}</p>
+                </div>
+            {/each}
+        </div>
+        <button 
+            on:click={handleListToggle}
+            class="listBtn">
+                {#if $readingList.length > 0}
+                    <p class="count"
+                    in:fly={{ y: 20, duration: 200}}
+                    out:fade={{ duration: 200}}>
+                        {$readingList.length}
+                    </p>
+                {/if}
+                {#if $readingListVisible == true}
+                    <Icon name="x" />
+                {:else}
+                    <Icon name="book-open" />
+                {/if}
+        </button>
     </div>
-    <button 
-        on:click={handleListToggle}
-        class="listBtn">
-            {#if $readingList.length > 0}
-                <p class="count"
-                in:fly={{ y: 20, duration: 200}}
-                out:fade={{ duration: 200}}>
-                    {$readingList.length}
-                </p>
-            {/if}
-            {#if $readingListVisible == true}
-                <Icon name="x" />
-            {:else}
-                <Icon name="book-open" />
-            {/if}
-    </button>
+    {#if $sliderVisible}
+        <div id="range-slider" transition:fade={{ delay: 250, duration: 300 }}>
+            <p><Icon name="move-left" /> Move left</p>
+            <Range min={0} max={100} step={1} showTicks={false} bind:sliderVal />
+            <p>Move right <Icon name="move-right" /></p>
+        </div>
+    {/if}
 </nav>
 
 <style>
@@ -64,13 +75,19 @@
         width: 100%;
         position: fixed;
         top: 0rem;
-        padding: 1rem 0 0 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        z-index: 1000;
+        height: 6rem;
+    }
+    .top-nav {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        z-index: 1000;
-        height: 3rem;
+        padding: 1rem 0 0 0;
+        margin: 0 0 2rem 0;
     }
     .sect-btns {
         margin: 0 auto;
@@ -191,6 +208,29 @@
         border: 2px solid white;
         box-shadow: 0.25rem 0 1rem  var(--color-gray-300);
     }
+    #range-slider {
+		z-index: 1000;
+        padding: 0 1rem;
+        max-width: 40rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: calc(var(--thumb-width) * 2);
+	}
+    #range-slider p {
+		font-size: var(--12px);
+		font-family: var(--sans-display);
+		width: 6rem;
+	}
+	#range-slider p:first-of-type {
+		text-align: right;
+		padding: 0 0.5rem 0 0;
+	}
+	#range-slider p:last-of-type {
+		text-align: left;
+		padding: 0 0 0 0.5rem
+	}
     :global(.listBtn.highlight) {
         background: rgba(255, 255, 255, 0.75) !important;
         /* animation: pulse-animation 2s infinite !important; */
