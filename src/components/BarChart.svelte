@@ -36,6 +36,7 @@
     }
 
     $: groupedData = d3.groups(data, d => d.year);
+    console.log(pos)
 </script>
 
 <svelte:window bind:innerWidth={w} />
@@ -43,7 +44,7 @@
     {#if pos == "overlay"}
         <p class="label left" style="color: {data[0]}">2011</p>
     {/if}
-    <div class="chart-wrapper" bind:clientWidth={barChartW}>
+    <div class="chart-wrapper chart-wrapper-{pos}" bind:clientWidth={barChartW}>
         {#if groupedData !== undefined}
             {#each groupedData as year, i}
                 <div class={checkData($stepData, year[0]) ? "year-bar active" : "year-bar"} 
@@ -79,7 +80,12 @@
         -webkit-align-items: flex-end;
         height: 100%;
         width: 100%;
+        padding: 0 1rem;
         position: relative;
+        border-bottom: 1px solid var(--color-gray-800);
+    }
+    .chart-wrapper-inline {
+        height: 9rem;
     }
     .year-bar {
         width: 5rem;
@@ -94,6 +100,7 @@
         width: 100%;
         text-align: center;
         top: -1rem;
+        left: 50%;
         transition: 0.25s linear;
         opacity: 0.125;
         letter-spacing: -0.05rem;
@@ -101,6 +108,7 @@
         font-size: var(--12px);
         white-space: nowrap;
         z-index: 1000;
+        transform: translate(-50%, 0);
     }
     .year-bar.active .count {
         opacity: 1;
@@ -112,7 +120,7 @@
         align-self: flex-end;
         align-items: center;
         font-family: var(--sans-display);
-        font-size: var(--12px);
+        font-size: var(--14px);
         padding: 0;
         line-height: 1;
         transition: 0.25s linear;
@@ -122,14 +130,14 @@
     .label.left {
         margin: 0 1rem 0 0;
         position: absolute;
-        bottom: 0;
-        left: 0;
+        bottom: -1.5rem;
+        left: 1rem;
     }
     .label.right {
         margin: 0 0 0 1rem;
         position: absolute;
-        bottom: 0;
-        right: 0;
+        bottom: -1.5rem;
+        right: 1rem;
     }
     :global(#barChart .label .icon) {
         margin: 0;
@@ -143,6 +151,7 @@
         }
         .chart-wrapper {
             width: 60%;
+            border-bottom: none;
         }
         .label {
             font-size: var(--36px);
@@ -168,7 +177,7 @@
     @media only screen and (min-width: 800px) {
         .count {
             font-size: var(--14px);
-            top: -1.5rem;
+            top: -1.25rem;
         }
 	}
 </style>

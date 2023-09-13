@@ -148,7 +148,7 @@
         background: var(--romance-blue-light);
     }
     :global(#illustration .book .marker) {
-        background: var(--romance-purple-light);
+        background: var(--romance-yellow-light);
     }
     :global(#race .book .marker) {
         background: var(--romance-teal-light);

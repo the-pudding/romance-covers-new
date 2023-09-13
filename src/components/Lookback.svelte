@@ -120,6 +120,7 @@
     <!-- This setcion pulls out book(s) to highlight without a full wall by using the Wall.Book.svelte
         and Wall.Shelf.svelte components. To style them differently, you'll want to use global stylings
         like the example in the css.-->
+    <h5>Historical Romance Novel Covers</h5>
     <div class="book-wrapper">
         {#each lookbackData as book, i}
             <div class="highlightBook">
@@ -149,10 +150,15 @@
     <div class="prose">
         <p>{@html copy.postLookBack[0].value}</p>
     </div>
+    <h5>Percentage of Romance Covers Featuring</h5>
     <SmallMultiples />
 </section>
 
 <style>
+    #lookback {
+        background: var(--romance-bg-pink);
+        padding: 0 0 4rem 0;
+    }
     .prose {
         display: flex;
         justify-content: center;
@@ -162,12 +168,21 @@
         line-height: 2;
         padding: 0 1rem;
     }
+    h5 {
+        max-width: 40rem;
+        text-transform: uppercase;
+        margin: 4rem auto 2rem auto;
+        font-family: var(--sans-display);
+        font-weight: 900;
+        text-align: center;
+        padding: 0 1rem;
+        font-size: var(--16px);
+    }
     .book-wrapper {
         display: flex;
         flex-direction: row;
         max-width: 50rem;
-        margin: 0 auto;
-        padding: 2rem 0 4rem 0;
+        margin: -3rem auto 6rem auto;
         flex-wrap: wrap;
     }
     .shelves {
@@ -190,7 +205,7 @@
         justify-content: center;
         width: 33%;
         margin: auto;
-        height: 12rem;
+        height: 10rem;
     }
     :global(#lookback .book) {
         margin: 0.5rem 0 0 0.25rem;
@@ -204,26 +219,26 @@
         transition: 0.125s all linear;
         background-color: white;
         border-radius: 0.25rem;
-        padding: 0.25rem 0.5rem;
+        padding: 0.125rem 0.5rem;
         box-shadow: -2px 2px 5px  rgba(0,0,0,0.125);
         opacity: 1; 
         font-family: var(--sans-display);
         box-decoration-break: clone;
     }
     :global(#lookback .lookback-doc, #lookback .lookback-clinch, #lookback .lookback-travel) {
-        border: 3px solid var(--romance-pink)
+        border: 2px solid var(--romance-pink)
     }
     :global(#lookback .lookback-doc:hover, #lookback .lookback-clinch:hover, #lookback .lookback-travel:hover, #lookback .small-chart-raunchiness:hover, #lookback .small-chart-illustration:hover, #lookback .small-chart-race:hover) {
         background-color: var(--romance-pink-light);
     }
     :global(#lookback .small-chart-raunchiness) {
-        border: 3px solid var(--romance-blue)
+        border: 2px solid var(--romance-blue)
     }
     :global(#lookback .small-chart-illustration) {
-        border: 3px solid var(--romance-yellow)
+        border: 2px solid var(--romance-yellow)
     }
     :global(#lookback .small-chart-race) {
-        border: 3px solid var(--romance-teal)
+        border: 2px solid var(--romance-teal)
     }
     :global(#lookback .small-chart-raunchiness:hover) {
         background-color: var(--romance-blue-light);

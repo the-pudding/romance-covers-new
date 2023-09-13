@@ -17,7 +17,7 @@
 	$: decimals = getDecimalCount(step);
 	$: ticks = showTicks ? range(min, max + step, step) : [];
 	$: value, sliderStore.set(value);
-	$: console.log($sliderStore);
+	// $: console.log($sliderStore);
 </script>
 
 <div class="range">

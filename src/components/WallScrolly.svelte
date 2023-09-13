@@ -5,6 +5,7 @@
 	import { stepData, sliderVisible } from "$stores/misc.js";
 	import Bookmark from "$components/Bookmark.svelte";
 	import Range from "$components/helpers/Range.svelte";
+	import inView from "$actions/inView.js";
 	let value;
 	let sliderVal;
     export let data;
@@ -23,6 +24,10 @@
 		} else {
 			sliderVisible.set(false)
 		}
+	}
+
+	function setPosClass() {
+
 	}
 
 	$: value, setStepData(value);

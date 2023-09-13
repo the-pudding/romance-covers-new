@@ -2,7 +2,7 @@
     import { activeSection, readingList, readingListVisible, sliderVisible } from "$stores/misc.js";
     import { fly, fade } from 'svelte/transition';
     import Icon from "$components/helpers/Icon.svelte";
-    const sections = ["intro", "raunchiness", "illustration", "race", "outro"];
+    const sections = ["intro", "raunchiness", "illustration", "race", "methods"];
     import * as d3 from "d3";
     import Range from "$components/helpers/Range.svelte";
 	let sliderVal;
@@ -122,8 +122,8 @@
     #sectionBox-race.active {
         border: 3px solid var(--romance-teal);
     }
-    #sectionBox-outro.active {
-        border: 3px solid var(--romance-purple);
+    #sectionBox-methods.active {
+        border: 3px solid var(--romance-pink);
     }
     .sectionBox:hover {
         opacity: 1; 
@@ -140,8 +140,8 @@
     #sectionBox-race {
         border: 3px solid var(--romance-teal-light);
     }
-    #sectionBox-outro {
-        border: 3px solid var(--romance-purple-light);
+    #sectionBox-methods {
+        border: 3px solid var(--romance-pink-light);
     }
     .label {
         position: absolute;
@@ -211,12 +211,14 @@
     #range-slider {
 		z-index: 1000;
         padding: 0 1rem;
-        max-width: 40rem;
+        width: 100%;
+        max-width: 60rem;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
         margin-bottom: calc(var(--thumb-width) * 2);
+        margin: 0 auto;
 	}
     #range-slider p {
 		font-size: var(--12px);

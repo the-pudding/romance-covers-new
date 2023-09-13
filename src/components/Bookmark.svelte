@@ -4,8 +4,8 @@
 
 <div class="instructions">
     <p>Use the <span class="svg-wrapper">
-        <Icon name="book open" size="0.75em" />
-    </span> buttons next to each book to add it to your reading list.</p>
+        <Icon name="book open" size="0.8em" />
+    </span> buttons next to each book to add it to your reading list and see the full list in the top right.</p>
 </div>  
 
 <style>
@@ -16,7 +16,7 @@
         justify-content: center;
         width: 100%;
         margin: 2rem auto 0 auto;
-        max-width: 40rem;
+        max-width: 25rem;
         font-family: var(--sans-display);
         text-align: center;
         padding: 0 1rem;

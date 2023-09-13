@@ -116,7 +116,7 @@
         display: flex;
         justify-content: center;
         flex-direction: column;
-        max-width: 40rem;
+        width: 100%;
         margin: 0 auto 4rem auto;
         text-align: center;
         text-transform: capitalize;
@@ -125,6 +125,8 @@
         padding: 3rem 0 0 0;
         z-index: 100;
         position: relative;
+        overflow: hidden;
+        min-height: 15rem;
     }
     h2:after {
         position: absolute;

@@ -56,9 +56,10 @@
 </section>
 
 <style>
-    .intro {
+    #intro {
         height: 200vh;
         width: 100%;
+        background: var(--romance-bg-pink);
     }
 	.sticky {
 		position: sticky;

@@ -42,30 +42,28 @@
 <style>
     #small-multiples {
         max-width: 50rem;
-        margin: 4rem auto;
+        margin: 0 auto 4rem auto;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
     }
     .top-wrapper {
-        width: 33%;
+        width: 100%;
         padding: 0 1rem;
-        transition: 0.25s linear;
+        margin: 1rem 0;
     }
     :global(#small-multiples .chart-wrapper) {
         width: 100%;
     }
     h5 {
         font-family: var(--sans-display);
-        font-weight: 900;
         text-align: center;
-        text-transform: uppercase;
         font-size: var(--18px);
-        margin: 0 auto -2rem auto;
+        margin: 0 auto 0.5rem auto;
         line-height: 1;
-        height: 4rem;
         display: flex;
         align-items: end;
         justify-content: center;
+        z-index: 1000;
     }
     .year-labels {
         width: 100%;
@@ -74,17 +72,22 @@
         justify-content: space-between;
         font-family: var(--sans-display);
         font-size: var(--12px);
+        padding: 0 0.5rem;
     }
     .year-labels p {
         padding: 0;
         margin: 0;
     }
     @media only screen and (min-width: 600px) {
+        #small-multiples {
+            flex-direction: row;
+        }
+        .top-wrapper {
+            width: 33%;
+            margin: 0;
+        }
         .year-labels p {
             font-size: var(--14px);
-        }
-        h5 {
-            height: 4rem;
         }
 	}
 </style>

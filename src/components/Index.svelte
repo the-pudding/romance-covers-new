@@ -51,14 +51,27 @@
 			barData = raunchinessData;
 			barColor = "#8eacf9";
 			barColorHighlight = "#4C7DFE";
+			if (body) {
+				body.style("background-color", "#dce5fd")
+			}
 		} else if (activeSection == "illustration") {
 			barData = illustrationData;
 			barColor = "#fde59a";
 			barColorHighlight = "#F7C42D";
+			if (body) {
+				body.style("background-color", "#fff6d7")
+			}
 		} else if (activeSection == "race") {
 			barData = raceData;
 			barColor = "#7ce7e7";
 			barColorHighlight = "#20B6B6";
+			if (body) {
+				body.style("background-color", "#e1fefe")
+			}
+		} else {
+			if (body) {
+				body.style("background-color", "#fce9eb")
+			}
 		}
 	}
 	$: activeSection, swapBarData($activeSection)
@@ -80,6 +93,7 @@
 {#if $activeSection !== "intro" && $activeSection !== "outro" && $activeSection !== null}
 	<section id="barChart" in:fly={{ y: 200, duration: 2000 }} out:fly={{ y: 200, duration: 2000 }}>
 		<BarChart data={barData} color={barColor} highlightColor={barColorHighlight} pos={"overlay"} yearTotals={yearTotals}/>
+		<div class="shield"></div>
 	</section>
 {/if}
 <ReadingList data={data} pos={"overlay"}/>
@@ -92,18 +106,33 @@
 		position: fixed;
 		height: 100vh;
 	}
-	.sections {
-		margin-top: 5rem;
-	}
 	#barChart {
         position: fixed;
         width: 100%;
         height: 10rem;
         left: 0;
-        bottom: 0rem;
+        bottom: 2rem;
         display: flex;
         flex-direction: row;
         justify-content: center;
         z-index: 999;
     }
+	.shield {
+		width: 100%;
+		height: 2rem;
+		position: absolute;
+		left: 0;
+		bottom: -2rem ;
+		background: rgba(255, 255, 255, 0.75);
+		display: block;
+	}
+
+	@media only screen and (min-width: 600px) {
+        #barChart {
+			bottom: 0rem;
+		}
+		.shield {
+			display: none;
+		}
+	}
 </style>
