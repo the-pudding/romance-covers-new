@@ -1,15 +1,12 @@
 <script>
-    import { readingList, readingListVisible, activeSection } from "$stores/misc.js";
+    import { readingList, readingListVisible } from "$stores/misc.js";
     import { fly, fade } from 'svelte/transition';
     import { flip } from 'svelte/animate';
     import Icon from "$components/helpers/Icon.svelte";
     import Bookmark from "$components/Bookmark.svelte";
-    import AddButton from "$components/AddButton.svelte";
-    import * as d3 from "d3";
+    import {select, selectAll} from "d3-selection";
     export let data;
     export let pos;
-
-    let displayList = $readingList;
 
     function findBookMatch(id, type) {
         let match = data.find(d => d.ISBN == id);
@@ -20,7 +17,6 @@
     }
 
     function handleBtnClick(e) {
-        let btn = d3.select(this);
 
         let bookID = e.target.parentNode.id;
         if (bookID == "") { bookID = e.target.parentNode.parentNode.id; }
@@ -29,7 +25,7 @@
         $readingList.splice(indexOfObject, 1)
         $readingList = $readingList
         
-        let allBookButtons = d3.selectAll(`#book_${bookID} button`);
+        let allBookButtons = selectAll(`#book_${bookID} button`);
         // console.log(allBookButtons)
         allBookButtons.classed("book_inList", false);
         allBookButtons.classed("book_noList", true); 
@@ -42,7 +38,7 @@
     }
     function clearList(e) {
         $readingList = [];
-        let allBookButtons = d3.selectAll(`.book button`);
+        let allBookButtons = selectAll(`.book button`);
         allBookButtons.classed("book_noList", true);
         allBookButtons.classed("book_inList", false);
 

@@ -1,13 +1,10 @@
 <script>
 	import Scrolly from "$components/helpers/Scrolly.svelte";
     import Wall from "$components/Wall.svelte";
-    import { getContext } from "svelte";
-	import { stepData, sliderVisible } from "$stores/misc.js";
-	import Bookmark from "$components/Bookmark.svelte";
-	import Range from "$components/helpers/Range.svelte";
-	import inView from "$actions/inView.js";
+	import { stepData, sliderVisible, sliderStore } from "$stores/misc.js";
+	
 	let value;
-	let sliderVal;
+
     export let data;
     export let copy;
 	export let section;
@@ -21,13 +18,10 @@
 	function lastStepUnlock(value) {
 		if (value == copy.length-1) {
 			sliderVisible.set(true)
+			// sliderStore.set(sliderStore)
 		} else {
 			sliderVisible.set(false)
 		}
-	}
-
-	function setPosClass() {
-
 	}
 
 	$: value, setStepData(value);

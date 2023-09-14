@@ -1,6 +1,5 @@
 <script>
 	import { getContext, onMount } from "svelte";
-	import Header from "$components/Header.svelte";
 	import ChapterMarker from "$components/ChapterMarker.svelte";
 	import Chapter from "$components/Chapter.svelte";
 	import BarChart from "$components/BarChart.svelte";
@@ -10,12 +9,10 @@
 	import Outro from "$components/Outro.svelte";
 	import { activeSection, readingListVisible } from "$stores/misc.js";
 	import Footer from "$components/Footer.svelte";
-	import { fade, fly } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 
 	const copy = getContext("copy");
-	// const data = getContext("data");
 	let scrollY = 0;
-	let containerElement;
 	let w;
 	let h;
 	let body;
@@ -81,7 +78,6 @@
 
 <svelte:window bind:outerWidth={w} bind:outerHeight={h} bind:scrollY={scrollY} />
 
-<!-- <Header /> -->
 <IntroScrolly bookMin={bookMin}/>
 <ChapterMarker />
 <Lookback bookMin={bookMin}/>

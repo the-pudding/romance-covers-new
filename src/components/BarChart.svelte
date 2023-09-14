@@ -1,9 +1,7 @@
 <script>
-    import * as d3 from "d3";
-    import { onMount } from "svelte";
+    import {groups} from "d3-array";
     import { fade, fly } from 'svelte/transition';
-    import { activeSection, stepData } from "$stores/misc.js";
-    import Icon from "$components/helpers/Icon.svelte";
+    import { stepData } from "$stores/misc.js";
 
     export let data;
     export let color;
@@ -35,7 +33,7 @@
         return percent
     }
 
-    $: groupedData = d3.groups(data, d => d.year);
+    $: groupedData = groups(data, d => d.year);
 </script>
 
 <svelte:window bind:innerWidth={w} />

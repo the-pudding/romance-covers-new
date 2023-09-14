@@ -1,8 +1,7 @@
 <script>
-    import * as d3 from "d3";
-    import { onMount } from "svelte";
-    import { stepData, sliderVisible, sliderStore } from "$stores/misc.js";
-    import { lazy, lazyAll } from '$utils/lazyLoad.js';
+    import {groups} from "d3-array";
+    import {select} from "d3-selection";
+    import { sliderVisible, sliderStore } from "$stores/misc.js";
     import Book from "$components/Wall.Book.svelte";
     import Shelf from "$components/Wall.Shelf.svelte";
 
@@ -18,37 +17,25 @@
     let h;
     let w;
     let wallH;
-    let shelfSectinoW;
 
-    let yearGroups = d3.groups(data, d => d.year);
+    let yearGroups = groups(data, d => d.year);
     let chunkWidths = [];
-    let chunkWidths2 = [];
     let totalShelfWidth;
 
-    function calcWidth(len) {
-        let bookWidth = Math.floor(wallH/5*0.66);
-        let remainder = len % 5;
-        let bookCols = remainder == 1 ? Math.round((len)/bookRows) + 1 : Math.round((len)/bookRows);
-        let chunkWidth = bookCols == 0 ? bookWidth + 8 : (bookCols * (bookWidth) + 8);
-        chunkWidths.push(chunkWidth);
-        return chunkWidth;
+    function calcTotalWidth(chunks) {
+        if (chunks.length == 13) {
+            totalShelfWidth = chunks.reduce(function (a, b) {
+                return {chunkWidth: a.chunkWidth + b.chunkWidth}; // returns object with property x
+            })
+        }
     }
-
-    // function calcTotalWidth(chunks) {
-    //     totalShelfWidth = chunks.reduce((a, b) => a + b, 0);
-    // }
-
-    onMount(() => {
-        // console.log(d3.selectAll("#race #book_9781250801234"));
-	})
 
     function shiftX(value) {
         if (copy[value] !== undefined) {
             if (value == 0) {
                 xShift = 0; 
-            } else if (copy[value] !== 0 && d3.select(`#${section} #book_${copy[value].scrollToId}`).node() !== null) {
-                let sel = d3.select(`#${section} #book_${copy[value].scrollToId}`).node().getBoundingClientRect().x;
-                console.log(sel)
+            } else if (copy[value] !== 0 && select(`#${section} #book_${copy[value].scrollToId}`).node() !== null) {
+                let sel = select(`#${section} #book_${copy[value].scrollToId}`).node().getBoundingClientRect().x;
                 // console.log(xShift, (sel-margins))
                 xShift = xShift + sel - margins
             }
@@ -56,7 +43,7 @@
     }
 
     function getYearLengths(data) {
-        chunkWidths2 = [];
+        chunkWidths = [];
         if (wallH !== undefined) {
             let bookWidth = Math.floor(wallH/5*0.66);
             data.forEach((d, i) => {
@@ -65,21 +52,26 @@
                 let remainder = chunkLength % 5;
                 let bookCols = remainder == 1 ? Math.round((chunkLength)/bookRows) + 1 : Math.round((chunkLength)/bookRows);
                 let chunkWidth = bookCols == 0 ? bookWidth + 8 : (bookCols * (bookWidth) + 8);
-                chunkWidths2.push({year: year, chunkWidth: chunkWidth});
+                chunkWidths.push({year: year, chunkWidth: chunkWidth});
             });
         }
     }
     
     function shiftSlider() {
-        if ($sliderVisible) {
-            let maxSlide = xShift;
-            xShift = $sliderStore*maxSlide/100;
+        if ($sliderVisible && totalShelfWidth) {
+            let currX = xShift;
+            let maxWidth = totalShelfWidth.chunkWidth;
+            let currSlide = currX/maxWidth*100;
+            console.log(currSlide)
+            // sliderStore.set(Math.round(currSlide))
+            xShift = $sliderStore*maxWidth/100;
         }
     }
 
     $: value, shiftX(value);
     $: wallH, getYearLengths(yearGroups);
-    $: w, getYearLengths(yearGroups)
+    $: w, getYearLengths(yearGroups);
+    $: chunkWidths, calcTotalWidth(chunkWidths)
     $: $sliderStore, shiftSlider();
 </script>
 
@@ -89,11 +81,11 @@
     <div class="overflow-wrap" style="transform:translate3d(-{xShift}px,0,0)">
         {#each yearGroups as year, i}
             <div class="year-wrapper" bind:clientHeight={wallH}>
-                {#if wallH !== undefined && chunkWidths2.length == 13}
-                    {@const match = chunkWidths2.find((d) => d.year == year[0])}
+                {#if wallH !== undefined && chunkWidths.length == 13}
+                    {@const match = chunkWidths.find((d) => d.year == year[0])}
                     <div class="yearChunk" id="chunk-{year[0]}"
                     style="width:{match.chunkWidth}px">
-                        <div class="books" use:lazyAll>
+                        <div class="books">
                             {#each year[1] as book, i}
                                 <Book book={book} index={i} wallH={wallH} />
                             {/each}

@@ -1,19 +1,19 @@
 <script>
-    import { activeSection, readingList, readingListVisible, sliderVisible } from "$stores/misc.js";
+    import { activeSection, readingList, readingListVisible, sliderVisible, sliderStore } from "$stores/misc.js";
     import { fly, fade } from 'svelte/transition';
     import Icon from "$components/helpers/Icon.svelte";
     const sections = ["intro", "raunchiness", "illustration", "race", "methods"];
-    import * as d3 from "d3";
+    import {select} from "d3-selection";
     import Range from "$components/helpers/Range.svelte";
 	let sliderVal;
 
     function handleListToggle(initState) {
         readingListVisible.set(!$readingListVisible);
-        d3.select(this).style("animation", "none")
-        d3.select(this).classed("highlight", false)
+        select(this).style("animation", "none")
+        select(this).classed("highlight", false)
     }
     function handleChapterClick(e) {
-        let id = (d3.select(this).node().id).split("-")[1];
+        let id = (select(this).node().id).split("-")[1];
 
         e.preventDefault()
 		const anchor = document.getElementById(id)

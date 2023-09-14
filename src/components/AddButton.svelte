@@ -1,17 +1,13 @@
 <script>
-    import Icon from "$components/helpers/Icon.svelte";
-    import { fly } from 'svelte/transition';
-    import { readingList, highlightYear } from "$stores/misc.js";
-    import * as d3 from "d3";
-    import addbook from "$svg/addbook.svg";
+    import { readingList } from "$stores/misc.js";
+    import {select} from "d3-selection";
 
     let showMessage = false;
-    let showX = false;
 
     function handleBtnClick(e) {
-        let btn = d3.select(this);
-        let textFeedback = d3.select(this.parentNode).select(".message");
-        let readingListIcon = d3.select(".listBtn");
+        let btn = select(this);
+        let textFeedback = select(this.parentNode).select(".message");
+        let readingListIcon = select(".listBtn");
 
         let bookID = e.target.parentNode.id;
             if (bookID == "") {
@@ -42,10 +38,6 @@
         setTimeout(() => {
             showMessage = false;
         }, 3000);
-    }
-
-    function setBtnClass() {
-
     }
 </script>
 

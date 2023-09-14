@@ -5,9 +5,8 @@
     import inView from "$actions/inView.js";
     import { activeSection } from "$stores/misc.js";
     import Icon from "$components/helpers/Icon.svelte";
-    import { fly, fade } from 'svelte/transition';
+    import { fade } from 'svelte/transition';
 
-    const copy = getContext("copy");
     let steps = [0];
 	let value;
     let id = "intro";

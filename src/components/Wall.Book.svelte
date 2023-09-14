@@ -2,7 +2,6 @@
     import AddButton from "$components/AddButton.svelte";
     import { stepData } from "$stores/misc.js";
     import { Image } from "svelte-lazy-loader";
-    import * as d3 from "d3";
 
     export let book;
     export let index;
@@ -11,7 +10,6 @@
 
     let w;
     let h; 
-    let bookActive;
 
     function checkData(data, id) {
         if (data[1] !== undefined) {
@@ -37,8 +35,8 @@
             transparent 16px, 
             rgba(255, 255, 255, 0.25) 17px,
             transparent 22px)">
-            <!-- <img src ="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}"> -->
-            <Image loading="lazy" src="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" />
+            <img src ="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}">
+            <!-- <Image loading="lazy" src="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" /> -->
         </div>
         <div class="marker">{book.year}</div>
         {#if bookAddable == true}
@@ -59,9 +57,9 @@
             transparent 10px,
             transparent 12px, 
             rgba(255, 255, 255, 0.25) 14px,
-            transparent 18px),
-            url(assets/images/img_{book.ISBN}.jpg)">
-            <!-- <img src ="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}"> -->
+            transparent 18px)">
+            <img src ="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}">
+            <!-- <Image loading="lazy" src="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" /> -->
         </div>
         {#if bookAddable == true}
             <AddButton />
@@ -116,7 +114,12 @@
         filter: contrast(100%) brightness(100%) saturate(100%);
         transition: all 0.25s ease-in;
         transform: scale(1);
+        pointer-events: all;
     }
+    /* .book .img-wrapper:hover {
+        transform: scale(3);
+        z-index: 1000;
+    } */
     .book.active .img-wrapper {
         outline: 3px solid var(--romance-pink);
         box-shadow: 0 0 8px 5px var(--romance-pink);

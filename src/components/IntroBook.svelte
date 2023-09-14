@@ -3,23 +3,15 @@
     const copy = getContext("copy");
 	import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
-	import wordmark from "$svg/wordmark.svg";
 
 	let y;
 	let w;
 	let h;
-	let scrollPercent;
 	let bookTranslate;
 	let mainRotate;
-	let frontTranslate;
 	let frontRotate;
 	export let value;
 	export let bookMin;
-
-	const progress = tweened(0, {
-		duration: 400,
-		easing: cubicOut
-	});
 
 	function computePercentage(y) {
 		if (y >= 2) {
@@ -33,7 +25,6 @@
 		}
 	}
 
-    $: open = y < 10 ? false : true;
 	$: y, computePercentage(y);
 </script>
 

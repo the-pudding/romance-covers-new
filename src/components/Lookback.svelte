@@ -1,7 +1,7 @@
 <script>
     import { getContext, onMount } from "svelte";
     import lookbackData from "$data/lookback.csv";
-    import * as d3 from "d3";
+    import {select, selectAll}from "d3-selection";
 
     import Wall from "$components/Wall.svelte";
     import Book from "$components/Wall.Book.svelte";
@@ -35,38 +35,38 @@
     }
 
     onMount(() => {
-		lookbackDoc = d3.selectAll(".lookback-doc");
-        lookbackClinch = d3.selectAll(".lookback-clinch");
-        lookbackTravel = d3.selectAll(".lookback-travel");
-        smallChartRaunchiness = d3.selectAll(".small-chart-raunchiness");
-        smallChartIllustration = d3.selectAll(".small-chart-illustration");
-        smallChartRace = d3.selectAll(".small-chart-race");
+		lookbackDoc = selectAll(".lookback-doc");
+        lookbackClinch = selectAll(".lookback-clinch");
+        lookbackTravel = selectAll(".lookback-travel");
+        smallChartRaunchiness = selectAll(".small-chart-raunchiness");
+        smallChartIllustration = selectAll(".small-chart-illustration");
+        smallChartRace = selectAll(".small-chart-race");
     })
 
     $: if (lookbackDoc !== undefined && lookbackTravel !== undefined && lookbackClinch !== undefined) {
         lookbackDoc
             .on("mouseover", function() {
-                d3.selectAll("#lookback .img-wrapper").classed("highlight", false);
-                d3.selectAll("#book_0 .img-wrapper, #book_1 .img-wrapper, #book_2 .img-wrapper").classed("highlight", true);
+                selectAll("#lookback .img-wrapper").classed("highlight", false);
+                selectAll("#book_0 .img-wrapper, #book_1 .img-wrapper, #book_2 .img-wrapper").classed("highlight", true);
             })
             .on("mouseout", function() {
-                d3.selectAll("#lookback .img-wrapper").classed("highlight", false);
+                selectAll("#lookback .img-wrapper").classed("highlight", false);
             })
         lookbackTravel
             .on("mouseover", function() {
-                d3.selectAll("#lookback .img-wrapper").classed("highlight", false);
-                d3.selectAll("#book_2 .img-wrapper").classed("highlight", true);
+                selectAll("#lookback .img-wrapper").classed("highlight", false);
+                selectAll("#book_2 .img-wrapper").classed("highlight", true);
             })
             .on("mouseout", function() {
-                d3.selectAll("#lookback .img-wrapper").classed("highlight", false);
+                selectAll("#lookback .img-wrapper").classed("highlight", false);
             })
         lookbackClinch
             .on("mouseover", function() {
-                d3.selectAll("#lookback .img-wrapper").classed("highlight", false);
-                d3.selectAll("#book_3 .img-wrapper, #book_4 .img-wrapper").classed("highlight", true);
+                selectAll("#lookback .img-wrapper").classed("highlight", false);
+                selectAll("#book_3 .img-wrapper, #book_4 .img-wrapper").classed("highlight", true);
             })
             .on("mouseout", function() {
-                d3.selectAll("#lookback .img-wrapper").classed("highlight", false);
+                selectAll("#lookback .img-wrapper").classed("highlight", false);
             })
 
     }
@@ -74,34 +74,34 @@
     $: if (smallChartRaunchiness !== undefined && smallChartIllustration !== undefined && smallChartRace != undefined) {
         smallChartRaunchiness
             .on("mouseover", function() {
-                d3.selectAll(".top-wrapper.illustration, .top-wrapper.race").style("opacity", 0.25);
+                selectAll(".top-wrapper.illustration, .top-wrapper.race").style("opacity", 0.25);
             })
             .on("mouseout", function() {
-                d3.selectAll(".top-wrapper").style("opacity", 1);
+                selectAll(".top-wrapper").style("opacity", 1);
             })
         smallChartIllustration
             .on("mouseover", function() {
-                d3.selectAll(".top-wrapper.raunchiness, .top-wrapper.race").style("opacity", 0.25);
+                selectAll(".top-wrapper.raunchiness, .top-wrapper.race").style("opacity", 0.25);
             })
             .on("mouseout", function() {
-                d3.selectAll(".top-wrapper").style("opacity", 1);
+                selectAll(".top-wrapper").style("opacity", 1);
             })
         smallChartRace
             .on("mouseover", function() {
-                d3.selectAll(".top-wrapper.illustration, .top-wrapper.raunchiness").style("opacity", 0.25);
+                selectAll(".top-wrapper.illustration, .top-wrapper.raunchiness").style("opacity", 0.25);
             })
             .on("mouseout", function() {
-                d3.selectAll(".top-wrapper").style("opacity", 1);
+                selectAll(".top-wrapper").style("opacity", 1);
             })
     }
 
     function handleEnter(){
-        let el = d3.select(this);
+        let el = select(this);
         let img = el.select(".book .img-wrapper");
         img.classed("highlight", true)
     }
     function handleExit(){
-        let el = d3.select(this);
+        let el = select(this);
         let img = el.select(".book .img-wrapper");
         img.classed("highlight", false)
     }
@@ -206,13 +206,14 @@
         width: 33%;
         margin: auto;
         height: 10rem;
+        z-index: 1;
     }
     :global(#lookback .book) {
         margin: 0.5rem 0 0 0.25rem;
         transition: 0.125s all linear;
     }
     :global(#lookback .img-wrapper.highlight) {
-        transform: scale(1.5) translate(0, -15%);
+        transform: scale(1.25) translate(0, -15%);
         transition: 0.125s all linear;
     }
     :global(#lookback .lookback-doc, #lookback .lookback-clinch, #lookback .lookback-travel, #lookback .small-chart-raunchiness, #lookback .small-chart-illustration, #lookback .small-chart-race) {
@@ -258,7 +259,7 @@
             width: 30rem;
         }
         :global(#lookback .img-wrapper.highlight) {
-            transform: scale(1.75) translate(0, -25%);
+            transform: scale(1.25) translate(0, 0);
             transition: 0.125s all linear;
         }
 	}

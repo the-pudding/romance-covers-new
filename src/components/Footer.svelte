@@ -1,6 +1,5 @@
 <script>
 	import { onMount } from "svelte";
-	import inView from "$actions/inView.js";
 	import wordmark from "$svg/wordmark.svg";
 
 	let localURL;
