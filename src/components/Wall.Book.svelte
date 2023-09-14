@@ -1,6 +1,7 @@
 <script>
     import AddButton from "$components/AddButton.svelte";
     import { stepData } from "$stores/misc.js";
+    import { Image } from "svelte-lazy-loader";
     import * as d3 from "d3";
 
     export let book;
@@ -35,9 +36,9 @@
             transparent 12px,
             transparent 16px, 
             rgba(255, 255, 255, 0.25) 17px,
-            transparent 22px),
-            url(assets/images/img_{book.ISBN}.jpg)">
+            transparent 22px)">
             <!-- <img src ="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}"> -->
+            <Image loading="lazy" src="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" />
         </div>
         <div class="marker">{book.year}</div>
         {#if bookAddable == true}
@@ -86,6 +87,11 @@
         box-shadow: -3px 3px 2px -2px  rgba(0, 0, 0, 0.125), inset -1px 1px 2px rgba(255, 255, 255, 0.5);
         transform: translate(0,0,0) perspective(8rem) rotateX(2deg);
         transform-style: preserve-3d;
+    }
+    :global(.img-wrapper img) {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
     }
     :global(#raunchiness .book.active .img-wrapper)  {
         opacity: 1;

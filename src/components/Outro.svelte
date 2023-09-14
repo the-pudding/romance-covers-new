@@ -36,7 +36,14 @@
         margin: 0 auto;
         line-height: 2;
     }
-
+    :global(#notes a) {
+        background-position: 0 1rem;
+        background-image: linear-gradient(180deg,transparent 0,var(--romance-pink-light) 0);
+    }
+    :global(#notes a:hover) {
+        background-position: 0 0;
+        background-image: linear-gradient(180deg,transparent 0,var(--romance-pink-light) 0);
+    }
     #notes h5 {
         max-width: 40rem;
         margin: 5rem auto 0 auto;

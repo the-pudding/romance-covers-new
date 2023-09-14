@@ -2,6 +2,7 @@
     import * as d3 from "d3";
     import { onMount } from "svelte";
     import { stepData, sliderVisible, sliderStore } from "$stores/misc.js";
+    import { lazy, lazyAll } from '$utils/lazyLoad.js';
     import Book from "$components/Wall.Book.svelte";
     import Shelf from "$components/Wall.Shelf.svelte";
 
@@ -92,7 +93,7 @@
                     {@const match = chunkWidths2.find((d) => d.year == year[0])}
                     <div class="yearChunk" id="chunk-{year[0]}"
                     style="width:{match.chunkWidth}px">
-                        <div class="books">
+                        <div class="books" use:lazyAll>
                             {#each year[1] as book, i}
                                 <Book book={book} index={i} wallH={wallH} />
                             {/each}

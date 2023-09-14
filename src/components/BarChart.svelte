@@ -36,7 +36,6 @@
     }
 
     $: groupedData = d3.groups(data, d => d.year);
-    console.log(pos)
 </script>
 
 <svelte:window bind:innerWidth={w} />
