@@ -1,33 +1,38 @@
 <script>
-	import wordmark from "$svg/wordmark.svg";
+	import logo from "$svg/logo.svg";
 </script>
 
 <header>
-	<div class="wordmark">
+	<div class="logo">
 		<a href="https://pudding.cool" aria-label="The Pudding" target="_self"
-			>{@html wordmark}</a
+			>{@html logo}</a
 		>
 	</div>
 </header>
 
 <style>
-	.wordmark {
-		max-width: 10em;
-		margin: 0 auto;
-		padding: 1em 0;
+	header {
+		position: absolute;
+		width: 2rem;
+		top: 0.75rem;
+		left: 1rem;
+	}
+	.logo {
+		width: 1.5rem;
+		padding: 0;
 	}
 
-	.wordmark a {
+	.logo a {
 		border: none;
 		display: block;
 		color: var(--color-fg);
 	}
 
-	.wordmark a:hover {
+	.logo a:hover {
 		background-color: transparent;
 	}
 
-	:global(.wordmark svg path) {
+	:global(.logo svg path) {
 		fill: currentColor;
 	}
 </style>

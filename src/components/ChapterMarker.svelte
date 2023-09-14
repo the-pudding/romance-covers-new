@@ -27,10 +27,16 @@
         let title = id == "race" ? "diversity" : id;
         return title
     }
+    import logo from "$svg/logo.svg";
 </script>
 
 <nav>
     <div class="top-nav">
+        <div class="logo">
+            <a href="https://pudding.cool" aria-label="The Pudding" target="_self"
+                >{@html logo}</a
+            >
+        </div>
         <div class="sect-btns">
             {#each sections as section, i}
                 {@const active = $activeSection == section ? "active" : ""}
@@ -88,6 +94,24 @@
         align-items: center;
         padding: 1rem 0 0 0;
         margin: 0 0 2rem 0;
+    }
+    .logo {
+        width: 1.5rem;
+        margin: -0.25rem 0 0 1rem;
+        transform: scale(1);
+        transition: 0.25s linear;
+    }
+    .logo:hover {
+        transform: scale(1.25);
+    }
+    .logo a {
+        border-bottom: none;
+    }
+    :global(.logo svg .st0) {
+        fill: var(--color-gray-800);
+    }
+    :global(.logo svg .st1) {
+        fill: rgba(0,0,0,0.25);
     }
     .sect-btns {
         margin: 0 auto;
@@ -189,6 +213,9 @@
         /* animation: pulse-animation 2s infinite; */
         transition: 0.25s linear;
         transform: scale(1);
+    }
+    .listBtn:hover {
+        transform: scale(1.25);
     }
     .count {
         position: absolute;

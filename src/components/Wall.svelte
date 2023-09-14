@@ -38,7 +38,7 @@
     // }
 
     onMount(() => {
-        console.log(d3.selectAll("#race #book_9781250801234"));
+        // console.log(d3.selectAll("#race #book_9781250801234"));
 	})
 
     function shiftX(value) {
@@ -46,7 +46,8 @@
             if (value == 0) {
                 xShift = 0; 
             } else if (copy[value] !== 0 && d3.select(`#${section} #book_${copy[value].scrollToId}`).node() !== null) {
-                let sel = d3.select(`#book_${copy[value].scrollToId}`).node().getBoundingClientRect().x;
+                let sel = d3.select(`#${section} #book_${copy[value].scrollToId}`).node().getBoundingClientRect().x;
+                console.log(sel)
                 // console.log(xShift, (sel-margins))
                 xShift = xShift + sel - margins
             }

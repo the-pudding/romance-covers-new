@@ -227,12 +227,12 @@
         border-radius: 50%;
         color: var(--color-gray-800);
         pointer-events: auto;
-        background-color: var(--romance-bg-blue);
+        background-color: var(--romance-bg-pink);
         transition: 0.25s all linear;
     }
     li button:hover {
         transform: scale(1.125);
-        background-color: var(--romance-blue-light);;
+        background-color: var(--romance-pink-light);;
     }
     :global(li button svg) {
         pointer-events: none;

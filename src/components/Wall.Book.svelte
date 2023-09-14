@@ -90,24 +90,18 @@
     :global(#raunchiness .book.active .img-wrapper)  {
         opacity: 1;
         filter: contrast(100%) brightness(100%) saturate(100%);
-        outline: 3px solid var(--romance-pink-light);
-        box-shadow: 0 0 30px 5px rgba(0,0,0,0.25);
         transform: scale(1.125);
         transition: all 0.25s ease-in;
     }
     :global(#illustration .book.active .img-wrapper)  {
         opacity: 1;
         filter: contrast(100%) brightness(100%) saturate(100%);
-        outline: 3px solid var(--romance-pink-light);
-        box-shadow: 0 0 30px 5px rgba(0,0,0,0.25);
         transform: scale(1.125);
         transition: all 0.25s ease-in;
     }
     :global(#race .book.active .img-wrapper)  {
         opacity: 1;
         filter: contrast(100%) brightness(100%) saturate(100%);
-        outline: 3px solid var(--romance-pink-light);
-        box-shadow: 0 0 30px 5px rgba(0,0,0,0.25);
         transform: scale(1.125);
         transition: all 0.25s ease-in;
     }
@@ -116,6 +110,10 @@
         filter: contrast(100%) brightness(100%) saturate(100%);
         transition: all 0.25s ease-in;
         transform: scale(1);
+    }
+    .book.active .img-wrapper {
+        outline: 3px solid var(--romance-pink);
+        box-shadow: 0 0 8px 5px var(--romance-pink);
     }
     /* :global(.book.active .img-wrapper) {
         outline: 3px solid var(--romance-yellow);
@@ -153,4 +151,10 @@
     :global(#race .book .marker) {
         background: var(--romance-teal-light);
     }
+
+    @media only screen and (min-width: 600px) {
+        :global(#raunchiness .book.active .img-wrapper, #illustration .book.active .img-wrapper, #race .book.active .img-wrapper)  {
+            transform: scale(1.25);
+        }
+	}
 </style>

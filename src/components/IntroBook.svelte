@@ -3,6 +3,7 @@
     const copy = getContext("copy");
 	import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
+	import wordmark from "$svg/wordmark.svg";
 
 	let y;
 	let w;
