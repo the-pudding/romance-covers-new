@@ -1,6 +1,6 @@
 <script>
     import {groups} from "d3-array";
-    import {select} from "d3-selection";
+    import {select, selectAll} from "d3-selection";
     import { sliderVisible, sliderStore } from "$stores/misc.js";
     import Book from "$components/Wall.Book.svelte";
     import Shelf from "$components/Wall.Shelf.svelte";
@@ -36,8 +36,17 @@
                 xShift = 0; 
             } else if (copy[value] !== 0 && select(`#${section} #book_${copy[value].scrollToId}`).node() !== null) {
                 let sel = select(`#${section} #book_${copy[value].scrollToId}`).node().getBoundingClientRect().x;
-                // console.log(xShift, (sel-margins))
-                xShift = xShift + sel - margins
+                let blur = selectAll(".year-wrapper");
+                console.log((sel - margins), w)
+                if (Math.abs(sel - margins) > w/1.25) {
+                    blur.classed("blur", true);
+                }
+                setTimeout(() => {
+                    xShift = xShift + sel - margins
+                }, 500)
+                setTimeout(() => {
+                    blur.classed("blur", false)
+                }, 1500)
             }
         }
     }
@@ -50,10 +59,19 @@
                 let year = d[0];
                 let chunkLength = d[1].length;
                 let remainder = chunkLength % 5;
-                let bookCols = remainder == 1 ? Math.round((chunkLength)/bookRows) + 1 : Math.round((chunkLength)/bookRows);
+                let bookCols = setBookCols(remainder, chunkLength, bookRows)
                 let chunkWidth = bookCols == 0 ? bookWidth + 8 : (bookCols * (bookWidth) + 8);
                 chunkWidths.push({year: year, chunkWidth: chunkWidth});
             });
+        }
+
+        function setBookCols(remainder, chunkLength, bookRows) {
+            if (remainder == 1 || remainder == 2) {
+                return Math.round((chunkLength)/bookRows) + 1
+            } else {
+                return Math.round((chunkLength)/bookRows)
+            }
+
         }
     }
     
@@ -103,6 +121,10 @@
 </section>
 
 <style>
+    :global(.blur) {
+        filter: blur(1px);
+        transition: 1s ease-in-out;
+    }
     .overflow-wrap {
         display: flex;
         flex-direction: row;

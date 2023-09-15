@@ -40,6 +40,7 @@
 	},
 	"browserslist": "> 0.5%, last 4 versions, not ie <= 11, not ie_mob <= 11",
 	"dependencies": {
+		"@leveluptuts/svelte-fit": "^1.0.3",
 		"image-downloader": "^4.3.0",
 		"svelte-lazy-loader": "^1.0.0"
 	}

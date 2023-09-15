@@ -74,6 +74,7 @@
 	$: activeSection, swapBarData($activeSection)
 	$: readingListVisible, setScroll($readingListVisible)
 	$: bookMin = Math.min(w,h);
+	$: console.log(bookMin)
 </script>
 
 <svelte:window bind:outerWidth={w} bind:outerHeight={h} bind:scrollY={scrollY} />

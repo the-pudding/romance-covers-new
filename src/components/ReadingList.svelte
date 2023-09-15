@@ -46,8 +46,10 @@
             $readingListVisible = false;
         }, 500);
     }
+    $: console.log($readingListVisible, pos)
 </script>
 
+{#if pos == "overlay"}
 <section id="reading-list-{pos}">
     {#if $readingListVisible && pos == "overlay"}
         <div class="paper"
@@ -94,12 +96,58 @@
                 <Bookmark />
             {/if}
         </div>
-    {/if}
-    {#if $readingListVisible && pos == "overlay"}
         <div class="bg" in:fade={{ delay: 300 }} out:fade={{ delay: 300 }}
         on:click={handleClickOut}></div>
     {/if}
 </section>
+{:else if pos == "inline"}
+<section id="reading-list-inline">
+    <div class="paper"
+        in:fly={{ y: 2000, duration: 1000 }}
+        out:fly={{ y: 2000, duration: 1000 }}>
+        <h3>Your Reading List</h3>
+        {#if $readingList.length > 0}
+            <button class="clear-list"
+                on:click={clearList}>Clear list</button>
+                <ul>
+                    {#each $readingList as book, i (book.id)}
+                        <div class="flip-div" animate:flip={{duration:1000, delay:0}}> 
+                            {#if book.id !== undefined && $readingList.find(d => d.id == book.id) !== undefined}  
+                                <li id="{findBookMatch(book.id, "img")}" >    
+                                    <img src ="assets/images/img_{findBookMatch(book.id, "img")}.jpg" alt="a thumbnail book cover of {findBookMatch(book.id, "title")}">
+                                    <div class="details">
+                                        <p class="title">{findBookMatch(book.id, "title")}</p>
+                                        <p class="author">By {findBookMatch(book.id, "author")}</p>
+                                        <div class="link-outs">
+                                            <p class="list-link library">
+                                                <span><Icon name="book" /></span>
+                                                <a href="https://www.worldcat.org/search?q=bn%3A{book.id}">
+                                                    Check out from your library
+                                                </a>
+                                            </p>
+                                            <p class="list-link bookshop">
+                                                <span><Icon name="shopping-bag" /></span>
+                                                <a href="https://bookshop.org/book/{book.id}">
+                                                    Buy from Bookshop
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <button class="remove"
+                                        on:click={handleBtnClick}>
+                                        <Icon name="x" />
+                                    </button>
+                                </li> 
+                            {/if}
+                        </div>
+                    {/each}
+                </ul>
+        {:else}
+            <Bookmark />
+        {/if}
+    </div>
+</section>
+{/if}
 
 <style>
     #reading-list-overlay {
@@ -150,6 +198,7 @@
     }
     #reading-list-inline .paper {
         position: relative;
+        max-height: 40rem;
         margin: 0 auto;
         transform: translate(0,0);
         left: 0;
@@ -179,10 +228,15 @@
     li {
         display: flex;
         flex-direction: row;
-        border-bottom: 1px solid var(--color-gray-100);
         padding: 1rem;
         justify-content: space-between;
         align-items: start;
+    }
+    .flip-div {
+        border-bottom: 1px solid var(--color-gray-100);
+    }
+    .flip-div:last-of-type {
+        border-bottom: none; 
     }
     .details {
         width: calc(100% - 10rem);

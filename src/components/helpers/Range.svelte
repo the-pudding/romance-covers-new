@@ -1,12 +1,12 @@
 <script>
-	import { sliderStore } from "$stores/misc.js";
+	import { sliderStore, activeSection } from "$stores/misc.js";
 	import Icon from "$components/helpers/Icon.svelte";
 	import { range, format } from "d3";
 	export let min = 0;
 	export let max = 100;
 	export let step = 1;
 	export let showTicks = false;
-	export let value = max;
+	export let value;
 	export let label = "";
 
 	const getDecimalCount = (value) => {

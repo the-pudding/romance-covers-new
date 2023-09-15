@@ -1,8 +1,6 @@
 <script>
     import { getContext, onMount } from "svelte";
     const copy = getContext("copy");
-	import { tweened } from 'svelte/motion';
-	import { cubicOut } from 'svelte/easing';
 
 	let y;
 	let w;
@@ -36,7 +34,7 @@
 			<div class="main" style="transform:rotate3d(1,1,0,{mainRotate}deg)">
 				<div class="book-front" style="transform:translate3d(0,0,25px) rotate3d(0,1,0,-{frontRotate}deg)">
 					<div class="book-cover">
-						<h1>What does a happily ever after look like?</h1>
+						<h1 >What does a happily ever after look like?</h1>
 						<p class="byline">Alice Liang</p>
 					</div>
 					<div class="book-cover-back">
@@ -84,10 +82,11 @@
 		text-align: center;
     }
     .credit a {
-        color: var(--color-gray-800)
+        color: var(--color-gray-800);
+		background-position: 0 0.9rem;
     }
-    .credit a:hover {
-        color: var(--romance-pink)
+	.credit a:hover {
+		background-position: 0 0;
     }
 	#book {
 		margin: 0 auto;
@@ -152,7 +151,7 @@
 		font-style: normal;
 		text-transform: uppercase;
 		color: #f7d92d;
-		font-size: clamp(var(--32px), 6vw, var(--48px));
+		font-size: clamp(var(--64px), 1vh, var(--32px));
 		line-height: 2;
 		margin: -0.25rem auto 0 auto;
 		padding: 0;

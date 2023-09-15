@@ -34,8 +34,9 @@
             transparent 12px,
             transparent 16px, 
             rgba(255, 255, 255, 0.25) 17px,
-            transparent 22px)">
-            <img src ="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}">
+            transparent 22px),
+            url(assets/images/img_{book.ISBN}.jpg)">
+            <!-- <img src ="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}"> -->
             <!-- <Image loading="lazy" src="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" /> -->
         </div>
         <div class="marker">{book.year}</div>
@@ -57,8 +58,9 @@
             transparent 10px,
             transparent 12px, 
             rgba(255, 255, 255, 0.25) 14px,
-            transparent 18px)">
-            <img src ="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}">
+            transparent 18px),
+            url(assets/images/img_{book.ISBN}.jpg)">
+            <!-- <img src ="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}"> -->
             <!-- <Image loading="lazy" src="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" /> -->
         </div>
         {#if bookAddable == true}
@@ -95,19 +97,19 @@
         opacity: 1;
         filter: contrast(100%) brightness(100%) saturate(100%);
         transform: scale(1.125);
-        transition: all 0.25s ease-in;
+        transition: all 0.25s ease-in 1s;
     }
     :global(#illustration .book.active .img-wrapper)  {
         opacity: 1;
         filter: contrast(100%) brightness(100%) saturate(100%);
         transform: scale(1.125);
-        transition: all 0.25s ease-in;
+        transition: all 0.25s ease-in 1s;
     }
     :global(#race .book.active .img-wrapper)  {
         opacity: 1;
         filter: contrast(100%) brightness(100%) saturate(100%);
         transform: scale(1.125);
-        transition: all 0.25s ease-in;
+        transition: all 0.25s ease-in 1s;
     }
     .book .img-wrapper {
         opacity: 1;

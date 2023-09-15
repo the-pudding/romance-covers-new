@@ -5,7 +5,9 @@
     const sections = ["intro", "raunchiness", "illustration", "race", "methods"];
     import {select} from "d3-selection";
     import Range from "$components/helpers/Range.svelte";
+    import logo from "$svg/logo.svg";
 	let sliderVal;
+    let rangeStart;
 
     function handleListToggle(initState) {
         readingListVisible.set(!$readingListVisible);
@@ -27,7 +29,13 @@
         let title = id == "race" ? "diversity" : id;
         return title
     }
-    import logo from "$svg/logo.svg";
+    function setRangeVal() {
+        if ($activeSection == "raunchiness") { rangeStart = 106.82}
+        else if ($activeSection == "illustration") { rangeStart = 82}
+        else if ($activeSection == "race") { rangeStart = 100}
+        else { rangeStart = 0}
+    }
+    $: $activeSection, setRangeVal() 
 </script>
 
 <nav>
@@ -70,8 +78,10 @@
     {#if $sliderVisible}
         <div id="range-slider" transition:fade={{ delay: 250, duration: 300 }}>
             <p><Icon name="move-left" /> Move left</p>
-            <Range min={0} max={100} step={1} showTicks={false} bind:sliderVal />
-            <p>Move right <Icon name="move-right" /></p>
+            {#if rangeStart !== undefined}
+                <Range value={rangeStart} min={0} max={100} step={1} showTicks={false} bind:sliderVal />
+                <p>Move right <Icon name="move-right" /></p>
+            {/if}
         </div>
     {/if}
 </nav>
