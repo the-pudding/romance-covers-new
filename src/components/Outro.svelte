@@ -36,11 +36,11 @@
         margin: 0 auto;
         line-height: 2;
     }
-    :global(#notes a) {
-        background-position: 0 1rem;
+    :global(#notes a, #methods a) {
+        background-position: 0 0 1.125rem;
         background-image: linear-gradient(180deg,transparent 0,var(--romance-pink-light) 0);
     }
-    :global(#notes a:hover) {
+    :global(#notes a:hover, #methods a:hover) {
         background-position: 0 0;
         background-image: linear-gradient(180deg,transparent 0,var(--romance-pink-light) 0);
     }
