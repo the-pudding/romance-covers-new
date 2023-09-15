@@ -12,7 +12,7 @@
 
 <section id="methods"
     use:inView
-    on:enter={() => setSection("outro")}>
+    on:enter={() => setSection("methods")}>
     <Prose copy={copy.outro} />
     {#if $readingList.length > 0}
         <ReadingList data={data} pos={"inline"}/>

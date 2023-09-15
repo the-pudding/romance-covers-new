@@ -25,7 +25,7 @@
             } else if (id == "illustration") {
                 nextSection = "race"
             } else if (id == "race") {
-                nextSection = "outro"
+                nextSection = "methods"
             }
             activeSection.set(nextSection)
         } else if (scrollDir == "up") {
@@ -100,9 +100,6 @@
 	}
     :global(#intro a) {
 		background-image: linear-gradient(180deg,transparent 0,var(--romance-pink-light) 0);
-	}
-    :global(#outro a) {
-		background-image: linear-gradient(180deg,transparent 0,var(--romance-purple-light) 0);
 	}
     :global(section a:hover) {
 		background-position: 0 0;

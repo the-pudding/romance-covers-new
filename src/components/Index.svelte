@@ -87,7 +87,7 @@
 	<Chapter id={"illustration"} data={illustrationData} copyBlock={copy.illustrationText} copyScroll={copy.illustrationScroll} pos={"overlay"} />
 	<Chapter id={"race"} data={raceData} copyBlock={copy.raceText} copyScroll={copy.raceScroll} pos={"overlay"} />
 </div>
-{#if $activeSection !== "intro" && $activeSection !== "outro" && $activeSection !== null}
+{#if $activeSection !== "intro" && $activeSection !== "methods" && $activeSection !== null}
 	<section id="barChart" in:fly={{ y: 200, duration: 2000 }} out:fly={{ y: 200, duration: 2000 }}>
 		<BarChart data={barData} color={barColor} highlightColor={barColorHighlight} pos={"overlay"} yearTotals={yearTotals}/>
 		<div class="shield"></div>
