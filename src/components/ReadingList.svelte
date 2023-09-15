@@ -61,7 +61,7 @@
                 on:click={clearList}>Clear list</button>
                 <ul>
                     {#each $readingList as book, i (book.id)}
-                        <div animate:flip={{duration:1000, delay:0}}> 
+                        <div class="flip-div" animate:flip={{duration:1000, delay:0}}> 
                             {#if book.id !== undefined && $readingList.find(d => d.id == book.id) !== undefined}  
                                 <li id="{findBookMatch(book.id, "img")}" >    
                                     <img src ="assets/images/img_{findBookMatch(book.id, "img")}.jpg" alt="a thumbnail book cover of {findBookMatch(book.id, "title")}">
