@@ -72,7 +72,6 @@
 	}
 	function calcMinDim(w, h) {
 		if (w !== undefined && h !== undefined) {
-			console.log(Math.min(w,h))
 			if (Math.min(w,h) > 400) {
 				return Math.min(w, h);
 			} else {

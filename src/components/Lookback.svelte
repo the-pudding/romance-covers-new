@@ -3,12 +3,10 @@
     import lookbackData from "$data/lookback.csv";
     import {select, selectAll}from "d3-selection";
 
-    import Wall from "$components/Wall.svelte";
     import Book from "$components/Wall.Book.svelte";
     import Shelf from "$components/Wall.Shelf.svelte";
     import Prose from "$components/Prose.svelte";
     import SmallMultiples from "$components/SmallMultiples.svelte";
-	import { Dice4 } from "lucide-svelte";
 
     const copy = getContext("copy");
     let bookRows = 5;
@@ -22,6 +20,7 @@
     let smallChartRaunchiness;
     let smallChartIllustration;
     let smallChartRace;
+    let introText;
     export let bookMin;
 
 
@@ -105,14 +104,40 @@
         let img = el.select(".book .img-wrapper");
         img.classed("highlight", false)
     }
+    function setText() {
+        if (copy !== undefined) {
+			if (bookMin > 950) {
+				introText = undefined;
+			} else if (bookMin > 750) {
+				introText = copy.intro.slice(2,4);
+			} else if (bookMin > 600) {
+				introText = copy.intro.slice(1,4);
+			} else {
+				introText = copy.intro.slice(2,4);
+                let splitText = copy.intro[0];
+				splitText = splitText.value.split(/(My)/);
+                splitText = splitText[1].concat("", splitText[2])
+                let splitTextArr = [{type: "text", value: splitText}]
+                introText = splitTextArr.concat(introText)
+			}
+		}
+    }
+
+    $: bookMin, setText();
 </script>
 
 <section id="lookback">
     <!-- This component handles the body copy. It expects and iteratible array of paragraphs 
         that is pulled from the Google Doc. Right now, it is pulling from the ".lookBack" section.-->
-    {#if bookMin < 700}
+    {#if introText !== undefined}
         <div class="prose">
-            <p>{@html copy.intro[1].value}</p>
+            {#if Array.isArray(introText)}
+            {#each introText as text, i}
+                <p>{@html text.value}</p>
+            {/each}
+            {:else}
+                <p>{@html introText}</p>
+            {/if}
         </div>
     {/if}
     <Prose copy={copy.lookBack} />

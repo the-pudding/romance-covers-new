@@ -9,6 +9,8 @@
 	let bookTranslate;
 	let mainRotate;
 	let frontRotate;
+	let pageOneText;
+	let pageTwoText;
 	export let value;
 	export let bookMin;
 
@@ -23,12 +25,35 @@
 			frontRotate = y/h*180;
 		}
 	}
+	function setBookText() {
+		if (copy !== undefined) {
+			if (bookMin > 950) {
+				pageOneText = copy.intro.slice(0,2);
+				pageTwoText = copy.intro.slice(2,4);
+			} else if (bookMin > 750) {
+				pageOneText = copy.intro.slice(0,1);
+				pageTwoText = copy.intro.slice(1,2);
+			} else if (bookMin > 600) {
+				pageOneText = copy.intro[0];
+				pageOneText = pageOneText.value.split(/(My)/);
+				let pageTwoText1 = pageOneText[1];
+				let pageTwoText2 = pageOneText[2];
+				pageOneText = pageOneText[0];
+				pageTwoText = pageTwoText1.concat("", pageTwoText2)
+			} else {
+				pageOneText = copy.intro[0];
+				pageOneText = pageOneText.value.split(/(My)/);
+				pageOneText = pageOneText[0];
+				pageTwoText = '';
+			}
+		}
+	}
 
 	$: y, computePercentage(y);
-	$: console.log(bookMin)
+	$: bookMin, setBookText();
 </script>
 
-<svelte:window bind:outerWidth={w} bind:outerHeight={h} bind:scrollY={y}/>
+<svelte:window bind:innerWidth={w} bind:innerHeight={h} bind:scrollY={y}/>
 
 <section id="intro-book">
 	{#if w !== undefined && h !== undefined}
@@ -41,14 +66,28 @@
 					</div>
 					<div class="book-cover-back">
 						<div class="book-cover-back-indent">
-							<p>{@html copy.intro[0].value}</p>
+							{#if pageOneText !== undefined}
+								{#if Array.isArray(pageOneText)}
+								{#each pageOneText as text, i}
+									<p>{@html text.value}</p>
+								{/each}
+								{:else}
+									<p>{@html pageOneText}</p>
+								{/if}
+							{/if}
 						</div>
 					</div>
 				</div>
 				<div class="book-page">
 					<div id="page-1" class="page">
-						{#if bookMin > 700}
-							<p>{@html copy.intro[1].value}</p>
+						{#if pageTwoText !== undefined}
+							{#if Array.isArray(pageTwoText)}
+							{#each pageTwoText as text, i}
+								<p>{@html text.value}</p>
+							{/each}
+							{:else}
+								<p>{@html pageTwoText}</p>
+							{/if}
 						{/if}
 					</div>
 				</div>
@@ -191,11 +230,11 @@
 		margin-top: 1rem;
 		margin-left: 1rem;
 		box-shadow: inset -3px 0 10px rgba(0,0,0,0.1);
-		padding: 3rem 2rem;
+		padding: 2rem 1rem;
 	}
 
 	.book-cover-back-indent p{
-		font-size: var(--16px);
+		font-size: var(--14px);
 		line-height: 1.65;
 		margin-bottom: 1rem;
 		text-align: left;
@@ -312,6 +351,12 @@
 		}
 		.book-cover .byline {
 			font-size: var(--24px);
+		}
+		.book-cover-back-indent {
+			padding: 3rem 2rem;
+		}
+		.book-cover-back-indent p {
+			font-size: var(--16px);
 		}
 	}
 	@media only screen and (min-width: 800px) and (min-height: 600px) {
