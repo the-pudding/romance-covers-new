@@ -1,5 +1,6 @@
 <script>
-    import { getContext, onMount } from "svelte";
+    import { getContext } from "svelte";
+	import { fit } from '@leveluptuts/svelte-fit'
     const copy = getContext("copy");
 
 	let y;
@@ -24,6 +25,7 @@
 	}
 
 	$: y, computePercentage(y);
+	$: console.log(bookMin)
 </script>
 
 <svelte:window bind:outerWidth={w} bind:outerHeight={h} bind:scrollY={y}/>
@@ -33,8 +35,8 @@
 		<div id="book" style="transform:translate3d({bookTranslate}%,0,0); height:{bookMin/1.5}px; width:{bookMin/1.5/1.475}px" >
 			<div class="main" style="transform:rotate3d(1,1,0,{mainRotate}deg)">
 				<div class="book-front" style="transform:translate3d(0,0,25px) rotate3d(0,1,0,-{frontRotate}deg)">
-					<div class="book-cover">
-						<h1 >What does a happily ever after look like?</h1>
+					<div class="book-cover" style={"width: 100%; height: 100%;"}>
+						<h1 use:fit>{@html copy.title}</h1>
 						<p class="byline">Alice Liang</p>
 					</div>
 					<div class="book-cover-back">
@@ -143,6 +145,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
+		padding: 0.5rem;
 		box-shadow: -15px 15px 20px -3px  rgba(0, 0, 0, 0.125), inset -1px 1px 2px rgba(255, 255, 255, 0.5);
 	}
 	.book-cover h1 {
@@ -151,24 +154,25 @@
 		font-style: normal;
 		text-transform: uppercase;
 		color: #f7d92d;
-		font-size: clamp(var(--64px), 1vh, var(--32px));
+		font-size: var(--24px);
 		line-height: 2;
-		margin: -0.25rem auto 0 auto;
-		padding: 0;
+		margin: -0.5rem auto 0 auto;
+		padding: 0 0 5rem 0;
 		text-align: center;
-		width: 95%;
-		/* text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.125); */
+		width: 100%;
+		text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.125);
 	}
 	.book-cover .byline {
 		font-family: var(--serif-display);
+		position: absolute;
+		bottom: 0.5rem;
 		/* font-weight: 900; */
 		font-style: normal;
 		text-align: center;
-		width: 95%;
-		font-size: var(--24px);
+		width: 100%;
+		font-size: var(--18px);
 		color: #f7d92d;
-		margin: 1.5rem auto 0 auto;
-		padding: 0 0 1.5rem 0;
+		margin: 0;
 	}
 	.book-cover-back{
 		width: 100%;
@@ -294,40 +298,42 @@
 	}
 
 	/* MEDIA QUERIES */
-	@media only screen and (min-width: 400px) {
+	@media only screen and (min-width: 400px) and (min-height: 200px) {
 		.book-cover h1 {
-			margin: -0.25rem auto 0 auto;
+			font-size: var(--24px);
 		}
 		.book-cover .byline {
-			font-size: var(--28px);
-			margin: 1.5rem auto 0 auto;
+			font-size: var(--18px);
 		}
 	}
-	@media only screen and (min-width: 600px) {
+	@media only screen and (min-width: 600px) and (min-height: 400px) {
 		.book-cover h1 {
-			margin: -0.25rem auto 0 auto;
+			font-size: var(--40px);
 		}
 		.book-cover .byline {
-			font-size: var(--32px);
-			margin: 4.25rem auto 0 auto;
+			font-size: var(--24px);
 		}
 	}
-	@media only screen and (min-width: 800px) {
+	@media only screen and (min-width: 800px) and (min-height: 600px) {
+		.book-cover {
+			padding: 1rem;
+		}
 		.book-cover h1 {
-			margin: 0.5rem auto 0 auto;
+			font-size: var(--56px);
+			margin: -1.5rem 0 0 0;
 		}
 		.book-cover .byline {
 			font-size: var(--36px);
-			margin: 4.25rem auto 0 auto;
+			bottom: 1rem;
 		}
 	}
-	@media only screen and (min-width: 1000px) {
+	@media only screen and (min-width: 1000px) and (min-height: 1000px) {
 		.book-cover h1 {
-			margin: -0.5rem auto 0 auto;
+			font-size: var(--56px);
+			margin: -2rem auto 0 auto;
 		}
 		.book-cover .byline {
 			font-size: var(--44px);
-			margin: 1rem auto 0 auto;
 		}
 	}
 </style>

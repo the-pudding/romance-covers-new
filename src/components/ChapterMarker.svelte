@@ -30,12 +30,17 @@
         return title
     }
     function setRangeVal() {
-        if ($activeSection == "raunchiness") { rangeStart = 106.82}
-        else if ($activeSection == "illustration") { rangeStart = 82}
-        else if ($activeSection == "race") { rangeStart = 100}
-        else { rangeStart = 0}
+        if ($sliderVisible) {
+            setTimeout(() => {
+                if ($activeSection == "raunchiness") { rangeStart = 106.2 }
+                else if ($activeSection == "illustration") { rangeStart = 82 }
+                else if ($activeSection == "race") { rangeStart = 100 }
+                else {rangeStart = 0}
+            }, 5000)
+        }
     }
     $: $activeSection, setRangeVal() 
+    // $: console.log($activeSection, rangeStart)
 </script>
 
 <nav>
@@ -76,7 +81,9 @@
         </button>
     </div>
     {#if $sliderVisible}
-        <div id="range-slider" transition:fade={{ delay: 250, duration: 300 }}>
+        <div id="range-slider" 
+            in:fade={{ delay: 250, duration: 300 }}
+            out:fade={{ delay: 0, duration: 0 }}>
             <p><Icon name="move-left" /> Move left</p>
             {#if rangeStart !== undefined}
                 <Range value={rangeStart} min={0} max={100} step={1} showTicks={false} bind:sliderVal />
@@ -106,10 +113,12 @@
         margin: 0 0 2rem 0;
     }
     .logo {
-        width: 1.5rem;
-        margin: -0.25rem 0 0 1rem;
+        width: 1.25rem;
         transform: scale(1);
         transition: 0.25s linear;
+        position: absolute;
+        left: 0.75rem;
+        top: 0.5rem;
     }
     .logo:hover {
         transform: scale(1.25);

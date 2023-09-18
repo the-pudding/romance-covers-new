@@ -8,6 +8,7 @@
     export let data;
     export let copy;
 	export let section;
+	export let scrollDir;
 
 	function setStepData(value) {
         let localStepData = [section, (copy[value])];
@@ -29,7 +30,7 @@
 
 <section id="scrolly">
 	<div class="sticky">
-        <Wall data={data} value={value} section={section} copy={copy}/>
+        <Wall data={data} value={value} section={section} copy={copy} scrollDir={scrollDir}/>
     </div>
 	<Scrolly bind:value>
         {#if copy}
@@ -46,7 +47,7 @@
 <style>
 	.sticky {
 		position: sticky;
-		top: 5rem;
+		top: 6rem;
 		transition: all 1s;
 		height: 100vh;
         z-index: 1;

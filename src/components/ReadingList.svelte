@@ -46,7 +46,6 @@
             $readingListVisible = false;
         }, 500);
     }
-    $: console.log($readingListVisible, pos)
 </script>
 
 {#if pos == "overlay"}

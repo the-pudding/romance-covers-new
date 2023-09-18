@@ -1,7 +1,7 @@
 <script>
     import {groups} from "d3-array";
     import {select, selectAll} from "d3-selection";
-    import { sliderVisible, sliderStore } from "$stores/misc.js";
+    import { activeSection, sliderVisible, sliderStore } from "$stores/misc.js";
     import Book from "$components/Wall.Book.svelte";
     import Shelf from "$components/Wall.Shelf.svelte";
 
@@ -9,6 +9,7 @@
     export let value;
     export let section;
     export let copy;
+    export let scrollDir;
 
     const shelves = [0, 1, 2, 3, 4];
     let margins = 32;
@@ -37,7 +38,6 @@
             } else if (copy[value] !== 0 && select(`#${section} #book_${copy[value].scrollToId}`).node() !== null) {
                 let sel = select(`#${section} #book_${copy[value].scrollToId}`).node().getBoundingClientRect().x;
                 let blur = selectAll(".year-wrapper");
-                console.log((sel - margins), w)
                 if (Math.abs(sel - margins) > w/1.25) {
                     blur.classed("blur", true);
                 }
@@ -80,10 +80,13 @@
             let currX = xShift;
             let maxWidth = totalShelfWidth.chunkWidth;
             let currSlide = currX/maxWidth*100;
-            console.log(currSlide)
+            // console.log(currSlide)
             // sliderStore.set(Math.round(currSlide))
             xShift = $sliderStore*maxWidth/100;
         }
+    }
+    function resetXShift() {
+        xShift = 0;
     }
 
     $: value, shiftX(value);
@@ -91,33 +94,36 @@
     $: w, getYearLengths(yearGroups);
     $: chunkWidths, calcTotalWidth(chunkWidths)
     $: $sliderStore, shiftSlider();
+    $: $activeSection, resetXShift(); 
 </script>
 
 <svelte:window bind:innerHeight={h} bind:innerWidth={w} />
 
 <section id="wall-{section}" class="wall">
-    <div class="overflow-wrap" style="transform:translate3d(-{xShift}px,0,0)">
-        {#each yearGroups as year, i}
-            <div class="year-wrapper" bind:clientHeight={wallH}>
-                {#if wallH !== undefined && chunkWidths.length == 13}
-                    {@const match = chunkWidths.find((d) => d.year == year[0])}
-                    <div class="yearChunk" id="chunk-{year[0]}"
-                    style="width:{match.chunkWidth}px">
-                        <div class="books">
-                            {#each year[1] as book, i}
-                                <Book book={book} index={i} wallH={wallH} />
+    {#if xShift !== undefined}
+        <div class="overflow-wrap" style="transform:translate3d(-{xShift}px,0,0)">
+            {#each yearGroups as year, i}
+                <div class="year-wrapper" bind:clientHeight={wallH}>
+                    {#if wallH !== undefined && chunkWidths.length == 13}
+                        {@const match = chunkWidths.find((d) => d.year == year[0])}
+                        <div class="yearChunk" id="chunk-{year[0]}"
+                        style="width:{match.chunkWidth}px">
+                            <div class="books">
+                                {#each year[1] as book, i}
+                                    <Book book={book} index={i} wallH={wallH} />
+                                {/each}
+                            </div>
+                        </div>
+                        <div class="shelves">
+                            {#each shelves as shelf, i} 
+                                <Shelf shelfW={match.chunkWidth} wallH={wallH} />
                             {/each}
                         </div>
-                    </div>
-                    <div class="shelves">
-                        {#each shelves as shelf, i} 
-                            <Shelf shelfW={match.chunkWidth} wallH={wallH} />
-                        {/each}
-                    </div>
-                {/if}
-            </div>
-        {/each}
-    </div>
+                    {/if}
+                </div>
+            {/each}
+        </div>
+    {/if}
 </section>
 
 <style>

@@ -1,7 +1,7 @@
 <script>
 	import { sliderStore, activeSection } from "$stores/misc.js";
 	import Icon from "$components/helpers/Icon.svelte";
-	import { range, format } from "d3";
+	import { range, format, select } from "d3";
 	export let min = 0;
 	export let max = 100;
 	export let step = 1;
@@ -17,7 +17,6 @@
 	$: decimals = getDecimalCount(step);
 	$: ticks = showTicks ? range(min, max + step, step) : [];
 	$: value, sliderStore.set(value);
-	// $: console.log($sliderStore);
 </script>
 
 <div class="range">
@@ -26,7 +25,7 @@
 			<span class="tick">{format(`.${decimals}f`)(tick)}</span>
 		{/each}
 	</div>
-	<input type="range" aria-label={label} {min} {max} {step} bind:value />
+	<input class="shake" type="range" aria-label={label} {min} {max} {step} bind:value />
 </div>
 
 <style>
@@ -58,6 +57,7 @@
 	input[type="range"]:focus::-moz-range-thumb,
 	input[type="range"]:focus::-ms-thumb {
 		box-shadow: 0 0 4px 0 var(--color-gray-300);
+		animation: shake 1s infinite;
 	}
 
 	input[type="range"]::-webkit-slider-runnable-track {
@@ -71,11 +71,12 @@
 		height: var(--thumb-width);
 		width: var(--thumb-width);
 		border-radius: 50%;
+		position: relative;
 		background: var(--color-gray-800);
 		appearance: none;
-		margin-top: calc(var(--thumb-width) / -3);
+		margin-top: calc(var(--thumb-width) / -3);	
+		animation: shake 1s infinite;
 	}
-
 	input[type="range"]:focus::-webkit-slider-runnable-track {
 		background: rgba(255,255,255,0.75);
 	}
@@ -92,7 +93,8 @@
 		height: var(--thumb-width);
 		width: var(--thumb-width);
 		border-radius: 50%;
-		background: var(--color-gray-900);
+		background: var(--color-gray-800);
+		animation: shake 1s infinite;
 	}
 
 	input[type="range"]::-ms-track {
@@ -116,7 +118,9 @@
 		height: var(--thumb-width);
 		width: var(--thumb-width);
 		border-radius: 50%;
-		background: var(--color-gray-900);
+		transform: translate3d(-1px, 0, 0);
+		background: var(--color-gray-800);
+		animation: shake 1s infinite;
 	}
 
 	input[type="range"]:focus::-ms-fill-lower,
@@ -167,5 +171,22 @@
 
 	.tick:last-of-type {
 		transform: translate(1px, 0);
+	}
+	@keyframes shake {
+		10%, 90% {
+			transform: translate3d(-1px, 0, 0);
+		}
+		
+		20%, 80% {
+			transform: translate3d(-1px, 0, 0);
+		}
+
+		30%, 50%, 70% {
+			transform: translate3d(-2px, 0, 0);
+		}
+
+		40%, 60% {
+			transform: translate3d(2px, 0, 0);
+		}
 	}
 </style>

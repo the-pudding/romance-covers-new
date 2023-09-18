@@ -42,7 +42,6 @@
 			}
 		}
 	}
-
 	function swapBarData(activeSection) {
 		if (activeSection == "raunchiness") {
 			barData = raunchinessData;
@@ -71,13 +70,22 @@
 			}
 		}
 	}
+	function calcMinDim(w, h) {
+		if (w !== undefined && h !== undefined) {
+			console.log(Math.min(w,h))
+			if (Math.min(w,h) > 400) {
+				return Math.min(w, h);
+			} else {
+				return 400
+			};
+		}
+	}
 	$: activeSection, swapBarData($activeSection)
 	$: readingListVisible, setScroll($readingListVisible)
-	$: bookMin = Math.min(w,h);
-	$: console.log(bookMin)
+	$: bookMin = calcMinDim(w, h);
 </script>
 
-<svelte:window bind:outerWidth={w} bind:outerHeight={h} bind:scrollY={scrollY} />
+<svelte:window bind:innerWidth={w} bind:innerHeight={h} bind:scrollY={scrollY} />
 
 <IntroScrolly bookMin={bookMin}/>
 <ChapterMarker />

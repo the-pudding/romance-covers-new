@@ -8,6 +8,7 @@
     let scrollY;
 	let scrollDir;
 	let lastY;
+    let h;
 
     export let id;
     export let data;
@@ -56,16 +57,16 @@
     // $: console.log(scrollDir);
 </script>
 
-<svelte:window bind:scrollY/>
+<svelte:window bind:scrollY bind:outerHeight={h}/>
 
 <section id={id}
-    use:inView
+    use:inView={{ top: 0 }}
     on:enter={() => setSectionEnter(id)}
     on:exit={() => setSectionExit(id)}>
     <h2>{resetTitles(id)}</h2>
     <ChapterText copy={copyBlock}/>
     <Bookmark />
-    <WallScrolly data={data} copy={copyScroll} section={id} />
+    <WallScrolly data={data} copy={copyScroll} section={id} scrollDir={scrollDir} />
 </section>
 
 <style>
