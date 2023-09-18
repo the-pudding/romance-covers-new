@@ -175,7 +175,7 @@
     <div class="prose">
         <p>{@html copy.postLookBack[0].value}</p>
     </div>
-    <h5>Percentage of Romance Covers Featuring</h5>
+    <h5>Percentage of Romance Novel Covers Featuring...</h5>
     <SmallMultiples />
 </section>
 
@@ -184,6 +184,9 @@
         background: var(--romance-bg-pink);
         padding: 0 0 4rem 0;
     }
+    :global(#lookback a) {
+		background-image: linear-gradient(180deg,transparent 0,var(--romance-pink-light) 0);
+	}
     .prose {
         display: flex;
         justify-content: center;

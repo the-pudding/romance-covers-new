@@ -1,8 +1,8 @@
 <script>
-	export let title = "Title TK";
-	export let description = "Description TK";
-	export let url = "https://pudding.cool";
-	export let keywords = "";
+	export let title = "What Does a Happily Ever After Look Like?";
+	export let description = "We looked at over 1,300 romance novel covers featured in Publishers Weekly from 2011 to 2023 and evaluated each cover based on its raunchiness (or level of undress), art style, and representation of racial diversity.";
+	export let url = "https://pudding.cool/2023/09/romance-covers";
+	export let keywords = "romance, literature, book, novel, love, heartbreak, diverity, race, gender, raunchiness, fabio, visual, illustration, cover, art";
 	export let preloadFont = [];
 </script>
 
@@ -19,7 +19,7 @@
 	<meta property="og:type" content="article" />
 	<meta property="og:locale" content="en_US" />
 
-	<meta property="og:image" content="{url}/assets/social-facebook.jpg" />
+	<meta property="og:image" content="{url}/assets/social/social-facebook.jpg" />
 	<meta property="og:image:type" content="image/jpeg" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="600" />
@@ -29,7 +29,7 @@
 	<meta name="twitter:creator" content="@puddingviz" />
 	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={description} />
-	<meta name="twitter:image:src" content="{url}/assets/social-twitter.jpg" />
+	<meta name="twitter:image:src" content="{url}/assets/social/social-twitter.jpg" />
 
 	<meta name="robots" content="max-image-preview:large" />
 
