@@ -36,7 +36,10 @@
         margin: 0;
     }
     :global(.svg-wrapper svg) {
-        margin: 0.3rem 0 0 0;
+        width: 60%;
+        height: 60%;
+        margin: 0.25rem 0 0 0;
+        display: inline-block;
     }
     :global(.svg-wrapper svg path) {
         stroke: var(--color-white);

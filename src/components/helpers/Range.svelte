@@ -1,7 +1,7 @@
 <script>
-	import { sliderStore, activeSection } from "$stores/misc.js";
-	import Icon from "$components/helpers/Icon.svelte";
-	import { range, format, select } from "d3";
+	import { activeSection, sliderStore } from "$stores/misc.js";
+	import { fly } from 'svelte/transition';
+	import { range, format } from "d3";
 	export let min = 0;
 	export let max = 100;
 	export let step = 1;
@@ -9,23 +9,43 @@
 	export let value;
 	export let label = "";
 
+	let promptVisible = 1;
+	let promptPos = "-1rem"
+
 	const getDecimalCount = (value) => {
 		if (Math.floor(value) === value) return 0;
 		return value.toString().split(".")[1].length || 0;
 	};
 
+	function hidePrompt() {
+		promptVisible = 0;
+	}
+	function positionPrompt(activeSection) {
+		if (activeSection == "illustration") {
+			promptPos = "15%"
+		} else {
+			promptPos = "-2%"
+		}
+	}
 	$: decimals = getDecimalCount(step);
 	$: ticks = showTicks ? range(min, max + step, step) : [];
 	$: value, sliderStore.set(value);
+	$: $activeSection, positionPrompt($activeSection);
 </script>
 
-<div class="range">
+<div class="range" on:click={hidePrompt}>
 	<div class="ticks">
 		{#each ticks as tick}
 			<span class="tick">{format(`.${decimals}f`)(tick)}</span>
 		{/each}
 	</div>
-	<input class="shake" type="range" aria-label={label} {min} {max} {step} bind:value />
+	<input type="range" aria-label={label} {min} {max} {step} bind:value />
+		<div class="prompt" style="opacity: {promptVisible}; right: {promptPos}"
+			in:fly={{ y: 10, duration: 1000, delay: 250}}
+			out:fly={{ y: 200, duration: 1000}}>
+			<p>Drag me!</p>
+		</div>
+
 </div>
 
 <style>
@@ -35,7 +55,20 @@
 		position: relative;
 		display: flex;
 		flex-direction: row;
-		width: calc(100% - 12rem);
+		width: calc(100% - 4rem);
+	}
+	.prompt {
+		position: absolute;
+		bottom: -2rem;
+        transition: 0.125s all linear;
+        font-family: var(--sans-display);
+        font-size: var(--12px);
+		text-transform: uppercase;
+        text-align: center;
+		animation: shake 1s infinite;
+	}
+	.prompt p {
+		margin: 0;
 	}
 	input[type="range"] {
 		display: block;
@@ -57,7 +90,6 @@
 	input[type="range"]:focus::-moz-range-thumb,
 	input[type="range"]:focus::-ms-thumb {
 		box-shadow: 0 0 4px 0 var(--color-gray-300);
-		animation: shake 1s infinite;
 	}
 
 	input[type="range"]::-webkit-slider-runnable-track {
@@ -66,7 +98,9 @@
 		background: rgba(255,255,255,0.75);
 		border-radius: 4px;
 	}
-
+	input[type=range] {
+    	-webkit-appearance: none;
+	}
 	input[type="range"]::-webkit-slider-thumb {
 		height: var(--thumb-width);
 		width: var(--thumb-width);
@@ -74,8 +108,7 @@
 		position: relative;
 		background: var(--color-gray-800);
 		appearance: none;
-		margin-top: calc(var(--thumb-width) / -3);	
-		animation: shake 1s infinite;
+		margin-top: calc(var(--thumb-width) / -3);
 	}
 	input[type="range"]:focus::-webkit-slider-runnable-track {
 		background: rgba(255,255,255,0.75);
@@ -94,7 +127,6 @@
 		width: var(--thumb-width);
 		border-radius: 50%;
 		background: var(--color-gray-800);
-		animation: shake 1s infinite;
 	}
 
 	input[type="range"]::-ms-track {
@@ -120,7 +152,6 @@
 		border-radius: 50%;
 		transform: translate3d(-1px, 0, 0);
 		background: var(--color-gray-800);
-		animation: shake 1s infinite;
 	}
 
 	input[type="range"]:focus::-ms-fill-lower,

@@ -21,5 +21,10 @@
         margin: 0 auto;
         line-height: 2;
         padding: 0 1rem;
+        font-weight: 500;
+    }
+    p {
+        font-family: var(--serif);
+        font-weight: 500;
     }
 </style>

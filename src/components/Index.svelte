@@ -72,10 +72,10 @@
 	}
 	function calcMinDim(w, h) {
 		if (w !== undefined && h !== undefined) {
-			if (Math.min(w,h) > 400) {
+			if (Math.min(w,h) > 600) {
 				return Math.min(w, h);
 			} else {
-				return 400
+				return 600
 			};
 		}
 	}

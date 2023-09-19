@@ -160,10 +160,12 @@
         z-index: 999;
         pointer-events: none;
         margin: 0 1rem;
+        overflow-y: auto;
     }
     #reading-list-inline {
         position: relative;
-        margin: 4rem auto;
+        margin: 4rem 1rem;
+        overflow-y: auto;
     }
     .bg {
         width: 100%;
@@ -187,13 +189,24 @@
         left: 50%;
         bottom: 0;
         box-shadow: -0.25rem 0 1rem  var(--color-gray-100);
-        padding: 2rem;
+        padding: 0.5rem;
         z-index: 1000;
         overflow-y: scroll;
         pointer-events: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+    .paper::-webkit-scrollbar {
+        -webkit-appearance: none;
+    }
+    .paper::-webkit-scrollbar:vertical {
+        width: 11px;
+    }
+    .paper::-webkit-scrollbar-thumb {
+        border-radius: 8px;
+        border: 2px solid white; /* should match background, can't be transparent */
+        background-color: var(--color-gray-200);
     }
     #reading-list-inline .paper {
         position: relative;
@@ -208,26 +221,26 @@
     h3 {
         font-family: var(--serif-display);
         text-align: center;
-        font-size: var(--36px);
+        font-size: var(--28px);
     }
     .clear-list {
         margin: 0 auto;
         background: transparent;
         color: var(--color-gray-600);
         font-family: var(--sans-display);
-        font-size: var(--14px);
+        font-size: var(--12px);
     }
     .clear-list:hover {
         color: var(--color-gray-800);
     }
     ul {
-        margin-top: 5rem;
+        margin-top: 3rem;
         width: 100%;
     }
     li {
         display: flex;
         flex-direction: row;
-        padding: 1rem;
+        padding: 1rem 0.25rem;
         justify-content: space-between;
         align-items: start;
     }
@@ -238,24 +251,25 @@
         border-bottom: none; 
     }
     .details {
-        width: calc(100% - 10rem);
+        width: calc(100% - 7rem);
     }
     .title {
         font-family: var(--serif-display);
-        font-size: var(--18px);
+        font-size: var(--20px);
         padding: 0;
         margin: 0;
     }
     .author {
         font-family: var(--sans-display);
-        font-size: var(--14px);
+        font-size: var(--12px);
         padding: 0;
         margin: 0;
     }
     .link-outs {
         display: flex;
-        flex-direction: row;
-        align-items: center;
+        flex-direction: column;
+        align-items: start;
+        margin: 0.5rem 0;
     }
     :global(.link-outs svg path) {
         stroke: var(--color-gray-500);
@@ -266,13 +280,13 @@
         margin: 0 0.25rem 0 0;
     }
     li img {
-        width: 3.5rem;
+        width: 2.5rem;
         object-fit: contain;
         margin-right: 0rem;
     }
     li button {
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 2rem;
+        height: 2rem;
         border-radius: 50%;
         color: var(--color-gray-800);
         pointer-events: auto;
@@ -285,14 +299,15 @@
     }
     :global(li button svg) {
         pointer-events: none;
-        margin-top: 0.2rem;
+        margin-top: 0rem;
     }
     :global(li button svg line) {
         stroke: white;
     }
     .list-link {
-        font-size: var(--12px);
+        font-size: 10px;
         font-family: var(--sans-display);
+        margin: 0.125rem 0;
     }
     .list-link a, .library a {
         margin-right: 1rem;
@@ -302,12 +317,46 @@
     .list-link a:hover, .library a:hover {
         color: var(--color-gray-800);
     }
+    @media only screen and (min-width: 400px) {
+        h3 {
+            font-size: var(--28px);
+        }
+        .paper {
+            padding: 1rem;
+        }
+	}
     @media only screen and (min-width: 600px) {
+        .paper {
+            padding: 2rem;
+        }
+        h3 {
+            font-size: var(--36px);
+        }
+        .clear-list {
+            font-size: var(--14px);
+        }
+        ul {
+            margin-top: 5rem;
+        }
         li {
             align-items: center;
+            padding: 1rem;
+        }
+        li img {
+            width: 3.5rem;
+        }
+        li button {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+        :global(li button svg) {
+            margin-top: 0.2rem;
+        }
+        .details {
+            width: calc(100% - 8rem);
         }
         .title {
-            font-size: var(--28px);
+            font-size: var(--24px);
         }
         .author {
             font-size: var(--14px);
@@ -315,6 +364,13 @@
         li button {
             width: 3rem;
             height: 3rem;
+        }
+        .link-outs {
+            flex-direction: row;
+            margin: 0.5rem 0;
+        }
+        .list-link {
+            margin: 0;
         }
 	}
 </style>

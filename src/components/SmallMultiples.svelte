@@ -46,6 +46,9 @@
         display: flex;
         flex-direction: column;
     }
+    :global(#small-multiples .count) {
+        left: 25%;
+    }
     .top-wrapper {
         width: 100%;
         padding: 0 1rem;
@@ -57,7 +60,7 @@
     h5 {
         font-family: var(--sans-display);
         text-align: center;
-        font-size: var(--18px);
+        font-size: var(--16px);
         margin: 0 auto 0.5rem auto;
         line-height: 1;
         display: flex;

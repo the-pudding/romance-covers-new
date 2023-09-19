@@ -1,5 +1,5 @@
 <script>
-    import { activeSection, readingList, readingListVisible, sliderVisible, sliderStore } from "$stores/misc.js";
+    import { activeSection, readingList, readingListVisible, sliderVisible } from "$stores/misc.js";
     import { fly, fade } from 'svelte/transition';
     import Icon from "$components/helpers/Icon.svelte";
     const sections = ["intro", "raunchiness", "illustration", "race", "methods"];
@@ -7,7 +7,7 @@
     import Range from "$components/helpers/Range.svelte";
     import logo from "$svg/logo.svg";
 	let sliderVal;
-    let rangeStart;
+    let rangeStart = 100;
 
     function handleListToggle(initState) {
         readingListVisible.set(!$readingListVisible);
@@ -29,18 +29,14 @@
         let title = id == "race" ? "diversity" : id;
         return title
     }
-    function setRangeVal() {
-        if ($sliderVisible) {
-            setTimeout(() => {
-                if ($activeSection == "raunchiness") { rangeStart = 106.2 }
-                else if ($activeSection == "illustration") { rangeStart = 82 }
-                else if ($activeSection == "race") { rangeStart = 100 }
-                else {rangeStart = 0}
-            }, 5000)
-        }
+    function setRangeVal(activeSection) {
+        sliderVisible.set(false)
+        if (activeSection == "raunchiness") { rangeStart = 106.2 }
+            else if (activeSection == "illustration") { rangeStart = 82 }
+            else if (activeSection == "race") { rangeStart = 100 }
+            else {rangeStart = 0}
     }
-    $: $activeSection, setRangeVal() 
-    // $: console.log($activeSection, rangeStart)
+    $: $activeSection, setRangeVal($activeSection) 
 </script>
 
 <nav>
@@ -80,17 +76,17 @@
                 {/if}
         </button>
     </div>
-    {#if $sliderVisible}
-        <div id="range-slider" 
-            in:fade={{ delay: 250, duration: 300 }}
-            out:fade={{ delay: 0, duration: 0 }}>
-            <p><Icon name="move-left" /> Move left</p>
-            {#if rangeStart !== undefined}
+    <div class="slider-wrapper">
+        {#if $sliderVisible}
+            <div id="range-slider" 
+                in:fade={{ delay: 250, duration: 300 }}
+                out:fade={{ delay: 0, duration: 0 }}>
+                <p><Icon name="move-left" /></p>
                 <Range value={rangeStart} min={0} max={100} step={1} showTicks={false} bind:sliderVal />
-                <p>Move right <Icon name="move-right" /></p>
-            {/if}
-        </div>
-    {/if}
+                <p><Icon name="move-right" /></p>
+            </div>
+        {/if}
+    </div>
 </nav>
 
 <style>
@@ -111,6 +107,15 @@
         align-items: center;
         padding: 1rem 0 0 0;
         margin: 0 0 2rem 0;
+        position: fixed;
+        width: 100%;
+        height: 3rem;
+    }
+    .slider-wrapper {
+        position: fixed;
+        top: 4.5rem;
+        width: 100%;
+        height: 3rem;
     }
     .logo {
         width: 1.25rem;
@@ -264,12 +269,13 @@
         justify-content: center;
         align-items: center;
         margin-bottom: calc(var(--thumb-width) * 2);
-        margin: 0 auto;
+        margin: 0.25rem auto 0 auto;
 	}
     #range-slider p {
-		font-size: var(--12px);
+		font-size: var(--14px);
 		font-family: var(--sans-display);
-		width: 6rem;
+		width: 2rem;
+        margin: 0.25rem 0 0 0;
 	}
 	#range-slider p:first-of-type {
 		text-align: right;

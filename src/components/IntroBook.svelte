@@ -14,7 +14,7 @@
 	export let value;
 	export let bookMin;
 
-	function computePercentage(y) {
+	function computePercentage(y, w, h) {
 		if (y >= 2) {
 			bookTranslate = w < 600 ? 100 : 50;
 			mainRotate = 0;
@@ -26,14 +26,15 @@
 		}
 	}
 	function setBookText() {
+		console.log(bookMin)
 		if (copy !== undefined) {
-			if (bookMin > 950) {
+			if (bookMin > 1100) {
 				pageOneText = copy.intro.slice(0,2);
 				pageTwoText = copy.intro.slice(2,4);
-			} else if (bookMin > 750) {
+			} else if (bookMin > 850) {
 				pageOneText = copy.intro.slice(0,1);
 				pageTwoText = copy.intro.slice(1,2);
-			} else if (bookMin > 600) {
+			} else if (bookMin > 675) {
 				pageOneText = copy.intro[0];
 				pageOneText = pageOneText.value.split(/(My)/);
 				let pageTwoText1 = pageOneText[1];
@@ -49,7 +50,9 @@
 		}
 	}
 
-	$: y, computePercentage(y);
+	$: y, computePercentage(y, w, h);
+	$: w, computePercentage(y, w, h);
+	$: h, computePercentage(y, w, h);
 	$: bookMin, setBookText();
 </script>
 
@@ -57,7 +60,7 @@
 
 <section id="intro-book">
 	{#if w !== undefined && h !== undefined}
-		<div id="book" style="transform:translate3d({bookTranslate}%,0,0); height:{bookMin/1.5}px; width:{bookMin/1.5/1.475}px" >
+		<div id="book" style="transform:translate3d({bookTranslate}%,0,0); height:{(bookMin-32)/1.5}px; width:{(bookMin-32)/1.5/1.475}px" >
 			<div class="main" style="transform:rotate3d(1,1,0,{mainRotate}deg)">
 				<div class="book-front" style="transform:translate3d(0,0,25px) rotate3d(0,1,0,-{frontRotate}deg)">
 					<div class="book-cover" style={"width: 100%; height: 100%;"}>
@@ -110,7 +113,7 @@
 		position: sticky;
 		top: 0rem;
         width: 100%;
-        height: auto;
+        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -121,6 +124,7 @@
         color: var(--color-gray-800);
         font-family: var(--sans-display);
 		text-align: center;
+		margin: -1rem 1rem 0 1rem;
     }
     .credit a {
         color: var(--color-gray-800);
@@ -135,6 +139,7 @@
 		transition-duration: .5s;
 		perspective: 2000px;
 		transform:translate3d(0,0,0);	
+		padding: 1rem;
 	}
 	.main {
 		width: 100%;
@@ -150,7 +155,7 @@
 -------------------------------------------------------------- */
 	.book-front{
 		width: 100%;
-        height: 100%;
+        height: calc(100% - 1rem);
 		position:absolute; top:0; bottom:0;
 		font-size:15px; text-align:center;
 		box-shadow:inset 3px 0 10px rgba(0,0,0,0.1); /* 给书本添加光照阴影 */
@@ -245,7 +250,7 @@
 -------------------------------------------------------------- */
 	.book-page{
 		width: calc(100% - 1rem);
-        height: calc(100% - 2rem);
+        height: calc(100% - 3rem);
 		line-height:20px;
 		position:absolute;
 		top: 1rem;
@@ -284,6 +289,7 @@
 -------------------------------------------------------------- */
     .book-back{
 		width:100%;
+		height: calc(100% - 1rem);
 		background:#4C7DFE;
 		position:absolute; 
         top:0; 
@@ -300,7 +306,7 @@
 		background:#4C7DFE;
 		box-shadow:1px 0 0 #4C7DFE,-1px 0 0 #4C7DFE; /* 旋转的时候 拼接处隐隐约约会有个缝隙 所以加上个阴影来填补它 */
 		position:absolute;
-		top:0; bottom:0; left:-25px;
+		top:0; bottom:16px; left:-25px;
 		transform:rotate3d(0,1,0,-90deg);
 	}
 	.book-bone h2{

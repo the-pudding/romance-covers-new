@@ -110,14 +110,6 @@
     .year-bar.active .count {
         opacity: 1;
     }
-    .chart-wrapper-inline .year-bar:first-of-type .count {
-        left: -55%;
-        text-align: right;
-    }
-    .chart-wrapper-inline .year-bar:last-of-type .count {
-        left: 55%;
-        text-align: left;
-    }
     .label {
         margin: 0;
         padding: 0;

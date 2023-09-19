@@ -3,7 +3,7 @@
     import ChapterText from "$components/ChapterText.svelte";
     import Bookmark from "$components/Bookmark.svelte";
     import inView from "$actions/inView.js";
-    import { activeSection } from "$stores/misc.js";
+    import { activeSection, sliderVisible } from "$stores/misc.js";
 
     let scrollY;
 	let scrollDir;
@@ -71,7 +71,7 @@
 
 <style>
     section {
-        padding: 10rem 0;
+        padding: 3rem 0;
     }
     #raunchiness {
         background-image: linear-gradient(var(--romance-bg-pink) 0%, var(--romance-bg-blue) 10%);
@@ -156,6 +156,9 @@
         opacity: 0.35;
     }
     @media only screen and (min-width: 600px) {
+        section {
+            padding: 3rem 0;
+        }
         h2 {
             font-size: var(--64px);
         }
