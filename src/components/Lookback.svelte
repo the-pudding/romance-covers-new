@@ -149,9 +149,7 @@
     <div class="book-wrapper">
         {#each lookbackData as book, i}
             <div class="highlightBook">
-                <div class="books"
-                    on:mouseenter={handleEnter}
-                    on:mouseout={handleExit}>
+                <div class="books">
                     <!-- Books expects a single book. In this case, I'm just using the first row of data from the
                     overall spreadsheet. We could create another spreadsheet structured in the same way, just with
                     "lookBack" books. If you need multiple books, you can wrap the Book.svelte component in an

@@ -36,9 +36,9 @@
         margin: 0;
     }
     :global(.svg-wrapper svg) {
-        width: 60%;
-        height: 60%;
-        margin: 0.25rem 0 0 0;
+        width: 100%;
+        height: 100%;
+        margin: 0.3rem 0 0 0;
         display: inline-block;
     }
     :global(.svg-wrapper svg path) {

@@ -25,19 +25,9 @@
         id="book_{book.ISBN}"
         style="height: {Math.floor(wallH/5)}px; width: {Math.floor(wallH/5*0.66)}px"
     >   
-        <div class='img-wrapper' style="height: {Math.floor(wallH/5-48)}px; width: {Math.floor((wallH/5-48)*0.625)}px;
-            background-image: linear-gradient(to right, 
-            rgba(60, 13, 20, 0.25) 1px, 
-            rgba(255, 255, 255, 0.5) 3px, 
-            rgba(255, 255, 255, 0.25) 7px, 
-            rgba(255, 255, 255, 0.25) 10px, 
-            transparent 12px,
-            transparent 16px, 
-            rgba(255, 255, 255, 0.25) 17px,
-            transparent 22px),
-            url(assets/images/img_{book.ISBN}.jpg)">
-            <!-- <img src ="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}"> -->
-            <!-- <Image loading="lazy" src="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" /> -->
+        <div class='img-wrapper' style="height: {Math.floor(wallH/5-48)}px; width: {Math.floor((wallH/5-48)*0.625)}px;">
+            <div class="overlay"></div>
+            <Image loading="lazy" src="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" />
         </div>
         <div class="marker">{book.year}</div>
         {#if bookAddable == true}
@@ -49,19 +39,9 @@
         id="book_{book.ISBN}" 
         style="height: {Math.floor(wallH/5)}px; width: {Math.floor(wallH/5*0.66)}px"
     >
-        <div class='img-wrapper' style="height: {Math.floor(wallH/5-48)}px; width: {Math.floor((wallH/5-48)*0.625)}px;
-            background-image: linear-gradient(to right, 
-            rgba(60, 13, 20, 0.25) 1px, 
-            rgba(255, 255, 255, 0.5) 2px, 
-            rgba(255, 255, 255, 0.25) 5px, 
-            rgba(255, 255, 255, 0.25) 7px, 
-            transparent 10px,
-            transparent 12px, 
-            rgba(255, 255, 255, 0.25) 14px,
-            transparent 18px),
-            url(assets/images/img_{book.ISBN}.jpg)">
-            <!-- <img src ="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}"> -->
-            <!-- <Image loading="lazy" src="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" /> -->
+        <div class='img-wrapper' style="height: {Math.floor(wallH/5-48)}px; width: {Math.floor((wallH/5-48)*0.625)}px;">
+            <div class="overlay"></div>
+            <Image loading="lazy" src="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" />
         </div>
         {#if bookAddable == true}
             <AddButton />
@@ -118,10 +98,20 @@
         transform: scale(1);
         pointer-events: all;
     }
-    /* .book .img-wrapper:hover {
-        transform: scale(3);
-        z-index: 1000;
-    } */
+    .img-wrapper .overlay {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-image: linear-gradient(to right, 
+            rgba(60, 13, 20, 0.25) 1px, 
+            rgba(255, 255, 255, 0.5) 3px, 
+            rgba(255, 255, 255, 0.25) 7px, 
+            rgba(255, 255, 255, 0.25) 10px, 
+            transparent 12px,
+            transparent 16px, 
+            rgba(255, 255, 255, 0.25) 17px,
+            transparent 22px)
+    }
     .book.active .img-wrapper {
         outline: 3px solid var(--romance-pink);
         box-shadow: 0 0 8px 5px var(--romance-pink);
