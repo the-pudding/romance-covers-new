@@ -7,3 +7,4 @@ export const readingList = writable([]);
 export const stepData = writable([]);
 export const sliderVisible = writable(false);
 export const sliderStore = writable(0);
+export const xShift = writable(0);

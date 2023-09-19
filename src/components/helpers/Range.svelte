@@ -16,10 +16,6 @@
 		if (Math.floor(value) === value) return 0;
 		return value.toString().split(".")[1].length || 0;
 	};
-
-	function hidePrompt() {
-		promptVisible = 0;
-	}
 	function positionPrompt(activeSection) {
 		if (activeSection == "illustration") {
 			promptPos = "15%"
@@ -27,19 +23,22 @@
 			promptPos = "-2%"
 		}
 	}
+	function handleChange() {
+		promptVisible = 0;
+		sliderStore.set(value)
+	}
 	$: decimals = getDecimalCount(step);
 	$: ticks = showTicks ? range(min, max + step, step) : [];
-	$: value, sliderStore.set(value);
 	$: $activeSection, positionPrompt($activeSection);
 </script>
 
-<div class="range" on:click={hidePrompt}>
+<div class="range">
 	<div class="ticks">
 		{#each ticks as tick}
 			<span class="tick">{format(`.${decimals}f`)(tick)}</span>
 		{/each}
 	</div>
-	<input type="range" aria-label={label} {min} {max} {step} bind:value />
+	<input on:change={handleChange} type="range" aria-label={label} {min} {max} {step} bind:value />
 		<div class="prompt" style="opacity: {promptVisible}; right: {promptPos}"
 			in:fly={{ y: 10, duration: 1000, delay: 250}}
 			out:fly={{ y: 200, duration: 1000}}>

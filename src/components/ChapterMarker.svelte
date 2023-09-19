@@ -1,5 +1,5 @@
 <script>
-    import { activeSection, readingList, readingListVisible, sliderVisible } from "$stores/misc.js";
+    import { activeSection, readingList, readingListVisible, sliderVisible, sliderStore } from "$stores/misc.js";
     import { fly, fade } from 'svelte/transition';
     import Icon from "$components/helpers/Icon.svelte";
     const sections = ["intro", "raunchiness", "illustration", "race", "methods"];
@@ -30,11 +30,13 @@
         return title
     }
     function setRangeVal(activeSection) {
-        sliderVisible.set(false)
-        if (activeSection == "raunchiness") { rangeStart = 106.2 }
-            else if (activeSection == "illustration") { rangeStart = 82 }
-            else if (activeSection == "race") { rangeStart = 100 }
-            else {rangeStart = 0}
+        sliderVisible.set(false);
+        sliderStore.set(100)
+        rangeStart = 100;
+        // if (activeSection == "raunchiness") { rangeStart = 106.2 }
+        //     else if (activeSection == "illustration") { rangeStart = 82 }
+        //     else if (activeSection == "race") { rangeStart = 100 }
+        //     else {rangeStart = 0}
     }
     $: $activeSection, setRangeVal($activeSection) 
 </script>

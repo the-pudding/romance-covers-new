@@ -1,7 +1,7 @@
 <script>
     import {groups} from "d3-array";
     import {select, selectAll} from "d3-selection";
-    import { activeSection, sliderVisible, sliderStore } from "$stores/misc.js";
+    import { sliderVisible, sliderStore, xShift } from "$stores/misc.js";
     import Book from "$components/Wall.Book.svelte";
     import Shelf from "$components/Wall.Shelf.svelte";
 
@@ -14,7 +14,7 @@
     const shelves = [0, 1, 2, 3, 4];
     let margins = 32;
     let bookRows = 5;
-    let xShift = 0;
+    let bookWidth;
     let h;
     let w;
     let wallH;
@@ -34,7 +34,7 @@
     function shiftX(value) {
         if (copy[value] !== undefined) {
             if (value == 0) {
-                xShift = 0; 
+                xShift.set(0); 
             } else if (copy[value] !== 0 && select(`#${section} #book_${copy[value].scrollToId}`).node() !== null) {
                 let sel = select(`#${section} #book_${copy[value].scrollToId}`).node().getBoundingClientRect().x;
                 let blur = selectAll(".year-wrapper");
@@ -42,7 +42,8 @@
                     blur.classed("blur", true);
                 }
                 setTimeout(() => {
-                    xShift = xShift + sel - margins
+                    let val = $xShift + sel - margins;
+                    xShift.set(val) 
                 }, 500)
                 setTimeout(() => {
                     blur.classed("blur", false)
@@ -54,13 +55,13 @@
     function getYearLengths(data) {
         chunkWidths = [];
         if (wallH !== undefined) {
-            let bookWidth = Math.floor(wallH/5*0.66);
+            bookWidth = Math.floor(wallH/5*0.66);
             data.forEach((d, i) => {
                 let year = d[0];
                 let chunkLength = d[1].length;
                 let remainder = chunkLength % 5;
                 let bookCols = setBookCols(remainder, chunkLength, bookRows)
-                let chunkWidth = bookCols == 0 ? bookWidth + 8 : (bookCols * (bookWidth) + 8);
+                let chunkWidth = bookCols == 0 ? bookWidth + 8 : (bookCols * (bookWidth)) + 8;
                 chunkWidths.push({year: year, chunkWidth: chunkWidth});
             });
         }
@@ -77,31 +78,25 @@
     
     function shiftSlider() {
         if ($sliderVisible && totalShelfWidth) {
-            let currX = xShift;
             let maxWidth = totalShelfWidth.chunkWidth;
-            let currSlide = currX/maxWidth*100;
-            // console.log(currSlide)
-            // sliderStore.set(Math.round(currSlide))
-            xShift = $sliderStore*maxWidth/100;
+            let val = $sliderStore*maxWidth/100
+            xShift.set(val)
         }
-    }
-    function resetXShift() {
-        xShift = 0;
     }
 
     $: value, shiftX(value);
     $: wallH, getYearLengths(yearGroups);
     $: w, getYearLengths(yearGroups);
-    $: chunkWidths, calcTotalWidth(chunkWidths)
-    $: $sliderStore, shiftSlider();
-    $: $activeSection, resetXShift(); 
+    $: chunkWidths, calcTotalWidth(chunkWidths);
+    // $: value, shiftSlider();
+    // $: $sliderStore, shiftSlider();
 </script>
 
 <svelte:window bind:innerHeight={h} bind:innerWidth={w} />
 
 <section id="wall-{section}" class="wall">
-    {#if xShift !== undefined}
-        <div class="overflow-wrap" style="transform:translate3d(-{xShift}px,0,0)">
+    {#if $xShift !== undefined}
+        <div class="overflow-wrap" style="transform:translate3d(-{$xShift}px,0,0)">
             {#each yearGroups as year, i}
                 <div class="year-wrapper" bind:clientHeight={wallH}>
                     {#if wallH !== undefined && chunkWidths.length == 13}
@@ -135,7 +130,7 @@
         display: flex;
         flex-direction: row;
         padding: 0 5rem;
-        transition: 1s ease-in-out;
+        transition: 0.5s ease-in-out;
     }
     .wall {
         margin: 0;
