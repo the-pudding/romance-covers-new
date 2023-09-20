@@ -1,7 +1,10 @@
 <script>
     import { getContext } from "svelte";
 	import { fit } from '@leveluptuts/svelte-fit'
-    const copy = getContext("copy");
+
+	export let bookMin;
+    
+	const copy = getContext("copy");
 
 	let y;
 	let w;
@@ -11,8 +14,6 @@
 	let frontRotate;
 	let pageOneText;
 	let pageTwoText;
-	export let value;
-	export let bookMin;
 
 	function computePercentage(y, w, h) {
 		if (y >= 2) {
@@ -25,6 +26,7 @@
 			frontRotate = y/h*180;
 		}
 	}
+	
 	function setBookText() {
 		if (copy !== undefined) {
 			if (bookMin > 1100) {

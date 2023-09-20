@@ -1,6 +1,6 @@
 <script>
-    import {groups} from "d3-array";
-    import {select, selectAll} from "d3-selection";
+    import { groups } from "d3-array";
+    import { select } from "d3-selection";
     import { activeSection, sliderVisible, sliderStore, xShift } from "$stores/misc.js";
     import Book from "$components/Wall.Book.svelte";
     import Shelf from "$components/Wall.Shelf.svelte";
@@ -9,17 +9,16 @@
     export let value;
     export let section;
     export let copy;
-    export let scrollDir;
 
     const shelves = [0, 1, 2, 3, 4];
-    let margins = 32;
-    let bookRows = 5;
+    const margins = 32;
+    const bookRows = 5;
+    const yearGroups = groups(data, d => d.year);
+
     let bookWidth;
     let h;
     let w;
     let wallH;
-
-    let yearGroups = groups(data, d => d.year);
     let chunkWidths = [];
     let maxWidth;
     let totalShelfWidth;
@@ -34,9 +33,8 @@
 
     function shiftX(value) {
         if (copy[value] !== undefined) {
-            if (value == 0) {
-                xShift.set(0); 
-            } else if (copy[value] !== 0 && select(`#${section} #book_${copy[value].scrollToId}`).node() !== null) {
+            if (value == 0) { xShift.set(0); }
+            else if (copy[value] !== 0 && select(`#${section} #book_${copy[value].scrollToId}`).node() !== null) {
                 let sel = select(`#${section} #book_${copy[value].scrollToId}`).node().getBoundingClientRect().x;
                 let val = $xShift + sel - margins;
                 xShift.set(val) 
@@ -52,9 +50,7 @@
                 //     blur.classed("blur", false)
                 // }, 1500)
             }
-            if (value == copy.length - 1 && select(`#${$activeSection} .overflow-wrap`).node() !== null) {
-                maxWidth = $xShift;
-            }
+            if (value == copy.length - 1 && select(`#${$activeSection} .overflow-wrap`).node() !== null) { maxWidth = $xShift; }
         }
     }
 

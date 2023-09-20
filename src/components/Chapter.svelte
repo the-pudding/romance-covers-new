@@ -17,26 +17,16 @@
 
     function setSectionEnter(id) { activeSection.set(id); }
     function setSectionExit(id) { 
-        // let activeSectionDiv = d3.select(`#${id}`);
-        // let parentNode = activeSectionDiv.node().parentNode; 
         let nextSection;
         if (scrollDir == "down") {
-            if (id == "raunchiness") {
-                nextSection = "illustration"
-            } else if (id == "illustration") {
-                nextSection = "race"
-            } else if (id == "race") {
-                nextSection = "methods"
-            }
+            if (id == "raunchiness") { nextSection = "illustration" } 
+            else if (id == "illustration") { nextSection = "race" }
+            else if (id == "race") { nextSection = "methods" }
             activeSection.set(nextSection)
         } else if (scrollDir == "up") {
-            if (id == "raunchiness") {
-                nextSection = "intro"
-            } else if (id == "illustration") {
-                nextSection = "raunchiness"
-            } else if (id == "race") {
-                nextSection = "illustration"
-            }
+            if (id == "raunchiness") { nextSection = "intro" } 
+            else if (id == "illustration") { nextSection = "raunchiness" }
+            else if (id == "race") { nextSection = "illustration" }
             activeSection.set(nextSection)
         }
     }
@@ -49,12 +39,11 @@
     }
 
     function resetTitles(id) {
-        let title = id == "race" ? "racial diversity" : id;
+        const title = id == "race" ? "racial diversity" : id;
         return title
     }
 
     $: scrollY, checkScrollY(scrollY);
-    // $: console.log(scrollDir);
 </script>
 
 <svelte:window bind:scrollY bind:outerHeight={h}/>
@@ -66,7 +55,7 @@
     <h2>{resetTitles(id)}</h2>
     <ChapterText copy={copyBlock}/>
     <Bookmark />
-    <WallScrolly data={data} copy={copyScroll} section={id} scrollDir={scrollDir} />
+    <WallScrolly data={data} copy={copyScroll} section={id} />
 </section>
 
 <style>

@@ -5,18 +5,14 @@
     let showMessage = false;
 
     function handleBtnClick(e) {
-        let btn = select(this);
-        let textFeedback = select(this.parentNode).select(".message");
-        let readingListIcon = select(".listBtn");
+        const btn = select(this);
+        const textFeedback = select(this.parentNode).select(".message");
+        const readingListIcon = select(".listBtn");
 
         let bookID = e.target.parentNode.id;
-            if (bookID == "") {
-                bookID = e.target.parentNode.parentNode.id;
-            }
-            if (bookID.includes("chunk")) {
-                bookID = e.target.parentNode.id; 
-            }
-        bookID = bookID.split("_")[1];
+            if (bookID == "") { bookID = e.target.parentNode.parentNode.id; }
+            if (bookID.includes("chunk")) { bookID = e.target.parentNode.id; }
+            bookID = bookID.split("_")[1];
 
         if ((this.className).includes("book_inList")) {
             btn.classed("book_inList", false);
@@ -35,9 +31,7 @@
         }  
         readingListIcon.classed("highlight", true)
 
-        setTimeout(() => {
-            showMessage = false;
-        }, 3000);
+        setTimeout(() => { showMessage = false; }, 3000);
     }
 </script>
 

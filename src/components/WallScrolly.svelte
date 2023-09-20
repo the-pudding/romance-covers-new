@@ -3,26 +3,21 @@
     import Wall from "$components/Wall.svelte";
 	import { stepData, sliderVisible, sliderStore } from "$stores/misc.js";
 	
-	let value;
-
-    export let data;
+	export let data;
     export let copy;
 	export let section;
-	export let scrollDir;
+
+	let value;
 
 	function setStepData(value) {
-        let localStepData = [section, (copy[value])];
+        const localStepData = [section, (copy[value])];
 		$stepData = localStepData;
 		lastStepUnlock(value)
     }
 
 	function lastStepUnlock(value) {
-		if (value == copy.length-1) {
-			sliderVisible.set(true)
-			// sliderStore.set(sliderStore)
-		} else {
-			sliderVisible.set(false)
-		}
+		if (value == copy.length-1) { sliderVisible.set(true) }
+		else { sliderVisible.set(false) }
 	}
 
 	$: value, setStepData(value);
@@ -30,7 +25,7 @@
 
 <section id="scrolly">
 	<div class="sticky">
-        <Wall data={data} value={value} section={section} copy={copy} scrollDir={scrollDir}/>
+        <Wall data={data} value={value} section={section} copy={copy}/>
     </div>
 	<Scrolly bind:value>
         {#if copy}

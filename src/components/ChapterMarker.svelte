@@ -2,10 +2,11 @@
     import { activeSection, readingList, readingListVisible, sliderVisible, sliderStore } from "$stores/misc.js";
     import { fly, fade } from 'svelte/transition';
     import Icon from "$components/helpers/Icon.svelte";
-    const sections = ["intro", "raunchiness", "illustration", "race", "methods"];
     import {select} from "d3-selection";
     import Range from "$components/helpers/Range.svelte";
     import logo from "$svg/logo.svg";
+
+    const sections = ["intro", "raunchiness", "illustration", "race", "methods"];
 	let sliderVal;
     let rangeStart = 100;
 
@@ -14,8 +15,9 @@
         select(this).style("animation", "none")
         select(this).classed("highlight", false)
     }
+
     function handleChapterClick(e) {
-        let id = (select(this).node().id).split("-")[1];
+        const id = (select(this).node().id).split("-")[1];
 
         e.preventDefault()
 		const anchor = document.getElementById(id)
@@ -26,18 +28,16 @@
     }
     
     function resetTitles(id) {
-        let title = id == "race" ? "diversity" : id;
+        const title = id == "race" ? "diversity" : id;
         return title
     }
+
     function setRangeVal(activeSection) {
         sliderVisible.set(false);
         sliderStore.set(100)
         rangeStart = 100;
-        // if (activeSection == "raunchiness") { rangeStart = 106.2 }
-        //     else if (activeSection == "illustration") { rangeStart = 82 }
-        //     else if (activeSection == "race") { rangeStart = 100 }
-        //     else {rangeStart = 0}
     }
+    
     $: $activeSection, setRangeVal($activeSection) 
 </script>
 

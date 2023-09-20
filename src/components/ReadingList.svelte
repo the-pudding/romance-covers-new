@@ -4,20 +4,19 @@
     import { flip } from 'svelte/animate';
     import Icon from "$components/helpers/Icon.svelte";
     import Bookmark from "$components/Bookmark.svelte";
-    import {select, selectAll} from "d3-selection";
+    import { selectAll } from "d3-selection";
+    
     export let data;
     export let pos;
 
     function findBookMatch(id, type) {
-        let match = data.find(d => d.ISBN == id);
-
+        const match = data.find(d => d.ISBN == id);
         if (type == "title") { return match.title }
         else if (type == "img") { return match.ISBN }
         else if (type == "author") { return match.author }
     }
 
     function handleBtnClick(e) {
-
         let bookID = e.target.parentNode.id;
         if (bookID == "") { bookID = e.target.parentNode.parentNode.id; }
         
@@ -25,26 +24,22 @@
         $readingList.splice(indexOfObject, 1)
         $readingList = $readingList
         
-        let allBookButtons = selectAll(`#book_${bookID} button`);
-        // console.log(allBookButtons)
+        const allBookButtons = selectAll(`#book_${bookID} button`);
         allBookButtons.classed("book_inList", false);
         allBookButtons.classed("book_noList", true); 
+    }
 
-    }
     function handleClickOut(e) {
-        if (e.target.parentNode.id == "reading-list-overlay") {
-            $readingListVisible = false;
-        }
+        if (e.target.parentNode.id == "reading-list-overlay") { $readingListVisible = false; }
     }
+
     function clearList(e) {
         $readingList = [];
-        let allBookButtons = selectAll(`.book button`);
+        const allBookButtons = selectAll(`.book button`);
         allBookButtons.classed("book_noList", true);
         allBookButtons.classed("book_inList", false);
 
-        setTimeout(() => {
-            $readingListVisible = false;
-        }, 500);
+        setTimeout(() => { $readingListVisible = false; }, 500);
     }
 </script>
 

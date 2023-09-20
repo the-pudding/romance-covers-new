@@ -1,20 +1,20 @@
 <script>
 	import Scrolly from "$components/helpers/Scrolly.svelte";
     import IntroBook from "$components/IntroBook.svelte";
-    import { getContext } from "svelte";
     import inView from "$actions/inView.js";
     import { activeSection } from "$stores/misc.js";
     import Icon from "$components/helpers/Icon.svelte";
     import { fade } from 'svelte/transition';
 
-    let steps = [0];
+    export let bookMin;
+
+    const steps = [0];
+
 	let value;
-    let id = "intro";
     let y;
     let h;
     let scrollDir;
 	let lastY;
-    export let bookMin;
 
     function setSection(id) { activeSection.set(id); }
 
@@ -27,17 +27,16 @@
         }
     }
 
-    $: y, checkScrollY(y);
-    
+    $: y, checkScrollY(y);  
 </script>
 
 <svelte:window bind:innerHeight={h} bind:scrollY={y}/>
 
 <section id="intro"
     use:inView
-    on:enter={() => setSection(id)}>
+    on:enter={() => setSection("intro")}>
 	<div class="sticky">
-        <IntroBook value={value} bookMin={bookMin}/>
+        <IntroBook bookMin={bookMin}/>
     </div>
 	<Scrolly bind:value>
         {#each steps as step, i}

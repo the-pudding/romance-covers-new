@@ -8,28 +8,23 @@
     export let highlightColor;
     export let pos;
     export let yearTotals;
+
     let w;
     let barChartW;
 
     function checkData(data, year) {
-        if (pos == "inline") {
-            return false
-        } else if (pos !== "overlay") {
-            return true
-        } else {
-            if (data[1] !== undefined && data[1].highlightYears.includes(year)) {
-                return true;
-            } else {
-                return false;
-            }
+        if (pos == "inline") { return false } 
+        else if (pos !== "overlay") { return true } 
+        else {
+            if (data[1] !== undefined && data[1].highlightYears.includes(year)) { return true; } 
+            else { return false; }
         }
     }
 
     function calcPercentage(year, groupLen, i) {
-        let yearMatch = yearTotals.find(d => d[0] == year);
-        let yearTotLen = yearMatch[1].length;
-        let percent = Math.round(groupLen/yearTotLen*100);
-        // let text = i == 0 ? `${percent}%` : percent;
+        const yearMatch = yearTotals.find(d => d[0] == year);
+        const yearTotLen = yearMatch[1].length;
+        const percent = Math.round(groupLen/yearTotLen*100);
         return percent
     }
 

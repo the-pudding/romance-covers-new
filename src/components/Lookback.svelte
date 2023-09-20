@@ -1,19 +1,16 @@
 <script>
     import { getContext, onMount } from "svelte";
     import lookbackData from "$data/lookback.csv";
-    import {select, selectAll}from "d3-selection";
-
+    import { selectAll }from "d3-selection";
     import Book from "$components/Wall.Book.svelte";
     import Shelf from "$components/Wall.Shelf.svelte";
     import Prose from "$components/Prose.svelte";
     import SmallMultiples from "$components/SmallMultiples.svelte";
 
+    export let bookMin;
+
     const copy = getContext("copy");
-    let bookRows = 5;
-    let bookWidth = 64;
-    let margins = 32;
-    const shelves = [0];
-    let chunkWidths = [];
+
     let lookbackDoc;
     let lookbackClinch;
     let lookbackTravel;
@@ -21,17 +18,6 @@
     let smallChartIllustration;
     let smallChartRace;
     let introText;
-    export let bookMin;
-
-
-    // This function calculates the width of the shelf based on the book rows
-    function calcWidth(len) {
-        let remainder = len % 5;
-        let bookCols = remainder == 1 ? Math.round((len)/bookRows) + 1 : Math.round((len)/bookRows);
-        let chunkWidth = bookCols == 0 ? bookWidth + margins : bookCols * (bookWidth + margins);
-        chunkWidths.push(chunkWidth);
-        return chunkWidth;
-    }
 
     onMount(() => {
 		lookbackDoc = selectAll(".lookback-doc");
@@ -94,25 +80,12 @@
             })
     }
 
-    function handleEnter(){
-        let el = select(this);
-        let img = el.select(".book .img-wrapper");
-        img.classed("highlight", true)
-    }
-    function handleExit(){
-        let el = select(this);
-        let img = el.select(".book .img-wrapper");
-        img.classed("highlight", false)
-    }
     function setText() {
         if (copy !== undefined) {
-			if (bookMin > 950) {
-				introText = undefined;
-			} else if (bookMin > 750) {
-				introText = copy.intro.slice(2,4);
-			} else if (bookMin > 600) {
-				introText = copy.intro.slice(1,4);
-			} else {
+			if (bookMin > 950) { introText = undefined; }
+            else if (bookMin > 750) { introText = copy.intro.slice(2,4); } 
+            else if (bookMin > 600) { introText = copy.intro.slice(1,4); }
+            else {
 				introText = copy.intro.slice(2,4);
                 let splitText = copy.intro[0];
 				splitText = splitText.value.split(/(My)/);
@@ -158,13 +131,7 @@
                     <Book book={book} index={0} bookAddable={false} wallH={760}/>
                 </div>
                 <div class="shelves">
-                    {#each shelves as shelf, i} 
-                        <!-- Shelf will be a single shelf. It is wrapped in an {#each} statement to produce
-                        multiple shelf rows, but currently there's only one item in the array (const shelves = [0];).
-                        To add more, it would look like (const shelves = [0, 1];). This value is hardcoded now, but
-                        it could change based on screen size.-->
-                        <Shelf shelfW={calcWidth(lookbackData.length)} shelfHasShadow={false} wallH={760} />
-                    {/each}
+                    <Shelf shelfW={100} shelfHasShadow={false} wallH={760} />
                 </div>
             </div>
         {/each}

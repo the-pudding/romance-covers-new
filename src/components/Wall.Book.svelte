@@ -12,9 +12,7 @@
     let h; 
 
     function checkData(data, id) {
-        if (data[1] !== undefined) {
-            return data[1].highlightBooks.includes(id);
-        }
+        if (data[1] !== undefined) { return data[1].highlightBooks.includes(id); }
     }
 </script>
 
