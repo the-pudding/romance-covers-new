@@ -240,6 +240,8 @@
 	}
 
 	.book-cover-back-indent p{
+		font-family: var(--serif);
+		font-weight: 500;
 		font-size: var(--14px);
 		line-height: 1.65;
 		margin-bottom: 1rem;

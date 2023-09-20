@@ -217,6 +217,9 @@
         box-shadow: -2px 2px 5px  rgba(0,0,0,0.125);
         opacity: 1; 
         font-family: var(--sans-display);
+        -ms-box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+        -o-box-decoration-break: clone;
         box-decoration-break: clone;
     }
     :global(#lookback .lookback-doc, #lookback .lookback-clinch, #lookback .lookback-travel) {

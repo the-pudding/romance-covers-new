@@ -66,7 +66,8 @@
 	}
 
 	.step p {
-		padding: 1rem;
+		font-family: var(--serif);
+		font-weight: 500;
         text-align: left;
         padding: 2rem;
         background: var(--color-white);

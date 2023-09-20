@@ -1,11 +1,10 @@
 <script>
     import Icon from "$components/helpers/Icon.svelte";
+    import AddButton from "$components/AddButton.svelte";
 </script>
 
 <div class="instructions">
-    <p>Use the <span class="svg-wrapper">
-        <Icon name="book open" size="0.8em" />
-    </span> buttons next to each book to add it to your reading list and see the full list in the top right.</p>
+    <p>Use the <AddButton /> buttons next to each book to add it to your reading list and see the full list in the top right.</p>
 </div>  
 
 <style>
@@ -24,8 +23,14 @@
         color: var(--color-gray-600);
         font-size: var(--14px);
     }
-
-    .svg-wrapper {
+    :global(.instructions .add) {
+        display: inline-block;
+        position: relative;
+        bottom: 0.25rem;
+        right: 0;
+        pointer-events: none;
+    }
+     .svg-wrapper {
         display: inline-block;
         background-color: var(--color-gray-900);
         border: 2px solid white;
