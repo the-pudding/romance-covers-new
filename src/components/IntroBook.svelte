@@ -249,6 +249,30 @@
 		padding: 0 0 1rem 0;
 	}
 
+	:global(.initial-cap) {
+		float: left;
+		font-family: var(--serif-display);
+		font-weight: 500;
+		font-size: 90px;
+		line-height: 0.75;
+		margin: 0;
+		padding: 0 0.125rem 0 0;
+		position: relative;
+		z-index: 1000;
+	}
+	:global(.initial-cap:before) {
+		content: "G";
+		position: absolute;
+		left: -1rem;
+		top: 0.5rem;
+		font-family: var(--sans-display);
+		font-weight: 900;
+		color: var(--romance-bg-blue);
+		z-index: 0;
+		mix-blend-mode: darken;
+		opacity: 0.5;
+	}
+
 /* = Book Page
 -------------------------------------------------------------- */
 	.book-page{
