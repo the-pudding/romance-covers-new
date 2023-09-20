@@ -88,11 +88,6 @@
 <Footer />
 
 <style>
-	.scrollContainer {
-		width: 100%;
-		position: fixed;
-		height: 100vh;
-	}
 	#barChart {
         position: fixed;
         width: 100%;

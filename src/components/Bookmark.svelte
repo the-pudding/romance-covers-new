@@ -30,23 +30,4 @@
         right: 0;
         pointer-events: none;
     }
-     .svg-wrapper {
-        display: inline-block;
-        background-color: var(--color-gray-900);
-        border: 2px solid white;
-        box-shadow: 0.25rem 0 1rem  var(--color-gray-300);
-        border-radius: 50%;
-        height: 1.5rem;
-        width: 1.5rem;
-        margin: 0;
-    }
-    :global(.svg-wrapper svg) {
-        width: 100%;
-        height: 100%;
-        margin: 0.3rem 0 0 0;
-        display: inline-block;
-    }
-    :global(.svg-wrapper svg path) {
-        stroke: var(--color-white);
-    }
 </style>

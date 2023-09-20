@@ -66,16 +66,6 @@
         transform-style: preserve-3d;
         z-index: 5;
     }
-    .add:hover .message {
-        transform: translate(-50%, -100%, 0) scale(0.6);
-        transform-style: preserve-3d;
-        z-index: 5;
-    }
-    .add:hover .message.visible {
-        transform: translate(-50%, -165%, 0) scale(0.65);
-        transform-style: preserve-3d;
-        z-index: 5;
-    }
     :global(.add.book_inList) {
         background-image: url($svg/x.svg);
         background-size: 0.75rem 0.75rem;

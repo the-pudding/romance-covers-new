@@ -85,12 +85,6 @@
         opacity: 0;
         visibility: none;
 	}
-	.step p {
-		padding: 1rem;
-        text-align: left;
-        padding: 2rem;
-        background: var(--color-white);
-	}
     .icon-wrapper {
         position: fixed;
         bottom: 0;

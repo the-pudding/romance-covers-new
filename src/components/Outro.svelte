@@ -28,14 +28,6 @@
         background-image: linear-gradient(var(--romance-bg-teal) 0%, var(--romance-bg-pink) 50%);
         padding: 10rem 0 5rem 0;
     }
-    .prose {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        max-width: 40rem;
-        margin: 0 auto;
-        line-height: 2;
-    }
     :global(#notes a, #methods a) {
         background-position: 0 0 1.125rem;
         background-image: linear-gradient(180deg,transparent 0,var(--romance-pink-light) 0);

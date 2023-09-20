@@ -212,9 +212,6 @@
     .label.active {
         opacity: 1; 
     }
-    .sectionBox.active .label {
-        transform: scale(0.65);
-    }
     .btn-wrapper {
         position: relative;
         margin: -0.5rem 0 0 0;

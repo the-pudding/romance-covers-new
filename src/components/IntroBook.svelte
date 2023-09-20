@@ -269,23 +269,11 @@
 		padding: 3rem 2rem;
 		overflow:hidden;
 	}
-	.book-page h3{
-		font-size:14px;
-		text-align:center;
-		margin-bottom:14px;
-	}
 	.book-page p{
 		font-size: var(--16px);
 		line-height: 1.65;
 		margin-bottom: 1rem;
 		padding: 0 0 1rem 0;
-	}
-	.page-number{
-		width:100%;
-		font-size:13px;
-		text-align:center;
-		position:absolute;
-		bottom:10px;
 	}
 
 /* = Book Back
@@ -312,15 +300,6 @@
 		top:0; bottom:16px; left:-25px;
 		transform:rotate3d(0,1,0,-90deg);
 	}
-	.book-bone h2{
-		width:530px;
-		height:50px; line-height:50px; /* 对应关系-1 */
-		font-size:14px; text-align:right;
-		padding:0 15px;
-		transform-origin:0 0;
-		transform:rotate(90deg) translateY(-50px);
-	}
-	.book-bone span{ font-size:14px; padding-right:20px;}
 	
 	.book-page,.book-top,.book-right,.book-bottom{
 		background:var(--color-white);
