@@ -26,7 +26,6 @@
 		}
 	}
 	function setBookText() {
-		console.log(bookMin)
 		if (copy !== undefined) {
 			if (bookMin > 1100) {
 				pageOneText = copy.intro.slice(0,2);

@@ -1,7 +1,7 @@
 <script>
     import {groups} from "d3-array";
     import {select, selectAll} from "d3-selection";
-    import { sliderVisible, sliderStore, xShift } from "$stores/misc.js";
+    import { activeSection, sliderVisible, sliderStore, xShift } from "$stores/misc.js";
     import Book from "$components/Wall.Book.svelte";
     import Shelf from "$components/Wall.Shelf.svelte";
 
@@ -21,6 +21,7 @@
 
     let yearGroups = groups(data, d => d.year);
     let chunkWidths = [];
+    let maxWidth;
     let totalShelfWidth;
 
     function calcTotalWidth(chunks) {
@@ -37,17 +38,22 @@
                 xShift.set(0); 
             } else if (copy[value] !== 0 && select(`#${section} #book_${copy[value].scrollToId}`).node() !== null) {
                 let sel = select(`#${section} #book_${copy[value].scrollToId}`).node().getBoundingClientRect().x;
-                let blur = selectAll(".year-wrapper");
-                if (Math.abs(sel - margins) > w/1.25) {
-                    blur.classed("blur", true);
-                }
-                setTimeout(() => {
-                    let val = $xShift + sel - margins;
-                    xShift.set(val) 
-                }, 500)
-                setTimeout(() => {
-                    blur.classed("blur", false)
-                }, 1500)
+                let val = $xShift + sel - margins;
+                xShift.set(val) 
+                // let blur = selectAll(".year-wrapper");
+                // if (Math.abs(sel - margins) > w/1.25) {
+                //     blur.classed("blur", true);
+                // }
+                // setTimeout(() => {
+                //     let val = $xShift + sel - margins;
+                //     xShift.set(val) 
+                // }, 500)
+                // setTimeout(() => {
+                //     blur.classed("blur", false)
+                // }, 1500)
+            }
+            if (value == copy.length - 1 && select(`#${$activeSection} .overflow-wrap`).node() !== null) {
+                maxWidth = $xShift;
             }
         }
     }
@@ -77,9 +83,8 @@
     }
     
     function shiftSlider() {
-        if ($sliderVisible && totalShelfWidth) {
-            let maxWidth = totalShelfWidth.chunkWidth;
-            let val = $sliderStore*maxWidth/100
+        if ($sliderVisible && totalShelfWidth && maxWidth !== undefined) {
+            let val = $sliderStore*maxWidth/100;
             xShift.set(val)
         }
     }
@@ -88,8 +93,7 @@
     $: wallH, getYearLengths(yearGroups);
     $: w, getYearLengths(yearGroups);
     $: chunkWidths, calcTotalWidth(chunkWidths);
-    // $: value, shiftSlider();
-    // $: $sliderStore, shiftSlider();
+    $: $sliderStore, shiftSlider();
 </script>
 
 <svelte:window bind:innerHeight={h} bind:innerWidth={w} />
@@ -122,10 +126,10 @@
 </section>
 
 <style>
-    :global(.blur) {
+    /* :global(.blur) {
         filter: blur(1px);
         transition: 1s ease-in-out;
-    }
+    } */
     .overflow-wrap {
         display: flex;
         flex-direction: row;

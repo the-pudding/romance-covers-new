@@ -46,9 +46,6 @@
         display: flex;
         flex-direction: column;
     }
-    :global(#small-multiples .count) {
-        left: 25%;
-    }
     .top-wrapper {
         width: 100%;
         padding: 0 1rem;

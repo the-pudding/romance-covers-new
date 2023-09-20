@@ -16,20 +16,12 @@
 		if (Math.floor(value) === value) return 0;
 		return value.toString().split(".")[1].length || 0;
 	};
-	function positionPrompt(activeSection) {
-		if (activeSection == "illustration") {
-			promptPos = "15%"
-		} else {
-			promptPos = "-2%"
-		}
-	}
 	function handleChange() {
 		promptVisible = 0;
 		sliderStore.set(value)
 	}
 	$: decimals = getDecimalCount(step);
 	$: ticks = showTicks ? range(min, max + step, step) : [];
-	$: $activeSection, positionPrompt($activeSection);
 </script>
 
 <div class="range">
@@ -39,7 +31,7 @@
 		{/each}
 	</div>
 	<input on:change={handleChange} type="range" aria-label={label} {min} {max} {step} bind:value />
-		<div class="prompt" style="opacity: {promptVisible}; right: {promptPos}"
+		<div class="prompt" style="opacity: {promptVisible};"
 			in:fly={{ y: 10, duration: 1000, delay: 250}}
 			out:fly={{ y: 200, duration: 1000}}>
 			<p>Drag me!</p>
@@ -59,10 +51,10 @@
 	.prompt {
 		position: absolute;
 		bottom: -2rem;
+		right: -1rem;
         transition: 0.125s all linear;
         font-family: var(--sans-display);
         font-size: var(--12px);
-		text-transform: uppercase;
         text-align: center;
 		animation: shake 1s infinite;
 	}
