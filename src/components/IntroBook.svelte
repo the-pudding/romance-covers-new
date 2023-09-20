@@ -63,7 +63,7 @@
 			<div class="main" style="transform:rotate3d(1,1,0,{mainRotate}deg)">
 				<div class="book-front" style="transform:translate3d(0,0,25px) rotate3d(0,1,0,-{frontRotate}deg)">
 					<div class="book-cover" style={"width: 100%; height: 100%;"}>
-						<h1 use:fit>{@html copy.title}</h1>
+						<h1 use:fit>{@html copy.titleBreaks}</h1>
 						<p class="byline">Alice Liang</p>
 					</div>
 					<div class="book-cover-back">

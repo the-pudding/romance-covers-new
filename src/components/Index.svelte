@@ -85,9 +85,8 @@
 </script>
 
 <svelte:window bind:innerWidth={w} bind:innerHeight={h} bind:scrollY={scrollY} />
-
-<IntroScrolly bookMin={bookMin}/>
 <ChapterMarker />
+<IntroScrolly bookMin={bookMin}/>
 <Lookback bookMin={bookMin}/>
 <div class="sections">
 	<Chapter id={"raunchiness"} data={raunchinessData} copyBlock={copy.raunchinessText} copyScroll={copy.raunchinessScroll} pos={"overlay"} />
