@@ -1,19 +1,28 @@
 <script>
+    import { onMount } from "svelte";
     import { readingList, readingListVisible } from "$stores/misc.js";
     import { fly, fade } from 'svelte/transition';
     import { flip } from 'svelte/animate';
     import Icon from "$components/helpers/Icon.svelte";
     import Bookmark from "$components/Bookmark.svelte";
     import { selectAll } from "d3-selection";
+    import { csvFormat } from "d3";
     
     export let data;
     export let pos;
+
+    let csvElement;
+
+    onMount(() => {
+        csvElement = document.createElement("a")
+    })
 
     function findBookMatch(id, type) {
         const match = data.find(d => d.ISBN == id);
         if (type == "title") { return match.title }
         else if (type == "img") { return match.ISBN }
         else if (type == "author") { return match.author }
+        else if (type == "cover_img") { return match.cover_url }
     }
 
     function handleBtnClick(e) {
@@ -41,6 +50,36 @@
 
         setTimeout(() => { $readingListVisible = false; }, 500);
     }
+
+    function downloadList(e) {
+        console.log($readingList)
+        const data = $readingList.map((d,i) => ({
+            ...d,
+            title: findBookMatch(d.id, "title"),
+            author: findBookMatch(d.id, "author"),
+            cover_img: findBookMatch(d.id, "cover_img"),
+            libraryLink: `https://www.worldcat.org/search?q=bn%3A${d.id}`,
+            bookshopLink: `https://bookshop.org/book/${d.id}`
+        }))
+        const concatData = [].concat(...data).map(d => ({
+            ...d,
+        }));
+        const csv = csvFormat(concatData)
+        console.log(csv)
+        
+        const csvBlob = new Blob([csv]);
+        const blobUrl = URL.createObjectURL(csvBlob);
+        csvElement.href = blobUrl;
+        csvElement.download = "romance_reading_list.csv";
+
+        csvElement.dispatchEvent(
+            new MouseEvent("click", {
+                bubbles: true,
+                cancelable: true,
+                view: window
+            })
+        );
+    }
 </script>
 
 {#if pos == "overlay"}
@@ -51,8 +90,10 @@
             out:fly={{ y: 200, duration: 1000}}>
             <h3>Your Reading List</h3>
             {#if $readingList.length > 0}
-                <button class="clear-list"
-                on:click={clearList}>Clear list</button>
+                <div class="list-btn-wrapper">
+                    <button class="clear-list" on:click={clearList}>Clear list<Icon name="x-circle" /></button>
+                    <button class="download-list" on:click={downloadList}>Download list<Icon name="download" /></button>
+                </div>
                 <ul>
                     {#each $readingList as book, i (book.id)}
                         <div class="flip-div" animate:flip={{duration:1000, delay:0}}> 
@@ -101,8 +142,10 @@
         out:fly={{ y: 2000, duration: 1000 }}>
         <h3>Your Reading List</h3>
         {#if $readingList.length > 0}
-            <button class="clear-list"
-                on:click={clearList}>Clear list</button>
+            <div class="list-btn-wrapper">
+                <button class="clear-list" on:click={clearList}>Clear list<Icon name="x-circle" /></button>
+                <button class="download-list" on:click={downloadList}>Download list<Icon name="download" /></button>
+            </div>
                 <ul>
                     {#each $readingList as book, i (book.id)}
                         <div class="flip-div" animate:flip={{duration:1000, delay:0}}> 
@@ -218,15 +261,26 @@
         text-align: center;
         font-size: var(--28px);
     }
-    .clear-list {
+    .list-btn-wrapper {
+        display: flex;
+        flex-direction: row;
         margin: 0 auto;
+    }
+    .clear-list, .download-list {
+        margin: 0 1rem;
         background: transparent;
         color: var(--color-gray-600);
         font-family: var(--sans-display);
         font-size: var(--12px);
     }
-    .clear-list:hover {
+    .clear-list:hover, .download-list:hover {
         color: var(--color-gray-800);
+    }
+    :global(.clear-list span, .download-list span) {
+        margin-left: 0.25rem;
+        padding-top: 0.25rem;
+        position: relative;
+        top: 0.125rem;
     }
     ul {
         margin-top: 3rem;
@@ -327,7 +381,7 @@
         h3 {
             font-size: var(--36px);
         }
-        .clear-list {
+        .clear-list, .download-list {
             font-size: var(--14px);
         }
         ul {
