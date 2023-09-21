@@ -66,7 +66,7 @@
 				<div class="book-front" style="transform:translate3d(0,0,25px) rotate3d(0,1,0,-{frontRotate}deg)">
 					<div class="book-cover" style={"width: 100%; height: 100%;"}>
 						<h1 use:fit>{@html copy.titleBreaks}</h1>
-						<p class="byline">Alice Liang</p>
+						<p class="byline"><a href="https://pudding.cool/author/alice">Alice Liang</a></p>
 					</div>
 					<div class="book-cover-back">
 						<div class="book-cover-back-indent">
@@ -106,7 +106,7 @@
 			</div>
 		</div>
 	{/if}
-	<p class="credit">Cover design by <a href="http://www.sandrachiu.com/">Sandra Chiu</a></p>
+	<p class="credit">With <a href="https://pudding.cool/author/jan-diehm/">Jan Diehm</a> • Cover design by <a href="http://www.sandrachiu.com/">Sandra Chiu</a></p>
 </section>
 
 <style>
@@ -126,6 +126,7 @@
         font-family: var(--sans-display);
 		text-align: center;
 		margin: -1rem 1rem 0 1rem;
+		z-index: 1000;
     }
     .credit a {
         color: var(--color-gray-800);
@@ -219,6 +220,13 @@
 		color: #f7d92d;
 		margin: 0;
 	}
+	.byline a {
+		color: #f7d92d;
+		background-image: none !important;
+	}
+	.byline a:hover {
+		color: var(--romance-yellow-light);
+	}
 	.book-cover-back{
 		width: 100%;
         height: 100%;
@@ -252,26 +260,27 @@
 	:global(.initial-cap) {
 		float: left;
 		font-family: var(--serif-display);
-		font-weight: 500;
-		font-size: 90px;
-		line-height: 0.75;
-		margin: 0;
-		padding: 0 0.125rem 0 0;
+		font-weight: 600;
+		font-size: 50px;
+		line-height: 0.8;
+		margin: 0.25rem 0 0 0;
+		padding: 0 0.25rem 0 0;
 		position: relative;
 		z-index: 1000;
 	}
-	:global(.initial-cap:before) {
+	/* :global(.initial-cap:before) {
 		content: "G";
+		font-size: 80px;
 		position: absolute;
-		left: -1rem;
-		top: 0.5rem;
+		left: -0.5rem;
+		top: -0.5rem;
 		font-family: var(--sans-display);
 		font-weight: 900;
-		color: var(--romance-bg-blue);
+		color: var(--romance-bg-pink);
 		z-index: 0;
 		mix-blend-mode: darken;
 		opacity: 0.5;
-	}
+	} */
 
 /* = Book Page
 -------------------------------------------------------------- */
@@ -357,18 +366,22 @@
 			font-size: var(--18px);
 		}
 	}
-	@media only screen and (min-width: 600px) and (min-height: 400px) {
+	@media only screen and (min-width: 650px) and (min-height: 400px) {
 		.book-cover h1 {
 			font-size: var(--40px);
 		}
 		.book-cover .byline {
 			font-size: var(--24px);
 		}
-		.book-cover-back-indent {
-			padding: 3rem 2rem;
+		.book-cover-back-indent, #page-1 {
+			padding: 1rem 2rem;
 		}
 		.book-cover-back-indent p {
 			font-size: var(--16px);
+		}
+		:global(.initial-cap) {
+			font-size: 60px;
+			line-height: 0.8;
 		}
 	}
 	@media only screen and (min-width: 800px) and (min-height: 600px) {

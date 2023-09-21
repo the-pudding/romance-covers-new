@@ -61,8 +61,27 @@
         margin: 0 auto;
 		pointer-events: none;
 	}
-	.step:last-of-type {
-		opacity: 0;
+	.step:last-of-type p {
+		position: relative;
+		text-align: center;
+		font-family: var(--sans-display);
+		font-weight: 900;
+		font-size: var(--12px);
+		display: flex;
+		justify-content: center;
+	}
+	.step:last-of-type p::before {
+		content: " ";
+		position:relative;
+		width: 1rem;
+		height: 1rem;
+		top:0rem;
+		left:0;
+		margin: 0 0.25rem 0 0;
+		background-image: url($svg/pointer.svg);
+		background-size: 1rem 1rem;
+        background-repeat: no-repeat;
+        background-position: center;
 	}
 
 	.step p {
@@ -92,5 +111,13 @@
 	}
 	:global(.step p a:hover) {
 		background-position: 0 0rem;
+	}
+	@media only screen and (min-width: 600px) {
+        .step:last-of-type p {
+			font-size: var(--14px);
+		}
+		.step:last-of-type p::before {
+			top:0.1rem;
+		}
 	}
  </style>
