@@ -91,8 +91,8 @@
             <h3>Your Reading List</h3>
             {#if $readingList.length > 0}
                 <div class="list-btn-wrapper">
-                    <button class="clear-list" on:click={clearList}>Clear list<Icon name="x-circle" /></button>
                     <button class="download-list" on:click={downloadList}>Download list<Icon name="download" /></button>
+                <button class="clear-list" on:click={clearList}>Clear list<Icon name="x-circle" /></button>
                 </div>
                 <ul>
                     {#each $readingList as book, i (book.id)}
@@ -143,8 +143,8 @@
         <h3>Your Reading List</h3>
         {#if $readingList.length > 0}
             <div class="list-btn-wrapper">
-                <button class="clear-list" on:click={clearList}>Clear list<Icon name="x-circle" /></button>
                 <button class="download-list" on:click={downloadList}>Download list<Icon name="download" /></button>
+                <button class="clear-list" on:click={clearList}>Clear list<Icon name="x-circle" /></button>
             </div>
                 <ul>
                     {#each $readingList as book, i (book.id)}
