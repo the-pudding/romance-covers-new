@@ -14,9 +14,7 @@
     use:inView
     on:enter={() => setSection("methods")}>
     <Prose copy={copy.outro} />
-    {#if $readingList.length > 0}
         <ReadingList data={data} pos={"inline"}/>
-    {/if}
     <div id="notes">
         <h5>Methods & Notes</h5>
         <Prose copy={copy.dataNote} />

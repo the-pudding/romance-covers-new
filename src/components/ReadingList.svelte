@@ -230,6 +230,7 @@
         padding: 0.5rem;
         z-index: 1000;
         overflow-y: scroll;
+        overflow-x: hidden;
         pointer-events: auto;
         display: flex;
         flex-direction: column;
