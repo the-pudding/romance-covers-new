@@ -33,11 +33,15 @@
 
     function shiftX(value) {
         if (copy[value] !== undefined) {
-            if (value == 0) { xShift.set(0); }
+            if (value == 0) { 
+                xShift.set(0); 
+                sliderStore.set(0)
+            }
             else if (copy[value] !== 0 && select(`#${section} #book_${copy[value].scrollToId}`).node() !== null) {
                 let sel = select(`#${section} #book_${copy[value].scrollToId}`).node().getBoundingClientRect().x;
                 let val = $xShift + sel - margins;
                 xShift.set(val) 
+
                 // let blur = selectAll(".year-wrapper");
                 // if (Math.abs(sel - margins) > w/1.25) {
                 //     blur.classed("blur", true);
