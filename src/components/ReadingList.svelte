@@ -78,12 +78,13 @@
             })
         );
     }
+    $: isScroll = $readingList.length > 0 ? true : false;
 </script>
 
 {#if pos == "overlay"}
 <section id="reading-list-{pos}">
     {#if $readingListVisible && pos == "overlay"}
-        <div class="paper"
+        <div class="paper" class:isScroll={isScroll}
             in:fly={{ y: 200, duration: 1000}}
             out:fly={{ y: 200, duration: 1000}}>
             <h3>Your Reading List</h3>
@@ -135,7 +136,7 @@
 </section>
 {:else if pos == "inline"}
 <section id="reading-list-inline">
-    <div class="paper"
+    <div class="paper" class:isScroll={isScroll}
         in:fly={{ y: 2000, duration: 1000 }}
         out:fly={{ y: 2000, duration: 1000 }}>
         <h3>Your Reading List</h3>
@@ -227,12 +228,15 @@
         box-shadow: -0.25rem 0 1rem  var(--color-gray-100);
         padding: 0.5rem;
         z-index: 1000;
-        overflow-y: scroll;
+        overflow-y: hidden;
         overflow-x: hidden;
         pointer-events: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+    .paper.isScroll {
+        overflow-y: scroll; 
     }
     .paper::-webkit-scrollbar {
         -webkit-appearance: none;
@@ -242,7 +246,7 @@
     }
     .paper::-webkit-scrollbar-thumb {
         border-radius: 8px;
-        border: 2px solid white; /* should match background, can't be transparent */
+        border: 2px solid white;
         background-color: var(--color-gray-200);
     }
     #reading-list-inline .paper {

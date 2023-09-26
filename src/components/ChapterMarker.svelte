@@ -1,5 +1,5 @@
 <script>
-    import { activeSection, xShiftRaunch, xShiftIllo, xShiftRace, readingList, readingListVisible, sliderVisible, sliderStoreRaunch, sliderStoreIllo, sliderStoreRace } from "$stores/misc.js";
+    import { activeSection, xShiftRaunch, xShiftIllo, xShiftRace, readingList, readingListVisible, sliderVisible, sliderStoreRaunch, sliderStoreIllo, sliderStoreRace, maxWidthRaunch, maxWidthIllo, maxWidthRace } from "$stores/misc.js";
     import { fly, fade } from 'svelte/transition';
     import Icon from "$components/helpers/Icon.svelte";
     import {select} from "d3-selection";
@@ -11,11 +11,21 @@
     let sliderValIllo;
     let sliderValRace;
     let rangeStart = 100;
+    let scrollY;
+	let scrollDir;
+	let lastY;
 
     function handleListToggle(initState) {
         readingListVisible.set(!$readingListVisible);
         select(this).style("animation", "none")
         select(this).classed("highlight", false)
+    }
+
+    function checkScrollY(scrollY) {
+        if (scrollY) {
+            scrollDir = scrollY > lastY ? "down" : "up"
+            lastY = scrollY;
+        }
     }
 
     function handleChapterClick(e) {
@@ -38,24 +48,27 @@
         sliderVisible.set(false);
         if (activeSection == "raunchiness") { 
             sliderStoreRaunch.set(100);
-            xShiftRaunch.set(0); 
+            if (scrollDir == "down") { xShiftRaunch.set(0); }
         } else if (activeSection == "illustration") { 
             sliderStoreIllo.set(100);
-            xShiftIllo.set(0);  
+            if (scrollDir == "down") { xShiftIllo.set(0); }
         } else if (activeSection == "race") { 
             sliderStoreRace.set(100);
-            xShiftRace.set(0);  
+            if (scrollDir == "down") { xShiftRace.set(0); } 
         } else {
             sliderStoreRaunch.set(100);
             sliderStoreIllo.set(100);
             sliderStoreRace.set(100);
-            xShiftRaunch.set(0);
-            xShiftIllo.set(0);
-            xShiftRace.set(0);
+            if (scrollDir == "down") { 
+                xShiftRaunch.set(0);
+                xShiftIllo.set(0);
+                xShiftRace.set(0);
+            }
         }
         rangeStart = 100;
     }
-    
+
+    $: scrollY, checkScrollY(scrollY);
     $: $activeSection, setRangeVal($activeSection) 
 </script>
 

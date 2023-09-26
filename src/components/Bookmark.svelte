@@ -35,4 +35,7 @@
         right: 0;
         pointer-events: none;
     }
+    :global(.instructions .message) {
+        display: none;
+    }
 </style>

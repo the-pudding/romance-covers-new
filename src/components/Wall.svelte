@@ -131,6 +131,7 @@
     $: $sliderStoreRaunch, shiftSlider();
     $: $sliderStoreIllo, shiftSlider();
     $: $sliderStoreRace, shiftSlider();
+    $: console.log({$xShiftRaunch, $xShiftIllo, $xShiftRace})
 </script>
 
 <svelte:window bind:innerHeight={h} bind:innerWidth={w} />
