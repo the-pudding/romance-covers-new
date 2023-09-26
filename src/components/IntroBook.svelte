@@ -199,14 +199,14 @@
 		font-weight: 900;
 		font-style: normal;
 		text-transform: uppercase;
-		color: #f7d92d;
+		color: #F8DC3F;
 		font-size: var(--24px);
 		line-height: 2;
 		margin: -0.5rem auto 0 auto;
 		padding: 0 0 5rem 0;
 		text-align: center;
 		width: 100%;
-		text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.125);
+		text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
 	}
 	.book-cover .byline {
 		font-family: var(--serif-display);
@@ -217,11 +217,11 @@
 		text-align: center;
 		width: 100%;
 		font-size: var(--18px);
-		color: #f7d92d;
+		color: #F8DC3F;
 		margin: 0;
 	}
 	.byline a {
-		color: #f7d92d;
+		color: #F8DC3F;
 		background-image: none !important;
 	}
 	.byline a:hover {
