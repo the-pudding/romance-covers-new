@@ -1,5 +1,5 @@
 <script>
-	import { activeSection, sliderStore } from "$stores/misc.js";
+	import { activeSection, sliderStoreRaunch, sliderStoreIllo, sliderStoreRace } from "$stores/misc.js";
 	import { fly } from 'svelte/transition';
 	import { range, format } from "d3";
 	export let min = 0;
@@ -8,23 +8,39 @@
 	export let showTicks = false;
 	export let value;
 	export let label = "";
+	export let section;
 
 	let promptVisible = 1;
-	let promptPos = "-1rem"
+	let promptPos = "-1rem";
+	let scrollY;
+	let scrollDir;
+	let lastY;
 
 	const getDecimalCount = (value) => {
 		if (Math.floor(value) === value) return 0;
 		return value.toString().split(".")[1].length || 0;
 	};
+
+	function checkScrollY(scrollY) {
+        if (scrollY) {
+            scrollDir = scrollY > lastY ? "down" : "up"
+            lastY = scrollY;
+        }
+    }
+
 	function handleChange() {
 		promptVisible = 0;
-		sliderStore.set(value)
+		if ($activeSection == "raunchiness") { sliderStoreRaunch.set(value) }
+		else if ($activeSection == "illustration") { 
+			sliderStoreIllo.set(value) }
+		else if ($activeSection == "race") { sliderStoreRace.set(value) }
 	}
 	$: decimals = getDecimalCount(step);
 	$: ticks = showTicks ? range(min, max + step, step) : [];
+	$: scrollY, checkScrollY(scrollY);
 </script>
 
-<div class="range">
+<div class="range" id="range-{section}">
 	<div class="ticks">
 		{#each ticks as tick}
 			<span class="tick">{format(`.${decimals}f`)(tick)}</span>
@@ -43,10 +59,10 @@
 	.range {
 		--thumb-width: 24px;
 		--tick-font-size: 12px;
-		position: relative;
+		position: absolute;
 		display: flex;
 		flex-direction: row;
-		width: calc(100% - 4rem);
+		width: 100%;
 	}
 	.prompt {
 		position: absolute;

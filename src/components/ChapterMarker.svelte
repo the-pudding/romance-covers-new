@@ -1,5 +1,5 @@
 <script>
-    import { activeSection, readingList, readingListVisible, sliderVisible, sliderStore } from "$stores/misc.js";
+    import { activeSection, xShiftRaunch, xShiftIllo, xShiftRace, readingList, readingListVisible, sliderVisible, sliderStoreRaunch, sliderStoreIllo, sliderStoreRace } from "$stores/misc.js";
     import { fly, fade } from 'svelte/transition';
     import Icon from "$components/helpers/Icon.svelte";
     import {select} from "d3-selection";
@@ -7,7 +7,9 @@
     import logo from "$svg/logo.svg";
 
     const sections = ["intro", "raunchiness", "illustration", "race", "methods"];
-	let sliderVal;
+	let sliderValRaunch;
+    let sliderValIllo;
+    let sliderValRace;
     let rangeStart = 100;
 
     function handleListToggle(initState) {
@@ -34,7 +36,23 @@
 
     function setRangeVal(activeSection) {
         sliderVisible.set(false);
-        sliderStore.set(100)
+        if (activeSection == "raunchiness") { 
+            sliderStoreRaunch.set(100);
+            xShiftRaunch.set(0); 
+        } else if (activeSection == "illustration") { 
+            sliderStoreIllo.set(100);
+            xShiftIllo.set(0);  
+        } else if (activeSection == "race") { 
+            sliderStoreRace.set(100);
+            xShiftRace.set(0);  
+        } else {
+            sliderStoreRaunch.set(100);
+            sliderStoreIllo.set(100);
+            sliderStoreRace.set(100);
+            xShiftRaunch.set(0);
+            xShiftIllo.set(0);
+            xShiftRace.set(0);
+        }
         rangeStart = 100;
     }
     
@@ -84,7 +102,15 @@
                 in:fade={{ delay: 250, duration: 300 }}
                 out:fade={{ delay: 0, duration: 0 }}>
                 <p><Icon name="move-left" /></p>
-                <Range value={rangeStart} min={0} max={100} step={1} showTicks={false} bind:sliderVal />
+                <div class="range-wrapper">
+                    {#if $activeSection == "raunchiness"}
+                        <Range value={rangeStart} min={0} max={100} step={1} showTicks={false} section={"raunchiness"} bind:sliderValRaunch /> 
+                    {:else if $activeSection == "illustration"}
+                        <Range value={rangeStart} min={0} max={100} step={1} showTicks={false} section={"illustration"} bind:sliderValIllo />
+                    {:else if $activeSection == "race"}
+                        <Range value={rangeStart} min={0} max={100} step={1} showTicks={false} section={"race"} bind:sliderValRace />
+                    {/if} 
+                </div>
                 <p><Icon name="move-right" /></p>
             </div>
         {/if}
@@ -118,6 +144,12 @@
         top: 4.5rem;
         width: 100%;
         height: 3rem;
+    }
+    .range-wrapper {
+        position: relative;
+        width: calc(100% - 4rem);
+        display: flex;
+		flex-direction: row;
     }
     .logo {
         width: 1.25rem;
@@ -274,7 +306,7 @@
 		font-size: var(--14px);
 		font-family: var(--sans-display);
 		width: 2rem;
-        margin: 0.25rem 0 0 0;
+        margin: 0.75rem 0 0 0;
 	}
 	#range-slider p:first-of-type {
 		text-align: right;

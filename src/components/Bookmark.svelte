@@ -1,10 +1,15 @@
 <script>
-    import Icon from "$components/helpers/Icon.svelte";
     import AddButton from "$components/AddButton.svelte";
+
+    export let category;
 </script>
 
 <div class="instructions">
-    <p>Use the <AddButton /> buttons next to each book to add it to your reading list and see the full list in the top right.</p>
+    {#if category == "wall"}
+        <p>Use the <AddButton /> buttons next to each book to add it to your reading list and see the full list in the top right.</p>
+    {:else}
+        <p>Use the <AddButton /> buttons next to each book to add it to your reading list.</p>
+    {/if}
 </div>  
 
 <style>

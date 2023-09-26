@@ -1,7 +1,7 @@
 <script>
 	import Scrolly from "$components/helpers/Scrolly.svelte";
     import Wall from "$components/Wall.svelte";
-	import { stepData, sliderVisible, sliderStore } from "$stores/misc.js";
+	import { stepData, sliderVisible, sliderStoreRaunch, sliderStoreIllo, sliderStoreRace } from "$stores/misc.js";
 	
 	export let data;
     export let copy;

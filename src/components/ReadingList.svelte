@@ -52,7 +52,6 @@
     }
 
     function downloadList(e) {
-        console.log($readingList)
         const data = $readingList.map((d,i) => ({
             ...d,
             title: findBookMatch(d.id, "title"),
@@ -65,7 +64,6 @@
             ...d,
         }));
         const csv = csvFormat(concatData)
-        console.log(csv)
         
         const csvBlob = new Blob([csv]);
         const blobUrl = URL.createObjectURL(csvBlob);
@@ -128,7 +126,7 @@
                     {/each}
                 </ul>
             {:else}
-                <Bookmark />
+                <Bookmark category={"list"}/>
             {/if}
         </div>
         <div class="bg" in:fade={{ delay: 300 }} out:fade={{ delay: 300 }}
