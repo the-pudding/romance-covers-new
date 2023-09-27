@@ -7,6 +7,7 @@
     import Bookmark from "$components/Bookmark.svelte";
     import { selectAll } from "d3-selection";
     import { csvFormat } from "d3";
+    import linkData from "$data/linkChecks.csv";
     
     export let data;
     export let pos;
@@ -16,6 +17,18 @@
     onMount(() => {
         csvElement = document.createElement("a")
     })
+
+    function findLinkMatch(id) {
+        const match = linkData.find(d => d.ISBN == id);
+        if (match.workingLink == "true") { return true }
+        else { return false }
+    }
+
+    function findLinkMatchURL(id) {
+        const match = linkData.find(d => d.ISBN == id);
+        if (match.workingLink == "true") { return `https://bookshop.org/book/${id}` }
+        else { return '' }
+    }
 
     function findBookMatch(id, type) {
         const match = data.find(d => d.ISBN == id);
@@ -58,7 +71,7 @@
             author: findBookMatch(d.id, "author"),
             cover_img: findBookMatch(d.id, "cover_img"),
             libraryLink: `https://www.worldcat.org/search?q=bn%3A${d.id}`,
-            bookshopLink: `https://bookshop.org/book/${d.id}`
+            bookshopLink: findLinkMatchURL(d.id)
         }))
         const concatData = [].concat(...data).map(d => ({
             ...d,
@@ -90,7 +103,7 @@
             <h3>Your Reading List</h3>
             {#if $readingList.length > 0}
                 <div class="list-btn-wrapper">
-                    <button class="download-list" on:click={downloadList}>Download list<Icon name="download" /></button>
+                    <button class="download-list" on:click={downloadList}>Download list as csv<Icon name="download" /></button>
                 <button class="clear-list" on:click={clearList}>Clear list<Icon name="x-circle" /></button>
                 </div>
                 <ul>
@@ -109,12 +122,14 @@
                                                     Check out from your library
                                                 </a>
                                             </p>
-                                            <p class="list-link bookshop">
-                                                <span><Icon name="shopping-bag" /></span>
-                                                <a href="https://bookshop.org/book/{book.id}">
-                                                    Buy from Bookshop
-                                                </a>
-                                            </p>
+                                            {#if findLinkMatch(book.id)}
+                                                <p class="list-link bookshop">
+                                                    <span><Icon name="shopping-bag" /></span>
+                                                    <a href="https://bookshop.org/book/{book.id}">
+                                                        Buy from Bookshop
+                                                    </a>
+                                                </p>
+                                            {/if}
                                         </div>
                                     </div>
                                     <button class="remove"
@@ -142,7 +157,7 @@
         <h3>Your Reading List</h3>
         {#if $readingList.length > 0}
             <div class="list-btn-wrapper">
-                <button class="download-list" on:click={downloadList}>Download list<Icon name="download" /></button>
+                <button class="download-list" on:click={downloadList}>Download list as csv<Icon name="download" /></button>
                 <button class="clear-list" on:click={clearList}>Clear list<Icon name="x-circle" /></button>
             </div>
                 <ul>
@@ -161,12 +176,14 @@
                                                     Check out from your library
                                                 </a>
                                             </p>
-                                            <p class="list-link bookshop">
-                                                <span><Icon name="shopping-bag" /></span>
-                                                <a href="https://bookshop.org/book/{book.id}">
-                                                    Buy from Bookshop
-                                                </a>
-                                            </p>
+                                            {#if findLinkMatch(book.id)}
+                                                <p class="list-link bookshop">
+                                                    <span><Icon name="shopping-bag" /></span>
+                                                    <a href="https://bookshop.org/book/{book.id}">
+                                                        Buy from Bookshop
+                                                    </a>
+                                                </p>
+                                            {/if}
                                         </div>
                                     </div>
                                     <button class="remove"

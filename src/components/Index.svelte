@@ -98,6 +98,7 @@
         flex-direction: row;
         justify-content: center;
         z-index: 999;
+		pointer-events: none;
     }
 	.shield {
 		width: 100%;

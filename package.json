@@ -10,7 +10,8 @@
 		"lint": "prettier --check --plugin-search-dir=. .",
 		"format": "prettier --write --plugin-search-dir=. .",
 		"imgDownload": "node tasks/imgDownload.js",
-		"imgLookbackDownload": "node tasks/imgLookbackDownload.js"
+		"imgLookbackDownload": "node tasks/imgLookbackDownload.js",
+		"checkURL": "node tasks/checkURL.js"
 	},
 	"devDependencies": {
 		"@rollup/plugin-dsv": "^3.0.2",
@@ -42,6 +43,8 @@
 	"dependencies": {
 		"@leveluptuts/svelte-fit": "^1.0.3",
 		"image-downloader": "^4.3.0",
-		"svelte-lazy-loader": "^1.0.0"
+		"svelte-lazy-loader": "^1.0.0",
+		"url-exist": "^3.0.1",
+		"url-exists": "^1.0.3"
 	}
 }
