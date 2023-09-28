@@ -33,6 +33,7 @@ export function lazyAll(node, params) {
 	const observer = new IntersectionObserver(observation, params);
 	
 	const imgs = node.querySelectorAll('img');
+	console.log(node)
 	imgs.forEach(img => observer.observe(img));
 	
 	return {

@@ -1,6 +1,7 @@
 <script>
     import { getContext } from "svelte";
-	import { fit } from '@leveluptuts/svelte-fit'
+	import { fit } from '@leveluptuts/svelte-fit';
+	import { fade } from 'svelte/transition';
 
 	export let bookMin;
     
@@ -60,13 +61,14 @@
 <svelte:window bind:innerWidth={w} bind:innerHeight={h} bind:scrollY={y}/>
 
 <section id="intro-book">
-	{#if w !== undefined && h !== undefined}
 		<div id="book" style="transform:translate3d({bookTranslate}%,0,0); height:{(bookMin-32)/1.5}px; width:{(bookMin-32)/1.5/1.475}px" >
 			<div class="main" style="transform:rotate3d(1,1,0,{mainRotate}deg)">
 				<div class="book-front" style="transform:translate3d(0,0,25px) rotate3d(0,1,0,-{frontRotate}deg)">
 					<div class="book-cover" style={"width: 100%; height: 100%;"}>
-						<h1 use:fit>{@html copy.titleBreaks}</h1>
-						<p class="byline"><a href="https://pudding.cool/author/alice">Alice Liang</a></p>
+						{#if w !== undefined && h !== undefined}
+							<h1 in:fade={{ delay: 500 }} use:fit>{@html copy.titleBreaks}</h1>
+							<p in:fade={{ delay: 500 }} class="byline"><a href="https://pudding.cool/author/alice">Alice Liang</a></p>
+						{/if}
 					</div>
 					<div class="book-cover-back">
 						<div class="book-cover-back-indent">
@@ -105,7 +107,6 @@
 				<div class="book-bottom"></div>
 			</div>
 		</div>
-	{/if}
 	<p class="credit">With <a href="https://pudding.cool/author/jan-diehm/">Jan Diehm</a> • Cover design by <a href="http://www.sandrachiu.com/">Sandra Chiu</a></p>
 </section>
 
@@ -138,10 +139,12 @@
 	#book {
 		margin: 0 auto;
 		position: relative;
-		transition-duration: .5s;
 		perspective: 2000px;
 		transform:translate3d(0,0,0);	
 		padding: 1rem;
+		max-width: 475px;
+		max-height: 700px;
+		transition: all 0.5s;
 	}
 	.main {
 		width: 100%;
@@ -172,6 +175,7 @@
         height: 100%;
 		overflow:hidden;
 		position:absolute; top:0; bottom:0;
+		background-color: var(--romance-blue);
 		background-image: linear-gradient(to right, 
 			rgba(60, 13, 20, 0.25) 1px, 
             rgba(255, 255, 255, 0.5) 3px, 

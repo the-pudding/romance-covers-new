@@ -35,8 +35,8 @@
 
 	function setScroll(readingListVisible) {
 		if (body) {
-			if (readingListVisible == false) { body.style("overflow-y", "auto") } 
-			else { body.style("overflow-y", "hidden") }
+			if (readingListVisible == true || w == undefined && h == undefined) { body.style("overflow-y", "hidden") } 
+			else { body.style("overflow-y", "auto") }
 		}
 	}
 
@@ -60,6 +60,8 @@
 		if (w !== undefined && h !== undefined) {
 			if (Math.min(w,h) > 600) { return Math.min(w, h); } 
 			else { return 600 };
+		} else {
+			return 600;
 		}
 	}
 	

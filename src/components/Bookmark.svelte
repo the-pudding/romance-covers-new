@@ -1,14 +1,13 @@
 <script>
-    import AddButton from "$components/AddButton.svelte";
 
     export let category;
 </script>
 
 <div class="instructions">
     {#if category == "wall"}
-        <p>Use the <AddButton /> buttons next to each book to add it to your reading list and see the full list in the top right.</p>
+        <p>Use the <span class="instruct-add"></span> buttons next to each book to add it to your reading list and see the full list in the top right.</p>
     {:else}
-        <p>Use the <AddButton /> buttons next to each book to add it to your reading list.</p>
+        <p>Use the  buttons next to each book to add it to your reading list.</p>
     {/if}
 </div>  
 
@@ -28,14 +27,20 @@
         color: var(--color-gray-600);
         font-size: var(--14px);
     }
-    :global(.instructions .add) {
+    :global(.instruct-add) {
         display: inline-block;
-        position: relative;
-        bottom: 0.25rem;
-        right: 0;
+        height: 1.5rem;
+        width: 1.5rem;
+        background-image: url($svg/book-open.svg);
+        background-size: 0.75rem 0.75rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: var(--color-gray-800);
+        border-radius: 50%;
+        box-shadow: 0.25rem 0 0.5rem  rgba(0,0,0,0.125);
+        border: 2px solid var(--color-white);
         pointer-events: none;
-    }
-    :global(.instructions .message) {
-        display: none;
+        position: relative;
+        top: 0.25rem;
     }
 </style>

@@ -45,9 +45,17 @@
         {/each}
 	</Scrolly>
 	<div class="spacer" />
-    {#if y < h && scrollDir != "up"}
+    {#if h == undefined}
+        <div class="loading-wrapper"
+            out:fade={{ duration: 500}}>
+            <p>Loading</p>
+            <span class="loader"></span>
+        </div>
+    {/if}
+    {#if y < 5 && scrollDir !== "up"}
         <div class="icon-wrapper"
             out:fade={{ duration: 500}}>
+            <p>Scroll</p>
             <Icon name="arrow-down-circle" size="3rem"/>
         </div>
     {/if}
@@ -85,12 +93,35 @@
         opacity: 0;
         visibility: none;
 	}
-    .icon-wrapper {
+    .icon-wrapper, .loading-wrapper {
         position: fixed;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         bottom: 0;
         left: 50%;
         transform: translate(-50%, -50%);
+    }
+    .icon-wrapper {
         animation: bounceUp 1s infinite;
+    }
+    .loading-wrapper p, .icon-wrapper p {
+        color: var(--romance-pink);
+        font-family: var(--sans-display);
+        font-size: var(--12px);
+        text-transform: uppercase;
+        margin: 0.5rem 0;
+    }
+    .loader {
+        width: 3rem;
+        height: 3rem;
+        border: 2px solid var(--romance-pink-light);
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
     }
     :global(.icon-wrapper svg path, .icon-wrapper svg circle) {
         stroke: var(--romance-pink-light);
@@ -101,5 +132,13 @@
         25%, 75% { bottom:4px; }
         50%      { bottom:6px; }
         100%     { bottom:0; }
+    }
+    @keyframes rotation {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
     }
 </style>
