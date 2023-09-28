@@ -37,7 +37,8 @@
 
 <button 
     on:click={handleBtnClick}
-    class="add book_noList">
+    class="add book_noList"
+    aria-label="add or remove book from reading list">
 </button>
 <p class="message" class:visible={showMessage}>Book added!</p>
 

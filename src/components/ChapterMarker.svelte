@@ -86,7 +86,8 @@
                     <button 
                         on:click={handleChapterClick}
                         class="sectionBox {active}"
-                        id="sectionBox-{section}">
+                        id="sectionBox-{section}"
+                        aria-label="jump to {section}">
                     </button>
                     <p class="label {active}">{resetTitles(section)}</p>
                 </div>
@@ -94,7 +95,8 @@
         </div>
         <button 
             on:click={handleListToggle}
-            class="listBtn">
+            class="listBtn"
+            aria-label="open reading list">
                 {#if $readingList.length > 0}
                     <p class="count"
                     in:fly={{ y: 20, duration: 200}}
