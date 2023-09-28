@@ -1,6 +1,6 @@
 
 body {
-	background-color: transparent;
+	background-color: var(--romance-bg-pink);
 	color: var(--color-gray-800);
 	line-height: 1.4;
 	font-family: var(--font-body, serif);

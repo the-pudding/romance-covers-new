@@ -34,7 +34,7 @@
         e.preventDefault()
 		const anchor = document.getElementById(id)
 		window.scrollTo({
-			top: anchor.offsetTop,
+			top: anchor.offsetTop + 20,
 			behavior: 'instant'
 		})
     }
