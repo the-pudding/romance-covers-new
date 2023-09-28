@@ -35,7 +35,7 @@
 
 	function setScroll(readingListVisible) {
 		if (body) {
-			if (readingListVisible == true || w == undefined && h == undefined) { body.style("overflow-y", "hidden") } 
+			if (readingListVisible == true) { body.style("overflow-y", "hidden") } 
 			else { body.style("overflow-y", "auto") }
 		}
 	}

@@ -56,19 +56,19 @@
 	$: w, computePercentage(y, w, h);
 	$: h, computePercentage(y, w, h);
 	$: bookMin, setBookText();
+
+	// height:{(bookMin-32)/1.5}px; width:{(bookMin-32)/1.5/1.475}px
 </script>
 
 <svelte:window bind:innerWidth={w} bind:innerHeight={h} bind:scrollY={y}/>
 
 <section id="intro-book">
-		<div id="book" style="transform:translate3d({bookTranslate}%,0,0); height:{(bookMin-32)/1.5}px; width:{(bookMin-32)/1.5/1.475}px" >
+		<div id="book" style="transform:translate3d({bookTranslate}%,0,0);" >
 			<div class="main" style="transform:rotate3d(1,1,0,{mainRotate}deg)">
 				<div class="book-front" style="transform:translate3d(0,0,25px) rotate3d(0,1,0,-{frontRotate}deg)">
 					<div class="book-cover" style={"width: 100%; height: 100%;"}>
-						{#if w !== undefined && h !== undefined}
-							<h1 in:fade={{ delay: 500 }} use:fit>{@html copy.titleBreaks}</h1>
-							<p in:fade={{ delay: 500 }} class="byline"><a href="https://pudding.cool/author/alice">Alice Liang</a></p>
-						{/if}
+							<h1 in:fade={{ delay: 0 }} use:fit>{@html copy.titleBreaks}</h1>
+							<p in:fade={{ delay: 0 }} class="byline"><a href="https://pudding.cool/author/alice">Alice Liang</a></p>
 					</div>
 					<div class="book-cover-back">
 						<div class="book-cover-back-indent">
@@ -145,6 +145,8 @@
 		max-width: 475px;
 		max-height: 700px;
 		transition: all 0.5s;
+		aspect-ratio: 1 / 1.475;
+		height: 80vmin;
 	}
 	.main {
 		width: 100%;
@@ -211,6 +213,7 @@
 		text-align: center;
 		width: 100%;
 		text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
+		/* transition: all 0.5s; */
 	}
 	.book-cover .byline {
 		font-family: var(--serif-display);
@@ -403,7 +406,7 @@
 	}
 	@media only screen and (min-width: 1000px) and (min-height: 1000px) {
 		.book-cover h1 {
-			font-size: var(--56px);
+			font-size: var(--64px);
 			margin: -2rem auto 0 auto;
 		}
 		.book-cover .byline {

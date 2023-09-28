@@ -45,17 +45,9 @@
         {/each}
 	</Scrolly>
 	<div class="spacer" />
-    {#if h == undefined}
-        <div class="loading-wrapper"
-            out:fade={{ duration: 500}}>
-            <p>Loading</p>
-            <span class="loader"></span>
-        </div>
-    {/if}
-    {#if y < 5 && scrollDir !== "up"}
+    {#if y == undefined || y < 5}
         <div class="icon-wrapper"
             out:fade={{ duration: 500}}>
-            <p>Scroll</p>
             <Icon name="arrow-down-circle" size="3rem"/>
         </div>
     {/if}

@@ -102,10 +102,10 @@
                         {$readingList.length}
                     </p>
                 {/if}
-                {#if $readingListVisible == true}
-                    <Icon name="x" />
-                {:else}
+                {#if $readingListVisible ==false}
                     <Icon name="book-open" />
+                {:else}
+                    <Icon name="x" />
                 {/if}
         </button>
     </div>
