@@ -113,14 +113,37 @@
             {/if}
         </div>
     {/if}
-    <Prose copy={copy.lookBack} />
+    <div class="prose">
+        <p>{@html copy.lookBackA[0].value}</p>
+    </div>
+    <h5>Clinch covers featuring Fabio</h5>
+    <div class="book-wrapper">
+        {#each lookbackData.slice(5,10) as book, i}
+            <div class="highlightBook">
+                <div class="books books-fabio">
+                    <!-- Books expects a single book. In this case, I'm just using the first row of data from the
+                    overall spreadsheet. We could create another spreadsheet structured in the same way, just with
+                    "lookBack" books. If you need multiple books, you can wrap the Book.svelte component in an
+                    {#each} statement (see Wall.svelte) or the Shelf component below.-->
+                    <!-- Index is set to 0 to add publication year on the shelf (might remove?) -->
+                    <Book book={book} index={0} bookAddable={false} wallH={760}/>
+                </div>
+                <div class="shelves">
+                    <Shelf shelfW={100} shelfHasShadow={false} wallH={760} />
+                </div>
+            </div>
+        {/each}
+    </div>
+    <div class="prose">
+        <p>{@html copy.lookBackB[0].value}</p>
+    </div>
 
     <!-- This setcion pulls out book(s) to highlight without a full wall by using the Wall.Book.svelte
         and Wall.Shelf.svelte components. To style them differently, you'll want to use global stylings
         like the example in the css.-->
     <h5>Historical Romance Novel Covers</h5>
     <div class="book-wrapper">
-        {#each lookbackData as book, i}
+        {#each lookbackData.slice(0,5) as book, i}
             <div class="highlightBook">
                 <div class="books">
                     <!-- Books expects a single book. In this case, I'm just using the first row of data from the
@@ -152,6 +175,9 @@
     :global(#lookback a) {
 		background-image: linear-gradient(180deg,transparent 0,var(--romance-pink-light) 0);
 	}
+    :global(.books-fabio .marker) {
+        display: none;
+    }
     .prose {
         display: flex;
         justify-content: center;

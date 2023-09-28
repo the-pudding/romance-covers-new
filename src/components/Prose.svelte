@@ -1,5 +1,6 @@
 <script>
     export let copy;
+    console.log(copy.length)
 </script>
 
 <div class="prose">
