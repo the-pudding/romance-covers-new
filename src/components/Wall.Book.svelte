@@ -25,8 +25,8 @@
     >   
         <div class='img-wrapper' style="height: {Math.floor(wallH/5-48)}px; width: {Math.floor((wallH/5-48)*0.625)}px;">
             <div class="overlay"></div>
-            <!-- <img src="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" /> -->
-            <Image loading="lazy" src="assets/images/covers/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" />
+            <img src="assets/images/covers/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" />
+            <!-- <Image loading="lazy" src="assets/images/covers/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" /> -->
         </div>
         <div class="marker">{book.year}</div>
         {#if bookAddable == true}
@@ -40,8 +40,8 @@
     >
         <div class='img-wrapper' style="height: {Math.floor(wallH/5-48)}px; width: {Math.floor((wallH/5-48)*0.625)}px;">
             <div class="overlay"></div>
-            <!-- <img src="assets/images/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" /> -->
-            <Image loading="lazy" src="assets/images/covers/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" />
+            <img src="assets/images/covers/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" />
+            <!-- <Image loading="lazy" src="assets/images/covers/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" /> -->
         </div>
         {#if bookAddable == true}
             <AddButton />
