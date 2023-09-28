@@ -7,7 +7,7 @@
     {#if category == "wall"}
         <p>Use the <span class="instruct-add"></span> buttons next to each book to add it to your reading list and see the full list in the top right.</p>
     {:else}
-        <p>Use the  buttons next to each book to add it to your reading list.</p>
+        <p>Use the <span class="instruct-add"></span> buttons next to each book to add it to your reading list.</p>
     {/if}
 </div>  
 
