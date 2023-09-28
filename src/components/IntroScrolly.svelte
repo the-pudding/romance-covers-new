@@ -5,6 +5,7 @@
     import { activeSection } from "$stores/misc.js";
     import Icon from "$components/helpers/Icon.svelte";
     import { fade } from 'svelte/transition';
+    import {select} from "d3-selection";
 
     export let bookMin;
 
@@ -24,10 +25,12 @@
             lastY = scrollY;
         } else {
             scrollDir = "down";
+            select()
         }
     }
 
-    $: y, checkScrollY(y);  
+    $: y, checkScrollY(y); 
+    $: isVisible = y == undefined || y < 5 ? true : false; 
 </script>
 
 <svelte:window bind:innerHeight={h} bind:scrollY={y}/>
@@ -45,12 +48,9 @@
         {/each}
 	</Scrolly>
 	<div class="spacer" />
-    {#if y == undefined || y < 5}
-        <div class="icon-wrapper"
-            out:fade={{ duration: 500}}>
-            <Icon name="arrow-down-circle" size="3rem"/>
-        </div>
-    {/if}
+    <div class="icon-wrapper" class:isVisible={isVisible}>
+        <Icon name="arrow-down-circle" size="3rem"/>
+    </div>
 </section>
 
 <style>
@@ -85,7 +85,7 @@
         opacity: 0;
         visibility: none;
 	}
-    .icon-wrapper, .loading-wrapper {
+    .icon-wrapper {
         position: fixed;
         display: flex;
         flex-direction: column;
@@ -94,16 +94,11 @@
         bottom: 0;
         left: 50%;
         transform: translate(-50%, -50%);
-    }
-    .icon-wrapper {
         animation: bounceUp 1s infinite;
+        opacity: 0;
     }
-    .loading-wrapper p, .icon-wrapper p {
-        color: var(--romance-pink);
-        font-family: var(--sans-display);
-        font-size: var(--12px);
-        text-transform: uppercase;
-        margin: 0.5rem 0;
+    .isVisible {
+        opacity: 1;
     }
     .loader {
         width: 3rem;

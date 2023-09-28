@@ -144,6 +144,8 @@
 		padding: 1rem;
 		max-width: 475px;
 		max-height: 700px;
+		min-width: 200px;
+		min-height: 400px;
 		transition: all 0.5s;
 		aspect-ratio: 1 / 1.475;
 		height: 80vmin;
