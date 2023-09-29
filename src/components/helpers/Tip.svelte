@@ -10,15 +10,30 @@
 
 <style>
 	a.tip-button {
+		position: fixed;
+		bottom: 1rem;
+		left: 1rem;
 		background: var(--color-fg);
 		color: var(--color-bg);
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
 		border-radius: 4px;
-		box-shadow: 0px 3px 3px 0px var(--color-gray-500);
+		box-shadow: 0px 3px 3px 0px var(--color-gray-200);
 		letter-spacing: 0.05em;
-		padding: 12px 16px;
+		padding: 0.5rem;
+		font-size: 12px;
+	}
+	:global(#intro a.tip-button) {
+		background-image: var(--color-fg);
+	}
+	a.tip-button:hover {
+		background: var(--romance-pink);
+		transition: all 0.25s;
+	}
+	a.tip-button:hover span {
+		transform: translate(0, -4px);
+		transition: all 0.25s;
 	}
 
 	span {

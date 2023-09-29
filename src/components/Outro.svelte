@@ -1,7 +1,8 @@
 <script>
     import { getContext } from "svelte";
     import inView from "$actions/inView.js";
-    import { readingList, activeSection } from "$stores/misc.js";
+    import { activeSection } from "$stores/misc.js";
+    import Tip from "$components/helpers/Tip.svelte";
     import ReadingList from "$components/ReadingList.svelte";
     import data from "$data/listings.csv";
     import Prose from "$components/Prose.svelte";
@@ -18,6 +19,9 @@
     <div id="notes">
         <h5>Methods & Notes</h5>
         <Prose copy={copy.dataNote} />
+    </div>
+    <div class="tip-wrapper">
+        <p>Like this story? Give the author a <span><Tip /></span></p>
     </div>
 </section>
 
@@ -49,5 +53,25 @@
         font-size: var(--14px);
         margin: 0.5rem 0;
         line-height: 1.65;
+    }
+    .tip-wrapper p {
+        max-width: 40rem;
+        margin: 2rem auto 0 auto;
+        padding: 0 1rem;
+        font-family: var(--sans-display);
+        font-weight: 900;
+        display: flex;
+        align-items: center;
+        color: var(--color-gray-800);
+    }
+    :global(#methods .tip-wrapper p span a.tip-button) {
+        position: relative;
+        left: 0;
+        bottom: 0;
+        margin: 0 0 0 0.5rem;
+        background-image: var(--color-gray-800);
+    }
+    :global(#methods .tip-wrapper p span a.tip-button:hover) {
+        background: var(--romance-pink);
     }
 </style>

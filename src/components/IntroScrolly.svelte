@@ -4,8 +4,7 @@
     import inView from "$actions/inView.js";
     import { activeSection } from "$stores/misc.js";
     import Icon from "$components/helpers/Icon.svelte";
-    import { fade } from 'svelte/transition';
-    import {select} from "d3-selection";
+    import Tip from "$components/helpers/Tip.svelte";
 
     export let bookMin;
 
@@ -16,6 +15,7 @@
     let h;
     let scrollDir;
 	let lastY;
+    let tipVisible = false;
 
     function setSection(id) { activeSection.set(id); }
 
@@ -25,8 +25,10 @@
             lastY = scrollY;
         } else {
             scrollDir = "down";
-            select()
         }
+    }
+    function hideTip() {
+        tipVisible = !tipVisible;   
     }
 
     $: y, checkScrollY(y); 
@@ -39,6 +41,9 @@
     use:inView
     on:enter={() => setSection("intro")}>
 	<div class="sticky">
+        {#if isVisible}
+            <Tip />
+        {/if}
         <IntroBook bookMin={bookMin}/>
     </div>
 	<Scrolly bind:value>
