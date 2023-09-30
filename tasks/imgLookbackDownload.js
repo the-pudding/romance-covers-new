@@ -16,7 +16,7 @@ csvData.forEach((d) => {
     if (d.cover_url !== "Unknown") {
         options.url = d.cover_url;
         // A single-digit index ID is used as the ISBN as some of the books on the list were written before ISBNs were in use
-        options.dest = `/Users/aliceliang/Documents/romance-covers-new/static/assets/images/img_${d.ISBN}.jpg`
+        options.dest = `/Users/aliceliang/Documents/romance-covers-new/static/assets/images/covers/img_${d.ISBN}.jpg`
 
         download.image(options)
             .then(({ filename }) => {
