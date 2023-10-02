@@ -2,6 +2,7 @@
     export let shelfW;
     export let shelfHasShadow = true;
     export let wallH;
+    export let bookRows;
 
     let w;
     let h; 
@@ -9,7 +10,7 @@
 
 <svelte:window bind:innerHeight={h} bind:innerWidth={w} />
 
-<div class="shelf" style="width:{shelfW}px; height:{Math.floor(wallH/5)}px">
+<div class="shelf" style="width:{shelfW}px; height:{Math.floor(wallH/bookRows)}px">
     <div class="shelf-front"></div>
     <div class="shelf-top"></div>
     <div class="shelf-right"></div>

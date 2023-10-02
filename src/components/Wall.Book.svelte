@@ -7,6 +7,7 @@
     export let index;
     export let bookAddable = true;
     export let wallH;
+    export let bookRows;
 
     let w;
     let h; 
@@ -21,9 +22,9 @@
 {#if index == 0}
     <div class={checkData($stepData, book.ISBN) ? "book active" : "book"}
         id="book_{book.ISBN}"
-        style="height: {Math.floor(wallH/5)}px; width: {Math.floor(wallH/5*0.66)}px"
+        style="height: {Math.floor(wallH/bookRows)}px; width: {Math.floor(wallH/bookRows*0.66)}px"
     >   
-        <div class='img-wrapper' style="height: {Math.floor(wallH/5-48)}px; width: {Math.floor((wallH/5-48)*0.625)}px;">
+        <div class='img-wrapper' style="height: {Math.floor(wallH/bookRows-48)}px; width: {Math.floor((wallH/bookRows-48)*0.625)}px;">
             <div class="overlay"></div>
             <img src="assets/images/covers/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" />
             <!-- <Image loading="lazy" src="assets/images/covers/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" /> -->
@@ -36,9 +37,9 @@
 {:else}
     <div class={checkData($stepData, book.ISBN) ? "book active" : "book"} 
         id="book_{book.ISBN}" 
-        style="height: {Math.floor(wallH/5)}px; width: {Math.floor(wallH/5*0.66)}px"
+        style="height: {Math.floor(wallH/bookRows)}px; width: {Math.floor(wallH/bookRows*0.66)}px"
     >
-        <div class='img-wrapper' style="height: {Math.floor(wallH/5-48)}px; width: {Math.floor((wallH/5-48)*0.625)}px;">
+        <div class='img-wrapper' style="height: {Math.floor(wallH/bookRows-48)}px; width: {Math.floor((wallH/bookRows-48)*0.625)}px;">
             <div class="overlay"></div>
             <img src="assets/images/covers/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" />
             <!-- <Image loading="lazy" src="assets/images/covers/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" /> -->

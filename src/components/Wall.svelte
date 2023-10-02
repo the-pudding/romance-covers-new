@@ -10,12 +10,12 @@
     export let section;
     export let copy;
 
-    const shelves = [0, 1, 2, 3, 4];
     const margins = 32;
-    const bookRows = 5;
     const yearGroups = groups(data, d => d.year);
 
     let bookWidth;
+    let bookRows = 3;
+    let shelves = [0, 1, 2];
     let h;
     let w;
     let wallH;
@@ -85,14 +85,14 @@
         }
     }
 
-    function getYearLengths(data) {
+    function getYearLengths(data, bookRows) {
         chunkWidths = [];
-        if (wallH !== undefined) {
-            bookWidth = Math.floor(wallH/5*0.66);
+        if (wallH !== undefined && bookRows !== undefined) {
+            bookWidth = Math.floor(wallH/bookRows*0.66);
             data.forEach((d, i) => {
                 let year = d[0];
                 let chunkLength = d[1].length;
-                let remainder = chunkLength % 5;
+                let remainder = chunkLength % bookRows;
                 let bookCols = setBookCols(remainder, chunkLength, bookRows)
                 let chunkWidth = bookCols == 0 ? bookWidth + 8 : (bookCols * (bookWidth)) + 8;
                 chunkWidths.push({year: year, chunkWidth: chunkWidth});
@@ -100,7 +100,7 @@
         }
 
         function setBookCols(remainder, chunkLength, bookRows) {
-            if (remainder == 1 || remainder == 2) {
+            if (remainder == 1) {
                 return Math.round((chunkLength)/bookRows) + 1
             } else {
                 return Math.round((chunkLength)/bookRows)
@@ -124,9 +124,17 @@
         }
     }
 
+    function getBookRows(h) {
+        if (h !== undefined) {
+            bookRows = h > 900 ? 5 : 3;
+            shelves = h > 900 ? [0, 1, 2, 3, 4] : [0, 1, 2];
+        }
+    }
+
     $: value, shiftX(value);
-    $: wallH, getYearLengths(yearGroups);
-    $: w, getYearLengths(yearGroups);
+    $: h, getBookRows(h);
+    $: w, getYearLengths(yearGroups, bookRows);
+    $: wallH, getYearLengths(yearGroups, bookRows);
     $: chunkWidths, calcTotalWidth(chunkWidths);
     $: $sliderStoreRaunch, shiftSlider();
     $: $sliderStoreIllo, shiftSlider();
@@ -146,13 +154,13 @@
                         style="width:{match.chunkWidth}px">
                             <div class="books">
                                 {#each year[1] as book, i}
-                                    <Book book={book} index={i} wallH={wallH} />
+                                    <Book book={book} index={i} wallH={wallH} bookRows={bookRows} />
                                 {/each}
                             </div>
                         </div>
                         <div class="shelves">
                             {#each shelves as shelf, i} 
-                                <Shelf shelfW={match.chunkWidth} wallH={wallH} />
+                                <Shelf shelfW={match.chunkWidth} wallH={wallH} bookRows={bookRows} />
                             {/each}
                         </div>
                     {/if}
@@ -169,13 +177,13 @@
                         style="width:{match.chunkWidth}px">
                             <div class="books">
                                 {#each year[1] as book, i}
-                                    <Book book={book} index={i} wallH={wallH} />
+                                    <Book book={book} index={i} wallH={wallH} bookRows={bookRows} />
                                 {/each}
                             </div>
                         </div>
                         <div class="shelves">
                             {#each shelves as shelf, i} 
-                                <Shelf shelfW={match.chunkWidth} wallH={wallH} />
+                                <Shelf shelfW={match.chunkWidth} wallH={wallH} bookRows={bookRows} />
                             {/each}
                         </div>
                     {/if}
@@ -192,13 +200,13 @@
                         style="width:{match.chunkWidth}px">
                             <div class="books">
                                 {#each year[1] as book, i}
-                                    <Book book={book} index={i} wallH={wallH} />
+                                    <Book book={book} index={i} wallH={wallH} bookRows={bookRows} />
                                 {/each}
                             </div>
                         </div>
                         <div class="shelves">
                             {#each shelves as shelf, i} 
-                                <Shelf shelfW={match.chunkWidth} wallH={wallH} />
+                                <Shelf shelfW={match.chunkWidth} wallH={wallH} bookRows={bookRows} />
                             {/each}
                         </div>
                     {/if}
