@@ -126,10 +126,10 @@
                     "lookBack" books. If you need multiple books, you can wrap the Book.svelte component in an
                     {#each} statement (see Wall.svelte) or the Shelf component below.-->
                     <!-- Index is set to 0 to add publication year on the shelf (might remove?) -->
-                    <Book book={book} index={0} bookAddable={false} wallH={760}/>
+                    <Book book={book} index={0} bookAddable={false} wallH={760} bookRows={5}/>
                 </div>
                 <div class="shelves">
-                    <Shelf shelfW={100} shelfHasShadow={false} wallH={760} />
+                    <Shelf shelfW={100} shelfHasShadow={false} wallH={760} bookRows={5}/>
                 </div>
             </div>
         {/each}
@@ -151,10 +151,10 @@
                     "lookBack" books. If you need multiple books, you can wrap the Book.svelte component in an
                     {#each} statement (see Wall.svelte) or the Shelf component below.-->
                     <!-- Index is set to 0 to add publication year on the shelf (might remove?) -->
-                    <Book book={book} index={0} bookAddable={false} wallH={760}/>
+                    <Book book={book} index={0} bookAddable={false} wallH={760} bookRows={5}/>
                 </div>
                 <div class="shelves">
-                    <Shelf shelfW={100} shelfHasShadow={false} wallH={760} />
+                    <Shelf shelfW={100} shelfHasShadow={false} wallH={760} bookRows={5}/>
                 </div>
             </div>
         {/each}

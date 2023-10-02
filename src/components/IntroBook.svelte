@@ -18,7 +18,13 @@
 
 	function computePercentage(y, w, h) {
 		if (y >= 2) {
-			bookTranslate = w < 600 ? 100 : 50;
+			if (w < 600 && y/h*100 < 50) {
+				bookTranslate = 100;
+			} else if (w < 600 && y/h*100 >= 50) {
+				bookTranslate = 0;
+			} else if (w >= 600) {
+				bookTranslate = 50;
+			}
 			mainRotate = 0;
 			frontRotate = 180;
 		} else {
@@ -36,19 +42,14 @@
 			} else if (bookMin > 850) {
 				pageOneText = copy.intro.slice(0,1);
 				pageTwoText = copy.intro.slice(1,2);
-			} else if (bookMin > 675) {
+			} else  {
 				pageOneText = copy.intro[0];
 				pageOneText = pageOneText.value.split(/(My)/);
 				let pageTwoText1 = pageOneText[1];
 				let pageTwoText2 = pageOneText[2];
 				pageOneText = pageOneText[0];
 				pageTwoText = pageTwoText1.concat("", pageTwoText2)
-			} else {
-				pageOneText = copy.intro[0];
-				pageOneText = pageOneText.value.split(/(My)/);
-				pageOneText = pageOneText[0];
-				pageTwoText = '';
-			}
+			} 
 		}
 	}
 
@@ -142,8 +143,8 @@
 		perspective: 2000px;
 		transform:translate3d(0,0,0);	
 		padding: 1rem;
-		max-width: 475px;
-		max-height: 700px;
+		max-width: 320px;
+		max-height: 470px;
 		min-width: 200px;
 		min-height: 400px;
 		transition: all 0.5s;
@@ -308,11 +309,11 @@
 	}
 	.page{
         height: 100%;
-		padding: 3rem 2rem;
+		padding: 2rem 2rem;
 		overflow:hidden;
 	}
 	.book-page p{
-		font-size: var(--16px);
+		font-size: var(--14px);
 		line-height: 1.65;
 		margin-bottom: 1rem;
 		padding: 0 0 1rem 0;
@@ -382,10 +383,10 @@
 		.book-cover .byline {
 			font-size: var(--24px);
 		}
-		.book-cover-back-indent, #page-1 {
-			padding: 1rem 2rem;
+		.book-cover-back-indent, .page {
+			padding: 2rem 2rem;
 		}
-		.book-cover-back-indent p {
+		.book-cover-back-indent p, #page-1 p {
 			font-size: var(--16px);
 		}
 		:global(.initial-cap) {
@@ -394,6 +395,10 @@
 		}
 	}
 	@media only screen and (min-width: 800px) and (min-height: 600px) {
+		#book {
+			max-width: 400px;
+			max-height: 560px;
+		}
 		.book-cover {
 			padding: 1rem;
 		}
@@ -407,6 +412,10 @@
 		}
 	}
 	@media only screen and (min-width: 1000px) and (min-height: 1000px) {
+		#book {
+			max-width: 475px;
+			max-height: 700px;
+		}
 		.book-cover h1 {
 			font-size: var(--64px);
 			margin: -2rem auto 0 auto;
