@@ -100,10 +100,13 @@
         }
 
         function setBookCols(remainder, chunkLength, bookRows) {
-            if (remainder == 1 || remainder == 2) {
-                return Math.round((chunkLength)/bookRows) + 1
+            console.log(remainder)
+            if (h > 900) {
+                let val = remainder <= 2 && remainder !== 0 ? (Math.round((chunkLength)/bookRows) + 1) : Math.round((chunkLength)/bookRows);
+                return val
             } else {
-                return Math.round((chunkLength)/bookRows)
+                let val = remainder <= 1 && remainder !== 0 ? (Math.round((chunkLength)/bookRows) + 1) : Math.round((chunkLength)/bookRows);
+                return val
             }
 
         }
@@ -254,7 +257,7 @@
         pointer-events: none;
     }
     .books {
-        height: 70vh;
+        height: 72vh;
         position: absolute;
         z-index: 999;
         display: flex;
