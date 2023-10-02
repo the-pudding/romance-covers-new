@@ -148,7 +148,7 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        padding: 1rem 0 0 0;
+        padding: 0.5rem 0 0 0;
         margin: 0 0 2rem 0;
         position: fixed;
         width: 100%;
@@ -172,7 +172,7 @@
         transition: 0.25s linear;
         position: absolute;
         left: 0.75rem;
-        top: 0.5rem;
+        top: 0.75rem;
     }
     .logo:hover {
         transform: scale(1.25);
@@ -273,8 +273,8 @@
     }
     .listBtn {
         position: absolute;
-        right: 1rem;
-        top: 1rem;
+        right: 0.75rem;
+        top: 0.75rem;
         background: transparent;
         z-index: 1000;
         border-radius: 50%;

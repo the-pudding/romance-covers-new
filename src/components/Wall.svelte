@@ -100,8 +100,7 @@
         }
 
         function setBookCols(remainder, chunkLength, bookRows) {
-            console.log(remainder)
-            if (h > 900) {
+            if (wallH > 700) {
                 let val = remainder <= 2 && remainder !== 0 ? (Math.round((chunkLength)/bookRows) + 1) : Math.round((chunkLength)/bookRows);
                 return val
             } else {
@@ -127,21 +126,23 @@
         }
     }
 
-    function getBookRows(h) {
-        if (h !== undefined) {
-            bookRows = h > 900 ? 5 : 3;
-            shelves = h > 900 ? [0, 1, 2, 3, 4] : [0, 1, 2];
+    function getBookRows(wallH) {
+        if (wallH !== undefined) {
+            console.log(wallH)
+            bookRows = wallH > 700 ? 5 : 3;
+            shelves = wallH > 700 ? [0, 1, 2, 3, 4] : [0, 1, 2];
         }
     }
 
     $: value, shiftX(value);
-    $: h, getBookRows(h);
+    $: wallH, getBookRows(wallH);
     $: w, getYearLengths(yearGroups, bookRows);
     $: wallH, getYearLengths(yearGroups, bookRows);
     $: chunkWidths, calcTotalWidth(chunkWidths);
     $: $sliderStoreRaunch, shiftSlider();
     $: $sliderStoreIllo, shiftSlider();
     $: $sliderStoreRace, shiftSlider();
+    $: console.log(wallH);
 </script>
 
 <svelte:window bind:innerHeight={h} bind:innerWidth={w} />
@@ -243,7 +244,7 @@
         width: 100%;
     }
     .year-wrapper {
-        height: 70vh;
+        height: 60vh;
         pointer-events: none;
     }
     .yearChunk {
