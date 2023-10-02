@@ -82,17 +82,9 @@
 
     function setText() {
         if (copy !== undefined) {
-			if (bookMin > 950) { introText = undefined; }
-            else if (bookMin > 750) { introText = copy.intro.slice(2,4); } 
-            else if (bookMin > 600) { introText = copy.intro.slice(1,4); }
-            else {
-				introText = copy.intro.slice(2,4);
-                let splitText = copy.intro[0];
-				splitText = splitText.value.split(/(My)/);
-                splitText = splitText[1].concat("", splitText[2])
-                let splitTextArr = [{type: "text", value: splitText}]
-                introText = splitTextArr.concat(introText)
-			}
+			if (bookMin > 1100) { introText = undefined; }
+            else if (bookMin > 850) { introText = copy.intro.slice(2,4); } 
+            else { introText = copy.intro.slice(1,4); }
 		}
     }
 
