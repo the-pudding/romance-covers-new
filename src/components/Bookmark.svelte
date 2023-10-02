@@ -5,7 +5,7 @@
 
 <div class="instructions">
     {#if category == "wall"}
-        <p>Use the <span class="instruct-add"></span> buttons next to each book to add it to your reading list and see the full list in the top right.</p>
+        <p>Use the <span class="instruct-add"></span> buttons next to each book to add it to your reading list and see your list in the top right.</p>
     {:else}
         <p>Use the <span class="instruct-add"></span> buttons next to each book to add it to your reading list.</p>
     {/if}

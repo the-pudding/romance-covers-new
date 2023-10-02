@@ -100,7 +100,7 @@
         }
 
         function setBookCols(remainder, chunkLength, bookRows) {
-            if (remainder == 1) {
+            if (remainder == 1 || remainder == 2) {
                 return Math.round((chunkLength)/bookRows) + 1
             } else {
                 return Math.round((chunkLength)/bookRows)
