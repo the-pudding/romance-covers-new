@@ -32,9 +32,9 @@
             {#each copy as text, i}
                 <div class="step">
                     <p>
-						{#if text.kicker}
+						<!-- {#if text.kicker}
 						<span class="kicker">{@html text.kicker}</span>
-						{/if}
+						{/if} -->
 						{@html text.text}</p>
                 </div>
             {/each}

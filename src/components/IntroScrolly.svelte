@@ -4,7 +4,6 @@
     import inView from "$actions/inView.js";
     import { activeSection } from "$stores/misc.js";
     import Icon from "$components/helpers/Icon.svelte";
-    import Tip from "$components/helpers/Tip.svelte";
 
     export let bookMin;
 
@@ -41,9 +40,6 @@
     use:inView
     on:enter={() => setSection("intro")}>
 	<div class="sticky">
-        {#if isVisible}
-            <Tip />
-        {/if}
         <IntroBook bookMin={bookMin}/>
     </div>
 	<Scrolly bind:value>
