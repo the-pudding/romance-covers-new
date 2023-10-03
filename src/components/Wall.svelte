@@ -100,7 +100,7 @@
         }
 
         function setBookCols(remainder, chunkLength, bookRows) {
-            if (wallH > 500) {
+            if (wallH > 550) {
                 let val = remainder <= 2 && remainder !== 0 ? (Math.round((chunkLength)/bookRows) + 1) : Math.round((chunkLength)/bookRows);
                 return val
             } else {
@@ -128,8 +128,8 @@
 
     function getBookRows(wallH) {
         if (wallH !== undefined) {
-            bookRows = wallH > 500 ? 5 : 3;
-            shelves = wallH > 500 ? [0, 1, 2, 3, 4] : [0, 1, 2];
+            bookRows = wallH > 550 ? 5 : 3;
+            shelves = wallH > 550 ? [0, 1, 2, 3, 4] : [0, 1, 2];
         }
     }
 

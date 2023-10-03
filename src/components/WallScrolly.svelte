@@ -96,6 +96,11 @@
         background: var(--color-white);
 		pointer-events: auto;
 	}
+	:global(.step p .bold-year) {
+		font-weight: 600;
+		font-family: var(--sans-display);
+		letter-spacing: -0.5px;
+	}
 	:global(.step p a) {
 		color: var(--color-gray-800);
 		background-repeat: no-repeat;
