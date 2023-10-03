@@ -31,7 +31,11 @@
         {#if copy}
             {#each copy as text, i}
                 <div class="step">
-                    <p>{@html text.text}</p>
+                    <p>
+						{#if text.kicker}
+						<span class="kicker">{@html text.kicker}</span>
+						{/if}
+						{@html text.text}</p>
                 </div>
             {/each}
         {/if}
@@ -111,6 +115,13 @@
 	}
 	:global(.step p a:hover) {
 		background-position: 0 0rem;
+	}
+	.kicker {
+		font-family: var(--sans-display);
+		font-weight: 900;
+		display: block;
+		letter-spacing: -1px;
+		margin: 0 0 0.5rem 0;
 	}
 	@media only screen and (min-width: 600px) {
         .step:last-of-type p {

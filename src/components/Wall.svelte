@@ -128,7 +128,6 @@
 
     function getBookRows(wallH) {
         if (wallH !== undefined) {
-            console.log(wallH)
             bookRows = wallH > 700 ? 5 : 3;
             shelves = wallH > 700 ? [0, 1, 2, 3, 4] : [0, 1, 2];
         }
@@ -142,7 +141,6 @@
     $: $sliderStoreRaunch, shiftSlider();
     $: $sliderStoreIllo, shiftSlider();
     $: $sliderStoreRace, shiftSlider();
-    $: console.log(wallH);
 </script>
 
 <svelte:window bind:innerHeight={h} bind:innerWidth={w} />
@@ -244,7 +242,7 @@
         width: 100%;
     }
     .year-wrapper {
-        height: 60vh;
+        height: 70vh;
         pointer-events: none;
     }
     .yearChunk {
