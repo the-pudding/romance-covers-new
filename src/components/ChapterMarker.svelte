@@ -112,7 +112,7 @@
         </button>
     </div>
     <div class="slider-wrapper">
-        {#if $sliderVisible}
+        {#if $sliderVisible && !$readingListVisible}
             <div id="range-slider" 
                 in:fade={{ delay: 250, duration: 300 }}
                 out:fade={{ delay: 0, duration: 0 }}>

@@ -57,6 +57,7 @@
 	$: w, computePercentage(y, w, h);
 	$: h, computePercentage(y, w, h);
 	$: bookMin, setBookText();
+	//console.log(CSS.supports("aspect-ratio: 16 / 9;"));
 
 	// height:{(bookMin-32)/1.5}px; width:{(bookMin-32)/1.5/1.475}px
 </script>
@@ -144,23 +145,27 @@
 		position: relative;
 		perspective: 2000px;
 		transform:translate3d(0,0,0);	
-		padding: 1rem;
-		max-width: 320px;
-		max-height: 470px;
-		min-width: 200px;
+		padding: 2% 1rem 1rem 1rem;
+		/* max-width: 320px;
+		max-height: 470px; */
+		min-width: 275px;
 		min-height: 400px;
 		transition: all 0.5s;
-		aspect-ratio: 1 / 1.475;
 		height: 80vmin;
+		width: 54.5vmin;
+		max-width: 475px;
+		max-height: 700px;
+		/* aspect-ratio: 1 / 1.475; */
 	}
 	.main {
 		width: 100%;
         height: 100%;
 		color: var(--color-off-black);
 		position: relative;
+		padding: 32% 0 0 0;
 		transform-style: preserve-3d;
 		transition-duration: .5s;
-		aspect-ratio: 1/1.475;
+		/* aspect-ratio: 1/1.475; */
 	}
 
 /* = Book Font
@@ -385,11 +390,15 @@
 		}
 	}
 	@media only screen and (min-width: 650px) and (min-height: 400px) {
+		#book {
+			padding: 2% 1rem 1rem 1rem;
+		}
 		.book-cover h1 {
 			font-size: var(--40px);
 		}
 		.book-cover .byline {
-			font-size: var(--24px);
+			font-size: var(--32px);
+			bottom: 1rem;
 		}
 		.book-cover-back-indent, .page {
 			padding: 2rem 2rem;
@@ -404,8 +413,7 @@
 	}
 	@media only screen and (min-width: 800px) and (min-height: 600px) {
 		#book {
-			max-width: 400px;
-			max-height: 560px;
+			width: 54vmin;
 		}
 		.book-cover {
 			padding: 1rem;
@@ -419,10 +427,12 @@
 			bottom: 1rem;
 		}
 	}
-	@media only screen and (min-width: 1000px) and (min-height: 1000px) {
+	@media only screen and (min-width: 1000px) and (min-height: 800px) {
 		#book {
-			max-width: 475px;
-			max-height: 700px;
+			width: 54.5vmin;
+			padding: 1% 1rem 1rem 1rem;
+			/* max-width: 475px;
+			max-height: 700px; */
 		}
 		.book-cover h1 {
 			font-size: var(--64px);

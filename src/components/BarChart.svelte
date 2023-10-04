@@ -41,7 +41,7 @@
             {#each groupedData as year, i}
                 <div class={checkData($stepData, year[0]) ? "year-bar active" : "year-bar"} 
                 id="bar-{year[0]}"
-                style="height: {calcPercentage(year[0], year[1].length)*1.5}px;
+                style="height: {calcPercentage(year[0], year[1].length)*1.125}px;
                 width: {barChartW/groupedData.length}px;
                 background: {checkData($stepData, year[0]) ? highlightColor : color}"
                 >

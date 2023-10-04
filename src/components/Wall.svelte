@@ -128,8 +128,8 @@
 
     function getBookRows(wallH) {
         if (wallH !== undefined) {
-            bookRows = wallH > 550 ? 5 : 3;
-            shelves = wallH > 550 ? [0, 1, 2, 3, 4] : [0, 1, 2];
+            bookRows = wallH > 550 ? 5 : 4;
+            shelves = wallH > 550 ? [0, 1, 2, 3, 4] : [0, 1, 2, 3];
         }
     }
 
@@ -227,7 +227,7 @@
         display: flex;
         flex-direction: row;
         padding: 0 5rem;
-        transition: 1s ease-in-out;
+        transition: 1.5s ease-in-out;
     }
     .wall {
         margin: 0;
