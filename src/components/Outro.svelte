@@ -21,7 +21,7 @@
         <Prose copy={copy.dataNote} />
     </div>
     <div class="tip-wrapper">
-        <p>Like this story? Give the author a <span><Tip /></span></p>
+        <p>Like this story? Give the author a <span><Tip href={"https://donate.stripe.com/14k9DY8BJ5C07PG8wD"}/></span></p>
     </div>
 </section>
 
