@@ -242,7 +242,7 @@
         width: 100%;
     }
     .year-wrapper {
-        height: 70vh;
+        height: 62vh;
         pointer-events: none;
     }
     .yearChunk {

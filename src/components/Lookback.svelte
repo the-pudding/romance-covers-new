@@ -247,13 +247,13 @@
         background-color: var(--romance-pink-light);
     }
     :global(#lookback .small-chart-raunchiness) {
-        border: 2px solid var(--romance-blue)
+        border: 2px solid var(--romance-blue);
     }
     :global(#lookback .small-chart-illustration) {
-        border: 2px solid var(--romance-yellow)
+        border: 2px solid var(--romance-yellow);
     }
     :global(#lookback .small-chart-race) {
-        border: 2px solid var(--romance-teal)
+        border: 2px solid var(--romance-teal);
     }
     :global(#lookback .small-chart-raunchiness:hover) {
         background-color: var(--romance-blue-light);

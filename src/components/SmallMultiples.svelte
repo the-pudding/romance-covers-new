@@ -51,15 +51,19 @@
     :global(#small-multiples .chart-wrapper) {
         width: 100%;
     }
+    :global(#small-multiples .count) {
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
     h5 {
         font-family: var(--sans-display);
         text-align: center;
         font-size: var(--16px);
-        margin: 0 auto 0.5rem auto;
+        margin: 0 auto -1rem auto;
         line-height: 1;
         display: flex;
         align-items: end;
-        justify-content: center;
+        justify-content: start;
         z-index: 1000;
     }
     .year-labels {
@@ -83,8 +87,16 @@
             width: 33%;
             margin: 0;
         }
+        h5 {
+            justify-content: center;
+        }
         .year-labels p {
             font-size: var(--14px);
+        }
+        :global(#small-multiples .count) {
+            /* text-shadow: 1px 1px 0 var(--romance-bg-pink), -1px -1px 0 var(--romance-bg-pink), 1px -1px 0 var(--romance-bg-pink), -1px 1px 0 var(--romance-bg-pink); */
+            left: 0;
+            transform: translate(-30%, 0);
         }
 	}
 </style>
