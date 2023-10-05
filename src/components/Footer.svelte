@@ -50,7 +50,9 @@
 
 	<section class="about">
 		<div class="wordmark">
-			{@html wordmark}
+			<a href="https://pudding.cool" target="_self">
+				{@html wordmark}
+			</a>
 		</div>
 		<p>
 			<a href="https://pudding.cool" target="_self">The Pudding</a>
@@ -117,6 +119,9 @@
 	.wordmark {
 		max-width: 10em;
 		margin: 1em auto;
+	}
+	:global(.wordmark svg path) {
+		fill: white;
 	}
 
 	.about {
