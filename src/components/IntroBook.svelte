@@ -35,13 +35,35 @@
 	}
 	
 	function setBookText() {
+		console.log(bookMin);
 		if (copy !== undefined) {
-			if (bookMin > 1100) {
+			if (bookMin > 900) {
 				pageOneText = copy.intro.slice(0,2);
 				pageTwoText = copy.intro.slice(2,4);
-			} else if (bookMin > 850) {
+			} else if (bookMin > 750) {
+				let pageOneText1 = copy.intro.slice(0,1);
+				let pageOneText2 = copy.intro.slice(1,2);
+				pageOneText2 = pageOneText2[0].value.split("Despite")[0];
+				pageOneText1.push({type: "text", value: pageOneText2})
+				pageOneText = pageOneText1;
+				let pageTwoText1 = copy.intro.slice(1,2);
+				let pageTwoText2 = copy.intro.slice(2,3);
+				pageTwoText1 = pageTwoText1[0].value.split("beliefs.")[1];
+				pageTwoText2 = pageTwoText2[0].value.split("Having")[0];
+				let pageTwoArray = [];
+				pageTwoArray.push({type: "text", value: pageTwoText1})
+				pageTwoArray.push({type: "text", value: pageTwoText2})
+				pageTwoText = pageTwoArray;
+			} else if (bookMin > 650) {
 				pageOneText = copy.intro.slice(0,1);
 				pageTwoText = copy.intro.slice(1,2);
+			} else if (bookMin > 600) {
+				pageOneText = copy.intro.slice(0,1);
+				let pageTwoText1 = pageOneText[0].value.split("trope.")[1];
+				pageOneText = pageOneText[0].value.split("It")[0];
+				let pageTwoText2 = copy.intro.slice(1,2);
+				pageTwoText2 = pageTwoText2[0].value.split("Despite")[0];
+				pageTwoText = pageTwoText1.concat(" ", pageTwoText2)
 			} else  {
 				pageOneText = copy.intro[0];
 				pageOneText = pageOneText.value.split(/(My)/);
@@ -273,9 +295,9 @@
 	.book-cover-back-indent p{
 		font-family: var(--serif);
 		font-weight: 500;
-		font-size: var(--14px);
+		font-size: var(--16px);
 		line-height: 1.65;
-		margin-bottom: 1rem;
+		margin: 0 0 1rem 0;
 		text-align: left;
 		padding: 0 0 1rem 0;
 	}
@@ -326,9 +348,9 @@
 		overflow:hidden;
 	}
 	.book-page p{
-		font-size: var(--14px);
+		font-size: var(--16px);
 		line-height: 1.65;
-		margin-bottom: 1rem;
+		margin: 0 0 1rem 0;
 		padding: 0 0 1rem 0;
 	}
 
@@ -389,7 +411,7 @@
 			font-size: var(--18px);
 		}
 	}
-	@media only screen and (min-width: 650px) and (min-height: 400px) {
+	@media only screen and (min-width: 600px) and (min-height: 400px) {
 		#book {
 			padding: 2% 1rem 1rem 1rem;
 		}
@@ -401,7 +423,7 @@
 			bottom: 1rem;
 		}
 		.book-cover-back-indent, .page {
-			padding: 2rem 2rem;
+			padding: 2rem;
 		}
 		.book-cover-back-indent p, #page-1 p {
 			font-size: var(--16px);

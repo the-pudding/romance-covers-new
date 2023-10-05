@@ -82,8 +82,20 @@
 
     function setText() {
         if (copy !== undefined) {
-			if (bookMin > 1100) { introText = undefined; }
-            else if (bookMin > 850) { introText = copy.intro.slice(2,4); } 
+			if (bookMin > 900) { introText = undefined; }
+            else if (bookMin > 750) { 
+                introText = copy.intro.slice(3,4); 
+                let introBit = copy.intro.slice(2,3)
+                introBit = introBit[0].value.split("sexuality. ")[1];
+                introText.unshift({type: "text", "value": introBit })
+            } else if (bookMin > 650) {
+                introText = copy.intro.slice(2,3); 
+            } else if (bookMin > 600) {
+                introText = copy.intro.slice(2,3); 
+                let introBit = copy.intro.slice(1,2);
+                introBit = introBit[0].value.split("beliefs. ")[1];
+                introText.unshift({type: "text", "value": introBit })
+            }
             else { introText = copy.intro.slice(1,4); }
 		}
     }
