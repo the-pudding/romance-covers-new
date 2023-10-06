@@ -6,6 +6,7 @@
 	export let data;
     export let copy;
 	export let section;
+	export let xShiftSection;
 
 	let value;
 
@@ -25,7 +26,7 @@
 
 <section id="scrolly">
 	<div class="sticky">
-        <Wall data={data} value={value} section={section} copy={copy}/>
+        <Wall data={data} value={value} section={section} copy={copy} xShiftSection={xShiftSection}/>
     </div>
 	<Scrolly bind:value>
         {#if copy}

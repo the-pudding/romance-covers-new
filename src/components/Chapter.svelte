@@ -13,6 +13,7 @@
     export let copyBlock;
     export let copyScroll;
     export let scrollY;
+    export let xShiftSection;
 
     function setSectionEnter(id) { activeSection.set(id); }
     function setSectionExit(id) { 
@@ -52,7 +53,7 @@
     <h2>{resetTitles(id)}</h2>
     <ChapterText copy={copyBlock}/>
     <Bookmark category={"wall"} />
-    <WallScrolly data={data} copy={copyScroll} section={id} />
+    <WallScrolly data={data} copy={copyScroll} section={id} xShiftSection={xShiftSection} />
 </section>
 
 <style>

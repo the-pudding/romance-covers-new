@@ -1,6 +1,6 @@
 <script>
 	import { getContext, onMount } from "svelte";
-	import { activeSection, readingListVisible } from "$stores/misc.js";
+	import { activeSection, readingListVisible, xShiftRaunch, xShiftIllo, xShiftRace } from "$stores/misc.js";
 	import { fly } from 'svelte/transition';
 	import data from "$data/listings.csv";
     import { groups, ascending } from "d3-array";
@@ -75,9 +75,9 @@
 <IntroScrolly bookMin={bookMin} w={w} h={h} scrollY={scrollY}/>
 <Lookback bookMin={bookMin}/>
 <div class="sections">
-	<Chapter id={"raunchiness"} data={raunchinessData} copyBlock={copy.raunchinessText} copyScroll={copy.raunchinessScroll} scrollY={scrollY} />
-	<Chapter id={"illustration"} data={illustrationData} copyBlock={copy.illustrationText} copyScroll={copy.illustrationScroll} scrollY={scrollY} />
-	<Chapter id={"race"} data={raceData} copyBlock={copy.raceText} copyScroll={copy.raceScroll} scrollY={scrollY} />
+	<Chapter id={"raunchiness"} data={raunchinessData} copyBlock={copy.raunchinessText} copyScroll={copy.raunchinessScroll} scrollY={scrollY} xShiftSection={$xShiftRaunch} />
+	<Chapter id={"illustration"} data={illustrationData} copyBlock={copy.illustrationText} copyScroll={copy.illustrationScroll} scrollY={scrollY} xShiftSection={$xShiftIllo} />
+	<Chapter id={"race"} data={raceData} copyBlock={copy.raceText} copyScroll={copy.raceScroll} scrollY={scrollY} xShiftSection={$xShiftRace} />
 </div>
 {#if $activeSection !== "intro" && $activeSection !== "methods" && $activeSection !== null}
 	<section id="barChart" in:fly={{ y: 200, duration: 2000 }} out:fly={{ y: 200, duration: 2000 }}>

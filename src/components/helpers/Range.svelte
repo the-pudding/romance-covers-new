@@ -1,6 +1,6 @@
 <script>
 	import { activeSection, sliderStoreRaunch, sliderStoreIllo, sliderStoreRace } from "$stores/misc.js";
-	import { fly } from 'svelte/transition';
+	import { fly, fade } from 'svelte/transition';
 	import { range, format } from "d3";
 	export let min = 0;
 	export let max = 100;
@@ -49,7 +49,7 @@
 	<input on:change={handleChange} type="range" aria-label={label} {min} {max} {step} bind:value />
 		<div class="prompt" style="opacity: {promptVisible};"
 			in:fly={{ y: 10, duration: 1000, delay: 250}}
-			out:fly={{ y: 200, duration: 1000}}>
+			out:fade={{ duration: 200 }}>
 			<p>Drag me!</p>
 		</div>
 

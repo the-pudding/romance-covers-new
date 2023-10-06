@@ -1,5 +1,5 @@
 <script>
-    import { activeSection, xShiftRaunch, xShiftIllo, xShiftRace, readingList, readingListVisible, sliderVisible, sliderStoreRaunch, sliderStoreIllo, sliderStoreRace } from "$stores/misc.js";
+    import { activeSection, readingList, readingListVisible, sliderVisible } from "$stores/misc.js";
     import { fly, fade } from 'svelte/transition';
     import Icon from "$components/helpers/Icon.svelte";
     import {select} from "d3-selection";
@@ -31,6 +31,10 @@
         const title = id == "race" ? "diversity" : id;
         return title
     }
+
+    function hideSlide(activeSection) { sliderVisible.set(false); }
+
+    $: $activeSection, hideSlide($activeSection)
 </script>
 
 <nav>
@@ -75,8 +79,8 @@
     <div class="slider-wrapper">
         {#if $sliderVisible && !$readingListVisible}
             <div id="range-slider" 
-                in:fade={{ delay: 250, duration: 300 }}
-                out:fade={{ delay: 0, duration: 0 }}>
+                in:fade={{ delay: 250, duration: 200 }}
+                out:fade={{ delay: 0, duration: 200 }}>
                 <p><Icon name="move-left" /></p>
                 <div class="range-wrapper">
                     {#if $activeSection == "raunchiness"}

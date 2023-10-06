@@ -1,7 +1,7 @@
 <script>
     import { groups } from "d3-array";
     import { select } from "d3-selection";
-    import { activeSection, maxWidthRaunch, maxWidthIllo, maxWidthRace, sliderStoreRaunch, sliderStoreIllo, sliderStoreRace, xShiftRaunch, xShiftIllo, xShiftRace } from "$stores/misc.js";
+    import { activeSection, maxWidthRaunch, maxWidthIllo, maxWidthRace, sliderVisible, sliderStoreRaunch, sliderStoreIllo, sliderStoreRace, xShiftRaunch, xShiftIllo, xShiftRace } from "$stores/misc.js";
     import Book from "$components/Wall.Book.svelte";
     import Shelf from "$components/Wall.Shelf.svelte";
 
@@ -9,6 +9,7 @@
     export let value;
     export let section;
     export let copy;
+    export let xShiftSection;
 
     const margins = 32;
     const yearGroups = groups(data, d => d.year);
@@ -132,10 +133,9 @@
 
 <svelte:window bind:innerHeight={h} bind:innerWidth={w} />
 
+
 <section id="wall-{section}" class="wall">
-    {#if $xShiftRaunch !== undefined && section == "raunchiness"}
-        {@const sliderMatch = $xShiftRaunch}
-        <div class="overflow-wrap" style="transform:translate3d(-{sliderMatch}px,0,0)">
+        <div class="overflow-wrap" style="transform:translate3d(-{xShiftSection}px,0,0)">
             {#each yearGroups as year, i}
                 <div class="year-wrapper" bind:clientHeight={wallH}>
                     {#if wallH !== undefined && chunkWidths.length == 13}
@@ -157,53 +157,6 @@
                 </div>
             {/each}
         </div>
-    {:else if $xShiftIllo !== undefined && section == "illustration"}
-        <div class="overflow-wrap" style="transform:translate3d(-{$xShiftIllo}px,0,0)">
-            {#each yearGroups as year, i}
-                <div class="year-wrapper" bind:clientHeight={wallH}>
-                    {#if wallH !== undefined && chunkWidths.length == 13}
-                        {@const match = chunkWidths.find((d) => d.year == year[0])}
-                        <div class="yearChunk" id="chunk-{year[0]}"
-                        style="width:{match.chunkWidth}px">
-                            <div class="books">
-                                {#each year[1] as book, i}
-                                    <Book book={book} index={i} wallH={wallH} bookRows={bookRows} />
-                                {/each}
-                            </div>
-                        </div>
-                        <div class="shelves">
-                            {#each shelves as shelf, i} 
-                                <Shelf shelfW={match.chunkWidth} wallH={wallH} bookRows={bookRows} />
-                            {/each}
-                        </div>
-                    {/if}
-                </div>
-            {/each}
-        </div>
-    {:else if $xShiftRace !== undefined && section == "race"}
-        <div class="overflow-wrap" style="transform:translate3d(-{$xShiftRace}px,0,0)">
-            {#each yearGroups as year, i}
-                <div class="year-wrapper" bind:clientHeight={wallH}>
-                    {#if wallH !== undefined && chunkWidths.length == 13}
-                        {@const match = chunkWidths.find((d) => d.year == year[0])}
-                        <div class="yearChunk" id="chunk-{year[0]}"
-                        style="width:{match.chunkWidth}px">
-                            <div class="books">
-                                {#each year[1] as book, i}
-                                    <Book book={book} index={i} wallH={wallH} bookRows={bookRows} />
-                                {/each}
-                            </div>
-                        </div>
-                        <div class="shelves">
-                            {#each shelves as shelf, i} 
-                                <Shelf shelfW={match.chunkWidth} wallH={wallH} bookRows={bookRows} />
-                            {/each}
-                        </div>
-                    {/if}
-                </div>
-            {/each}
-        </div>
-    {/if}
 </section>
 
 <style>

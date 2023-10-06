@@ -10,6 +10,7 @@
     
 	const copy = getContext("copy");
 
+	let bookH;
 	let bookTranslate = 0;
 	let frontRotate = 0;
 	let pageOneText;
@@ -64,7 +65,7 @@
 			} 
 		}
 	}
-
+	$: console.log(bookH)
 	$: scrollY, computePercentage(scrollY, w, h);
 	$: w, computePercentage(scrollY, w, h);
 	$: h, computePercentage(scrollY, w, h);
@@ -72,7 +73,7 @@
 </script>
 
 <section id="intro-book">
-		<div id="book" style="transform:translate3d({bookTranslate}%,0,0);" >
+		<div id="book" style="transform:translate3d({bookTranslate}%,0,0);" bind:clientHeight={bookH} >
 			<div class="main">
 				<div class="book-front" style="transform:translate3d(0,0,25px) rotate3d(0,1,0,-{frontRotate}deg)">
 					<div class="book-cover">
@@ -146,14 +147,14 @@
 		position: relative;
 		perspective: 2000px;
 		transform:translate3d(0,0,0);	
-		padding: 2% 1rem 1rem 1rem;
-		/* max-width: 320px;
-		max-height: 470px; */
+		padding: 1rem;
+		max-width: 320px;
+		max-height: 470px;
 		min-width: 275px;
 		min-height: 400px;
 		transition: all 0.5s;
 		height: 80vmin;
-		width: 54.5vmin;
+		width: 52.8vmin;
 		max-width: 475px;
 		max-height: 700px;
 		/* aspect-ratio: 1 / 1.475; */
@@ -200,7 +201,7 @@
             transparent 22px),
             url("/assets/images/Alice_cover_notype.jpg");
 		/* background: url("/assets/images/Alice_cover_notype.jpg"); */
-        background-size: contain;
+        background-size: cover;
         background-repeat: no-repeat;
 		transform-style:preserve-3d;
 		backface-visibility:hidden;
@@ -350,7 +351,7 @@
 	}
 
 	/* MEDIA QUERIES */
-	@media only screen and (min-width: 400px) and (min-height: 200px) {
+	@media only screen and (min-width: 400px) and (min-height: 600px) {
 		.book-cover h1 {
 			font-size: var(--24px);
 		}
@@ -358,10 +359,7 @@
 			font-size: var(--18px);
 		}
 	}
-	@media only screen and (min-width: 600px) and (min-height: 400px) {
-		#book {
-			padding: 2% 1rem 1rem 1rem;
-		}
+	@media only screen and (min-width: 600px) and (min-height: 800px) {
 		.book-cover h1 {
 			font-size: var(--40px);
 		}
@@ -380,10 +378,7 @@
 			line-height: 0.8;
 		}
 	}
-	@media only screen and (min-width: 800px) and (min-height: 600px) {
-		#book {
-			width: 54vmin;
-		}
+	@media only screen and (min-width: 800px) and (min-height: 1000px) {
 		.book-cover {
 			padding: 1rem;
 		}
@@ -396,11 +391,7 @@
 			bottom: 1rem;
 		}
 	}
-	@media only screen and (min-width: 1000px) and (min-height: 800px) {
-		#book {
-			width: 54.5vmin;
-			padding: 1% 1rem 1rem 1rem;
-		}
+	@media only screen and (min-width: 1000px) and (min-height: 1200px) {
 		.book-cover h1 {
 			font-size: var(--64px);
 			margin: -1rem auto 0 auto;
