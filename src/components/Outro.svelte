@@ -30,11 +30,7 @@
         background-image: linear-gradient(var(--romance-bg-teal) 0%, var(--romance-bg-pink) 50%);
         padding: 10rem 0 5rem 0;
     }
-    :global(#notes a, #methods a) {
-        background-position: 0 0 1.125rem;
-        background-image: linear-gradient(180deg,transparent 0,var(--romance-pink-light) 0);
-    }
-    :global(#notes a:hover, #methods a:hover) {
+    :global(#notes a:hover, section#methods a:hover) {
         background-position: 0 0;
         background-image: linear-gradient(180deg,transparent 0,var(--romance-pink-light) 0);
     }

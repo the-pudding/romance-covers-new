@@ -89,6 +89,10 @@
     :global(#intro a) {
 		background-image: linear-gradient(180deg,transparent 0,var(--romance-pink-light) 0);
 	}
+    :global(#methods a) {
+        background-image: linear-gradient(180deg,transparent 0,var(--romance-pink-light) 0);
+        background-position: 0 1.05rem;
+    }
     :global(section a:hover) {
 		background-position: 0 0;
 	}

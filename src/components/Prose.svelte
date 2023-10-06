@@ -22,6 +22,7 @@
         line-height: 2;
         padding: 0 1rem;
         font-weight: 500;
+        font-size: var(--16px);
     }
     p {
         font-family: var(--serif);
