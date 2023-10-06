@@ -23,7 +23,7 @@
             else if (id == "illustration") { nextSection = "race"; }
             else if (id == "race") { nextSection = "methods"; }
             activeSection.set(nextSection)
-        } else {
+        } else if (scrollDir == "up") {
             if (id == "raunchiness") { nextSection = "intro"; } 
             else if (id == "illustration") { nextSection = "raunchiness"; }
             else if (id == "race") { nextSection = "illustration"; }
@@ -42,7 +42,7 @@
         const title = id == "race" ? "racial diversity" : id;
         return title
     }
-
+    
     $: scrollY, checkScrollY(scrollY);
 </script>
 

@@ -30,42 +30,24 @@
 	function setBookText() {
 		if (copy !== undefined) {
 			if (bookMin > 900) {
-				pageOneText = copy.intro.slice(0,2);
-				pageTwoText = copy.intro.slice(2,4);
+				pageOneText = copy.page1_900;
+				pageTwoText = copy.page2_900;
 			} else if (bookMin > 750) {
-				const pageOneText1 = copy.intro.slice(0,1);
-				const pageOneText2 = copy.intro.slice(1,2)[0].value.split("Despite")[0];
-				pageOneText1.push({type: "text", value: pageOneText2})
-				pageOneText = pageOneText1;
-				let pageTwoText1 = copy.intro.slice(1,2);
-				let pageTwoText2 = copy.intro.slice(2,3);
-				pageTwoText1 = pageTwoText1[0].value.split("beliefs.")[1];
-				pageTwoText2 = pageTwoText2[0].value.split("Having")[0];
-				let pageTwoArray = [];
-				pageTwoArray.push({type: "text", value: pageTwoText1})
-				pageTwoArray.push({type: "text", value: pageTwoText2})
-				pageTwoText = pageTwoArray;
+				pageOneText = copy.page1_750;
+				pageTwoText = copy.page2_750;
 			} else if (bookMin > 650) {
-				pageOneText = copy.intro.slice(0,1);
-				pageTwoText = copy.intro.slice(1,2);
+				pageOneText = copy.page1_650;
+				pageTwoText = copy.page2_650;
 			} else if (bookMin > 600) {
-				pageOneText = copy.intro.slice(0,1);
-				let pageTwoText1 = pageOneText[0].value.split("trope.")[1];
-				pageOneText = pageOneText[0].value.split("It")[0];
-				let pageTwoText2 = copy.intro.slice(1,2);
-				pageTwoText2 = pageTwoText2[0].value.split("Despite")[0];
-				pageTwoText = pageTwoText1.concat(" ", pageTwoText2)
+				pageOneText = copy.page1_600;
+				pageTwoText = copy.page2_600;
 			} else  {
-				pageOneText = copy.intro[0];
-				pageOneText = pageOneText.value.split(/(My)/);
-				let pageTwoText1 = pageOneText[1];
-				let pageTwoText2 = pageOneText[2];
-				pageOneText = pageOneText[0];
-				pageTwoText = pageTwoText1.concat("", pageTwoText2)
+				pageOneText = copy.page1_else;
+				pageTwoText = copy.page2_else;
 			} 
 		}
 	}
-	$: console.log(bookH)
+
 	$: scrollY, computePercentage(scrollY, w, h);
 	$: w, computePercentage(scrollY, w, h);
 	$: h, computePercentage(scrollY, w, h);
