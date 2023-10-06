@@ -56,7 +56,7 @@
 
     }
 
-    $: if (smallChartRaunchiness !== undefined && smallChartIllustration !== undefined && smallChartRace != undefined) {
+    $: if (smallChartRaunchiness !== undefined && smallChartIllustration !== undefined && smallChartRace !== undefined) {
         smallChartRaunchiness
             .on("mouseover", function() {
                 selectAll(".top-wrapper.illustration, .top-wrapper.race").style("opacity", 0.25);
@@ -104,32 +104,15 @@
 </script>
 
 <section id="lookback">
-    <!-- This component handles the body copy. It expects and iteratible array of paragraphs 
-        that is pulled from the Google Doc. Right now, it is pulling from the ".lookBack" section.-->
     {#if introText !== undefined}
-        <div class="prose">
-            {#if Array.isArray(introText)}
-            {#each introText as text, i}
-                <p>{@html text.value}</p>
-            {/each}
-            {:else}
-                <p>{@html introText}</p>
-            {/if}
-        </div>
+        <Prose copy={introText}/>
     {/if}
-    <div class="prose">
-        <p>{@html copy.lookBackA[0].value}</p>
-    </div>
+    <Prose copy={copy.lookBackA[0]}/>
     <h5>Clinch covers featuring Fabio</h5>
     <div class="book-wrapper">
         {#each lookbackData.slice(5,10) as book, i}
             <div class="highlightBook">
                 <div class="books books-fabio">
-                    <!-- Books expects a single book. In this case, I'm just using the first row of data from the
-                    overall spreadsheet. We could create another spreadsheet structured in the same way, just with
-                    "lookBack" books. If you need multiple books, you can wrap the Book.svelte component in an
-                    {#each} statement (see Wall.svelte) or the Shelf component below.-->
-                    <!-- Index is set to 0 to add publication year on the shelf (might remove?) -->
                     <Book book={book} index={0} bookAddable={false} wallH={760} bookRows={5}/>
                 </div>
                 <div class="shelves">
@@ -138,23 +121,12 @@
             </div>
         {/each}
     </div>
-    <div class="prose">
-        <p>{@html copy.lookBackB[0].value}</p>
-    </div>
-
-    <!-- This setcion pulls out book(s) to highlight without a full wall by using the Wall.Book.svelte
-        and Wall.Shelf.svelte components. To style them differently, you'll want to use global stylings
-        like the example in the css.-->
+    <Prose copy={copy.lookBackB[0]}/>
     <h5>Historical Romance Novel Covers</h5>
     <div class="book-wrapper">
         {#each lookbackData.slice(0,5) as book, i}
             <div class="highlightBook">
                 <div class="books">
-                    <!-- Books expects a single book. In this case, I'm just using the first row of data from the
-                    overall spreadsheet. We could create another spreadsheet structured in the same way, just with
-                    "lookBack" books. If you need multiple books, you can wrap the Book.svelte component in an
-                    {#each} statement (see Wall.svelte) or the Shelf component below.-->
-                    <!-- Index is set to 0 to add publication year on the shelf (might remove?) -->
                     <Book book={book} index={0} bookAddable={false} wallH={760} bookRows={5}/>
                 </div>
                 <div class="shelves">
@@ -163,10 +135,7 @@
             </div>
         {/each}
     </div>
-    
-    <div class="prose">
-        <p>{@html copy.postLookBack[0].value}</p>
-    </div>
+    <Prose copy={copy.postLookBack[0]}/>
     <h5>Percentage of Romance Novel Covers Featuring...</h5>
     <SmallMultiples />
 </section>

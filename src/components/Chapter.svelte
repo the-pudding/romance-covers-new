@@ -3,17 +3,16 @@
     import ChapterText from "$components/ChapterText.svelte";
     import Bookmark from "$components/Bookmark.svelte";
     import inView from "$actions/inView.js";
-    import { activeSection, maxWidthRaunch, sliderVisible, xShiftRaunch, xShiftIllo, xShiftRace, sliderStoreRaunch, sliderStoreIllo, sliderStoreRace } from "$stores/misc.js";
+    import { activeSection } from "$stores/misc.js";
 
-    let scrollY;
 	let scrollDir;
 	let lastY;
-    let h;
 
     export let id;
     export let data;
     export let copyBlock;
     export let copyScroll;
+    export let scrollY;
 
     function setSectionEnter(id) { activeSection.set(id); }
     function setSectionExit(id) { 
@@ -23,7 +22,7 @@
             else if (id == "illustration") { nextSection = "race"; }
             else if (id == "race") { nextSection = "methods"; }
             activeSection.set(nextSection)
-        } else if (scrollDir == "up") {
+        } else {
             if (id == "raunchiness") { nextSection = "intro"; } 
             else if (id == "illustration") { nextSection = "raunchiness"; }
             else if (id == "race") { nextSection = "illustration"; }
@@ -45,8 +44,6 @@
 
     $: scrollY, checkScrollY(scrollY);
 </script>
-
-<svelte:window bind:scrollY bind:outerHeight={h}/>
 
 <section id={id}
     use:inView={{ top: 0 }}

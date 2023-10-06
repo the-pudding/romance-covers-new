@@ -14,7 +14,7 @@
     const yearGroups = groups(data, d => d.year);
 
     let bookWidth;
-    let bookRows = 3;
+    let bookRows = 4;
     let shelves = [0, 1, 2];
     let h;
     let w;
@@ -25,7 +25,7 @@
     function calcTotalWidth(chunks) {
         if (chunks.length == 13) {
             totalShelfWidth = chunks.reduce(function (a, b) {
-                return {chunkWidth: a.chunkWidth + b.chunkWidth}; // returns object with property x
+                return {chunkWidth: a.chunkWidth + b.chunkWidth};
             })
         }
     }
@@ -43,42 +43,29 @@
                     sliderStoreRace.set(0);
                     xShiftRace.set(0);  
                 }
-                // sliderStore.set(0)
             }
             else if (copy[value] !== 0 && select(`#${section} #book_${copy[value].scrollToId}`).node() !== null) {
-                let sel = select(`#${section} #book_${copy[value].scrollToId}`).node().getBoundingClientRect().x;
+                const sel = select(`#${section} #book_${copy[value].scrollToId}`).node().getBoundingClientRect().x;
                 if ($activeSection == "raunchiness") { 
-                    let val = $xShiftRaunch + sel - margins;
+                    const val = $xShiftRaunch + sel - margins;
                     xShiftRaunch.set(val);  
                 } else if ($activeSection == "illustration") { 
-                    let val = $xShiftIllo + sel - margins;
+                    const val = $xShiftIllo + sel - margins;
                     xShiftIllo.set(val); 
                 } else if ($activeSection == "race") { 
-                    let val = $xShiftRace + sel - margins;
+                    const val = $xShiftRace + sel - margins;
                     xShiftRace.set(val);  
                 }
-
-                // let blur = selectAll(".year-wrapper");
-                // if (Math.abs(sel - margins) > w/1.25) {
-                //     blur.classed("blur", true);
-                // }
-                // setTimeout(() => {
-                //     let val = $xShift + sel - margins;
-                //     xShift.set(val) 
-                // }, 500)
-                // setTimeout(() => {
-                //     blur.classed("blur", false)
-                // }, 1500)
             }
             if (value == copy.length - 1 && select(`#${$activeSection} .overflow-wrap`).node() !== null) { 
                 if ($activeSection == "raunchiness") { 
-                    let val = $xShiftRaunch
+                    const val = $xShiftRaunch
                     maxWidthRaunch.set(val); 
                 } else if ($activeSection == "illustration") { 
-                    let val = $xShiftIllo
+                    const val = $xShiftIllo
                     maxWidthIllo.set(val);
                 } else if ($activeSection == "race") { 
-                    let val = $xShiftRace
+                    const val = $xShiftRace
                     maxWidthRace.set(val);
                 }
             }
@@ -90,21 +77,21 @@
         if (wallH !== undefined && bookRows !== undefined) {
             bookWidth = Math.floor(wallH/bookRows*0.66);
             data.forEach((d, i) => {
-                let year = d[0];
-                let chunkLength = d[1].length;
-                let remainder = chunkLength % bookRows;
-                let bookCols = setBookCols(remainder, chunkLength, bookRows)
-                let chunkWidth = bookCols == 0 ? bookWidth + 8 : (bookCols * (bookWidth)) + 8;
+                const year = d[0];
+                const chunkLength = d[1].length;
+                const remainder = chunkLength % bookRows;
+                const bookCols = setBookCols(remainder, chunkLength, bookRows)
+                const chunkWidth = bookCols == 0 ? bookWidth + 8 : (bookCols * (bookWidth)) + 8;
                 chunkWidths.push({year: year, chunkWidth: chunkWidth});
             });
         }
 
         function setBookCols(remainder, chunkLength, bookRows) {
             if (wallH > 550) {
-                let val = remainder <= 2 && remainder !== 0 ? (Math.round((chunkLength)/bookRows) + 1) : Math.round((chunkLength)/bookRows);
+                const val = remainder <= 2 && remainder !== 0 ? (Math.round((chunkLength)/bookRows) + 1) : Math.round((chunkLength)/bookRows);
                 return val
             } else {
-                let val = remainder <= 1 && remainder !== 0 ? (Math.round((chunkLength)/bookRows) + 1) : Math.round((chunkLength)/bookRows);
+                const val = remainder <= 1 && remainder !== 0 ? (Math.round((chunkLength)/bookRows) + 1) : Math.round((chunkLength)/bookRows);
                 return val
             }
 
@@ -114,13 +101,13 @@
     function shiftSlider() {
         if (totalShelfWidth && $maxWidthRaunch !== undefined && $maxWidthIllo !== undefined && $maxWidthRace !== undefined) {
             if ($activeSection == "raunchiness") {
-                let val = $sliderStoreRaunch*$maxWidthRaunch/100;
+                const val = $sliderStoreRaunch*$maxWidthRaunch/100;
                 xShiftRaunch.set(val)
             } else if ($activeSection == "illustration") {
-                let val = $sliderStoreIllo*$maxWidthIllo/100;
+                const val = $sliderStoreIllo*$maxWidthIllo/100;
                 xShiftIllo.set(val)
             } if ($activeSection == "race") {
-                let val = $sliderStoreRace*$maxWidthRace/100;
+                const val = $sliderStoreRace*$maxWidthRace/100;
                 xShiftRace.set(val)
             }
         }
@@ -147,7 +134,8 @@
 
 <section id="wall-{section}" class="wall">
     {#if $xShiftRaunch !== undefined && section == "raunchiness"}
-        <div class="overflow-wrap" style="transform:translate3d(-{$xShiftRaunch}px,0,0)">
+        {@const sliderMatch = $xShiftRaunch}
+        <div class="overflow-wrap" style="transform:translate3d(-{sliderMatch}px,0,0)">
             {#each yearGroups as year, i}
                 <div class="year-wrapper" bind:clientHeight={wallH}>
                     {#if wallH !== undefined && chunkWidths.length == 13}

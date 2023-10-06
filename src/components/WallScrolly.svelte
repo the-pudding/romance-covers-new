@@ -1,7 +1,7 @@
 <script>
 	import Scrolly from "$components/helpers/Scrolly.svelte";
     import Wall from "$components/Wall.svelte";
-	import { stepData, sliderVisible, sliderStoreRaunch, sliderStoreIllo, sliderStoreRace } from "$stores/misc.js";
+	import { stepData, sliderVisible } from "$stores/misc.js";
 	
 	export let data;
     export let copy;
@@ -31,11 +31,7 @@
         {#if copy}
             {#each copy as text, i}
                 <div class="step">
-                    <p>
-						<!-- {#if text.kicker}
-						<span class="kicker">{@html text.kicker}</span>
-						{/if} -->
-						{@html text.text}</p>
+                    <p>{@html text.text}</p>
                 </div>
             {/each}
         {/if}
@@ -56,7 +52,6 @@
 	.spacer {
 		height: 75vh;
 	}
-
 	.step {
 		height: 80vh;
 		text-align: center;
@@ -87,7 +82,6 @@
         background-repeat: no-repeat;
         background-position: center;
 	}
-
 	.step p {
 		font-family: var(--serif);
 		font-weight: 500;
@@ -120,13 +114,6 @@
 	}
 	:global(.step p a:hover) {
 		background-position: 0 0rem;
-	}
-	.kicker {
-		font-family: var(--sans-display);
-		font-weight: 900;
-		display: block;
-		letter-spacing: -1px;
-		margin: 0 0 0.5rem 0;
 	}
 	@media only screen and (min-width: 600px) {
         .step:last-of-type p {

@@ -1,5 +1,5 @@
 <script>
-    import { activeSection, xShiftRaunch, xShiftIllo, xShiftRace, readingList, readingListVisible, sliderVisible, sliderStoreRaunch, sliderStoreIllo, sliderStoreRace, maxWidthRaunch, maxWidthIllo, maxWidthRace } from "$stores/misc.js";
+    import { activeSection, xShiftRaunch, xShiftIllo, xShiftRace, readingList, readingListVisible, sliderVisible, sliderStoreRaunch, sliderStoreIllo, sliderStoreRace } from "$stores/misc.js";
     import { fly, fade } from 'svelte/transition';
     import Icon from "$components/helpers/Icon.svelte";
     import {select} from "d3-selection";
@@ -11,26 +11,14 @@
     let sliderValIllo;
     let sliderValRace;
     let rangeStart = 100;
-    let scrollY;
-	let scrollDir;
-	let lastY;
 
     function handleListToggle(initState) {
         readingListVisible.set(!$readingListVisible);
-        select(this).style("animation", "none")
-        select(this).classed("highlight", false)
-    }
-
-    function checkScrollY(scrollY) {
-        if (scrollY) {
-            scrollDir = scrollY > lastY ? "down" : "up"
-            lastY = scrollY;
-        }
+        select(this).style("animation", "none").classed("highlight", false)
     }
 
     function handleChapterClick(e) {
         const id = (select(this).node().id).split("-")[1];
-
         e.preventDefault()
 		const anchor = document.getElementById(id)
 		window.scrollTo({
@@ -43,41 +31,14 @@
         const title = id == "race" ? "diversity" : id;
         return title
     }
-
-    function setRangeVal(activeSection) {
-        sliderVisible.set(false);
-        if (activeSection == "raunchiness") { 
-            sliderStoreRaunch.set(100);
-            if (scrollDir == "down") { xShiftRaunch.set(0); }
-        } else if (activeSection == "illustration") { 
-            sliderStoreIllo.set(100);
-            if (scrollDir == "down") { xShiftIllo.set(0); }
-        } else if (activeSection == "race") { 
-            sliderStoreRace.set(100);
-            if (scrollDir == "down") { xShiftRace.set(0); } 
-        } else {
-            sliderStoreRaunch.set(100);
-            sliderStoreIllo.set(100);
-            sliderStoreRace.set(100);
-            if (scrollDir == "down") { 
-                xShiftRaunch.set(0);
-                xShiftIllo.set(0);
-                xShiftRace.set(0);
-            }
-        }
-        rangeStart = 100;
-    }
-
-    $: scrollY, checkScrollY(scrollY);
-    $: $activeSection, setRangeVal($activeSection) 
 </script>
 
 <nav>
     <div class="top-nav">
         <div class="logo">
-            <a href="https://pudding.cool" aria-label="The Pudding" target="_self"
-                >{@html logo}</a
-            >
+            <a href="https://pudding.cool" aria-label="The Pudding" target="_self">
+                {@html logo}
+            </a>
         </div>
         <div class="sect-btns">
             {#each sections as section, i}
@@ -104,7 +65,7 @@
                         {$readingList.length}
                     </p>
                 {/if}
-                {#if $readingListVisible ==false}
+                {#if $readingListVisible == false}
                     <Icon name="book-open" />
                 {:else}
                     <Icon name="x" />
@@ -280,7 +241,6 @@
         border-radius: 50%;
         height: 2rem;
         width: 2rem;
-        /* animation: pulse-animation 2s infinite; */
         transition: 0.25s linear;
         transform: scale(1);
     }
@@ -333,7 +293,6 @@
 	}
     :global(.listBtn.highlight) {
         background: rgba(255, 255, 255, 0.75) !important;
-        /* animation: pulse-animation 2s infinite !important; */
         animation: pulse-animation 2s infinite 1s !important;
     }
     @keyframes pulse-animation {

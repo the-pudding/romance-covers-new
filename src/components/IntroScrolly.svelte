@@ -6,41 +6,24 @@
     import Icon from "$components/helpers/Icon.svelte";
 
     export let bookMin;
+    export let w;
+    export let h;
+    export let scrollY;
 
     const steps = [0];
 
 	let value;
-    let y;
-    let h;
-    let scrollDir;
-	let lastY;
-    let tipVisible = false;
 
     function setSection(id) { activeSection.set(id); }
 
-    function checkScrollY(y) {
-        if (y && y != 0) {
-            scrollDir = scrollY > lastY ? "down" : "up"
-            lastY = scrollY;
-        } else {
-            scrollDir = "down";
-        }
-    }
-    function hideTip() {
-        tipVisible = !tipVisible;   
-    }
-
-    $: y, checkScrollY(y); 
-    $: isVisible = y == undefined || y < 5 ? true : false; 
+    $: isVisible = scrollY == undefined || scrollY < 5 ? true : false; 
 </script>
-
-<svelte:window bind:innerHeight={h} bind:scrollY={y}/>
 
 <section id="intro"
     use:inView
     on:enter={() => setSection("intro")}>
 	<div class="sticky">
-        <IntroBook bookMin={bookMin}/>
+        <IntroBook bookMin={bookMin} w={w} h={h} scrollY={scrollY}/>
     </div>
 	<Scrolly bind:value>
         {#each steps as step, i}

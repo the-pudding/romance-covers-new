@@ -72,12 +72,12 @@
 
 <svelte:window bind:innerWidth={w} bind:innerHeight={h} bind:scrollY={scrollY} />
 <ChapterMarker />
-<IntroScrolly bookMin={bookMin}/>
+<IntroScrolly bookMin={bookMin} w={w} h={h} scrollY={scrollY}/>
 <Lookback bookMin={bookMin}/>
 <div class="sections">
-	<Chapter id={"raunchiness"} data={raunchinessData} copyBlock={copy.raunchinessText} copyScroll={copy.raunchinessScroll} />
-	<Chapter id={"illustration"} data={illustrationData} copyBlock={copy.illustrationText} copyScroll={copy.illustrationScroll} />
-	<Chapter id={"race"} data={raceData} copyBlock={copy.raceText} copyScroll={copy.raceScroll} />
+	<Chapter id={"raunchiness"} data={raunchinessData} copyBlock={copy.raunchinessText} copyScroll={copy.raunchinessScroll} scrollY={scrollY} />
+	<Chapter id={"illustration"} data={illustrationData} copyBlock={copy.illustrationText} copyScroll={copy.illustrationScroll} scrollY={scrollY} />
+	<Chapter id={"race"} data={raceData} copyBlock={copy.raceText} copyScroll={copy.raceScroll} scrollY={scrollY} />
 </div>
 {#if $activeSection !== "intro" && $activeSection !== "methods" && $activeSection !== null}
 	<section id="barChart" in:fly={{ y: 200, duration: 2000 }} out:fly={{ y: 200, duration: 2000 }}>

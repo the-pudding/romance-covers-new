@@ -4,33 +4,25 @@
 	import { fade } from 'svelte/transition';
 
 	export let bookMin;
+	export let w;
+	export let h;
+	export let scrollY;
     
 	const copy = getContext("copy");
 
-	let y;
-	let w;
-	let h;
-	let bookTranslate;
-	let mainRotate;
-	let frontRotate;
+	let bookTranslate = 0;
+	let frontRotate = 0;
 	let pageOneText;
 	let pageTwoText;
 
-	function computePercentage(y, w, h) {
-		if (y >= 2) {
-			if (w < 600 && y/h*100 < 50) {
-				bookTranslate = 100;
-			} else if (w < 600 && y/h*100 >= 50) {
-				bookTranslate = 0;
-			} else if (w >= 600) {
-				bookTranslate = 50;
-			}
-			mainRotate = 0;
+	function computePercentage(scrollY, w, h) {
+		if (scrollY >= 2) {
+			if (w < 600) { bookTranslate = scrollY/h*100 < 50 ? 100 : 0;
+			} else { bookTranslate = 50; }
 			frontRotate = 180;
 		} else {
-			bookTranslate = w >= 600 ? y/h*100 : y/h*50;
-			mainRotate = y/h*10;
-			frontRotate = y/h*180;
+			bookTranslate = 0;
+			frontRotate = 0;
 		}
 	}
 	
@@ -40,9 +32,8 @@
 				pageOneText = copy.intro.slice(0,2);
 				pageTwoText = copy.intro.slice(2,4);
 			} else if (bookMin > 750) {
-				let pageOneText1 = copy.intro.slice(0,1);
-				let pageOneText2 = copy.intro.slice(1,2);
-				pageOneText2 = pageOneText2[0].value.split("Despite")[0];
+				const pageOneText1 = copy.intro.slice(0,1);
+				const pageOneText2 = copy.intro.slice(1,2)[0].value.split("Despite")[0];
 				pageOneText1.push({type: "text", value: pageOneText2})
 				pageOneText = pageOneText1;
 				let pageTwoText1 = copy.intro.slice(1,2);
@@ -74,26 +65,21 @@
 		}
 	}
 
-	$: y, computePercentage(y, w, h);
-	$: w, computePercentage(y, w, h);
-	$: h, computePercentage(y, w, h);
+	$: scrollY, computePercentage(scrollY, w, h);
+	$: w, computePercentage(scrollY, w, h);
+	$: h, computePercentage(scrollY, w, h);
 	$: bookMin, setBookText();
-	//console.log(CSS.supports("aspect-ratio: 16 / 9;"));
-
-	// height:{(bookMin-32)/1.5}px; width:{(bookMin-32)/1.5/1.475}px
 </script>
-
-<svelte:window bind:innerWidth={w} bind:innerHeight={h} bind:scrollY={y}/>
 
 <section id="intro-book">
 		<div id="book" style="transform:translate3d({bookTranslate}%,0,0);" >
-			<div class="main" style="transform:rotate3d(1,1,0,{mainRotate}deg)">
+			<div class="main">
 				<div class="book-front" style="transform:translate3d(0,0,25px) rotate3d(0,1,0,-{frontRotate}deg)">
 					<div class="book-cover">
 						<div class="title-wrapper" style={"width: 100%; height: 80%;"}>
 							<h1 in:fade={{ delay: 0 }} use:fit={{min_size: 12, max_size:64 }}>{@html copy.titleBreaks}</h1>
 						</div>
-							<p in:fade={{ delay: 0 }} class="byline"><a href="https://pudding.cool/author/alice">Alice Liang</a></p>
+						<p in:fade={{ delay: 0 }} class="byline"><a href="https://pudding.cool/author/alice">Alice Liang</a></p>
 					</div>
 					<div class="book-cover-back">
 						<div class="book-cover-back-indent">
@@ -122,14 +108,8 @@
 						{/if}
 					</div>
 				</div>
-				<div class="book-back">
-				</div>
-				<div class="book-bone">
-					<!-- <h2>What Does A Happily Ever After Look Like?</h2> -->
-				</div>
-				<div class="book-top"></div>
-				<div class="book-right"></div>
-				<div class="book-bottom"></div>
+				<div class="book-back"></div>
+				<div class="book-bone"></div>
 			</div>
 		</div>
 	<p class="credit">With <a href="https://pudding.cool/author/jan-diehm/">Jan Diehm</a> • Cover design by <a href="http://www.sandrachiu.com/">Sandra Chiu</a></p>
@@ -312,19 +292,6 @@
 		position: relative;
 		z-index: 1000;
 	}
-	/* :global(.initial-cap:before) {
-		content: "G";
-		font-size: 80px;
-		position: absolute;
-		left: -0.5rem;
-		top: -0.5rem;
-		font-family: var(--sans-display);
-		font-weight: 900;
-		color: var(--romance-bg-pink);
-		z-index: 0;
-		mix-blend-mode: darken;
-		opacity: 0.5;
-	} */
 
 /* = Book Page
 -------------------------------------------------------------- */
@@ -378,27 +345,8 @@
 		transform:rotate3d(0,1,0,-90deg);
 	}
 	
-	.book-page,.book-top,.book-right,.book-bottom{
+	.book-page {
 		background:var(--color-white);
-	}
-	.book-right{
-		width:50px; height:100%;
-		position:absolute; top:5px; right:-20px;
-		box-shadow:0 1px 0 var(--color-white),0 -1px 0 var(--color-white);
-		transform:rotate3d(0,1,0,90deg);
-	}
-	.book-top{
-		width:415px; height:50px;
-		position:absolute; top:-20px; left:0;
-		transform:rotate3d(1,0,0,90deg);
-	}
-	.book-bottom{
-		width:415px; height:50px;
-		position:absolute; bottom:-20px; left:0;
-		transform: rotate3d(1,0,0,-90deg) translate3d(0,0,0);
-	}
-	.book-right,.book-top,.book-bottom{
-		backface-visibility:hidden;
 	}
 
 	/* MEDIA QUERIES */
@@ -452,8 +400,6 @@
 		#book {
 			width: 54.5vmin;
 			padding: 1% 1rem 1rem 1rem;
-			/* max-width: 475px;
-			max-height: 700px; */
 		}
 		.book-cover h1 {
 			font-size: var(--64px);
