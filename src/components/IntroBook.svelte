@@ -59,8 +59,17 @@
 			<div class="main">
 				<div class="book-front" style="transform:translate3d(0,0,25px) rotate3d(0,1,0,-{frontRotate}deg)">
 					<div class="book-cover">
+						<div class="img-wrapper">
+							<img 
+								srcset="/assets/images/Alice_cover_notype_600.jpg 600w, /assets/images/Alice_cover_notype_900.jpg 900w" 
+								sizes="(max-width: 600px) 600px, 900px"
+								src="/assets/images/Alice_cover_notype_900.jpg"
+								alt="An illustrated book cover of an Asian woman with one hand on her hip and the other on her chin in a curious pose. There are colorful books flying around her on a blue background."
+							/>
+						</div>
+						<div class="gradient-wrapper"></div>
 						<div class="title-wrapper" style={"width: 100%; height: 80%;"}>
-							<h1 in:fade={{ delay: 0 }} use:fit={{min_size: 12, max_size:64 }}>{@html copy.titleBreaks}</h1>
+							<h1 in:fade={{ delay: 0 }} use:fit={{min_size: 12, max_size:72 }}>{@html copy.titleBreaks}</h1>
 						</div>
 						<p in:fade={{ delay: 0 }} class="byline"><a href="https://pudding.cool/author/alice">Alice Liang</a></p>
 					</div>
@@ -130,16 +139,13 @@
 		perspective: 2000px;
 		transform:translate3d(0,0,0);	
 		padding: 1rem;
-		max-width: 320px;
-		max-height: 470px;
-		min-width: 275px;
+		max-width: 600px;
+		max-height: 740px;
+		min-width: 200px;
 		min-height: 400px;
 		transition: all 0.5s;
+		aspect-ratio: 1 / 1.475;
 		height: 80vmin;
-		width: 52.8vmin;
-		max-width: 475px;
-		max-height: 700px;
-		/* aspect-ratio: 1 / 1.475; */
 	}
 	.main {
 		width: 100%;
@@ -149,7 +155,7 @@
 		padding: 32% 0 0 0;
 		transform-style: preserve-3d;
 		transition-duration: .5s;
-		/* aspect-ratio: 1/1.475; */
+		aspect-ratio: 1/1.475;
 	}
 
 /* = Book Font
@@ -172,17 +178,6 @@
 		overflow:hidden;
 		position:absolute; top:0; bottom:0;
 		background-color: var(--romance-blue);
-		background-image: linear-gradient(to right, 
-			rgba(60, 13, 20, 0.25) 1px, 
-            rgba(255, 255, 255, 0.5) 3px, 
-            rgba(255, 255, 255, 0.25) 7px, 
-            rgba(255, 255, 255, 0.25) 10px, 
-            transparent 12px,
-            transparent 16px, 
-            rgba(255, 255, 255, 0.25) 17px,
-            transparent 22px),
-            url("/assets/images/Alice_cover_notype.jpg");
-		/* background: url("/assets/images/Alice_cover_notype.jpg"); */
         background-size: cover;
         background-repeat: no-repeat;
 		transform-style:preserve-3d;
@@ -191,10 +186,35 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
-		padding: 0.5rem;
 		box-shadow: -15px 15px 20px -3px  rgba(0, 0, 0, 0.125), inset -1px 1px 2px rgba(255, 255, 255, 0.5);
 	}
+	.img-wrapper {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+	}
+	.img-wrapper img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	.gradient-wrapper {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background-image: linear-gradient(to right, 
+			rgba(60, 13, 20, 0.25) 1px, 
+            rgba(255, 255, 255, 0.5) 3px, 
+            rgba(255, 255, 255, 0.25) 7px, 
+            rgba(255, 255, 255, 0.25) 10px, 
+            transparent 12px,
+            transparent 16px, 
+            rgba(255, 255, 255, 0.25) 17px,
+            transparent 22px);
+            /* url("/assets/images/Alice_cover_notype.jpg"); */
+	}
 	.title-wrapper {
+		position: absolute;
 		width: 100%;
 		height: 60%;
 	}
@@ -206,7 +226,7 @@
 		color: #F8DC3F;
 		font-size: var(--24px);
 		line-height: 2;
-		margin: -0.5rem auto 0 auto;
+		margin: 0 auto 0 auto;
 		padding: 0 0 5rem 0;
 		text-align: center;
 		width: 100%;
@@ -223,7 +243,7 @@
 		font-style: normal;
 		text-align: center;
 		width: 100%;
-		font-size: var(--18px);
+		font-size: var(--24px);
 		color: #F8DC3F;
 		margin: 0;
 	}
@@ -339,7 +359,7 @@
 			font-size: var(--24px);
 		}
 		.book-cover .byline {
-			font-size: var(--18px);
+			font-size: var(--24px);
 		}
 	}
 	@media only screen and (min-width: 600px) and (min-height: 800px) {
@@ -347,7 +367,7 @@
 			font-size: var(--40px);
 		}
 		.book-cover .byline {
-			font-size: var(--32px);
+			font-size: var(--40px);
 			bottom: 1rem;
 		}
 		.book-cover-back-indent, .page {
@@ -362,15 +382,12 @@
 		}
 	}
 	@media only screen and (min-width: 800px) and (min-height: 1000px) {
-		.book-cover {
-			padding: 1rem;
-		}
 		.book-cover h1 {
 			font-size: var(--56px);
-			margin: -1.5rem 0 0 0;
+			margin: 0 auto;
 		}
 		.book-cover .byline {
-			font-size: var(--36px);
+			font-size: var(--44px);
 			bottom: 1rem;
 		}
 	}
