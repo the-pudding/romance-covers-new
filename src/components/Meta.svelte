@@ -1,6 +1,6 @@
 <script>
 	export let title = "What Does a Happily Ever After Look Like?";
-	export let description = "We looked at over 1,300 romance novel covers featured in Publishers Weekly from 2011 to 2023 and evaluated each cover based on its raunchiness (or level of undress), art style, and representation of racial diversity.";
+	export let description = "We looked at over 1,400 romance novel covers featured in Publishers Weekly from 2011 to 2023 and evaluated each cover based on its raunchiness (or level of undress), art style, and representation of racial diversity.";
 	export let url = "https://pudding.cool/2023/10/romance-covers";
 	export let keywords = "romance, literature, book, novel, love, heartbreak, diverity, race, gender, raunchiness, fabio, visual, illustration, cover, art";
 	export let preloadFont = [];
