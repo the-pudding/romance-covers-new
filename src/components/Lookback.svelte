@@ -103,10 +103,10 @@
         {#each lookbackData.slice(5,10) as book, i}
             <div class="highlightBook">
                 <div class="books books-fabio">
-                    <Book book={book} index={0} bookAddable={false} wallH={760} bookRows={5}/>
+                    <Book book={book} index={0} bookAddable={false} wallH={760} bookRows={5} imgsLoaded={true}/>
                 </div>
                 <div class="shelves">
-                    <Shelf shelfW={100} shelfHasShadow={false} wallH={760} bookRows={5}/>
+                    <Shelf shelfW={100} shelfHasShadow={false} wallH={760} bookRows={5} />
                 </div>
             </div>
         {/each}
@@ -117,7 +117,7 @@
         {#each lookbackData.slice(0,5) as book, i}
             <div class="highlightBook">
                 <div class="books">
-                    <Book book={book} index={0} bookAddable={false} wallH={760} bookRows={5}/>
+                    <Book book={book} index={0} bookAddable={false} wallH={760} bookRows={5} imgsLoaded={true}/>
                 </div>
                 <div class="shelves">
                     <Shelf shelfW={100} shelfHasShadow={false} wallH={760} bookRows={5}/>

@@ -8,6 +8,7 @@
     export let bookAddable = true;
     export let wallH;
     export let bookRows;
+    export let imgsLoaded;
 
     let w;
     let h; 
@@ -26,7 +27,9 @@
     >   
         <div class='img-wrapper' style="height: {Math.floor(wallH/bookRows-48)}px; width: {Math.floor((wallH/bookRows-48)*0.625)}px;">
             <div class="overlay"></div>
-            <img src="assets/images/covers/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" />
+            {#if imgsLoaded}
+                <img src="assets/images/covers/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" />
+            {/if}
             <!-- <Image loading="lazy" src="assets/images/covers/img_{book.ISBN}.jpg" alt="a thumbnail book cover of {book.title}" /> -->
         </div>
         <div class="marker">{book.year}</div>

@@ -69,9 +69,9 @@
 						</div>
 						<div class="gradient-wrapper"></div>
 						<div class="title-wrapper" style={"width: 100%; height: 80%;"}>
-							<h1 in:fade={{ delay: 0 }} use:fit={{min_size: 12, max_size:72 }}>{@html copy.titleBreaks}</h1>
+							<h1 use:fit={{min_size: 12, max_size:72 }}>{@html copy.titleBreaks}</h1>
 						</div>
-						<p in:fade={{ delay: 0 }} class="byline"><a href="https://pudding.cool/author/alice">Alice Liang</a></p>
+						<p class="byline"><a href="https://pudding.cool/author/alice">Alice Liang</a></p>
 					</div>
 					<div class="book-cover-back">
 						<div class="book-cover-back-indent">

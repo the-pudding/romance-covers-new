@@ -33,7 +33,6 @@
 	</Scrolly>
 	<div class="spacer" />
     <div class="icon-wrapper" class:isVisible={isVisible}>
-        <Icon name="arrow-down-circle" size="3rem"/>
     </div>
 </section>
 
@@ -70,6 +69,8 @@
         visibility: none;
 	}
     .icon-wrapper {
+        height: 3.5rem;
+        width: 3.5rem;
         position: fixed;
         display: flex;
         flex-direction: column;
@@ -80,6 +81,10 @@
         transform: translate(-50%, -50%);
         animation: bounceUp 1s infinite;
         opacity: 0;
+        background-image: url($svg/arrow-down-circle.svg);
+        background-size: 3.5rem 3.5rem;
+        background-repeat: no-repeat;
+        background-position: center;
     }
     .isVisible {
         opacity: 1;
@@ -93,10 +98,6 @@
         display: inline-block;
         box-sizing: border-box;
         animation: rotation 1s linear infinite;
-    }
-    :global(.icon-wrapper svg path, .icon-wrapper svg circle) {
-        stroke: var(--romance-pink-light);
-        stroke-width: 1px;
     }
     @keyframes bounceUp {
         0%       { bottom:2px; }

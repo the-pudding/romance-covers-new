@@ -40,6 +40,6 @@
         border: 2px solid var(--color-white);
         pointer-events: none;
         position: relative;
-        top: 0.25rem;
+        top: 0.5rem;
     }
 </style>

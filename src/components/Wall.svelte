@@ -4,6 +4,7 @@
     import { activeSection, maxWidthRaunch, maxWidthIllo, maxWidthRace, sliderVisible, sliderStoreRaunch, sliderStoreIllo, sliderStoreRace, xShiftRaunch, xShiftIllo, xShiftRace } from "$stores/misc.js";
     import Book from "$components/Wall.Book.svelte";
     import Shelf from "$components/Wall.Shelf.svelte";
+    // import { lazy, lazyAll } from "$utils/lazyLoad.js";
 
     export let data;
     export let value;
@@ -23,6 +24,7 @@
     let chunkWidths = [];
     let totalShelfWidth;
     // let slideSpeed = 1.5;
+    let imgsLoaded = false;
 
     function calcTotalWidth(chunks) {
         if (chunks.length == 13) {
@@ -125,6 +127,10 @@
         }
     }
 
+    function loadImgs($activeSection, section) {
+        imgsLoaded = $activeSection == section || $activeSection == "intro" ? true : false;
+    }
+
     $: value, shiftX(value);
     $: wallH, getBookRows(wallH);
     $: w, getYearLengths(yearGroups, bookRows);
@@ -133,6 +139,7 @@
     $: $sliderStoreRaunch, shiftSlider();
     $: $sliderStoreIllo, shiftSlider();
     $: $sliderStoreRace, shiftSlider();
+    $: $activeSection, loadImgs($activeSection, section);
 </script>
 
 <svelte:window bind:innerHeight={h} bind:innerWidth={w} />
@@ -148,7 +155,7 @@
                         style="width:{match.chunkWidth}px">
                             <div class="books">
                                 {#each year[1] as book, i}
-                                    <Book book={book} index={i} wallH={wallH} bookRows={bookRows} />
+                                    <Book book={book} index={i} wallH={wallH} bookRows={bookRows} imgsLoaded={imgsLoaded} />
                                 {/each}
                             </div>
                         </div>

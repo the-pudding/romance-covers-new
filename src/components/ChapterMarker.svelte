@@ -70,9 +70,9 @@
                     </p>
                 {/if}
                 {#if $readingListVisible == false}
-                    <Icon name="book-open" />
+                    <div class="book_noList_black"></div>
                 {:else}
-                    <Icon name="x" />
+                    <div class="book_inList_black"></div>
                 {/if}
         </button>
     </div>
@@ -118,6 +118,29 @@
         position: fixed;
         width: 100%;
         height: 3rem;
+    }
+    :global(.book_inList_black) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 2rem;
+        width: 2rem;
+        background-image: url($svg/x.svg);
+        background-size: 1rem 1rem;
+        background-repeat: no-repeat;
+        background-position: center;
+        transition: 0.5s background-color linear;
+    }
+    :global(.book_noList_black) {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 2rem;
+        width: 2rem;
+        background-image: url($svg/book-open-black.svg);
+        background-size: 1rem 1rem;
+        background-repeat: no-repeat;
+        background-position: center;
     }
     .slider-wrapper {
         position: fixed;
@@ -268,6 +291,7 @@
         font-family:  var(--sans-display);
         border: 2px solid white;
         box-shadow: 0.25rem 0 1rem  var(--color-gray-300);
+        z-index: 1000;
     }
     #range-slider {
 		z-index: 1000;
