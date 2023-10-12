@@ -47,7 +47,8 @@
         <div class="sect-btns">
             {#each sections as section, i}
                 {@const active = $activeSection == section ? "active" : ""}
-                <div class="btn-wrapper">
+                <div class="btn-wrapper"
+                    class:isHidden={$readingListVisible}>
                     <button 
                         on:click={handleChapterClick}
                         class="sectionBox {active}"
@@ -77,8 +78,9 @@
         </button>
     </div>
     <div class="slider-wrapper">
-        {#if $sliderVisible && !$readingListVisible}
+        {#if $sliderVisible}
             <div id="range-slider" 
+                class:isHidden={$readingListVisible}
                 in:fade={{ delay: 250, duration: 200 }}
                 out:fade={{ delay: 0, duration: 200 }}>
                 <p><Icon name="move-left" /></p>
@@ -141,6 +143,11 @@
         background-size: 1rem 1rem;
         background-repeat: no-repeat;
         background-position: center;
+    }
+    .isHidden {
+        pointer-events: none;
+        opacity: 0.125;
+        transition: 0.25s linear;
     }
     .slider-wrapper {
         position: fixed;
