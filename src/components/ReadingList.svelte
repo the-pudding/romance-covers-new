@@ -69,7 +69,7 @@
             ...d,
             title: findBookMatch(d.id, "title"),
             author: findBookMatch(d.id, "author"),
-            cover_img: findBookMatch(d.id, "cover_img"),
+            cover_img: `https://github.com/the-pudding/romance-cover-imgs/blob/main/static/assets/images/img_${d.id}.jpg`,
             libraryLink: `https://www.worldcat.org/search?q=bn%3A${d.id}`,
             bookshopLink: findLinkMatchURL(d.id)
         }))
