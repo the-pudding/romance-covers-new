@@ -69,8 +69,8 @@
         visibility: none;
 	}
     .icon-wrapper {
-        height: 3.5rem;
-        width: 3.5rem;
+        height: 3rem;
+        width: 3rem;
         position: fixed;
         display: flex;
         flex-direction: column;
@@ -82,7 +82,7 @@
         animation: bounceUp 1s infinite;
         opacity: 0;
         background-image: url($svg/arrow-down-circle.svg);
-        background-size: 3.5rem 3.5rem;
+        background-size: 3rem 3rem;
         background-repeat: no-repeat;
         background-position: center;
     }
