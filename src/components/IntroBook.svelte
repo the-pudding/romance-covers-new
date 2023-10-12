@@ -61,9 +61,9 @@
 					<div class="book-cover">
 						<div class="img-wrapper">
 							<img 
-								srcset="/assets/images/Alice_cover_notype_600.jpg 600w, /assets/images/Alice_cover_notype_900.jpg 900w" 
+								srcset="assets/images/Alice_cover_notype_600.jpg 600w, assets/images/Alice_cover_notype_900.jpg 900w" 
 								sizes="(max-width: 600px) 600px, 900px"
-								src="/assets/images/Alice_cover_notype_900.jpg"
+								src="assets/images/Alice_cover_notype_900.jpg"
 								alt="An illustrated book cover of a woman with one hand on her hip and the other on her chin in a curious pose. There are colorful books flying around her on a blue background."
 							/>
 						</div>
