@@ -58,7 +58,6 @@
 	function bookMousemove(e) {
 		let xPos = e.clientX;
 		let rotation = xPos > w/2 ? 30 : -30;
-		console.log(xPos, w)
 		if (scrollY < 2) {
 			let book = selectAll("#book .main")
 			book.style("transform", `rotate3d(0,1,0,${rotation}deg)`)
