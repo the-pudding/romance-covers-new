@@ -46,7 +46,7 @@
 				pageOneText = copy.page1_600;
 				pageTwoText = copy.page2_600;
 				headlineSize = 40;
-			} else  {
+			} else if (bookMin <= 600)  {
 				pageOneText = copy.page1_else;
 				pageTwoText = copy.page2_else;
 				headlineSize = 36;
@@ -58,6 +58,7 @@
 	$: w, computePercentage(scrollY, w, h);
 	$: h, computePercentage(scrollY, w, h);
 	$: bookMin, setBookText();
+	$: console.log(headlineSize, bookMin)
 </script>
 
 <section id="intro-book">
@@ -75,7 +76,7 @@
 						</div>
 						<div class="gradient-wrapper"></div>
 						<div class="title-wrapper" style={"width: 100%; height: 80%;"}>
-							<h1 style="font-size:{headlineSize}px">{@html copy.titleBreaks}</h1>
+							<h1 style="font-size:{headlineSize}px">What Does <br> A Happily <br> Ever After <br> Look Like?</h1>
 						</div>
 						<p class="byline"><a href="https://pudding.cool/author/alice-liang">Alice Liang</a></p>
 					</div>
@@ -239,6 +240,7 @@
 		text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
 		max-height: 60%;
 		white-space: nowrap;
+		font-size: var(--64px);
 		/* transition: all 0.5s; */
 	}
 	.book-cover .byline {

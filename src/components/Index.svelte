@@ -60,9 +60,7 @@
 		if (w !== undefined && h !== undefined) {
 			if (Math.min(w,h) > 600) { return Math.min(w, h); } 
 			else { return 600 };
-		} else {
-			return 600;
-		}
+		} 
 	}
 	
 	$: activeSection, swapBarData($activeSection)
