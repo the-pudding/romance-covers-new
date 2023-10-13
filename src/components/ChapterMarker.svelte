@@ -1,4 +1,5 @@
 <script>
+    import { onMount } from "svelte";
     import { activeSection, readingList, readingListVisible, sliderVisible } from "$stores/misc.js";
     import { fly, fade } from 'svelte/transition';
     import Icon from "$components/helpers/Icon.svelte";
@@ -11,6 +12,11 @@
     let sliderValIllo;
     let sliderValRace;
     let rangeStart = 100;
+    let loading = true;
+
+    onMount(() => {
+		loading = false;
+	})
 
     function handleListToggle(initState) {
         readingListVisible.set(!$readingListVisible);
@@ -38,7 +44,7 @@
 </script>
 
 <nav>
-    <div class="top-nav">
+    <div class="top-nav" class:loading={loading}>
         <div class="logo">
             <a href="https://pudding.cool" aria-label="The Pudding" target="_self">
                 {@html logo}
@@ -109,6 +115,9 @@
         flex-direction: column;
         z-index: 1000;
         height: 6rem;
+    }
+    .loading {
+        pointer-events: none;
     }
     .top-nav {
         display: flex;

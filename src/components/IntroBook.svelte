@@ -15,7 +15,7 @@
 	let frontRotate = 0;
 	let pageOneText;
 	let pageTwoText;
-	let headlineSize;
+	// let headlineSize;
 
 	function computePercentage(scrollY, w, h) {
 		if (scrollY >= 2) {
@@ -33,23 +33,23 @@
 			if (bookMin > 900) {
 				pageOneText = copy.page1_900;
 				pageTwoText = copy.page2_900;
-				headlineSize = 68;
+				// headlineSize = 68;
 			} else if (bookMin > 750) {
 				pageOneText = copy.page1_750;
 				pageTwoText = copy.page2_750;
-				headlineSize = 56;
+				// headlineSize = 56;
 			} else if (bookMin > 650) {
 				pageOneText = copy.page1_650;
 				pageTwoText = copy.page2_650;
-				headlineSize = 48;
+				// headlineSize = 48;
 			} else if (bookMin > 600) {
 				pageOneText = copy.page1_600;
 				pageTwoText = copy.page2_600;
-				headlineSize = 40;
+				// headlineSize = 40;
 			} else if (bookMin <= 600)  {
 				pageOneText = copy.page1_else;
 				pageTwoText = copy.page2_else;
-				headlineSize = 36;
+				// headlineSize = 36;
 			} 
 		}
 	}
@@ -58,7 +58,6 @@
 	$: w, computePercentage(scrollY, w, h);
 	$: h, computePercentage(scrollY, w, h);
 	$: bookMin, setBookText();
-	$: console.log(headlineSize, bookMin)
 </script>
 
 <section id="intro-book">
@@ -76,7 +75,7 @@
 						</div>
 						<div class="gradient-wrapper"></div>
 						<div class="title-wrapper" style={"width: 100%; height: 80%;"}>
-							<h1 style="font-size:{headlineSize}px">What Does <br> A Happily <br> Ever After <br> Look Like?</h1>
+							<h1>What Does <br> A Happily <br> Ever After <br> Look Like?</h1>
 						</div>
 						<p class="byline"><a href="https://pudding.cool/author/alice-liang">Alice Liang</a></p>
 					</div>
@@ -223,8 +222,7 @@
 	}
 	.title-wrapper {
 		position: absolute;
-		width: 100%;
-		height: 60%;
+		container: title / inline-size;
 	}
 	.book-cover h1 {
 		font-family: var(--sans-display);
@@ -240,8 +238,28 @@
 		text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
 		max-height: 60%;
 		white-space: nowrap;
-		font-size: var(--64px);
+		font-size: 36px;
 		/* transition: all 0.5s; */
+	}
+	@container title (min-width: 275px) {
+		.book-cover h1 {
+			font-size: 40px;
+		}
+	}
+	@container title (min-width: 325px) {
+		.book-cover h1 {
+			font-size: 48px;
+		}
+	}
+	@container title (min-width: 375px) {
+		.book-cover h1 {
+			font-size: 56px;
+		}
+	}
+	@container title (min-width: 450px) {
+		.book-cover h1 {
+			font-size: 68px;
+		}
 	}
 	.book-cover .byline {
 		font-family: var(--serif-display);

@@ -1,9 +1,10 @@
 <script>
+    import { onMount } from "svelte";
 	import Scrolly from "$components/helpers/Scrolly.svelte";
     import IntroBook from "$components/IntroBook.svelte";
     import inView from "$actions/inView.js";
     import { activeSection } from "$stores/misc.js";
-    import Icon from "$components/helpers/Icon.svelte";
+	import { Info } from "lucide-svelte";
 
     export let bookMin;
     export let w;
@@ -13,6 +14,11 @@
     const steps = [0];
 
 	let value;
+    let loading = true;
+    
+    onMount(() => {
+		loading = false;
+	})
 
     function setSection(id) { activeSection.set(id); }
 
@@ -33,6 +39,13 @@
 	</Scrolly>
 	<div class="spacer" />
     <div class="icon-wrapper" class:isVisible={isVisible}>
+        {#if loading == true}
+        <p>Loading</p>
+        <div class="icon-loading"></div>
+        {:else}
+        <p>Scroll</p>
+        <div class="icon-scroll"></div>
+        {/if}
     </div>
 </section>
 
@@ -76,15 +89,38 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        bottom: 0;
+        bottom: 2rem;
         left: 50%;
-        transform: translate(-50%, -50%);
-        animation: bounceUp 1s infinite;
+        transform: translate(-50%, 0);
         opacity: 0;
+    }
+    .icon-wrapper p {
+        position: absolute;
+        bottom: -2.25rem;
+        color: var(--romance-pink-light);
+        font-family: var(--sans-display);
+        font-size: var(--12px);
+        text-align: center;
+    }
+    .icon-loading {
+        height: 3rem;
+        position: absolute;
+        width: 3rem;
+        background-image: url($svg/loader.svg);
+        background-size: 3rem 3rem;
+        background-repeat: no-repeat;
+        background-position: center; 
+        animation: rotation 1s infinite;
+    }
+    .icon-scroll {
+        height: 3rem;
+        position: absolute;
+        width: 3rem;
         background-image: url($svg/arrow-down-circle.svg);
         background-size: 3rem 3rem;
         background-repeat: no-repeat;
-        background-position: center;
+        background-position: center; 
+        animation: bounceUp 1s infinite;
     }
     .isVisible {
         opacity: 1;
