@@ -1,7 +1,6 @@
 <script>
     import { getContext } from "svelte";
-	import { fit } from '@leveluptuts/svelte-fit';
-	import { fade } from 'svelte/transition';
+	import { selectAll, style }from "d3-selection";
 
 	export let bookMin;
 	export let w;
@@ -22,6 +21,8 @@
 			if (w < 600) { bookTranslate = scrollY/h*100 < 50 ? 100 : 0;
 			} else { bookTranslate = 50; }
 			frontRotate = 180;
+			let book = selectAll("#book .main")
+			book.style("transform", "rotate3d(0,1,0,0deg)")
 		} else {
 			bookTranslate = 0;
 			frontRotate = 0;
@@ -54,6 +55,23 @@
 		}
 	}
 
+	function bookMousemove(e) {
+		let xPos = e.clientX;
+		let rotation = xPos > w/2 ? 30 : -30;
+		console.log(xPos, w)
+		if (scrollY < 2) {
+			let book = selectAll("#book .main")
+			book.style("transform", `rotate3d(0,1,0,${rotation}deg)`)
+		}
+	}
+
+	function bookMouseout() {
+		if (scrollY < 2) {
+			let book = selectAll("#book .main")
+			book.style("transform", "rotate3d(0,1,0,0deg)")
+		}
+	}
+
 	$: scrollY, computePercentage(scrollY, w, h);
 	$: w, computePercentage(scrollY, w, h);
 	$: h, computePercentage(scrollY, w, h);
@@ -61,7 +79,7 @@
 </script>
 
 <section id="intro-book">
-		<div id="book" style="transform:translate3d({bookTranslate}%,0,0);" bind:clientHeight={bookH} >
+		<div on:mousemove={bookMousemove} on:mouseout={bookMouseout} id="book" style="transform:translate3d({bookTranslate}%,0,0);" bind:clientHeight={bookH} >
 			<div class="main">
 				<div class="book-front" style="transform:translate3d(0,0,25px) rotate3d(0,1,0,-{frontRotate}deg)">
 					<div class="book-cover">
@@ -108,6 +126,9 @@
 				</div>
 				<div class="book-back"></div>
 				<div class="book-bone"></div>
+				<div class="book-top"></div>
+				<div class="book-right"></div>
+				<div class="book-bottom"></div>
 			</div>
 		</div>
 	<p class="credit">With <a href="https://pudding.cool/author/jan-diehm/">Jan Diehm</a> • Cover design by <a href="http://www.sandrachiu.com/">Sandra Chiu</a></p>
@@ -130,7 +151,7 @@
         color: var(--color-gray-800);
         font-family: var(--sans-display);
 		text-align: center;
-		margin: -1rem 1rem 0 1rem;
+		margin: -0.5rem 1rem 0 1rem;
 		z-index: 1000;
     }
     .credit a {
@@ -154,6 +175,9 @@
 		aspect-ratio: 1 / 1.475;
 		height: 80vmin;
 	}
+	/* #book:hover .main:hover {
+		transform:rotate3d(0,1,0,-30deg);
+	} */
 	.main {
 		width: 100%;
         height: 100%;
@@ -375,8 +399,31 @@
 		transform:rotate3d(0,1,0,-90deg);
 	}
 	
-	.book-page {
+	.book-page, .book-top, .book-right, .book-bottom {
 		background:var(--color-white);
+	}
+
+	.book-right{
+		width:49px; 
+		height: calc(100% - 1.5rem);
+		position:absolute; 
+		top:5px; 
+		right:-20px;
+		box-shadow:0 1px 0 #EEEFE9,0 -1px 0 #EEEFE9;
+		transform:rotate3d(0,1,0,90deg);
+	}
+	.book-top{
+		width:100%; height:50px;
+		position:absolute; top:-20px; left:0;
+		transform:rotate3d(1,0,0,90deg);
+	}
+	.book-bottom{
+		width:100%; height:50px;
+		position:absolute; bottom:-20px; left:0;
+		transform:rotate3d(1,0,0,-90deg) translate3d(0,0,0);
+	}
+	.book-right,.book-top,.book-bottom{
+		backface-visibility:hidden;
 	}
 
 	/* MEDIA QUERIES */
