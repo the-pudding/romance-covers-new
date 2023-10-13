@@ -15,6 +15,7 @@
 	let frontRotate = 0;
 	let pageOneText;
 	let pageTwoText;
+	let headlineSize;
 
 	function computePercentage(scrollY, w, h) {
 		if (scrollY >= 2) {
@@ -32,18 +33,23 @@
 			if (bookMin > 900) {
 				pageOneText = copy.page1_900;
 				pageTwoText = copy.page2_900;
+				headlineSize = 68;
 			} else if (bookMin > 750) {
 				pageOneText = copy.page1_750;
 				pageTwoText = copy.page2_750;
+				headlineSize = 56;
 			} else if (bookMin > 650) {
 				pageOneText = copy.page1_650;
 				pageTwoText = copy.page2_650;
+				headlineSize = 48;
 			} else if (bookMin > 600) {
 				pageOneText = copy.page1_600;
 				pageTwoText = copy.page2_600;
+				headlineSize = 40;
 			} else  {
 				pageOneText = copy.page1_else;
 				pageTwoText = copy.page2_else;
+				headlineSize = 36;
 			} 
 		}
 	}
@@ -69,7 +75,7 @@
 						</div>
 						<div class="gradient-wrapper"></div>
 						<div class="title-wrapper" style={"width: 100%; height: 80%;"}>
-							<h1 use:fit={{min_size: 12, max_size:72 }}>{@html copy.titleBreaks}</h1>
+							<h1 style="font-size:{headlineSize}px">{@html copy.titleBreaks}</h1>
 						</div>
 						<p class="byline"><a href="https://pudding.cool/author/alice-liang">Alice Liang</a></p>
 					</div>
@@ -225,7 +231,6 @@
 		font-style: normal;
 		text-transform: uppercase;
 		color: #F8DC3F;
-		font-size: var(--24px);
 		line-height: 2;
 		margin: 0 auto 0 auto;
 		padding: 0 0 5rem 0;
@@ -356,17 +361,11 @@
 
 	/* MEDIA QUERIES */
 	@media only screen and (min-width: 400px) and (min-height: 600px) {
-		.book-cover h1 {
-			font-size: var(--24px);
-		}
 		.book-cover .byline {
 			font-size: var(--24px);
 		}
 	}
 	@media only screen and (min-width: 600px) and (min-height: 800px) {
-		.book-cover h1 {
-			font-size: var(--40px);
-		}
 		.book-cover .byline {
 			font-size: var(--40px);
 			bottom: 1rem;
@@ -384,7 +383,6 @@
 	}
 	@media only screen and (min-width: 800px) and (min-height: 1000px) {
 		.book-cover h1 {
-			font-size: var(--56px);
 			margin: 0 auto;
 		}
 		.book-cover .byline {
@@ -394,7 +392,6 @@
 	}
 	@media only screen and (min-width: 1000px) and (min-height: 1200px) {
 		.book-cover h1 {
-			font-size: var(--64px);
 			margin: -1rem auto 0 auto;
 		}
 		.book-cover .byline {

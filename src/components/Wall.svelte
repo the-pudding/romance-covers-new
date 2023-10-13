@@ -23,7 +23,7 @@
     let wallH;
     let chunkWidths = [];
     let totalShelfWidth;
-    // let slideSpeed = 1.5;
+    let slideSpeed = 1.5;
     let imgsLoaded = false;
 
     function calcTotalWidth(chunks) {
@@ -52,15 +52,15 @@
                 const sel = select(`#${section} #book_${copy[value].scrollToId}`).node().getBoundingClientRect().x;
                 if ($activeSection == "raunchiness") { 
                     const val = $xShiftRaunch + sel - margins;
-                    // slideSpeed = Math.max(Math.abs(sel)/750, 1.5);
+                    slideSpeed = Math.max(Math.abs(sel)/750, 1.5);
                     xShiftRaunch.set(val);  
                 } else if ($activeSection == "illustration") { 
                     const val = $xShiftIllo + sel - margins;
-                    // slideSpeed = Math.max(Math.abs(sel)/750, 1.5);
+                    slideSpeed = Math.max(Math.abs(sel)/750, 1.5);
                     xShiftIllo.set(val); 
                 } else if ($activeSection == "race") { 
                     const val = $xShiftRace + sel - margins;
-                    // slideSpeed = Math.max(Math.abs(sel)/750, 1.5);
+                    slideSpeed = Math.max(Math.abs(sel)/750, 1.5);
                     xShiftRace.set(val);  
                 }
             }
@@ -146,7 +146,7 @@
 
 
 <section id="wall-{section}" class="wall">
-        <div class="overflow-wrap" style="transform:translate3d(-{xShiftSection}px,0,0);">
+        <div class="overflow-wrap" style="transform:translate3d(-{xShiftSection}px,0,0); transition: {slideSpeed}s ease-in-out;">
             {#each yearGroups as year, i}
                 <div class="year-wrapper" bind:clientHeight={wallH}>
                     {#if wallH !== undefined && chunkWidths.length == 13}
