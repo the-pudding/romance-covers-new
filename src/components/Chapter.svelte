@@ -4,9 +4,11 @@
     import Bookmark from "$components/Bookmark.svelte";
     import inView from "$actions/inView.js";
     import { activeSection } from "$stores/misc.js";
+    import { fly } from 'svelte/transition';
 
 	let scrollDir;
 	let lastY;
+    let headlingFly = false;
 
     export let id;
     export let data;
@@ -15,7 +17,10 @@
     export let scrollY;
     export let xShiftSection;
 
-    function setSectionEnter(id) { activeSection.set(id); }
+    function setSectionEnter(id) { 
+        headlingFly = true;
+        activeSection.set(id); 
+    }
     function setSectionExit(id) { 
         let nextSection;
         if (scrollDir == "down") {
@@ -50,7 +55,9 @@
     use:inView={{ top: 0 }}
     on:enter={() => setSectionEnter(id)}
     on:exit={() => setSectionExit(id)}>
-    <h2>{resetTitles(id)}</h2>
+    {#if headlingFly}
+        <h2 in:fly={{ y: 200, duration: 2000 }}>{resetTitles(id)}</h2>
+    {/if}
     <ChapterText copy={copyBlock}/>
     <Bookmark category={"wall"} />
     <WallScrolly data={data} copy={copyScroll} section={id} xShiftSection={xShiftSection} />
