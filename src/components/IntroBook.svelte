@@ -30,24 +30,25 @@
 	}
 	
 	function setBookText() {
+		console.log(bookMin)
 		if (copy !== undefined) {
 			if (bookMin > 900) {
 				pageOneText = copy.page1_900;
 				pageTwoText = copy.page2_900;
 				// headlineSize = 68;
-			} else if (bookMin > 750) {
+			} else if (bookMin > 780) {
 				pageOneText = copy.page1_750;
 				pageTwoText = copy.page2_750;
 				// headlineSize = 56;
-			} else if (bookMin > 650) {
+			} else if (bookMin > 740) {
 				pageOneText = copy.page1_650;
 				pageTwoText = copy.page2_650;
 				// headlineSize = 48;
-			} else if (bookMin > 600) {
+			} else if (bookMin > 680) {
 				pageOneText = copy.page1_600;
 				pageTwoText = copy.page2_600;
 				// headlineSize = 40;
-			} else if (bookMin <= 600)  {
+			} else if (bookMin <= 680)  {
 				pageOneText = copy.page1_else;
 				pageTwoText = copy.page2_else;
 				// headlineSize = 36;
@@ -326,7 +327,7 @@
 	.book-cover-back-indent p{
 		font-family: var(--serif);
 		font-weight: 500;
-		font-size: var(--16px);
+		font-size: 16px;
 		line-height: 1.65;
 		margin: 0 0 1rem 0;
 		text-align: left;
@@ -366,7 +367,7 @@
 		overflow:hidden;
 	}
 	.book-page p{
-		font-size: var(--16px);
+		font-size: 16px;
 		line-height: 1.65;
 		margin: 0 0 1rem 0;
 		padding: 0 0 1rem 0;
@@ -439,8 +440,8 @@
 		.book-cover-back-indent, .page {
 			padding: 2rem;
 		}
-		.book-cover-back-indent p, #page-1 p {
-			font-size: var(--16px);
+		.book-cover-back-indent p, #page-1 p, .book-page p {
+			font-size: 16px;
 		}
 		:global(.initial-cap) {
 			font-size: 60px;

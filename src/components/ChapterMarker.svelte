@@ -45,7 +45,7 @@
 
 <nav>
     <div class="top-nav" class:loading={loading}>
-        <div class="logo">
+        <div class="logo" class:isHidden={$readingListVisible}>
             <a href="https://pudding.cool" aria-label="The Pudding" target="_self">
                 {@html logo}
             </a>

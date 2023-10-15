@@ -83,9 +83,9 @@
     function setText() {
         if (copy !== undefined) {
 			if (bookMin > 900) { introText = undefined; }
-            else if (bookMin > 750) { introText = copy.lookBackOverflow_750; } 
-            else if (bookMin > 650) { introText = copy.lookBackOverflow_650; }
-            else if (bookMin > 600) { introText = copy.lookBackOverflow_600; }
+            else if (bookMin > 780) { introText = copy.lookBackOverflow_750; } 
+            else if (bookMin > 740) { introText = copy.lookBackOverflow_650; }
+            else if (bookMin > 680) { introText = copy.lookBackOverflow_600; }
             else { introText = copy.lookBackOverflow_else; }
 		}
     }
